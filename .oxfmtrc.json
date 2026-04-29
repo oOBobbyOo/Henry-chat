@@ -13,5 +13,5 @@
   "insertFinalNewline": true,
   "endOfLine": "lf",
   "singleAttributePerLine": true,
-  "ignorePatterns": ["dist/**", "build/**", ".next/**", "node_modules/**", "**/*.d.ts"]
+  "ignorePatterns": [".next/**", "out/**", "build/**", "node_modules/**", "next-env.d.ts"]
 }
