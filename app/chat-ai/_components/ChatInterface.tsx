@@ -3,11 +3,12 @@
 import { useState } from 'react'
 
 import { LogOut, Menu, Plus, Settings, User, UserIcon } from 'lucide-react'
-import { ChatAIPanels } from './ChatAIPanels'
-import { ChatSidebar } from './ChatSidebar'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+
+import { ChatAIPanels } from './ChatAIPanels'
+import { ChatSidebar } from './ChatSidebar'
 
 export function ChatInterface() {
   // 移动端侧边栏状态

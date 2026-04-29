@@ -13,5 +13,18 @@
   "insertFinalNewline": true,
   "endOfLine": "lf",
   "singleAttributePerLine": true,
+  "sortImports": {
+    "customGroups": [
+      {
+        "groupName": "react-libs",
+        "elementNamePattern": ["react", "react-**"]
+      },
+      {
+        "groupName": "next-libs",
+        "elementNamePattern": ["next", "next/*"]
+      }
+    ],
+    "groups": ["react-libs", "next-libs", ["value-builtin", "value-external"], "value-internal", ["value-parent", "value-sibling", "value-index"], "unknown"]
+  },
   "ignorePatterns": [".next/**", "out/**", "build/**", "node_modules/**", "next-env.d.ts"]
 }
