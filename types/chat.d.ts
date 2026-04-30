@@ -66,6 +66,13 @@ declare namespace Chat {
     messageCount: number
   }
 
+  /** 会话列表状态接口 */
+  interface SessionState {
+    sessions: Session[]
+    hasMore: boolean
+    page: number
+  }
+
   /** 聊天消息角色 */
   export type MessageRole = 'user' | 'assistant' | 'system'
 
