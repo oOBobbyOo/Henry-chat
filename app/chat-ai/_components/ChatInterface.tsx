@@ -7,10 +7,24 @@ import { LogOut, Menu, Plus, Settings, User, UserIcon } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 
+import { INITIAL_PRIMARY_MODEL } from '../constants'
+import { useChatModels } from '../hooks/useChatModels'
 import { ChatAIPanels } from './ChatAIPanels'
 import { ChatSidebar } from './ChatSidebar'
 
 export function ChatInterface() {
+  // 获取动态模型列表
+  const { models, isLoading: isModelsLoading } = useChatModels()
+
+  // 模型配置列表：第一个是主模型，后续是对比模型
+  const [modelConfigs, setModelConfigs] = useState<Chat.ModelConfig[]>([INITIAL_PRIMARY_MODEL])
+
+  // 主模型配置
+  const primaryConfig = modelConfigs[0]
+
+  // 输入框内容：以模型 id 为 key
+  const [inputValues, setInputValues] = useState<Record<string, string>>({})
+
   // 移动端侧边栏状态
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false)
 
@@ -75,7 +89,7 @@ export function ChatInterface() {
         <ChatSidebar isMobileOpen={isMobileSidebarOpen} />
         {/* --- 右侧聊天区 --- */}
         <div className="flex flex-1">
-          <ChatAIPanels />
+          <ChatAIPanels config={primaryConfig} />
         </div>
       </div>
     </div>
