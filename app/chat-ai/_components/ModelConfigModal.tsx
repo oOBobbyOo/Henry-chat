@@ -4,7 +4,7 @@ import { RotateCcw, Settings2, X } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from '@/components/ui/dialog'
-import { cn } from '@/lib/utils'
+import { cn } from '@/lib/cn'
 
 import { DEFAULT_MODEL_CONFIG } from '../constants'
 import { ConfigFields } from './ConfigFields'
@@ -73,16 +73,16 @@ export function ModelConfigModal({
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[700px] max-h-[90vh] p-0 overflow-hidden flex flex-col rounded-xl border-none shadow-2xl">
-        <DialogHeader className="px-6 pt-6 pb-4 border-b border-gray-50 bg-white">
+      <DialogContent className="flex max-h-[90vh] flex-col overflow-hidden rounded-xl border-none p-0 shadow-2xl sm:max-w-[700px]">
+        <DialogHeader className="border-b border-gray-50 bg-white px-6 pt-6 pb-4">
           <div className="flex items-center gap-2">
-            <div className="p-2 bg-blue-50 rounded-xl text-blue-600 shadow-sm">{icon}</div>
+            <div className="rounded-xl bg-blue-50 p-2 text-blue-600 shadow-sm">{icon}</div>
             <DialogTitle className="text-xl font-bold text-gray-800">{title}</DialogTitle>
           </div>
         </DialogHeader>
         <DialogDescription />
 
-        <div className="flex-1  overflow-y-auto px-6 py-4 custom-scrollbar">
+        <div className="custom-scrollbar flex-1 overflow-y-auto px-6 py-4">
           <ConfigFields
             config={config}
             updateConfig={updateConfig}
@@ -108,15 +108,15 @@ export function ModelConfigModal({
           `}</style>
         </div>
 
-        <DialogFooter className="mb-0 px-6 py-4 flex items-center justify-between sm:justify-between border-t border-gray-100 bg-gray-50/50">
+        <DialogFooter className="mb-0 flex items-center justify-between border-t border-gray-100 bg-gray-50/50 px-6 py-4 sm:justify-between">
           <div className="flex items-center gap-2">
             <Button
               variant="ghost"
               size="sm"
               onClick={handleReset}
-              className="text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+              className="rounded-lg text-gray-500 transition-all hover:bg-blue-50 hover:text-blue-600"
             >
-              <RotateCcw className="h-4 w-4 mr-1.5" />
+              <RotateCcw className="mr-1.5 h-4 w-4" />
               重置默认
             </Button>
 
@@ -124,23 +124,23 @@ export function ModelConfigModal({
               variant="ghost"
               size="sm"
               onClick={toggleCompare}
-              className={cn('rounded-lg transition-all', isCompareMode ? 'text-red-500 hover:text-red-600 hover:bg-red-50' : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50')}
+              className={cn('rounded-lg transition-all', isCompareMode ? 'text-red-500 hover:bg-red-50 hover:text-red-600' : 'text-gray-500 hover:bg-blue-50 hover:text-blue-600')}
             >
               {isCompareMode ? (
                 <>
-                  <X className="h-4 w-4 mr-1.5" />
+                  <X className="mr-1.5 h-4 w-4" />
                   取消对比
                 </>
               ) : (
                 <>
-                  <Settings2 className="h-4 w-4 mr-1.5" />
+                  <Settings2 className="mr-1.5 h-4 w-4" />
                   开启对比
                 </>
               )}
             </Button>
           </div>
           <DialogTrigger asChild>
-            <Button className="bg-blue-500 hover:bg-blue-600 text-white px-8 rounded-lg shadow-blue-100 shadow-lg active:scale-95 transition-all">确定</Button>
+            <Button className="rounded-lg bg-blue-500 px-8 text-white shadow-lg shadow-blue-100 transition-all hover:bg-blue-600 active:scale-95">确定</Button>
           </DialogTrigger>
         </DialogFooter>
       </DialogContent>
