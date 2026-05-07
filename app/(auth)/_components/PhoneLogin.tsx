@@ -1,5 +1,7 @@
 'use client'
 
+import { useCallback, useEffect, useState } from 'react'
+
 import { useForm } from '@tanstack/react-form'
 import z from 'zod'
 
@@ -14,8 +16,8 @@ import { LoginOrSignup } from '../_components/LoginOrSignup'
 
 // 定义 Zod Schema 校验规则
 const loginSchema = z.object({
-  phone: z.string('请输入正确的手机号码'),
-  password: z.string().min(6, '密码至少需要 6 个字符').max(20, '密码最长 20 个字符'),
+  phone: z.string().regex(/^1[3-9]\d{9}$/, '请输入有效的手机号'),
+  code: z.string().regex(/^\d{6}$/, '请输入6位数字验证码'),
 })
 
 // 统一 Input 样式类（边框/阴影/无外环/聚焦反馈）
@@ -31,15 +33,44 @@ const inputClasses = cn(
 )
 
 export default function PhoneLogin() {
+  const [countdown, setCountdown] = useState(0)
+  const [isSending, setIsSending] = useState(false)
+
+  // 🔢 倒计时定时器
+  useEffect(() => {
+    if (countdown <= 0) return
+    const timer = setInterval(() => setCountdown((c) => c - 1), 1000)
+    return () => clearInterval(timer)
+  }, [countdown])
+
   const form = useForm({
     defaultValues: {
       phone: '',
-      password: '',
+      code: '',
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value, null, 2))
     },
   })
+
+  // 📤 发送验证码
+  const handleSendCode = useCallback(async () => {
+    // 触发手机号字段校验
+    await form.validateField('phone', 'blur')
+    const phone = form.getFieldValue('phone')
+    const phoneMeta = form.getFieldMeta('phone')
+    if (!phone || (phoneMeta?.errors ?? []).length > 0) return // 校验失败则拦截
+
+    setIsSending(true)
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      setCountdown(60)
+    } catch (error) {
+      console.error('发送验证码失败', error)
+    } finally {
+      setIsSending(false)
+    }
+  }, [form])
 
   return (
     <form
@@ -60,16 +91,63 @@ export default function PhoneLogin() {
             <Input
               id={field.name}
               name={field.name}
-              type="number"
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
               placeholder="请输入手机号"
-              autoComplete="email"
               value={field.state.value}
               onBlur={field.handleBlur}
-              onChange={(e) => field.handleChange(e.target.value)}
+              onChange={(e) => {
+                // 仅允许输入数字
+                const val = e.target.value.replace(/\D/g, '')
+                field.handleChange(val)
+              }}
               aria-invalid={!!field.state.meta.errors.length}
               aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
               className={inputClasses}
             />
+            <FieldError errors={field.state.meta.errors} />
+          </div>
+        )}
+      />
+
+      {/* Code Field */}
+      <form.Field
+        name="code"
+        validators={{ onChange: loginSchema.shape.code }}
+        children={(field) => (
+          <div className="space-y-2">
+            <Label htmlFor={field.name}>验证码</Label>
+            <div className="flex gap-2.5">
+              <Input
+                id={field.name}
+                name={field.name}
+                type="text"
+                inputMode="numeric"
+                pattern="\d{6}"
+                maxLength={6}
+                autoComplete="one-time-code" // iOS/Android 自动读取短信验证码
+                placeholder="请输入验证码"
+                value={field.state.value}
+                onBlur={field.handleBlur}
+                onChange={(e) => {
+                  // 仅允许输入数字
+                  const val = e.target.value.replace(/\D/g, '')
+                  field.handleChange(val)
+                }}
+                aria-invalid={!!field.state.meta.errors.length}
+                aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                className={cn(inputClasses, 'flex-1')}
+              />
+              <button
+                type="button"
+                onClick={handleSendCode}
+                disabled={countdown > 0 || isSending}
+                className="min-w-[100px] shrink-0 cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-3 text-center text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:border-violet-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-gray-300 disabled:hover:bg-white sm:w-[150px]"
+              >
+                {isSending ? '发送中...' : countdown > 0 ? `${countdown}秒` : '获取验证码'}
+              </button>
+            </div>
             <FieldError errors={field.state.meta.errors} />
           </div>
         )}
