@@ -1,25 +1,16 @@
-'use client'
-
 import { AnimatedCharacters } from './_components/AnimatedCharacters'
-import { useAuth } from './hooks/useAuth'
 
 export default function AuthLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const { isTyping, password, showPassword } = useAuth()
-
   return (
     <div className="grid max-h-screen min-h-screen overflow-hidden lg:grid-cols-2">
       {/* Left Content Section with Animated Characters */}
       <div className="relative hidden flex-col justify-center bg-linear-to-br from-gray-400 via-gray-500 to-gray-600 p-12 text-white lg:flex dark:from-white/90 dark:via-white/80 dark:to-white/70 dark:text-gray-900">
         <div className="relative z-20 flex h-[500px] items-end justify-center">
-          <AnimatedCharacters
-            isTyping={isTyping}
-            showPassword={showPassword}
-            passwordLength={password.length}
-          />
+          <AnimatedCharacters />
         </div>
         <div
           className="absolute inset-0"
