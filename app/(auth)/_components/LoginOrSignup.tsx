@@ -1,8 +1,8 @@
 import { useRouter } from 'next/navigation'
 
-import { Lock, CircleUser, LucideIcon, Mail } from 'lucide-react'
+import { CircleUser, LucideIcon, Mail, Phone } from 'lucide-react'
 
-export type ModelType = 'password' | 'email' | 'signup'
+export type ModelType = 'phone' | 'email' | 'signup'
 
 interface Model {
   type: ModelType
@@ -13,8 +13,8 @@ interface Model {
 }
 
 export const models: Model[] = [
-  { type: 'password', path: '/login', label: '密码登录', shortLabel: '密码', icon: Lock },
-  { type: 'email', path: '/login', label: '邮箱登录', shortLabel: '邮箱', icon: Mail },
+  { type: 'phone', path: '/login?model=phone', label: '手机登录', shortLabel: '手机', icon: Phone },
+  { type: 'email', path: '/login?model=email', label: '邮箱登录', shortLabel: '邮箱', icon: Mail },
   { type: 'signup', path: '/signup', label: '创建账户', shortLabel: '注册', icon: CircleUser },
 ]
 

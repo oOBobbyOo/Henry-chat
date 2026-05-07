@@ -74,7 +74,7 @@ export default function SignupPage() {
               <Input
                 id={field.name}
                 value={field.state.value}
-                placeholder="name"
+                placeholder="请输入姓名"
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
                 aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
