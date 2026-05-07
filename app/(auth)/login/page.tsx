@@ -11,6 +11,8 @@ import { Label } from '@/components/ui/label'
 import { PasswordInput } from '@/components/ui/password-input'
 import { cn } from '@/lib/cn'
 
+import { LoginOrSignup } from '../_components/LoginOrSignup'
+
 // 定义 Zod Schema 校验规则
 const loginSchema = z.object({
   email: z.email('请输入有效的邮箱地址'),
@@ -116,6 +118,8 @@ export default function LoginPage() {
         </Button>
 
         <DividerWithText>或继续使用</DividerWithText>
+
+        <LoginOrSignup currentModel="password" />
       </form>
     </div>
   )

@@ -4,11 +4,14 @@ import { useForm } from '@tanstack/react-form'
 import z from 'zod'
 
 import { Button } from '@/components/ui/button'
+import { DividerWithText } from '@/components/ui/divider-with-text'
 import { FieldError } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { PasswordInput } from '@/components/ui/password-input'
 import { cn } from '@/lib/cn'
+
+import { LoginOrSignup } from '../_components/LoginOrSignup'
 
 // 定义 Zod Schema 校验规则
 const signupSchema = z.object({
@@ -71,6 +74,7 @@ export default function SignupPage() {
               <Input
                 id={field.name}
                 value={field.state.value}
+                placeholder="name"
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
                 aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
@@ -117,6 +121,7 @@ export default function SignupPage() {
                 id={field.name}
                 name={field.name}
                 type="password"
+                placeholder="••••••••"
                 autoComplete="new-password"
                 value={field.state.value}
                 onBlur={field.handleBlur}
@@ -148,6 +153,7 @@ export default function SignupPage() {
                 id={field.name}
                 name={field.name}
                 type="password"
+                placeholder="••••••••"
                 autoComplete="new-password"
                 value={field.state.value}
                 onBlur={field.handleBlur}
@@ -168,6 +174,10 @@ export default function SignupPage() {
         >
           {form.state.isSubmitting ? '注册中...' : '注册'}
         </Button>
+
+        <DividerWithText>或继续使用</DividerWithText>
+
+        <LoginOrSignup currentModel="signup" />
       </form>
     </div>
   )
