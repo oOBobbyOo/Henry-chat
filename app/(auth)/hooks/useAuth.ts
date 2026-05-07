@@ -9,5 +9,6 @@ export function useAuth() {
     isTyping,
     password,
     showPassword,
+    setShowPassword,
   }
 }

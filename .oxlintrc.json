@@ -61,12 +61,7 @@
         "react/jsx-no-duplicate-props": "error",
         "react/jsx-no-target-blank": "off",
         "react/jsx-no-undef": "error",
-        "react/no-children-prop": [
-          "allow",
-          {
-            "allowFunctions": true
-          }
-        ],
+        "react/no-children-prop": "off",
         "react/no-danger-with-children": "error",
         "react/no-direct-mutation-state": "error",
         "react/no-find-dom-node": "error",
@@ -114,6 +109,7 @@
       "files": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
       "rules": {
         "constructor-super": "off",
+        "getter-return": "off",
         "no-class-assign": "off",
         "no-const-assign": "off",
         "no-dupe-class-members": "off",
@@ -125,6 +121,7 @@
         "no-redeclare": "off",
         "no-setter-return": "off",
         "no-this-before-super": "off",
+        "no-unreachable": "off",
         "no-unsafe-negation": "off",
         "no-var": "error",
         "no-with": "off",
