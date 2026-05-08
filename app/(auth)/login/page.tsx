@@ -1,16 +1,19 @@
-'use client'
+import { Suspense } from 'react'
 
-import { useSearchParams } from 'next/navigation'
+import { EmailLoginForm } from '../_components/EmailLoginForm'
+import { PhoneLoginForm } from '../_components/PhoneLoginForm'
 
-import EmailLogin from '../_components/EmailLogin'
-import PhoneLogin from '../_components/PhoneLogin'
+interface LoginPageProps {
+  searchParams: Promise<{ model?: string }>
+}
 
-export default function LoginPage() {
-  const searchParams = useSearchParams()
-  const model = searchParams.get('model') || 'phone'
+export default async function LoginPage({ searchParams }: LoginPageProps) {
+  // 直接 await 获取参数（微任务级延迟，不影响首屏体验）
+  const { model = 'phone' } = await searchParams
+  const isValidModel = model === 'email' ? 'email' : 'phone'
 
   return (
-    <div>
+    <>
       {/* Header */}
       <div className="mb-10 text-center">
         <h1 className="mb-2 text-3xl leading-tight font-bold tracking-tight text-gray-900 sm:text-3xl md:mb-2.5 md:text-4xl lg:text-5xl">欢迎回来</h1>
@@ -18,7 +21,7 @@ export default function LoginPage() {
       </div>
 
       {/* Login Form */}
-      {model === 'phone' ? <PhoneLogin /> : <EmailLogin />}
-    </div>
+      <Suspense>{isValidModel === 'phone' ? <PhoneLoginForm /> : <EmailLoginForm />}</Suspense>
+    </>
   )
 }

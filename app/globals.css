@@ -128,3 +128,29 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  /* 淡入 + 上滑 组合动画 */
+  .animate-fade-slide-up {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fade-slide-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-fill-mode: both; /* 关键：延迟期间保持初始状态，结束后保持最终状态 */
+  }
+
+  @keyframes fade-slide-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* 尊重系统减弱动态效果设置 */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-slide-up {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+}
