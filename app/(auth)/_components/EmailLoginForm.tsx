@@ -1,10 +1,13 @@
 'use client'
 
+import Link from 'next/link'
+
 import { useForm } from '@tanstack/react-form'
 import z from 'zod'
 
 import { AnimatedField } from '@/components/ui/animated-field'
 import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import { DividerWithText } from '@/components/ui/divider-with-text'
 import { FieldError } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
@@ -18,6 +21,7 @@ import { LoginOrSignup } from './LoginOrSignup'
 const loginSchema = z.object({
   email: z.email('请输入有效的邮箱地址'),
   password: z.string().min(6, '密码至少需要 6 个字符').max(20, '密码最长 20 个字符'),
+  remember: z.boolean().optional(),
 })
 
 // 统一 Input 样式类（边框/阴影/无外环/聚焦反馈）
@@ -37,6 +41,7 @@ export function EmailLoginForm() {
     defaultValues: {
       email: '',
       password: '',
+      remember: false, // 默认未勾选
     },
     onSubmit: ({ value }) => {
       alert(JSON.stringify(value, null, 2))
@@ -107,6 +112,37 @@ export function EmailLoginForm() {
       </AnimatedField>
 
       <AnimatedField index={2}>
+        <div className="flex items-center justify-between gap-2">
+          <form.Field
+            name="remember"
+            children={(field) => (
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id={field.name}
+                  checked={field.state.value}
+                  onCheckedChange={(checked) => field.handleChange(!!checked)}
+                  className="border-gray-300 data-[state=checked]:border-violet-600 data-[state=checked]:bg-violet-600"
+                />
+                <Label
+                  htmlFor={field.name}
+                  className="text-muted-foreground cursor-pointer text-sm font-normal select-none"
+                >
+                  记住密码
+                </Label>
+              </div>
+            )}
+          />
+
+          <Link
+            href="/forgot-password"
+            className="focus-visible:ring-ring rounded-md text-sm font-medium text-violet-400 hover:text-violet-600 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+          >
+            忘记密码？
+          </Link>
+        </div>
+      </AnimatedField>
+
+      <AnimatedField index={3}>
         <Button
           type="submit"
           className="animate-fade-in h-12 w-full transform cursor-pointer rounded-xl bg-gray-900 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-gray-800 hover:shadow-xl active:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-900 md:text-base"
