@@ -4,7 +4,7 @@ import { RotateCcw, Settings2, X } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from '@/components/ui/dialog'
-import { cn } from '@/lib/cn'
+import { cn } from '@/lib/utils'
 
 import { DEFAULT_MODEL_CONFIG } from '../constants'
 import { ConfigFields } from './ConfigFields'

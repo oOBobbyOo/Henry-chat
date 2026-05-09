@@ -12,7 +12,7 @@ import { DividerWithText } from '@/components/ui/divider-with-text'
 import { FieldError } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { cn } from '@/lib/cn'
+import { cn } from '@/lib/utils'
 import { AuthService } from '@/services/auth'
 
 import { LoginOrSignup } from './LoginOrSignup'

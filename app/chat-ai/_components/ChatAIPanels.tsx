@@ -6,7 +6,7 @@ import { Brain, Globe, LogOut, Send, Settings, Square, User, UserIcon } from 'lu
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { cn } from '@/lib/cn'
+import { cn } from '@/lib/utils'
 
 import { QUICK_QUESTIONS } from '../constants'
 import { ModelConfigModal } from './ModelConfigModal'

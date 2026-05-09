@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Check, MessageSquare, Pencil, Plus, Trash2, X } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/cn'
 import { formatTime } from '@/lib/time'
+import { cn } from '@/lib/utils'
 
 interface ChatHistoryListProps {
   /** 会话列表 */
