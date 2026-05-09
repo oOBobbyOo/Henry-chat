@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 import { useForm } from '@tanstack/react-form'
 import { Mail, CheckCircle2, ArrowLeft } from 'lucide-react'
+import { toast } from 'sonner'
 import z from 'zod'
 
 import { AnimatedField } from '@/components/ui/animated-field'
@@ -14,6 +15,7 @@ import { FieldError } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/cn'
+import { AuthService } from '@/services/auth'
 
 // 校验规则
 const forgotSchema = z.object({
@@ -36,11 +38,12 @@ export function ForgotPasswordForm() {
   const form = useForm({
     defaultValues: { email: '' },
     onSubmit: async ({ value }) => {
-      alert(JSON.stringify(value, null, 2))
-
-      // 替换为真实 API 请求：/api/auth/forgot-password
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      setIsSuccess(true)
+      try {
+        await AuthService.forgotPassword(value)
+        setIsSuccess(true)
+      } catch {
+        toast.error('发送邮件失败！')
+      }
     },
   })
 

@@ -1,6 +1,7 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
+import { toast } from 'sonner'
 import z from 'zod'
 
 import { AnimatedField } from '@/components/ui/animated-field'
@@ -11,6 +12,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { PasswordInput } from '@/components/ui/password-input'
 import { cn } from '@/lib/cn'
+import { AuthService } from '@/services/auth'
 
 import { LoginOrSignup } from '../_components/LoginOrSignup'
 
@@ -42,8 +44,13 @@ export function SignupForm() {
       password: '',
       confirmPassword: '',
     },
-    onSubmit: ({ value }) => {
-      alert(JSON.stringify(value, null, 2))
+    onSubmit: async ({ value }) => {
+      const { name, email, password } = value
+      try {
+        await AuthService.signup({ name, email, password })
+      } catch {
+        toast.error('注册失败！')
+      }
     },
   })
 

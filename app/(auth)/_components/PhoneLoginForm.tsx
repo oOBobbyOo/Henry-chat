@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import { useForm } from '@tanstack/react-form'
+import { toast } from 'sonner'
 import z from 'zod'
 
 import { AnimatedField } from '@/components/ui/animated-field'
@@ -12,6 +13,7 @@ import { FieldError } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/cn'
+import { AuthService } from '@/services/auth'
 
 import { LoginOrSignup } from './LoginOrSignup'
 
@@ -49,8 +51,12 @@ export function PhoneLoginForm() {
       phone: '',
       code: '',
     },
-    onSubmit: ({ value }) => {
-      alert(JSON.stringify(value, null, 2))
+    onSubmit: async ({ value }) => {
+      try {
+        await AuthService.phoneLogin(value)
+      } catch {
+        toast.error('登录失败！')
+      }
     },
   })
 

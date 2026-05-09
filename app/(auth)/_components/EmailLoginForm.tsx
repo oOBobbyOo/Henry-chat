@@ -3,6 +3,7 @@
 import Link from 'next/link'
 
 import { useForm } from '@tanstack/react-form'
+import { toast } from 'sonner'
 import z from 'zod'
 
 import { AnimatedField } from '@/components/ui/animated-field'
@@ -14,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { PasswordInput } from '@/components/ui/password-input'
 import { cn } from '@/lib/cn'
+import { AuthService } from '@/services/auth'
 
 import { LoginOrSignup } from './LoginOrSignup'
 
@@ -43,8 +45,13 @@ export function EmailLoginForm() {
       password: '',
       remember: false, // 默认未勾选
     },
-    onSubmit: ({ value }) => {
-      alert(JSON.stringify(value, null, 2))
+    onSubmit: async ({ value }) => {
+      const { email, password } = value
+      try {
+        await AuthService.emailLogin({ email, password })
+      } catch {
+        toast.error('登录失败！')
+      }
     },
   })
 
