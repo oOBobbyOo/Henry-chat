@@ -11,6 +11,7 @@ import { useCallback, useRef, useState } from 'react'
 
 import { v4 as uuidv4 } from 'uuid'
 
+import { parseStream } from '@/lib/sse'
 import { ChatService } from '@/services/chat'
 
 /** 生成临时消息 ID */
@@ -49,36 +50,12 @@ export function useChat() {
   // 用于取消 SSE 连接
   const cancelFnRef = useRef<(() => void) | null>(null)
 
-  /** 默认的 OpenAI 格式流式响应解析器 */
-  const parseOpenAIStreamLine = <T>(line: string): T | null => {
-    // 处理 data: 开头的行
-    if (line.startsWith('data: ')) {
-      const jsonStr = line.slice(6).trim()
-      if (jsonStr === '[DONE]') {
-        return null
-      }
-      try {
-        const parsed = JSON.parse(jsonStr)
+  /** 设置当前的会话信息 */
+  const setCurrentMessages = useCallback((id: string, msg: any) => {
+    setMessages((prev) => prev.map((m) => (m.id === id ? { ...m, ...msg } : m)))
+  }, [])
 
-        return parsed as T
-      } catch {
-        // 忽略解析错误
-        return null
-      }
-    } else if (!line.startsWith('event:') && !line.startsWith('id:') && !line.startsWith('retry:')) {
-      // 尝试直接解析非 SSE 格式的 JSON（兼容性处理）
-      try {
-        const parsed = JSON.parse(line)
-        return parsed as T
-      } catch {
-        // 忽略解析错误
-        return null
-      }
-    }
-    return null
-  }
-
-  /** 加载会话历 */
+  /** 加载会话历史 */
   const loadConversation = useCallback(async (id: string): Promise<boolean> => {
     setStatus('loading')
     setError(null)
@@ -92,14 +69,7 @@ export function useChat() {
 
   /** 发送消息 */
   const sendMessage = useCallback(
-    async (
-      content: string,
-      config: Chat.ModelConfig,
-      options?: {
-        onSuccess?: () => void
-        onError?: (err: unknown) => void
-      },
-    ) => {
+    async (content: string, config: Chat.ModelConfig) => {
       if (!content.trim() || status === 'streaming') return
 
       // 添加用户消息
@@ -134,81 +104,34 @@ export function useChat() {
         stream: true,
       }
 
-      console.log('[ config ] >>:', config)
-
       try {
         const response = await ChatService.chatCompletions(params)
 
-        // 读取流式响应
-        const reader = response.body!.getReader()
-        const decoder = new TextDecoder()
-        let buffer = ''
-
-        let full_content = ''
-        let full_reasoning_content = ''
-
-        const processStream = async () => {
-          try {
-            while (true) {
-              const { done, value } = await reader.read()
-
-              if (done) {
-                break
-              }
-
-              buffer += decoder.decode(value, { stream: true })
-              const lines = buffer.split('\n')
-              buffer = lines.pop() || '' // 保留不完整的最后一行
-
-              for (const line of lines) {
-                if (line.trim() === '') continue
-
-                let chunk: any | null = null
-
-                chunk = parseOpenAIStreamLine(line)
-
-                if (chunk) {
-                  full_content += chunk.choices?.[0]?.delta?.content || ''
-                  full_reasoning_content += chunk.choices?.[0]?.delta?.reasoning_content || ''
-                  const finish_reason = chunk.choices?.[0]?.finish_reason
-
-                  setMessages((prev) =>
-                    prev.map((m) =>
-                      m.id === assistantMessage.id
-                        ? {
-                            ...m,
-                            content: m.content + full_content,
-                            reasoningContent: (m.reasoningContent || '') + full_reasoning_content,
-                            isStreaming: m.isStreaming, // 保留流式状态
-                          }
-                        : m,
-                    ),
-                  )
-
-                  if (finish_reason) {
-                    setStatus('idle')
-                    setMessages((prev) => prev.map((m) => (m.id === assistantMessage.id ? { ...m, isStreaming: false } : m)))
-                  }
-                }
-              }
-            }
-          } catch (err) {
-            console.warn('解析聊天流失败:', err)
-          } finally {
-            // 释放读取锁
-            reader?.releaseLock()
-          }
-        }
-
-        processStream()
-
-        console.log('[ full_content ] >>:', full_content)
-        console.log('[ full_reasoning_content ] >>:', full_reasoning_content)
+        await parseStream(response, {
+          onReasoning: (delta, fullReasoning) => {
+            setCurrentMessages(assistantMessage.id, { reasoningContent: fullReasoning })
+            console.log('🔍 思考:', { delta, text: fullReasoning })
+          },
+          onContent: (delta, fullConetnt) => {
+            setCurrentMessages(assistantMessage.id, { content: fullConetnt })
+            console.log('🤖 回复:', { delta, text: fullConetnt })
+          },
+          onDone: (state) => {
+            setStatus('idle')
+            setCurrentMessages(assistantMessage.id, { isStreaming: false })
+            console.log('✅ 完成:', state)
+          },
+          onError: (err) => {
+            setStatus('error')
+            setCurrentMessages(assistantMessage.id, { isStreaming: false })
+            console.error('❌ 错误:', err)
+          },
+        })
       } catch (error) {
         console.warn('获取聊天流失败:', error)
       }
     },
-    [messages, status],
+    [status, messages, setCurrentMessages],
   )
 
   /** 停止生成 */

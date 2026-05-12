@@ -9,6 +9,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { cn } from '@/lib/utils'
 
 import { QUICK_QUESTIONS } from '../constants'
+import { ChatMessageBubble } from './ChatMessageBubble'
 import { ModelConfigModal } from './ModelConfigModal'
 
 interface ChatPanelProps {
@@ -149,7 +150,15 @@ export function ChatAIPanels({
             <p className="text-sm">开始新的对话吧 ✨</p>
           </div>
         ) : (
-          <div className="mx-auto max-w-3xl space-y-4">历史会话信息</div>
+          <div className="mx-auto max-w-3xl space-y-4">
+            {messages.map((message) => (
+              <ChatMessageBubble
+                key={message.id}
+                message={message}
+                isGenerating={status === 'streaming'}
+              />
+            ))}
+          </div>
         )}
       </div>
 

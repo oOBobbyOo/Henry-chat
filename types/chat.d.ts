@@ -100,8 +100,6 @@ declare namespace Chat {
       /** 消息内容 */
       content: string
     }>
-    /** 流式 */
-    stream: boolean
   }
 
   /** 聊天消息角色 */
