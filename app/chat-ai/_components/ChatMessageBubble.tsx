@@ -1,8 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+
+import Image from 'next/image'
 
 import { Bot, Brain, Check, ChevronDown, ChevronUp, ClipboardCopy, Copy, Download, Link, Loader2, Pencil, Share2, Sparkles, User } from 'lucide-react'
+import remarkGfm from 'remark-gfm'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
@@ -15,8 +19,6 @@ interface ChatMessageBubbleProps {
 export function ChatMessageBubble({ message, isGenerating = false }: ChatMessageBubbleProps) {
   const [showReasoning, setShowReasoning] = useState(true) // 默认展开，不自动折叠
   const [copied, setCopied] = useState(false)
-
-  console.log(message)
 
   // 是否用户
   const isUser = message.role === 'user'
@@ -61,7 +63,7 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
               // 图片消息
               <div className="p-3">
                 <div className="group/img relative overflow-hidden rounded-lg bg-gray-50">
-                  <img
+                  <Image
                     src={message.imageUrl}
                     alt={message.content || '生成的图片'}
                     className="h-auto max-h-[400px] w-full cursor-pointer object-contain transition-transform hover:scale-[1.02]"
@@ -121,7 +123,10 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
                 {/* 推理内容（深度思考模式） */}
                 {hasReasoning && (
                   <div className="border-b border-gray-100">
-                    <button className="group flex w-full items-center gap-2 px-4 py-3 text-left text-xs font-medium text-gray-600 transition-all duration-200 hover:bg-gray-50/80">
+                    <button
+                      onClick={() => setShowReasoning(!showReasoning)}
+                      className="group flex w-full items-center gap-2 px-4 py-3 text-left text-xs font-medium text-gray-600 transition-all duration-200 hover:bg-gray-50/80"
+                    >
                       <Brain className="h-4 w-4 shrink-0 text-blue-500" />
                       <span className="flex-1">{message.isStreaming && !message.content ? '正在思考...' : '深度思考'}</span>
                       {showReasoning ? (
@@ -152,7 +157,7 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
                                 'after:ml-1 after:inline-block after:animate-pulse after:align-middle after:text-blue-400 after:content-["▋"]',
                             )}
                           >
-                            {message.reasoningContent || ''}
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.reasoningContent || ''}</ReactMarkdown>
                           </div>
                         </div>
                       </div>
@@ -170,7 +175,7 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
                     )}
                   >
                     {message.content ? (
-                      <div>{message.content}</div>
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
                     ) : message.isStreaming && !message.reasoningContent ? (
                       <span className="inline-flex items-center gap-1 text-gray-400">
                         <Loader2 className="h-3 w-3 animate-spin" />
@@ -183,45 +188,45 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
             )}
           </div>
         </div>
-
-        {/* 消息操作按钮 */}
-        {!message.isStreaming && (
-          <div className={cn('mt-1.5 flex items-center gap-3 opacity-0 transition-opacity group-hover:opacity-100', isUser ? 'justify-end md:pr-11' : 'md:pl-11')}>
-            <button
-              disabled={isGenerating}
-              className={cn(
-                'flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
-                isGenerating ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer text-gray-400 hover:bg-blue-50 hover:text-blue-600',
-              )}
-            >
-              <Pencil className="h-3.5 w-3.5" />
-              编辑
-            </button>
-            <button
-              className={cn(
-                'flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
-                copied ? 'bg-green-50 text-green-600' : 'text-gray-400 hover:bg-blue-50 hover:text-blue-600',
-              )}
-            >
-              {copied ? (
-                <>
-                  <Check className="h-3.5 w-3.5" />
-                  已复制
-                </>
-              ) : (
-                <>
-                  <Copy className="h-3.5 w-3.5" />
-                  复制
-                </>
-              )}
-            </button>
-            <button className="flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600">
-              <Share2 className="h-3.5 w-3.5" />
-              分享
-            </button>
-          </div>
-        )}
       </div>
+
+      {/* 消息操作按钮 */}
+      {!message.isStreaming && (
+        <div className={cn('mt-1.5 flex items-center gap-3 opacity-0 transition-opacity group-hover:opacity-100', isUser ? 'justify-end md:pr-11' : 'md:pl-11')}>
+          <button
+            disabled={isGenerating}
+            className={cn(
+              'flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
+              isGenerating ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer text-gray-400 hover:bg-blue-50 hover:text-blue-600',
+            )}
+          >
+            <Pencil className="h-3.5 w-3.5" />
+            <span>编辑</span>
+          </button>
+          <button
+            className={cn(
+              'flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
+              copied ? 'bg-green-50 text-green-600' : 'text-gray-400 hover:bg-blue-50 hover:text-blue-600',
+            )}
+          >
+            {copied ? (
+              <>
+                <Check className="h-3.5 w-3.5" />
+                <span>已复制</span>
+              </>
+            ) : (
+              <>
+                <Copy className="h-3.5 w-3.5" />
+                <span>复制</span>
+              </>
+            )}
+          </button>
+          <button className="flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600">
+            <Share2 className="h-3.5 w-3.5" />
+            <span>分享</span>
+          </button>
+        </div>
+      )}
     </div>
   )
 }
