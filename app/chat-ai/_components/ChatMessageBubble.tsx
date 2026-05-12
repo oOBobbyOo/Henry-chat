@@ -1,13 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import ReactMarkdown from 'react-markdown'
 
 import Image from 'next/image'
 
 import { Bot, Brain, Check, ChevronDown, ChevronUp, ClipboardCopy, Copy, Download, Link, Loader2, Pencil, Share2, Sparkles, User } from 'lucide-react'
-import remarkGfm from 'remark-gfm'
 
+import { ReactMarkdownRenderer } from '@/components/markdown/react-markdown-renderer'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 
@@ -157,7 +156,7 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
                                 'after:ml-1 after:inline-block after:animate-pulse after:align-middle after:text-blue-400 after:content-["▋"]',
                             )}
                           >
-                            <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.reasoningContent || ''}</ReactMarkdown>
+                            <ReactMarkdownRenderer content={message.reasoningContent || ''} />
                           </div>
                         </div>
                       </div>
@@ -175,7 +174,7 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
                     )}
                   >
                     {message.content ? (
-                      <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.content}</ReactMarkdown>
+                      <ReactMarkdownRenderer content={message.content || ''} />
                     ) : message.isStreaming && !message.reasoningContent ? (
                       <span className="inline-flex items-center gap-1 text-gray-400">
                         <Loader2 className="h-3 w-3 animate-spin" />
