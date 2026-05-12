@@ -11,7 +11,8 @@ export const request = new ClientRequest(baseURL, {
 
 // 请求拦截：注入 Token
 request.useRequestInterceptor((config) => {
-  const token = localStorage.getItem('token')
+  // const token = localStorage.getItem('token')
+  const token = process.env.NEXT_PUBLIC_API_LEY
   if (token) {
     config.headers = {
       ...config.headers,

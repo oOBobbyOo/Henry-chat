@@ -43,6 +43,22 @@ declare namespace Chat {
     label: string
   }
 
+  /** 模型 */
+  export interface Model {
+    /** 创建时间 */
+    created: Date
+    /** 模型 ID */
+    id: string
+  }
+
+  /** 模型列表接口 */
+  export interface ModelsResponse {
+    /** 是否请求成功 */
+    success: boolean
+    /** 模型列表 */
+    data: Model[]
+  }
+
   /** 快捷问题接口 */
   export interface QuickQuestion {
     id: string
@@ -67,10 +83,25 @@ declare namespace Chat {
   }
 
   /** 会话列表状态接口 */
-  interface SessionState {
+  export interface SessionState {
     sessions: Session[]
     hasMore: boolean
     page: number
+  }
+
+  /** 聊天请求参数 */
+  export interface CompletionParams {
+    /** 模型名称  */
+    model: string
+    /** 消息列表 */
+    messages: Array<{
+      /** 消息角色：user, assistant, system */
+      role: MessageRole
+      /** 消息内容 */
+      content: string
+    }>
+    /** 流式 */
+    stream: boolean
   }
 
   /** 聊天消息角色 */
