@@ -4,11 +4,13 @@ import { useState } from 'react'
 
 import Image from 'next/image'
 
-import { Bot, Brain, Check, ChevronDown, ChevronUp, ClipboardCopy, Copy, Download, Link, Loader2, Pencil, Share2, Sparkles, User } from 'lucide-react'
+import { Bot, Brain, ChevronDown, ChevronUp, ClipboardCopy, Download, Link, Loader2, Sparkles, User } from 'lucide-react'
 
 import { ReactMarkdownRenderer } from '@/components/markdown/react-markdown-renderer'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
+
+import { ChatActionButtons } from './ChatActionButtons'
 
 interface ChatMessageBubbleProps {
   message: Chat.Message
@@ -17,7 +19,6 @@ interface ChatMessageBubbleProps {
 
 export function ChatMessageBubble({ message, isGenerating = false }: ChatMessageBubbleProps) {
   const [showReasoning, setShowReasoning] = useState(true) // 默认展开，不自动折叠
-  const [copied, setCopied] = useState(false)
 
   // 是否用户
   const isUser = message.role === 'user'
@@ -191,39 +192,13 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
 
       {/* 消息操作按钮 */}
       {!message.isStreaming && (
-        <div className={cn('mt-1.5 flex items-center gap-3 opacity-0 transition-opacity group-hover:opacity-100', isUser ? 'justify-end md:pr-11' : 'md:pl-11')}>
-          <button
-            disabled={isGenerating}
-            className={cn(
-              'flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
-              isGenerating ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer text-gray-400 hover:bg-blue-50 hover:text-blue-600',
-            )}
-          >
-            <Pencil className="h-3.5 w-3.5" />
-            <span>编辑</span>
-          </button>
-          <button
-            className={cn(
-              'flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
-              copied ? 'bg-green-50 text-green-600' : 'text-gray-400 hover:bg-blue-50 hover:text-blue-600',
-            )}
-          >
-            {copied ? (
-              <>
-                <Check className="h-3.5 w-3.5" />
-                <span>已复制</span>
-              </>
-            ) : (
-              <>
-                <Copy className="h-3.5 w-3.5" />
-                <span>复制</span>
-              </>
-            )}
-          </button>
-          <button className="flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600">
-            <Share2 className="h-3.5 w-3.5" />
-            <span>分享</span>
-          </button>
+        <div className={cn('mt-1.5 flex items-center gap-3', isUser ? 'justify-end opacity-0 transition-opacity group-hover:opacity-100 md:pr-11' : 'md:pl-11')}>
+          <ChatActionButtons
+            onRegenerate={() => console.log('onRegenerate')}
+            content={message.content}
+            onLike={() => console.log('liked')}
+            onDislike={() => console.log('disliked')}
+          />
         </div>
       )}
     </div>
