@@ -192,12 +192,15 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
 
       {/* 消息操作按钮 */}
       {!message.isStreaming && (
-        <div className={cn('mt-1.5 flex items-center gap-3', isUser ? 'justify-end opacity-0 transition-opacity group-hover:opacity-100 md:pr-11' : 'md:pl-11')}>
+        <div className={cn('mt-1.5 flex items-center gap-1', isUser ? 'justify-end opacity-0 transition-opacity group-hover:opacity-100 md:pr-11' : 'md:pl-11')}>
           <ChatActionButtons
             onRegenerate={() => console.log('onRegenerate')}
             content={message.content}
             onLike={() => console.log('liked')}
             onDislike={() => console.log('disliked')}
+            disabled={isGenerating}
+            onEdit={() => console.log(message)}
+            isUser={isUser}
           />
         </div>
       )}

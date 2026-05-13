@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 
-import { Check, Copy, RefreshCw, Share2, ThumbsDown, ThumbsUp } from 'lucide-react'
+import { Check, Copy, RefreshCw, Share2, SquarePen, ThumbsDown, ThumbsUp } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -17,9 +18,26 @@ interface ChatActionButtonsProps {
   liked?: boolean
   disliked?: boolean
   onShare?: (content: string) => void
+  disabled?: boolean
+  onEdit?: () => void
+  isUser?: boolean
+  side?: 'top' | 'right' | 'bottom' | 'left'
 }
 
-export function ChatActionButtons({ onRegenerate, onCopy, content = '', onLike, onDislike, liked = false, disliked = false, onShare }: ChatActionButtonsProps) {
+export function ChatActionButtons({
+  onRegenerate,
+  onCopy,
+  content = '',
+  onLike,
+  onDislike,
+  liked = false,
+  disliked = false,
+  onShare,
+  disabled = false,
+  onEdit,
+  isUser = false,
+  side = 'bottom',
+}: ChatActionButtonsProps) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = () => {
@@ -47,9 +65,13 @@ export function ChatActionButtons({ onRegenerate, onCopy, content = '', onLike, 
       } else {
         // 降级：复制并提示
         navigator.clipboard.writeText(content)
-        alert('已复制内容，可手动分享')
+        toast('已复制内容，可手动分享')
       }
     }
+  }
+
+  const handleEdit = () => {
+    onEdit?.()
   }
 
   return (
@@ -70,11 +92,11 @@ export function ChatActionButtons({ onRegenerate, onCopy, content = '', onLike, 
             <span className="sr-only">复制内容</span>
           </Button>
         </TooltipTrigger>
-        <TooltipContent>{copied ? '已复制' : '复制'}</TooltipContent>
+        <TooltipContent side={side}>{copied ? '已复制' : '复制'}</TooltipContent>
       </Tooltip>
 
       {/* 重新生成 */}
-      {onRegenerate && (
+      {!isUser && onRegenerate && (
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -87,12 +109,12 @@ export function ChatActionButtons({ onRegenerate, onCopy, content = '', onLike, 
               <span className="sr-only">重新生成</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>重新生成</TooltipContent>
+          <TooltipContent side={side}>重新生成</TooltipContent>
         </Tooltip>
       )}
 
       {/* 点赞 */}
-      {onLike && (
+      {!isUser && onLike && (
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -108,12 +130,12 @@ export function ChatActionButtons({ onRegenerate, onCopy, content = '', onLike, 
               <span className="sr-only">赞</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>有帮助</TooltipContent>
+          <TooltipContent side={side}>喜欢</TooltipContent>
         </Tooltip>
       )}
 
       {/* 踩 */}
-      {onDislike && (
+      {!isUser && onDislike && (
         <Tooltip>
           <TooltipTrigger asChild>
             <Button
@@ -129,25 +151,49 @@ export function ChatActionButtons({ onRegenerate, onCopy, content = '', onLike, 
               <span className="sr-only">踩</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>没有帮助</TooltipContent>
+          <TooltipContent side={side}>不喜欢</TooltipContent>
         </Tooltip>
       )}
 
       {/* 分享 */}
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600"
-            onClick={handleShare}
-          >
-            <Share2 className="h-4 w-4" />
-            <span className="sr-only">分享</span>
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>分享</TooltipContent>
-      </Tooltip>
+      {!isUser && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs text-gray-400 transition-all duration-200 hover:bg-blue-50 hover:text-blue-600"
+              onClick={handleShare}
+            >
+              <Share2 className="h-4 w-4" />
+              <span className="sr-only">分享</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side={side}>分享</TooltipContent>
+        </Tooltip>
+      )}
+
+      {/* 编辑 */}
+      {isUser && (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className={cn(
+                'flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
+                disabled ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer text-gray-400 hover:bg-blue-50 hover:text-blue-600',
+              )}
+              disabled={disabled}
+              onClick={handleEdit}
+            >
+              <SquarePen className="h-4 w-4" />
+              <span className="sr-only">编辑</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side={side}>编辑</TooltipContent>
+        </Tooltip>
+      )}
     </TooltipProvider>
   )
 }
