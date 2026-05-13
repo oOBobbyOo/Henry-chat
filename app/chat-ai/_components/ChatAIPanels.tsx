@@ -3,6 +3,7 @@
 import { useRef } from 'react'
 
 import { Brain, Globe, LogOut, Send, Settings, Square, User, UserIcon } from 'lucide-react'
+import { useStickToBottom } from 'use-stick-to-bottom'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
@@ -53,6 +54,9 @@ export function ChatAIPanels({
   onCancelCompare,
 }: ChatPanelProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  // 使用 use-stick-to-bottom 实现自动滚动
+  const { scrollRef, contentRef } = useStickToBottom()
 
   // 处理键盘事件（Enter 发送）
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -144,13 +148,19 @@ export function ChatAIPanels({
       </header>
 
       {/* --- 消息区域 --- */}
-      <div className="flex-1 overflow-y-auto p-4">
+      <div
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto p-4"
+      >
         {messages.length === 0 ? (
           <div className="flex h-full items-center justify-center text-gray-400">
             <p className="text-sm">开始新的对话吧 ✨</p>
           </div>
         ) : (
-          <div className="mx-auto max-w-3xl space-y-4">
+          <div
+            ref={contentRef}
+            className="mx-auto max-w-3xl space-y-4"
+          >
             {messages.map((message) => (
               <ChatMessageBubble
                 key={message.id}
