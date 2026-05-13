@@ -22,10 +22,10 @@ export const WEB_SEARCH_OPTIONS = [
  * 快捷问题列表
  */
 export const QUICK_QUESTIONS: Chat.QuickQuestion[] = [
-  { id: 'q1', text: '非洲平头哥是哪种动物?' },
-  { id: 'q2', text: '世界上最好的编程语言是哪个?' },
-  { id: 'q3', text: '空穴来风的真正含义' },
-  { id: 'q4', text: '大器晚成还是大器免成' },
+  { id: 'q1', text: '今天的天气怎么样?' },
+  { id: 'q2', text: '最好的编程语言是哪个?' },
+  { id: 'q3', text: 'LLM的真正含义' },
+  { id: 'q4', text: 'langChain和langGraph是什么?' },
 ]
 
 /**

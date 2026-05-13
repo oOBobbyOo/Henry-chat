@@ -7,9 +7,9 @@ import { useStickToBottom } from 'use-stick-to-bottom'
 
 import { cn } from '@/lib/utils'
 
-import { QUICK_QUESTIONS } from '../constants'
 import { ChatMessageBubble } from './ChatMessageBubble'
 import { ModelConfigModal } from './ModelConfigModal'
+import { QuickQuestions } from './QuickQuestions'
 import { UserDropdownMenu } from './UserDropdownMenu'
 
 interface ChatPanelProps {
@@ -79,6 +79,12 @@ export function ChatAIPanels({
   // 是否显示快捷问题（仅在消息为空时显示）
   const showQuickQuestions = messages.length === 0
 
+  // 处理快捷问题输入
+  const handleQuestion = (question: Chat.QuickQuestion) => {
+    onInputChange(question.text)
+    textareaRef.current?.focus()
+  }
+
   // 从 config 中读取网页搜索和深度思考状态
   const enableWebSearch = config.enableWebSearch || false
   const enableDeepThinking = config.enableThinking || false
@@ -139,22 +145,7 @@ export function ChatAIPanels({
       <div className="w-full p-4">
         <div className="mx-auto max-w-3xl space-y-3">
           {/* 快捷问题按钮组（仅在消息为空时显示） */}
-          {showQuickQuestions && (
-            <div className="flex flex-wrap items-center gap-2">
-              {QUICK_QUESTIONS.map((question) => (
-                <button
-                  key={question.id}
-                  onClick={() => {
-                    onInputChange(question.text)
-                    textareaRef.current?.focus()
-                  }}
-                  className={cn('cursor-pointer rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-600', 'transition-colors hover:border-blue-200 hover:bg-gray-50')}
-                >
-                  {question.text}
-                </button>
-              ))}
-            </div>
-          )}
+          {showQuickQuestions && <QuickQuestions onClickQuestion={handleQuestion} />}
 
           {/* 输入框区域 */}
           <div className="relative rounded-xl border border-gray-200 bg-white transition-all duration-200 focus-within:border-blue-300 focus-within:ring-2 focus-within:ring-blue-100">
