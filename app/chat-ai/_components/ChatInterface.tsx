@@ -4,16 +4,14 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import { LogOut, Menu, Plus, Settings, User, UserIcon } from 'lucide-react'
-
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { Menu, Plus } from 'lucide-react'
 
 import { createModelConfig, INITIAL_PRIMARY_MODEL } from '../constants'
 import { useChatModels } from '../hooks/useChatModels'
 import { useConversations } from '../hooks/useConversations'
 import { ChatAIPanels } from './ChatAIPanels'
 import { ChatSidebar } from './ChatSidebar'
+import { UserDropdownMenu } from './UserDropdownMenu'
 
 /** 最大允许的对比模型数量（不含主模型） */
 const MAX_COMPARE_MODELS = 1
@@ -191,43 +189,7 @@ export function ChatInterface({
           >
             <Plus className="h-5 w-5" />
           </button>
-          {
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="group rounded-full p-0 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:outline-none">
-                  <Avatar className="h-8 w-8 shadow-sm ring-2 ring-white transition-all group-hover:ring-blue-50">
-                    <AvatarImage
-                      src={''}
-                      alt={'User'}
-                    />
-                    <AvatarFallback className="bg-blue-500 text-white">
-                      <User className="h-4 w-4" />
-                    </AvatarFallback>
-                  </Avatar>
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="end"
-                className="w-56"
-              >
-                <DropdownMenuLabel>我的账户</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer">
-                  <UserIcon className="mr-2 h-4 w-4" />
-                  <span>个人中心</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer">
-                  <Settings className="mr-2 h-4 w-4" />
-                  <span>账户设置</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer text-red-600 focus:bg-red-50 focus:text-red-600">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  <span>退出登录</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          }
+          <UserDropdownMenu />
         </div>
       </header>
 
