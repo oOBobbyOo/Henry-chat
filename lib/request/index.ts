@@ -5,7 +5,8 @@ import { ClientRequest } from './client'
 const baseURL = process.env.NEXT_PUBLIC_SERVER_URL || ''
 
 // 默认导出实例
-export const request = new ClientRequest(baseURL, {
+export const request = new ClientRequest({
+  baseURL,
   timeout: 6000,
 })
 
