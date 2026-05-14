@@ -39,7 +39,7 @@ export interface RequestConfig extends Omit<RequestInit, 'headers' | 'body' | 's
   /** 基础 URL（可选） */
   baseURL?: string
   /** 请求超时时间（单位：毫秒） */
-  timeout?: number
+  timeout?: number | null
   /** 请求头（覆盖默认值） */
   headers?: Record<string, string>
   /** URL 查询参数（自动拼接到 URL 末尾） */

@@ -1,8 +1,20 @@
 import { request } from '@/lib/request'
 
 export const AuthService = {
-  signup: (params: Auth.SignupParams) => request.post('/api/auth/signup', params),
-  phoneLogin: (params: Auth.PhoneLoginParams) => request.post('/api/auth/phone/login', params),
-  emailLogin: (params: Auth.EmailLoginParams) => request.post('/api/auth/email/login', params),
-  forgotPassword: (params: Auth.ForgotPasswordParams) => request.post('/api/auth/forgot-password', params),
+  signup: (body: Auth.SignupRequestBody) =>
+    request.post('/api/auth/signup', {
+      body,
+    }),
+  phoneLogin: (body: Auth.PhoneLoginRequestBody) =>
+    request.post('/api/auth/phone/login', {
+      body,
+    }),
+  emailLogin: (body: Auth.EmailLoginRequestBody) =>
+    request.post('/api/auth/email/login', {
+      body,
+    }),
+  forgotPassword: (body: Auth.ForgotPasswordRequestBody) =>
+    request.post('/api/auth/forgot-password', {
+      body,
+    }),
 }

@@ -90,7 +90,7 @@ declare namespace Chat {
   }
 
   /** 聊天请求参数 */
-  export interface CompletionParams {
+  export interface CompletionRequestBody {
     /** 模型名称  */
     model: string
     /** 消息列表 */

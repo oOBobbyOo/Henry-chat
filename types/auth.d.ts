@@ -1,6 +1,6 @@
 declare namespace Auth {
   /** 注册请求参数 */
-  export interface SignupParams {
+  export interface SignupRequestBody {
     /** 用户名 */
     name: string
     /** 邮箱 */
@@ -10,7 +10,7 @@ declare namespace Auth {
   }
 
   /** 手机登录请求参数 */
-  export interface PhoneLoginParams {
+  export interface PhoneLoginRequestBody {
     /** 手机 */
     phone: string
     /** 手机验证码 */
@@ -18,7 +18,7 @@ declare namespace Auth {
   }
 
   /** 邮箱登录请求参数 */
-  export interface EmailLoginParams {
+  export interface EmailLoginRequestBody {
     /** 邮箱 */
     email: string
     /** 密码 */
@@ -26,7 +26,7 @@ declare namespace Auth {
   }
 
   /** 忘记密码请求参数 */
-  export interface ForgotPasswordParams {
+  export interface ForgotPasswordRequestBody {
     /** 邮箱 */
     email: string
   }
