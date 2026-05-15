@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils'
 import { AuthService } from '@/services/auth'
 
 import { LoginOrSignup } from './LoginOrSignup'
+import { SocialLoginButtons } from './SocialLoginButtons'
 
 // 定义 Zod Schema 校验规则
 const loginSchema = z.object({
@@ -172,6 +173,10 @@ export function PhoneLoginForm() {
         >
           {form.state.isSubmitting ? '登录中...' : '登录'}
         </Button>
+      </AnimatedField>
+
+      <AnimatedField index={3}>
+        <SocialLoginButtons />
       </AnimatedField>
 
       <DividerWithText>或继续使用</DividerWithText>
