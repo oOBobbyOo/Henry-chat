@@ -2,6 +2,7 @@ import { formatTokens } from '@/lib/format'
 import { getLobeIcon } from '@/lib/libe-icon'
 
 import { ModelLink, VendorLink } from './EntityLinks'
+import { GrowthText } from './GrowthText'
 
 type ModelLeaderboardProps = {
   rows: Ranking.ModelRanking[]
@@ -70,10 +71,10 @@ function ModelList(props: { rows: Ranking.ModelRanking[]; variant: 'default' | '
                 </>
               )}
             </div>
-            {/* <GrowthText
+            <GrowthText
               value={row.growth_pct}
               className={compact ? 'text-[10px]' : 'text-[11px]'}
-            /> */}
+            />
           </div>
         </li>
       ))}
