@@ -7,6 +7,7 @@ export const VALID_PERIODS: Ranking.Period[] = ['today', 'week', 'month', 'year'
 export const RankingService = {
   getRankings: (period: Ranking.Period) =>
     request.get<Ranking.Response>('/api/rankings', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
       params: { period },
     }),
 }
