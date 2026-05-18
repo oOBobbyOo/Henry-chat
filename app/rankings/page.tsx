@@ -1,6 +1,6 @@
 'use client'
 
-import { useParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { Skeleton } from '@/components/ui/skeleton'
 import { useRankings, VALID_PERIODS } from '@/services/ranking'
@@ -8,14 +8,22 @@ import { useRankings, VALID_PERIODS } from '@/services/ranking'
 import { MarketShareSection } from './_components/MarketShareSection'
 import { ModelsSection } from './_components/ModelsSection'
 import { PulseSection } from './_components/PulseSection'
+import { RankingsHero } from './_components/RankingsHero'
 
 export default function RankingsPage() {
-  const params = useParams()
+  const router = useRouter()
 
-  const period: Ranking.Period = VALID_PERIODS.includes(params.period as Ranking.Period) ? (params.period as Ranking.Period) : 'today'
+  const searchParams = useSearchParams()
+  const searchPeriod = searchParams.get('period') as Ranking.Period
+
+  const period = VALID_PERIODS.includes(searchPeriod) ? searchPeriod : 'today'
 
   const { data, isLoading, error } = useRankings(period)
   const snapshot = data?.data as Ranking.Snapshots
+
+  const handlePeriodChange = (next: Ranking.Period) => {
+    router.push(`/rankings?period=${next}`)
+  }
 
   if (isLoading) return <RankingsLoading />
 
@@ -28,6 +36,11 @@ export default function RankingsPage() {
 
   return (
     <>
+      <RankingsHero
+        period={period}
+        onPeriodChange={handlePeriodChange}
+      />
+
       <ModelsSection
         history={snapshot.models_history}
         rows={snapshot.models}
