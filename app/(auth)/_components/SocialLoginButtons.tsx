@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 
-import { createAuthClient } from 'better-auth/client'
 import { Loader2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+import { signIn } from '@/lib/authClient'
 import { cn } from '@/lib/utils'
 
 export type SocialProvider = 'google' | 'facebook'
@@ -84,8 +84,6 @@ export function SocialLoginButton({ provider, onClick, isLoading = false, classN
   )
 }
 
-export const authClient = createAuthClient()
-
 export function SocialLoginButtons({ providers = ['google', 'facebook'], className }: { providers?: SocialProvider[]; className?: string }) {
   const [loadingProvider, setLoadingProvider] = useState<SocialProvider | null>(null)
 
@@ -93,8 +91,10 @@ export function SocialLoginButtons({ providers = ['google', 'facebook'], classNa
     if (loadingProvider) return
     setLoadingProvider(provider)
     try {
-      await authClient.signIn.social({ provider, callbackURL: '/' })
-    } catch {
+      await signIn.social({ provider, callbackURL: '/chat-ai' })
+    } catch (err) {
+      console.log(err)
+
       setLoadingProvider(null)
     }
   }
