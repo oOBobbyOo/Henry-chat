@@ -67,6 +67,27 @@ declare namespace Ranking {
     buckets: number
   }
 
+  /**
+   * One sample of a vendor's market share at a given timestamp. `share` is
+   * normalised within the bucket (sums to 1.0 across all vendors at the same
+   * `ts`); `tokens` is preserved for tooltip use.
+   */
+  export type VendorSharePoint = {
+    ts: string
+    label: string
+    vendor: string
+    share: number
+    tokens: number
+  }
+
+  export type VendorShareSeries = {
+    /** Flat points ready for VChart, ordered oldest → newest. */
+    points: VendorSharePoint[]
+    /** Vendors that appear in the series, sorted by aggregate tokens desc. */
+    vendors: Array<{ name: string; total: number; share: number }>
+    buckets: number
+  }
+
   export type Snapshots = {
     // Overall (all categories) ------------------------------------------------
     models: ModelRanking[]

@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useRankings, VALID_PERIODS } from '@/services/ranking'
 
+import { MarketShareSection } from './_components/MarketShareSection'
 import { ModelsSection } from './_components/ModelsSection'
 import { PulseSection } from './_components/PulseSection'
 
@@ -30,6 +31,12 @@ export default function RankingsPage() {
       <ModelsSection
         history={snapshot.models_history}
         rows={snapshot.models}
+        period={period}
+      />
+
+      <MarketShareSection
+        history={snapshot.vendor_share_history}
+        rows={snapshot.vendors}
         period={period}
       />
 
