@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useRankings, VALID_PERIODS } from '@/services/ranking'
 
+import { ModelsSection } from './_components/ModelsSection'
 import { PulseSection } from './_components/PulseSection'
 
 export default function RankingsPage() {
@@ -28,6 +29,12 @@ export default function RankingsPage() {
 
   return (
     <div className="relative mx-auto w-full max-w-[1280px] space-y-8 px-3 pt-16 pb-10 sm:px-6 sm:pt-20 sm:pb-12 xl:px-8">
+      <ModelsSection
+        history={snapshot.models_history}
+        rows={snapshot.models}
+        period={period}
+      />
+
       <PulseSection
         movers={snapshot.top_movers}
         droppers={snapshot.top_droppers}
