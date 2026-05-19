@@ -52,7 +52,7 @@ export function RankingsHero(props: RankingsHeroProps) {
                 isActive ? 'text-foreground' : 'text-muted-foreground hover:text-foreground',
               )}
             >
-              {p.labelKey}
+              {t(p.labelKey)}
               <span
                 aria-hidden
                 className={cn('bg-foreground absolute inset-x-3 -bottom-px h-[2px] rounded-full transition-opacity', isActive ? 'opacity-100' : 'opacity-0')}
