@@ -1,6 +1,6 @@
-'use client'
-
 import { useMemo } from 'react'
+
+import { useT } from 'next-i18next/client'
 
 import { formatShare, formatTokens } from '@/lib/format'
 
@@ -53,6 +53,8 @@ type MarketShareSectionProps = {
 }
 
 export function MarketShareSection(props: MarketShareSectionProps) {
+  const { t } = useT('rankings')
+
   const visible = props.rows.slice(0, MAX_VENDORS_IN_LIST)
   const half = Math.ceil(visible.length / 2)
   const left = visible.slice(0, half)
@@ -64,11 +66,11 @@ export function MarketShareSection(props: MarketShareSectionProps) {
     <section className="bg-card overflow-hidden rounded-lg border">
       <div className="border-t">
         <header className="px-5 pt-4 pb-2">
-          <h3 className="text-foreground text-sm font-semibold">{'By model author'}</h3>
-          <p className="text-muted-foreground/80 mt-0.5 text-xs">{'Vendors ranked by aggregated token volume'}</p>
+          <h3 className="text-foreground text-sm font-semibold">{t('By model author')}</h3>
+          <p className="text-muted-foreground/80 mt-0.5 text-xs">{t('Vendors ranked by aggregated token volume')}</p>
         </header>
         {visible.length === 0 ? (
-          <div className="text-muted-foreground/80 px-5 py-8 text-center text-sm">{'No vendor data available'}</div>
+          <div className="text-muted-foreground/80 px-5 py-8 text-center text-sm">{t('No vendor data available')}</div>
         ) : (
           <div className="grid grid-cols-1 gap-x-8 px-5 pt-1 pb-4 md:grid-cols-2">
             <VendorList

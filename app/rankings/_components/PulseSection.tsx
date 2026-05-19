@@ -1,4 +1,5 @@
 import { ArrowDownRight, ArrowUpRight, TrendingDown, TrendingUp } from 'lucide-react'
+import { useT } from 'next-i18next/client'
 
 import { getLobeIcon } from '@/lib/libe-icon'
 import { cn } from '@/lib/utils'
@@ -11,15 +12,17 @@ type PulseSectionProps = {
 }
 
 export function PulseSection(props: PulseSectionProps) {
+  const { t } = useT('rankings')
+
   return (
     <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
       <PulseCard
-        title={'Trending up'}
-        description={'Models climbing the leaderboard'}
+        title={t('Trending up')}
+        description={t('Models climbing the leaderboard')}
         icon={<TrendingUp className="size-4 text-emerald-500" />}
       >
         {props.movers.length === 0 ? (
-          <PulseEmpty label={'No notable climbers right now'} />
+          <PulseEmpty label={t('No notable climbers right now')} />
         ) : (
           <ul>
             {props.movers.map((row) => (
@@ -34,12 +37,12 @@ export function PulseSection(props: PulseSectionProps) {
       </PulseCard>
 
       <PulseCard
-        title={'Trending down'}
-        description={'Models losing positions'}
+        title={t('Trending down')}
+        description={t('Models losing positions')}
         icon={<TrendingDown className="size-4 text-rose-500" />}
       >
         {props.droppers.length === 0 ? (
-          <PulseEmpty label={'No notable drops right now'} />
+          <PulseEmpty label={t('No notable drops right now')} />
         ) : (
           <ul>
             {props.droppers.map((row) => (
