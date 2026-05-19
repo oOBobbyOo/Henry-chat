@@ -1,5 +1,15 @@
 {
   "Leaderboards": "Leaderboards",
   "Rankings": "Rankings",
-  "Discover the most-used models and rising vendors on the platform, updated from live usage data.": "Discover the most-used models and rising vendors on the platform, updated from live usage data."
+  "Discover the most-used models and rising vendors on the platform, updated from live usage data.": "Discover the most-used models and rising vendors on the platform, updated from live usage data.",
+  "Today": "Today",
+  "LLM Leaderboard": "LLM Leaderboard",
+  "Compare the most popular models on the platform": "Compare the most popular models on the platform",
+  "No models match the selected filters": "No models match the selected filters",
+  "By model author": "By model author",
+  "Vendors ranked by aggregated token volume": "Vendors ranked by aggregated token volume",
+  "No vendor data available": "No vendor data available",
+  "Trending down": "Trending down",
+  "Models losing positions": "Models losing positions",
+  "No notable drops right now": "No notable drops right now"
 }
