@@ -1,3 +1,5 @@
+import { LanguageSwitcher } from '@/components/language-switcher'
+
 import { AnimatedCharacters } from './_components/AnimatedCharacters'
 
 export default function AuthLayout({
@@ -27,6 +29,11 @@ export default function AuthLayout({
       {/* Right Login Section */}
       <div className="bg-background flex items-center justify-center p-8">
         <div className="w-full max-w-[420px]">{children}</div>
+      </div>
+
+      {/* Language Switcher */}
+      <div className="absolute top-10 right-10">
+        <LanguageSwitcher />
       </div>
     </div>
   )
