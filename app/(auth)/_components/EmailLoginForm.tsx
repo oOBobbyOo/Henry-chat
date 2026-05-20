@@ -3,6 +3,7 @@
 import Link from 'next/link'
 
 import { useForm } from '@tanstack/react-form'
+import { useT } from 'next-i18next/client'
 import { toast } from 'sonner'
 import z from 'zod'
 
@@ -19,13 +20,6 @@ import { AuthService } from '@/services/auth'
 
 import { LoginOrSignup } from './LoginOrSignup'
 
-// 定义 Zod Schema 校验规则
-const loginSchema = z.object({
-  email: z.email('请输入有效的邮箱地址'),
-  password: z.string().min(6, '密码至少需要 6 个字符').max(20, '密码最长 20 个字符'),
-  remember: z.boolean().optional(),
-})
-
 // 统一 Input 样式类（边框/阴影/无外环/聚焦反馈）
 const inputClasses = cn(
   'h-12',
@@ -39,6 +33,18 @@ const inputClasses = cn(
 )
 
 export function EmailLoginForm() {
+  const { t } = useT('auth')
+
+  // 定义 Zod Schema 校验规则
+  const loginSchema = z.object({
+    email: z.email(t('Please enter a valid phone number.')),
+    password: z
+      .string()
+      .min(6, t('Passwords must be at least {{number}} characters long.', { number: 6 }))
+      .max(20, t('Passwords must be at most {{number}} characters long.', { number: 20 })),
+    remember: z.boolean().optional(),
+  })
+
   const form = useForm({
     defaultValues: {
       email: '',
@@ -49,8 +55,9 @@ export function EmailLoginForm() {
       const { email, password } = value
       try {
         await AuthService.emailLogin({ email, password })
+        toast.success(t('Login successful!'))
       } catch {
-        toast.error('登录失败！')
+        toast.error(t('Login failed!'))
       }
     },
   })
@@ -71,7 +78,7 @@ export function EmailLoginForm() {
           validators={{ onChange: loginSchema.shape.email }}
           children={(field) => (
             <div className="space-y-2">
-              <Label htmlFor={field.name}>邮箱</Label>
+              <Label htmlFor={field.name}>{t('Email')}</Label>
               <Input
                 id={field.name}
                 name={field.name}
@@ -98,7 +105,7 @@ export function EmailLoginForm() {
           validators={{ onChange: loginSchema.shape.password }}
           children={(field) => (
             <div className="space-y-2">
-              <Label htmlFor={field.name}>密码</Label>
+              <Label htmlFor={field.name}>{t('Password')}</Label>
               <PasswordInput
                 id={field.name}
                 name={field.name}
@@ -134,7 +141,7 @@ export function EmailLoginForm() {
                   htmlFor={field.name}
                   className="text-muted-foreground cursor-pointer text-sm font-normal select-none"
                 >
-                  记住密码
+                  {t('Remember me')}
                 </Label>
               </div>
             )}
@@ -144,7 +151,7 @@ export function EmailLoginForm() {
             href="/forgot-password"
             className="focus-visible:ring-ring rounded-md text-sm font-medium text-violet-400 hover:text-violet-600 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
-            忘记密码？
+            {t('Forgot password?')}
           </Link>
         </div>
       </AnimatedField>
@@ -155,11 +162,11 @@ export function EmailLoginForm() {
           className="h-12 w-full transform cursor-pointer rounded-xl bg-gray-900 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-gray-800 hover:shadow-xl active:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-900 md:text-base"
           disabled={form.state.isSubmitting}
         >
-          {form.state.isSubmitting ? '登录中...' : '登录'}
+          {form.state.isSubmitting ? t('Logging in...') : t('Log in')}
         </Button>
       </AnimatedField>
 
-      <DividerWithText>或继续使用</DividerWithText>
+      <DividerWithText>{t('Or continue with')}</DividerWithText>
 
       <LoginOrSignup currentModel="email" />
     </form>

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import { useForm } from '@tanstack/react-form'
+import { useT } from 'next-i18next/client'
 import { toast } from 'sonner'
 import z from 'zod'
 
@@ -18,12 +19,6 @@ import { AuthService } from '@/services/auth'
 import { LoginOrSignup } from './LoginOrSignup'
 import { SocialLoginButtons } from './SocialLoginButtons'
 
-// 定义 Zod Schema 校验规则
-const loginSchema = z.object({
-  phone: z.string().regex(/^1[3-9]\d{9}$/, '请输入有效的手机号'),
-  code: z.string().regex(/^\d{6}$/, '请输入6位数字验证码'),
-})
-
 // 统一 Input 样式类（边框/阴影/无外环/聚焦反馈）
 const inputClasses = cn(
   'h-12',
@@ -37,6 +32,8 @@ const inputClasses = cn(
 )
 
 export function PhoneLoginForm() {
+  const { t } = useT('auth')
+
   const [countdown, setCountdown] = useState(0)
   const [isSending, setIsSending] = useState(false)
 
@@ -47,6 +44,12 @@ export function PhoneLoginForm() {
     return () => clearInterval(timer)
   }, [countdown])
 
+  // 定义 Zod Schema 校验规则
+  const loginSchema = z.object({
+    phone: z.string().regex(/^1[3-9]\d{9}$/, t('Please enter a valid phone number.')),
+    code: z.string().regex(/^\d{6}$/, t('Please enter a 6-digit verification code.')),
+  })
+
   const form = useForm({
     defaultValues: {
       phone: '',
@@ -55,8 +58,9 @@ export function PhoneLoginForm() {
     onSubmit: async ({ value }) => {
       try {
         await AuthService.phoneLogin(value)
+        toast.success(t('Login successful!'))
       } catch {
-        toast.error('登录失败！')
+        toast.error(t('Login failed!'))
       }
     },
   })
@@ -71,6 +75,7 @@ export function PhoneLoginForm() {
 
     setIsSending(true)
     try {
+      // TODO: 请求短信接口获取手机验证码
       await new Promise((resolve) => setTimeout(resolve, 1000))
       setCountdown(60)
     } catch (error) {
@@ -96,14 +101,14 @@ export function PhoneLoginForm() {
           validators={{ onChange: loginSchema.shape.phone }}
           children={(field) => (
             <div className="space-y-2">
-              <Label htmlFor={field.name}>手机</Label>
+              <Label htmlFor={field.name}>{t('Phone')}</Label>
               <Input
                 id={field.name}
                 name={field.name}
                 type="tel"
                 inputMode="tel"
                 autoComplete="tel"
-                placeholder="请输入手机号"
+                placeholder={t('Enter your Phone number')}
                 value={field.state.value}
                 onBlur={field.handleBlur}
                 onChange={(e) => {
@@ -128,7 +133,7 @@ export function PhoneLoginForm() {
           validators={{ onChange: loginSchema.shape.code }}
           children={(field) => (
             <div className="space-y-2">
-              <Label htmlFor={field.name}>验证码</Label>
+              <Label htmlFor={field.name}>{t('Verification code')}</Label>
               <div className="flex gap-2.5">
                 <Input
                   id={field.name}
@@ -138,7 +143,7 @@ export function PhoneLoginForm() {
                   pattern="\d{6}"
                   maxLength={6}
                   autoComplete="one-time-code" // iOS/Android 自动读取短信验证码
-                  placeholder="请输入验证码"
+                  placeholder={t('Enter your Verification code')}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => {
@@ -156,7 +161,7 @@ export function PhoneLoginForm() {
                   disabled={countdown > 0 || isSending}
                   className="min-w-[100px] shrink-0 cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-3 text-center text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:border-violet-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-gray-300 disabled:hover:bg-white sm:w-[150px]"
                 >
-                  {isSending ? '发送中...' : countdown > 0 ? `${countdown}秒` : '获取验证码'}
+                  {isSending ? t('Sending...') : countdown > 0 ? t('{{countdown}}s', { countdown }) : t('Get code')}
                 </button>
               </div>
               <FieldError errors={field.state.meta.errors} />
@@ -171,7 +176,7 @@ export function PhoneLoginForm() {
           className="h-12 w-full transform cursor-pointer rounded-xl bg-gray-900 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-gray-800 hover:shadow-xl active:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-900 md:text-base"
           disabled={form.state.isSubmitting}
         >
-          {form.state.isSubmitting ? '登录中...' : '登录'}
+          {form.state.isSubmitting ? t('Logging in...') : t('Log in')}
         </Button>
       </AnimatedField>
 
@@ -179,7 +184,7 @@ export function PhoneLoginForm() {
         <SocialLoginButtons />
       </AnimatedField>
 
-      <DividerWithText>或继续使用</DividerWithText>
+      <DividerWithText>{t('Or continue with')}</DividerWithText>
 
       <LoginOrSignup currentModel="phone" />
     </form>

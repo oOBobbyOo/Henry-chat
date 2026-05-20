@@ -1,12 +1,18 @@
+'use server'
+
+import { getT } from 'next-i18next/server'
+
 import { SignupForm } from '../_components/SignupForm'
 
-export default function SignupPage() {
+export default async function SignupPage() {
+  const { t } = await getT('auth')
+
   return (
     <>
       {/* Header */}
       <div className="mb-10 text-center">
-        <h1 className="mb-2 text-3xl leading-tight font-bold tracking-tight text-gray-900 sm:text-3xl md:mb-2.5 md:text-4xl lg:text-5xl">创建账户</h1>
-        <p className="text-base leading-relaxed font-medium text-gray-600 md:text-base">创建您的账户</p>
+        <h1 className="mb-2 text-3xl leading-tight font-bold tracking-tight text-gray-900 sm:text-3xl md:mb-2.5 md:text-4xl lg:text-5xl">{t('Create Account')}</h1>
+        <p className="text-base leading-relaxed font-medium text-gray-600 md:text-base">{t('Create Your Account')}</p>
       </div>
 
       {/* Signup Form */}

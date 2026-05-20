@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { Loader2 } from 'lucide-react'
+import { useT } from 'next-i18next/client'
 
 import { Button } from '@/components/ui/button'
 import { signIn } from '@/lib/authClient'
@@ -63,6 +64,8 @@ const providerConfig = {
 } as const
 
 export function SocialLoginButton({ provider, onClick, isLoading = false, className }: SocialLoginButtonProps) {
+  const { t } = useT('auth')
+
   const { label, Icon, theme } = providerConfig[provider]
 
   return (
@@ -71,7 +74,7 @@ export function SocialLoginButton({ provider, onClick, isLoading = false, classN
       variant="outline"
       onClick={onClick}
       disabled={isLoading}
-      aria-label={`使用 ${label} 登录`}
+      aria-label={t('Log in with {{label}}', { label })}
       className={cn(
         'flex h-12 w-full cursor-pointer items-center justify-center gap-3 rounded-lg border px-4 py-3 text-sm font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-xl focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 md:text-base',
         theme,
@@ -79,7 +82,7 @@ export function SocialLoginButton({ provider, onClick, isLoading = false, classN
       )}
     >
       {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Icon className="h-5 w-5" />}
-      <span>{isLoading ? '登录中...' : `使用 ${label} 登录`}</span>
+      <span>{isLoading ? t('Logging in...') : t('Log in with {{label}}', { label })}</span>
     </Button>
   )
 }

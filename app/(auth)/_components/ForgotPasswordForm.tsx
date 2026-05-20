@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 import { useForm } from '@tanstack/react-form'
 import { Mail, CheckCircle2, ArrowLeft } from 'lucide-react'
+import { useT } from 'next-i18next/client'
 import { toast } from 'sonner'
 import z from 'zod'
 
@@ -16,11 +17,6 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 import { AuthService } from '@/services/auth'
-
-// 校验规则
-const forgotSchema = z.object({
-  email: z.email('请输入有效的邮箱地址'),
-})
 
 // 复用统一输入框样式（增加左侧图标内边距）
 const inputClasses = cn(
@@ -33,7 +29,14 @@ const inputClasses = cn(
 )
 
 export function ForgotPasswordForm() {
+  const { t } = useT('auth')
+
   const [isSuccess, setIsSuccess] = useState(false)
+
+  // 校验规则
+  const forgotSchema = z.object({
+    email: z.email(t('Please enter a valid email address.')),
+  })
 
   const form = useForm({
     defaultValues: { email: '' },
@@ -42,7 +45,7 @@ export function ForgotPasswordForm() {
         await AuthService.forgotPassword(value)
         setIsSuccess(true)
       } catch {
-        toast.error('发送邮件失败！')
+        toast.error(t('Email sending failed!'))
       }
     },
   })
@@ -56,9 +59,9 @@ export function ForgotPasswordForm() {
             <CheckCircle2 className="h-8 w-8 text-green-600 dark:text-green-400" />
           </div>
           <div className="space-y-2">
-            <h3 className="text-lg font-semibold">邮件已发送</h3>
+            <h3 className="text-lg font-semibold">{t('Email Sent')}</h3>
             <p className="text-muted-foreground text-sm">
-              我们已向 <span className="text-foreground font-medium">{form.getFieldValue('email')}</span> 发送了密码重置链接。请检查收件箱（及垃圾邮件箱）。
+              <span className="text-foreground font-medium">{form.getFieldValue('email')}</span> {t('Has been sent a password reset link.')} {t('Please check your inbox (and spam folder).')}
             </p>
           </div>
           <Link href="/login?model=email">
@@ -67,7 +70,7 @@ export function ForgotPasswordForm() {
               className="flex h-12 w-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:border-gray-400 hover:bg-gray-50"
             >
               <ArrowLeft className="h-4 w-4" />
-              返回登录
+              {t('Back to Log In')}
             </Button>
           </Link>
         </div>
@@ -90,14 +93,14 @@ export function ForgotPasswordForm() {
           validators={{ onChange: forgotSchema.shape.email }}
           children={(field) => (
             <div className="space-y-2">
-              <Label htmlFor={field.name}>邮箱</Label>
+              <Label htmlFor={field.name}>{t('Email')}</Label>
               <div className="relative">
                 <Input
                   id={field.name}
                   type="email"
                   inputMode="email"
                   autoComplete="email"
-                  placeholder="请输入注册邮箱"
+                  placeholder={t('Enter your registered email')}
                   value={field.state.value}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
@@ -119,7 +122,7 @@ export function ForgotPasswordForm() {
           className="h-12 w-full transform cursor-pointer rounded-xl bg-gray-900 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-gray-800 hover:shadow-xl active:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-900 md:text-base"
           disabled={form.state.isSubmitting}
         >
-          {form.state.isSubmitting ? '发送中...' : '发送重置链接'}
+          {form.state.isSubmitting ? t('Sending...') : t('Send Reset Link')}
         </Button>
       </AnimatedField>
 
@@ -129,7 +132,7 @@ export function ForgotPasswordForm() {
           className="text-muted-foreground hover:text-foreground focus-visible:ring-ring inline-flex items-center gap-1.5 rounded-md text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
         >
           <ArrowLeft className="h-4 w-4" />
-          返回登录
+          {t('Back to Log In')}
         </Link>
       </AnimatedField>
     </form>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useForm } from '@tanstack/react-form'
+import { useT } from 'next-i18next/client'
 import { toast } from 'sonner'
 import z from 'zod'
 
@@ -16,14 +17,6 @@ import { AuthService } from '@/services/auth'
 
 import { LoginOrSignup } from '../_components/LoginOrSignup'
 
-// 定义 Zod Schema 校验规则
-const signupSchema = z.object({
-  name: z.string().min(2, '姓名至少需要 2 个字符'),
-  email: z.email('请输入有效的邮箱地址'),
-  password: z.string().min(6, '密码至少需要 6 个字符').max(20, '密码最长 20 个字符'),
-  confirmPassword: z.string().min(1, '请再次输入密码'),
-})
-
 // 统一 Input 样式类（边框/阴影/无外环/聚焦反馈）
 const inputClasses = cn(
   'h-12',
@@ -37,6 +30,19 @@ const inputClasses = cn(
 )
 
 export function SignupForm() {
+  const { t } = useT('auth')
+
+  // 定义 Zod Schema 校验规则
+  const signupSchema = z.object({
+    name: z.string().min(2, t('Enter your username')),
+    email: z.email(t('Please enter a valid phone number.')),
+    password: z
+      .string()
+      .min(6, t('Passwords must be at least {{number}} characters long.', { number: 6 }))
+      .max(20, t('Passwords must be at most {{number}} characters long.', { number: 20 })),
+    confirmPassword: z.string().min(1, t('Please enter your password again.')),
+  })
+
   const form = useForm({
     defaultValues: {
       name: '',
@@ -48,8 +54,9 @@ export function SignupForm() {
       const { name, email, password } = value
       try {
         await AuthService.signup({ name, email, password })
+        toast.success(t('Sign up successful!'))
       } catch {
-        toast.error('注册失败！')
+        toast.error(t('Sign up failed!'))
       }
     },
   })
@@ -72,11 +79,11 @@ export function SignupForm() {
           {(field) => (
             <AnimatedField index={1}>
               <div className="space-y-2">
-                <Label htmlFor={field.name}>姓名</Label>
+                <Label htmlFor={field.name}>{t('Username')}</Label>
                 <Input
                   id={field.name}
                   value={field.state.value}
-                  placeholder="请输入姓名"
+                  placeholder={t('Enter your username')}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                   aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
@@ -97,7 +104,7 @@ export function SignupForm() {
           children={(field) => (
             <AnimatedField index={2}>
               <div className="space-y-2">
-                <Label htmlFor={field.name}>邮箱</Label>
+                <Label htmlFor={field.name}>{t('Email')}</Label>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -125,7 +132,7 @@ export function SignupForm() {
           validators={{ onChange: signupSchema.shape.password }}
           children={(field) => (
             <div className="space-y-2">
-              <Label htmlFor={field.name}>密码</Label>
+              <Label htmlFor={field.name}>{t('Password')}</Label>
               <PasswordInput
                 id={field.name}
                 name={field.name}
@@ -159,7 +166,7 @@ export function SignupForm() {
           }}
           children={(field) => (
             <div className="space-y-2">
-              <Label htmlFor={field.name}>确认密码</Label>
+              <Label htmlFor={field.name}>{t('Confirm Password')}</Label>
               <PasswordInput
                 id={field.name}
                 name={field.name}
@@ -185,11 +192,11 @@ export function SignupForm() {
           className="h-12 w-full transform cursor-pointer rounded-xl bg-gray-900 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-gray-800 hover:shadow-xl active:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-900 md:text-base"
           disabled={form.state.isSubmitting}
         >
-          {form.state.isSubmitting ? '注册中...' : '注册'}
+          {form.state.isSubmitting ? t('Signing up...') : t('Sign Up')}
         </Button>
       </AnimatedField>
 
-      <DividerWithText>或继续使用</DividerWithText>
+      <DividerWithText>{t('Or continue with')}</DividerWithText>
 
       <LoginOrSignup currentModel="signup" />
     </form>
