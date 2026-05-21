@@ -129,6 +129,10 @@
   }
 }
 
+@theme {
+  --app-content-max-width: 1760px;
+}
+
 @layer utilities {
   /* 淡入 + 上滑 组合动画 */
   .animate-fade-slide-up {
