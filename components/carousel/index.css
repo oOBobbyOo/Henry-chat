@@ -1,0 +1,62 @@
+/* Plaza hero carousel */
+.plaza-active-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: 1.5px;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  overflow: hidden;
+  z-index: 35;
+}
+
+.plaza-active-ring::before {
+  content: '';
+  position: absolute;
+  inset: -200%;
+  background: conic-gradient(from 0deg, rgba(34, 211, 238, 0) 0deg, rgba(207, 250, 254, 0.9) 50deg, rgba(34, 211, 238, 0.7) 110deg, rgba(34, 211, 238, 0) 180deg, rgba(34, 211, 238, 0) 360deg);
+  animation: plaza-active-ring-spin 6s linear infinite;
+}
+
+@keyframes plaza-active-ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.plaza-active-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 34;
+  animation: plaza-active-glow-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes plaza-active-glow-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(34, 211, 238, 0.12),
+      0 0 24px -2px rgba(34, 211, 238, 0.16);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(34, 211, 238, 0.28),
+      0 0 36px -2px rgba(34, 211, 238, 0.32);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plaza-active-glow,
+  .plaza-active-ring::before {
+    animation: none;
+  }
+}
