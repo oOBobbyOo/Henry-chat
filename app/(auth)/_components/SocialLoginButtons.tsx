@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { Button } from '@/components/ui/button'
-import { signIn } from '@/lib/authClient'
+import { signIn } from '@/lib/auth-client'
 import { cn } from '@/lib/utils'
 
 export type SocialProvider = 'google' | 'facebook'
