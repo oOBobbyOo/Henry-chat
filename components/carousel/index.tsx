@@ -126,7 +126,7 @@ export function Carousel({ items, className, autoPlayMs = 6000, showArrows = tru
               type="button"
               aria-label="上一条"
               onClick={() => goBy(-1)}
-              className="absolute top-1/2 left-2 z-40 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(180deg,rgba(15,18,28,0.9),rgba(11,14,22,0.94))] text-white/85 shadow-[0_16px_32px_-10px_rgba(0,0,0,0.65)] backdrop-blur-md transition hover:border-cyan-300/40 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300/40 focus-visible:outline-none"
+              className="absolute top-1/2 left-2 z-40 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 shadow-lg backdrop-blur-md transition hover:border-cyan-400 hover:text-cyan-700 focus-visible:ring-2 focus-visible:ring-cyan-300/40 focus-visible:outline-none dark:border-white/12 dark:bg-[linear-gradient(180deg,rgba(15,18,28,0.9),rgba(11,14,22,0.94))] dark:text-white/85 dark:shadow-[0_16px_32px_-10px_rgba(0,0,0,0.65)] dark:hover:border-cyan-300/40 dark:hover:text-white"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -134,7 +134,7 @@ export function Carousel({ items, className, autoPlayMs = 6000, showArrows = tru
               type="button"
               aria-label="下一条"
               onClick={() => goBy(1)}
-              className="absolute top-1/2 right-2 z-40 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/12 bg-[linear-gradient(180deg,rgba(15,18,28,0.9),rgba(11,14,22,0.94))] text-white/85 shadow-[0_16px_32px_-10px_rgba(0,0,0,0.65)] backdrop-blur-md transition hover:border-cyan-300/40 hover:text-white focus-visible:ring-2 focus-visible:ring-cyan-300/40 focus-visible:outline-none"
+              className="absolute top-1/2 right-2 z-40 inline-flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-gray-300 bg-white text-gray-600 shadow-lg backdrop-blur-md transition hover:border-cyan-400 hover:text-cyan-700 focus-visible:ring-2 focus-visible:ring-cyan-300/40 focus-visible:outline-none dark:border-white/12 dark:bg-[linear-gradient(180deg,rgba(15,18,28,0.9),rgba(11,14,22,0.94))] dark:text-white/85 dark:shadow-[0_16px_32px_-10px_rgba(0,0,0,0.65)] dark:hover:border-cyan-300/40 dark:hover:text-white"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
@@ -160,7 +160,9 @@ export function Carousel({ items, className, autoPlayMs = 6000, showArrows = tru
                 onClick={() => goTo(index)}
                 className={cn(
                   'inline-flex h-[5px] rounded-full transition-all duration-300 focus-visible:ring-1 focus-visible:ring-cyan-300/40 focus-visible:outline-none',
-                  isActive ? 'w-[22px] bg-[linear-gradient(90deg,#67E8F9,#22D3EE)] shadow-[0_0_12px_rgba(34,211,238,0.5)]' : 'w-[5px] bg-white/20 hover:bg-white/40',
+                  isActive
+                    ? 'w-[22px] bg-[linear-gradient(90deg,#67E8F9,#22D3EE)] shadow-[0_0_12px_rgba(34,211,238,0.5)]'
+                    : 'w-[5px] bg-gray-300 hover:bg-gray-400 dark:bg-white/20 dark:hover:bg-white/40',
                 )}
               />
             )
@@ -227,8 +229,8 @@ function PromoSlideOverlays({ data, showGrid }: { data: PromoSlideData; showGrid
           }}
         />
       ) : null}
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(95deg,rgba(7,7,14,0.92)_0%,rgba(7,7,14,0.7)_38%,rgba(7,7,14,0.32)_62%,rgba(7,7,14,0)_92%)]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(to_top,rgba(7,7,14,0.65),transparent)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(95deg,rgba(245,245,250,0.88)_0%,rgba(245,245,250,0.6)_38%,rgba(245,245,250,0.2)_62%,rgba(245,245,250,0)_92%)] dark:bg-[linear-gradient(95deg,rgba(7,7,14,0.92)_0%,rgba(7,7,14,0.7)_38%,rgba(7,7,14,0.32)_62%,rgba(7,7,14,0)_92%)]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(to_top,rgba(245,245,250,0.7),transparent)] dark:bg-[linear-gradient(to_top,rgba(7,7,14,0.65),transparent)]" />
     </>
   )
 }
@@ -254,9 +256,9 @@ export function PromoSlide({ data, variant = 'active', priority }: PromoSlidePro
         <PromoSlideOverlays data={data} />
         <div className="relative z-10 flex h-full flex-col justify-between p-5">
           {primaryTag ? (
-            <span className="inline-flex h-6 w-fit items-center gap-1.5 rounded-full border border-cyan-300/40 bg-cyan-400/18 px-2.5 text-[10.5px] font-semibold text-cyan-100/90 backdrop-blur-sm">
+            <span className="inline-flex h-6 w-fit items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-100 px-2.5 text-[10.5px] font-semibold text-cyan-800 backdrop-blur-sm dark:border-cyan-300/40 dark:bg-cyan-400/18 dark:text-cyan-100/90">
               <span
-                className="h-[5px] w-[5px] rounded-full bg-cyan-300"
+                className="h-[5px] w-[5px] rounded-full bg-cyan-600 dark:bg-cyan-300"
                 aria-hidden
               />
               {primaryTag.label}
@@ -265,8 +267,8 @@ export function PromoSlide({ data, variant = 'active', priority }: PromoSlidePro
             <span />
           )}
           <div>
-            {secondaryTag ? <div className="text-[10px] font-semibold tracking-[0.16em] text-white/55 uppercase">{secondaryTag.label}</div> : null}
-            <div className="mt-2 line-clamp-2 text-[20px] leading-[1.05] font-bold tracking-tight text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)]">{data.title}</div>
+            {secondaryTag ? <div className="text-[10px] font-semibold tracking-[0.16em] text-gray-500 uppercase dark:text-white/55">{secondaryTag.label}</div> : null}
+            <div className="mt-2 line-clamp-2 text-[20px] leading-[1.05] font-bold tracking-tight text-gray-900 dark:text-white dark:drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)]">{data.title}</div>
           </div>
         </div>
       </div>
@@ -302,13 +304,15 @@ export function PromoSlide({ data, variant = 'active', priority }: PromoSlidePro
               <span
                 key={tag.label}
                 className={cn(
-                  'inline-flex h-6 items-center gap-1.5 rounded-full px-3 text-[10.5px] font-semibold backdrop-blur-sm',
-                  tag.accent ? 'border border-cyan-300/40 bg-cyan-400/18 text-cyan-100/95' : 'border border-white/10 bg-black/40 font-medium text-white/85',
+                  'inline-flex h-6 items-center gap-1.5 rounded-full px-3 text-[10.5px] font-semibold',
+                  tag.accent
+                    ? 'border border-cyan-500/30 bg-cyan-100 text-cyan-800 dark:border-cyan-300/40 dark:bg-cyan-400/18 dark:text-cyan-100/95'
+                    : 'border border-gray-300 bg-white/80 font-medium text-gray-700 dark:border-white/10 dark:bg-black/40 dark:text-white/85',
                 )}
               >
                 {tag.accent ? (
                   <span
-                    className="h-[5px] w-[5px] rounded-full bg-cyan-300"
+                    className="h-[5px] w-[5px] rounded-full bg-cyan-600 dark:bg-cyan-300"
                     aria-hidden
                   />
                 ) : null}
@@ -319,23 +323,25 @@ export function PromoSlide({ data, variant = 'active', priority }: PromoSlidePro
           {data.countdown ? (
             <div className="hidden items-center gap-2 sm:flex">
               <span className="relative flex h-1.5 w-1.5 shrink-0">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-300 opacity-60" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(34,211,238,0.6)]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-500 opacity-60 dark:bg-cyan-300" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-600 shadow-[0_0_10px_rgba(34,211,238,0.6)] dark:bg-cyan-300" />
               </span>
-              <span className="text-[9.5px] font-semibold tracking-[0.16em] text-white/45 uppercase">活动剩余</span>
-              <span className="text-[12.5px] font-semibold text-white/95 tabular-nums">{data.countdown}</span>
+              <span className="text-[9.5px] font-semibold tracking-[0.16em] text-gray-500 uppercase dark:text-white/45">活动剩余</span>
+              <span className="text-[12.5px] font-semibold text-gray-900 tabular-nums dark:text-white/95">{data.countdown}</span>
             </div>
           ) : null}
         </div>
 
         <div className="flex flex-1 flex-col justify-center py-2">
-          {data.subtitle ? <p className="text-[clamp(22px,3vw,36px)] leading-[0.98] font-black tracking-tighter text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">{data.subtitle}</p> : null}
-          <h2 className="mt-2 max-w-[560px] text-[17px] leading-[1.18] font-semibold tracking-tight text-white/94">{data.title}</h2>
-          {data.description ? <p className="mt-2 line-clamp-2 max-w-[560px] text-[12.5px] leading-[1.6] text-white/65">{data.description}</p> : null}
+          {data.subtitle ? (
+            <p className="text-[clamp(22px,3vw,36px)] leading-[0.98] font-black tracking-tighter text-gray-900 dark:text-white dark:drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">{data.subtitle}</p>
+          ) : null}
+          <h2 className="mt-2 max-w-[560px] text-[17px] leading-[1.18] font-semibold tracking-tight text-gray-800 dark:text-white/94">{data.title}</h2>
+          {data.description ? <p className="mt-2 line-clamp-2 max-w-[560px] text-[12.5px] leading-[1.6] text-gray-600 dark:text-white/65">{data.description}</p> : null}
         </div>
 
         <div className="flex items-end justify-between gap-3">
-          {data.footer ? <span className="line-clamp-1 text-[10.5px] text-white/55">{data.footer}</span> : <span />}
+          {data.footer ? <span className="line-clamp-1 text-[10.5px] text-gray-500 dark:text-white/55">{data.footer}</span> : <span />}
           {data.cta ? (
             <Link
               href={data.cta.href}
