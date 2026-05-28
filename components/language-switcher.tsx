@@ -3,6 +3,7 @@
 import { Check, Languages } from 'lucide-react'
 import { useChangeLanguage, useT } from 'next-i18next/client'
 
+import { Button } from '@/components/ui/button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { INTERFACE_LANGUAGE_OPTIONS } from '@/i18n/languages'
 import { cn } from '@/lib/utils'
@@ -17,7 +18,12 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Languages className="size-[1.2rem] cursor-pointer" />
+        <Button
+          variant="outline"
+          size="icon"
+        >
+          <Languages className="h-[1.2rem] w-[1.2rem]" />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         {INTERFACE_LANGUAGE_OPTIONS.map((lang) => (
@@ -25,7 +31,7 @@ export function LanguageSwitcher() {
             key={lang.code}
             onClick={() => changeLanguage(lang.code)}
           >
-            <span> {lang.label}</span>
+            <span>{lang.label}</span>
             <Check
               size={14}
               className={cn('ms-auto', currentLanguage !== lang.code && 'hidden')}
