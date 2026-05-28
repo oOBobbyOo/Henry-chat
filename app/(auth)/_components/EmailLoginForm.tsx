@@ -135,7 +135,7 @@ export function EmailLoginForm() {
                   id={field.name}
                   checked={field.state.value}
                   onCheckedChange={(checked) => field.handleChange(!!checked)}
-                  className="border-gray-300 data-[state=checked]:border-violet-600 data-[state=checked]:bg-violet-600"
+                  className="border-gray-300 data-[state=checked]:border-violet-600 data-[state=checked]:bg-violet-600 dark:border-gray-600"
                 />
                 <Label
                   htmlFor={field.name}
@@ -149,7 +149,7 @@ export function EmailLoginForm() {
 
           <Link
             href="/forgot-password"
-            className="focus-visible:ring-ring rounded-md text-sm font-medium text-violet-400 hover:text-violet-600 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="focus-visible:ring-ring rounded-md text-sm font-medium text-violet-400 hover:text-violet-600 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none dark:text-violet-400 dark:hover:text-violet-300"
           >
             {t('Forgot password?')}
           </Link>
@@ -159,7 +159,7 @@ export function EmailLoginForm() {
       <AnimatedField index={3}>
         <Button
           type="submit"
-          className="h-12 w-full transform cursor-pointer rounded-xl bg-gray-900 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-gray-800 hover:shadow-xl active:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-900 md:text-base"
+          className="h-12 w-full transform cursor-pointer rounded-xl bg-gray-900 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-gray-800 hover:shadow-xl active:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-900 md:text-base dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 dark:disabled:hover:bg-white"
           disabled={form.state.isSubmitting}
         >
           {form.state.isSubmitting ? t('Logging in...') : t('Log in')}

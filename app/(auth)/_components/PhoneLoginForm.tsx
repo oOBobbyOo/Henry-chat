@@ -159,7 +159,7 @@ export function PhoneLoginForm() {
                   type="button"
                   onClick={handleSendCode}
                   disabled={countdown > 0 || isSending}
-                  className="min-w-[100px] shrink-0 cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-3 text-center text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:border-violet-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-gray-300 disabled:hover:bg-white sm:w-[150px]"
+                  className="min-w-[100px] shrink-0 cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-3 text-center text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:border-violet-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-gray-300 disabled:hover:bg-white sm:w-[150px] dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-violet-400 dark:hover:bg-gray-750 dark:disabled:hover:border-gray-600 dark:disabled:hover:bg-gray-800"
                 >
                   {isSending ? t('Sending...') : countdown > 0 ? t('{{countdown}}s', { countdown }) : t('Get code')}
                 </button>
@@ -173,7 +173,7 @@ export function PhoneLoginForm() {
       <AnimatedField index={2}>
         <Button
           type="submit"
-          className="h-12 w-full transform cursor-pointer rounded-xl bg-gray-900 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-gray-800 hover:shadow-xl active:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-900 md:text-base"
+          className="h-12 w-full transform cursor-pointer rounded-xl bg-gray-900 py-3.5 text-base font-bold text-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:bg-gray-800 hover:shadow-xl active:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100 disabled:hover:bg-gray-900 md:text-base dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100 dark:disabled:hover:bg-white"
           disabled={form.state.isSubmitting}
         >
           {form.state.isSubmitting ? t('Logging in...') : t('Log in')}

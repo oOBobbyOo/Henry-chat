@@ -47,7 +47,7 @@ export function LoginOrSignup({ currentModel }: LoginOrSignupProps) {
               key={model.type}
               type="button"
               onClick={() => onModelChange(model.path)}
-              className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:border-gray-400 hover:bg-gray-50"
+              className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:border-gray-400 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-gray-500 dark:hover:bg-gray-750"
             >
               <Icon className="h-4 w-4 shrink-0" />
               <span>{t(model.lang)}</span>

@@ -1,4 +1,5 @@
 import { LanguageSwitcher } from '@/components/language-switcher'
+import { ThemeModeToggle } from '@/components/theme/theme-mode-toggle'
 
 import { AnimatedCharacters } from './_components/AnimatedCharacters'
 
@@ -31,8 +32,9 @@ export default function AuthLayout({
         <div className="w-full max-w-[420px]">{children}</div>
       </div>
 
-      {/* Language Switcher */}
-      <div className="absolute top-10 right-10">
+      {/* Switcher */}
+      <div className="absolute top-10 right-10 flex items-center gap-2">
+        <ThemeModeToggle />
         <LanguageSwitcher />
       </div>
     </div>
