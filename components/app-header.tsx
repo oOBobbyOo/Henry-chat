@@ -8,7 +8,7 @@ import { ThemeToggle } from './theme/theme-toggle'
 export function AppHeader() {
   return (
     <header className="sticky top-3 z-50 px-4 lg:px-5">
-      <div className="mx-auto flex min-h-[68px] w-full max-w-[calc(var(--app-content-max-width)-2rem)] items-center justify-between gap-4 rounded-[20px] border border-gray-200 bg-transparent px-4 py-2.5 shadow-sm saturate-145 backdrop-blur-xl lg:max-w-[calc(var(--app-content-max-width)-2.5rem)] dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(13,20,33,0.78),rgba(8,13,24,0.68))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_42px_rgba(2,6,23,0.2)]">
+      <div className="mx-auto flex min-h-17 w-full max-w-[calc(var(--app-content-max-width)-2rem)] items-center justify-between gap-4 rounded-[20px] border border-gray-200 bg-transparent px-4 py-2.5 shadow-sm saturate-145 backdrop-blur-xl lg:max-w-[calc(var(--app-content-max-width)-2.5rem)] dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(13,20,33,0.78),rgba(8,13,24,0.68))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_42px_rgba(2,6,23,0.2)]">
         {/* Left */}
         <div className="flex min-w-0 items-center gap-2.5 lg:gap-3">
           <div className="flex min-w-0 flex-col justify-center py-0.5">
@@ -39,7 +39,7 @@ export function AppHeader() {
               className="inline-flex h-full min-w-0 items-center gap-1.5 px-3 text-[12px] font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900 focus-visible:ring-2 focus-visible:ring-cyan-300/40 focus-visible:outline-none focus-visible:ring-inset dark:text-zinc-200 dark:hover:bg-white/4 dark:hover:text-white"
             >
               <Award className="h-3.5 w-3.5 shrink-0 text-gray-400 dark:text-white/70" />
-              <span className="hidden max-w-[86px] truncate sm:inline">排行榜</span>
+              <span className="hidden max-w-21.5 truncate sm:inline">排行榜</span>
             </Link>
             <span className="h-5 w-px shrink-0 bg-gray-200 dark:bg-white/8"></span>
             {/* Theme toggle */}

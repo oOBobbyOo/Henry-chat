@@ -1,3 +1,5 @@
+"use client"
+
 import { ChevronRight, CircleQuestionMark, LayoutDashboard, LogOut, Settings, ShieldCheck, User } from 'lucide-react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
