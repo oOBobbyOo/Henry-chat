@@ -171,7 +171,7 @@ export function PartnersShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative mt-16 overflow-hidden rounded-[28px] border border-gray-200/70 bg-transparent saturate-145 backdrop-blur-xl dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(13,20,33,0.55),rgba(8,13,24,0.4))]"
+      className="relative overflow-hidden rounded-[28px] border border-gray-200/70 bg-transparent saturate-145 backdrop-blur-xl dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(13,20,33,0.55),rgba(8,13,24,0.4))]"
     >
       {/* Decorative accent */}
       <div
