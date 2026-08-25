@@ -2,7 +2,33 @@
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 
+import type { SimpleIcon } from 'simple-icons'
+
 import { useInView } from 'framer-motion'
+import {
+  siAlibabacloud,
+  siAnthropic,
+  siBaidu,
+  siBilibili,
+  siBytedance,
+  siDeepseek,
+  siGoogle,
+  siHonor,
+  siHuawei,
+  siKuaishou,
+  siMeituan,
+  siMeta,
+  siMinimax,
+  siMoonshotai,
+  siNvidia,
+  siOppo,
+  siQq,
+  siQwen,
+  siSinaweibo,
+  siTripdotcom,
+  siVivo,
+  siXiaomi,
+} from 'simple-icons'
 
 import { cn } from '@/lib/utils'
 
@@ -13,55 +39,88 @@ import './partners-showcase.css'
 /* ------------------------------------------------------------------ */
 
 interface PartnerLogo {
+  /** 公司名称 */
   name: string
-  symbol: string
-  /** Base hue used to tint the placeholder mark */
-  hue: number
+  /** 品牌 logo 数据（来自 simple-icons） */
+  icon: SimpleIcon
 }
 
+/* AI 大模型 / 云计算 */
 const PARTNERS_ROW_A: PartnerLogo[] = [
-  { name: '云从科技', symbol: '☁️', hue: 210 },
-  { name: '科大讯飞', symbol: '🎤', hue: 160 },
-  { name: '百度智能云', symbol: '🔍', hue: 30 },
-  { name: '阿里云', symbol: '☁️', hue: 260 },
-  { name: '腾讯云', symbol: '💬', hue: 190 },
-  { name: '华为云', symbol: '🌐', hue: 340 },
-  { name: '字节跳动', symbol: '⚡', hue: 40 },
-  { name: '商汤科技', symbol: '🧠', hue: 280 },
-  { name: '旷视科技', symbol: '👁️', hue: 140 },
-  { name: '第四范式', symbol: '📊', hue: 0 },
-  { name: '智谱AI', symbol: '🔮', hue: 220 },
-  { name: '百川智能', symbol: '🌊', hue: 200 },
-  { name: 'MiniMax', symbol: '✨', hue: 50 },
-  { name: '月之暗面', symbol: '🌙', hue: 240 },
-  { name: '零一万物', symbol: '🌱', hue: 120 },
-  { name: '面壁智能', symbol: '🛡️', hue: 170 },
+  { name: '百度智能云', icon: siBaidu },
+  { name: '阿里云', icon: siAlibabacloud },
+  { name: '华为云', icon: siHuawei },
+  { name: '字节跳动', icon: siBytedance },
+  { name: '通义千问', icon: siQwen },
+  { name: 'DeepSeek', icon: siDeepseek },
+  { name: 'MiniMax', icon: siMinimax },
+  { name: '月之暗面', icon: siMoonshotai },
+  { name: 'Google', icon: siGoogle },
+  { name: 'Meta', icon: siMeta },
+  { name: 'NVIDIA', icon: siNvidia },
+  { name: 'Anthropic', icon: siAnthropic },
 ]
 
+/* 大厂 / 平台 */
 const PARTNERS_ROW_B: PartnerLogo[] = [
-  { name: '中国银行', symbol: '🏦', hue: 340 },
-  { name: '平安科技', symbol: '🛡️', hue: 260 },
-  { name: '招商银行', symbol: '💎', hue: 160 },
-  { name: '中国人寿', symbol: '🎯', hue: 10 },
-  { name: '国家电网', symbol: '⚡', hue: 30 },
-  { name: '中国移动', symbol: '📶', hue: 180 },
-  { name: '比亚迪', symbol: '🚗', hue: 200 },
-  { name: '美的集团', symbol: '🏠', hue: 40 },
-  { name: '海尔智家', symbol: '❄️', hue: 210 },
-  { name: '京东集团', symbol: '🛒', hue: 340 },
-  { name: '拼多多', symbol: '📦', hue: 340 },
-  { name: '美团', symbol: '🍜', hue: 260 },
-  { name: '小米集团', symbol: '📱', hue: 30 },
-  { name: '携程集团', symbol: '✈️', hue: 40 },
-  { name: '蔚来汽车', symbol: '🔋', hue: 40 },
-  { name: '理想汽车', symbol: '🚀', hue: 200 },
-  { name: '小鹏汽车', symbol: '🪽', hue: 210 },
-  { name: '中兴通讯', symbol: '📡', hue: 140 },
+  { name: '腾讯', icon: siQq },
+  { name: '美团', icon: siMeituan },
+  { name: '小米', icon: siXiaomi },
+  { name: '携程集团', icon: siTripdotcom },
+  { name: '快手', icon: siKuaishou },
+  { name: '微博', icon: siSinaweibo },
+  { name: '哔哩哔哩', icon: siBilibili },
+  { name: 'OPPO', icon: siOppo },
+  { name: 'vivo', icon: siVivo },
+  { name: 'Honor', icon: siHonor },
 ]
 
 /* ------------------------------------------------------------------ */
 /*  Logo marquee                                                       */
 /* ------------------------------------------------------------------ */
+
+/** 判断品牌色是否接近黑色（仅针对极暗且低饱和度的单色标，暗色主题下需提亮显示；红色/深蓝等饱和品牌色不应被误判） */
+function isNearBlack(hex: string): boolean {
+  const h = hex.replace('#', '')
+  const r = Number.parseInt(h.slice(0, 2), 16)
+  const g = Number.parseInt(h.slice(2, 4), 16)
+  const b = Number.parseInt(h.slice(4, 6), 16)
+  const max = Math.max(r, g, b)
+  const min = Math.min(r, g, b)
+  return max < 48 && max - min < 24
+}
+
+function BrandMark({ icon }: { icon: SimpleIcon }) {
+  const hex = icon.hex.replace('#', '')
+
+  if (isNearBlack(hex)) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+        className="h-5 w-5"
+      >
+        <path
+          d={icon.path}
+          className="fill-[#1a1e25] dark:fill-[#e8eef7]"
+        />
+      </svg>
+    )
+  }
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="h-5 w-5"
+    >
+      <path
+        d={icon.path}
+        fill={`#${hex}`}
+      />
+    </svg>
+  )
+}
 
 function PartnerLogoItem({ logo }: { logo: PartnerLogo }) {
   return (
@@ -72,14 +131,8 @@ function PartnerLogoItem({ logo }: { logo: PartnerLogo }) {
         'hover:border-gray-300/80 dark:border-white/6 dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] dark:hover:border-white/14',
       )}
     >
-      <span
-        className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-[16px]"
-        style={{
-          background: `linear-gradient(135deg, hsl(${logo.hue} 60% 50% / 0.16), hsl(${logo.hue} 40% 60% / 0.05))`,
-          border: `1px solid hsl(${logo.hue} 50% 55% / 0.18)`,
-        }}
-      >
-        {logo.symbol}
+      <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-gray-200/70 bg-white dark:border-white/8 dark:bg-white/4">
+        <BrandMark icon={logo.icon} />
       </span>
       <span className="whitespace-nowrap text-[13px] font-medium tracking-tight text-gray-500 dark:text-[#c8d0dc]">{logo.name}</span>
     </div>
@@ -92,7 +145,7 @@ function MarqueeRow({ logos, reverse = false, duration = 36 }: { logos: PartnerL
   return (
     <div className="partners-marquee">
       <div
-        className="partners-marquee-track"
+        className="partners-marquee-track gap-3"
         data-reverse={reverse}
         style={{ '--marquee-duration': `${duration}s` } as CSSProperties}
       >
