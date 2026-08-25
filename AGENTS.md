@@ -6,17 +6,17 @@ Always respond in Chinese. 请始终使用中文进行回复、解释和编写�
 
 ## 一、技术栈
 
-| 领域 | 技术 | 说明 |
-| --- | --- | --- |
-| 框架 | Next.js 16.2.4 | App Router，默认 **RSC（服务端组件）** |
-| UI | React 19.2.4 | 已启用 `reactCompiler: true` |
-| 样式 | Tailwind CSS v4 + shadcn/ui | `radix-nova` 风格，CSS 变量主题 |
-| 数据请求 | TanStack Query v5 | 缓存、SSE 流式、自动重试 |
-| 认证 | better-auth | 邮箱密码 + Google/Facebook 社交登录 |
-| 数据库 | drizzle-orm + Neon (Serverless Postgres) | 通过 `@neondatabase/serverless` |
-| i18n | next-i18next | 支持 `zh` / `en` |
-| 类型 | TypeScript 5.9 | `strict: true` |
-| Lint / 格式化 | oxlint / oxfmt | 见 `.oxlintrc.json`、`.oxfmtrc.json` |
+| 领域          | 技术                                     | 说明                                   |
+| ------------- | ---------------------------------------- | -------------------------------------- |
+| 框架          | Next.js 16.2.4                           | App Router，默认 **RSC（服务端组件）** |
+| UI            | React 19.2.4                             | 已启用 `reactCompiler: true`           |
+| 样式          | Tailwind CSS v4 + shadcn/ui              | `radix-nova` 风格，CSS 变量主题        |
+| 数据请求      | TanStack Query v5                        | 缓存、SSE 流式、自动重试               |
+| 认证          | better-auth                              | 邮箱密码 + Google/Facebook 社交登录    |
+| 数据库        | drizzle-orm + Neon (Serverless Postgres) | 通过 `@neondatabase/serverless`        |
+| i18n          | next-i18next                             | 支持 `zh` / `en`                       |
+| 类型          | TypeScript 5.9                           | `strict: true`                         |
+| Lint / 格式化 | oxlint / oxfmt                           | 见 `.oxlintrc.json`、`.oxfmtrc.json`   |
 
 ## 二、通用约定
 
@@ -84,8 +84,7 @@ drizzle/              # 数据库迁移文件（勿手改）
 
    export const CHAT_QUERY_KEYS = { getModels: ['getModels'] }
 
-   export const createModelsQueryOptions = () =>
-     queryOptions({ queryKey: CHAT_QUERY_KEYS.getModels, queryFn: ChatService.getModels })
+   export const createModelsQueryOptions = () => queryOptions({ queryKey: CHAT_QUERY_KEYS.getModels, queryFn: ChatService.getModels })
 
    export function useModelsQuery() {
      return useSuspenseQuery(createModelsQueryOptions())
@@ -114,6 +113,7 @@ drizzle/              # 数据库迁移文件（勿手改）
    ```
 
    用法：`Chat.Message`、`Chat.ModelConfig`、`Ranking.Period`、`Auth.SignupRequestBody`。
+
 2. **跨文件复用的 type/interface**：若不属于某个领域命名空间，用显式 `export` 放在具体模块内（如 `@/lib/request`、`types/request.d.ts`）。
 3. 接口字段必须写**中文 JSDoc 注释**（`/** 消息内容 */`），尤其是命名空间内的公共类型。
 
@@ -143,6 +143,7 @@ drizzle/              # 数据库迁移文件（勿手改）
 ---
 
 <!-- BEGIN:nextjs-agent-rules -->
+
 ## This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.

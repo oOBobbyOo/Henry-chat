@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
+
 import { useInView } from 'framer-motion'
 
 import { cn } from '@/lib/utils'
@@ -80,22 +81,12 @@ function PartnerLogoItem({ logo }: { logo: PartnerLogo }) {
       >
         {logo.symbol}
       </span>
-      <span className="whitespace-nowrap text-[13px] font-medium tracking-tight text-gray-500 dark:text-[#c8d0dc]">
-        {logo.name}
-      </span>
+      <span className="whitespace-nowrap text-[13px] font-medium tracking-tight text-gray-500 dark:text-[#c8d0dc]">{logo.name}</span>
     </div>
   )
 }
 
-function MarqueeRow({
-  logos,
-  reverse = false,
-  duration = 36,
-}: {
-  logos: PartnerLogo[]
-  reverse?: boolean
-  duration?: number
-}) {
+function MarqueeRow({ logos, reverse = false, duration = 36 }: { logos: PartnerLogo[]; reverse?: boolean; duration?: number }) {
   const doubled = useMemo(() => [...logos, ...logos], [logos])
 
   return (
@@ -106,7 +97,10 @@ function MarqueeRow({
         style={{ '--marquee-duration': `${duration}s` } as CSSProperties}
       >
         {doubled.map((logo, i) => (
-          <PartnerLogoItem key={`${logo.name}-${i}`} logo={logo} />
+          <PartnerLogoItem
+            key={`${logo.name}-${i}`}
+            logo={logo}
+          />
         ))}
       </div>
     </div>
@@ -192,18 +186,19 @@ export function PartnersShowcase() {
           <span className="inline-flex h-6 items-center rounded-full border border-gray-200 px-2.5 text-[11px] tracking-[0.14em] text-[#718096] uppercase dark:border-white/8 dark:text-white/50">
             生态伙伴
           </span>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-gray-700 sm:text-[26px] dark:text-[#eef4ff]">
-            与顶尖伙伴携手共创
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-[#91a0b5]">
-            深入产业，为 500+ 企业创造卓越价值，让 AI 能力真正落地千行百业。
-          </p>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-gray-700 sm:text-[26px] dark:text-[#eef4ff]">与顶尖伙伴携手共创</h2>
+          <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-[#91a0b5]">深入产业，为 500+ 企业创造卓越价值，让 AI 能力真正落地千行百业。</p>
         </div>
 
         {/* Stats */}
         <dl className="mx-auto mt-8 grid max-w-2xl grid-cols-2 gap-3 sm:grid-cols-4">
           {STATS.map((stat) => (
-            <StatItem key={stat.label} value={stat.value} label={stat.label} active={inView} />
+            <StatItem
+              key={stat.label}
+              value={stat.value}
+              label={stat.label}
+              active={inView}
+            />
           ))}
         </dl>
 
@@ -212,13 +207,19 @@ export function PartnersShowcase() {
 
         {/* Marquee rows */}
         <div className="space-y-4">
-          <MarqueeRow logos={PARTNERS_ROW_A} reverse={false} duration={40} />
-          <MarqueeRow logos={PARTNERS_ROW_B} reverse={true} duration={45} />
+          <MarqueeRow
+            logos={PARTNERS_ROW_A}
+            reverse={false}
+            duration={40}
+          />
+          <MarqueeRow
+            logos={PARTNERS_ROW_B}
+            reverse={true}
+            duration={45}
+          />
         </div>
 
-        <p className="mt-6 text-center text-[11px] tracking-wide text-[#91a0b5]/60">
-          —— 以上仅为部分合作伙伴展示，排名不分先后 ——
-        </p>
+        <p className="mt-6 text-center text-[11px] tracking-wide text-[#91a0b5]/60">—— 以上仅为部分合作伙伴展示，排名不分先后 ——</p>
       </div>
     </section>
   )

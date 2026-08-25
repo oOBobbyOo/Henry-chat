@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { ArrowRight, BarChart3, Coins, CreditCard, RefreshCw, ShieldCheck, Zap } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
+
 import { PartnersShowcase } from './_components/partners-showcase'
 
 const FEATURES = [
@@ -56,9 +57,7 @@ export default function TokenHubPage() {
     <div className="mx-auto w-full max-w-(--app-content-max-width) flex-1 px-4 pt-16 pb-14 sm:px-6 sm:pt-20 sm:pb-16 xl:px-8">
       {/* Hero / intro */}
       <section className="mx-auto max-w-3xl text-center">
-        <p className="text-[11px] font-medium tracking-[0.28em] text-[#91a0b5] uppercase dark:text-white/45">
-          用量管家 · 清晰可控
-        </p>
+        <p className="text-[11px] font-medium tracking-[0.28em] text-[#91a0b5] uppercase dark:text-white/45">用量管家 · 清晰可控</p>
 
         <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
           {HERO_BADGES.map(({ emoji, label }) => (
@@ -76,12 +75,8 @@ export default function TokenHubPage() {
           <span className="bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">一个 Token 账户</span>
           ，管好全部 AI 用量
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-[#91a0b5]">
-          Token 中心集中管理余额、快速充值并实时追踪每一次消费，让多模型 AI 的使用清晰、透明、可控。
-        </p>
-        <p className="mt-3 text-[12px] tracking-[0.06em] text-[#b1bfd0] dark:text-white/40">
-          余额 · 充值 · 消费明细 · 多模型，真正的 AI 用量管家
-        </p>
+        <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-[#91a0b5]">Token 中心集中管理余额、快速充值并实时追踪每一次消费，让多模型 AI 的使用清晰、透明、可控。</p>
+        <p className="mt-3 text-[12px] tracking-[0.06em] text-[#b1bfd0] dark:text-white/40">余额 · 充值 · 消费明细 · 多模型，真正的 AI 用量管家</p>
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
           <Button
             asChild

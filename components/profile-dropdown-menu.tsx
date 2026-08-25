@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { ChevronRight, CircleQuestionMark, LayoutDashboard, LogOut, Settings, ShieldCheck, User } from 'lucide-react'
 
