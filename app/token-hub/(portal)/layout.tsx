@@ -1,4 +1,4 @@
-import { AppLayout } from './_components/app-layout'
+import { AppLayout } from '../_components/app-layout'
 
 export default function TokenHubLayout({
   children,
