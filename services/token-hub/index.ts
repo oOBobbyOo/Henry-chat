@@ -67,6 +67,11 @@ export const TokenHubService = {
       baseURL: LOCAL_BASE_URL,
       body: { service_id: serviceId, enabled },
     }),
+  /** Agent Chat 最近对话列表 */
+  getChatConversations: () =>
+    request.get<TokenHub.ChatConversationsResponse>('/api/token-hub/chat/conversations', {
+      baseURL: LOCAL_BASE_URL,
+    }),
   /** 模型目录(模型广场) */
   getModels: () => request.get<TokenHub.CatalogResponse>('/api/token-hub/catalog/models', { baseURL: LOCAL_BASE_URL }),
   /** 模型近 30 分钟性能指标 */
@@ -100,6 +105,7 @@ export const TOKEN_HUB_QUERY_KEYS = {
   reportTrend: ['token-hub', 'reports-trend'],
   reportBreakdown: ['token-hub', 'reports-breakdown'],
   mcpMarket: ['token-hub', 'mcp-market'],
+  chatConversations: ['token-hub', 'chat-conversations'],
   models: ['token-hub', 'catalog-models'],
   modelMetrics: ['token-hub', 'catalog-metrics'],
   keys: ['token-hub', 'keys'],
@@ -178,6 +184,15 @@ export function createMcpMarketQueryOptions(filters?: { price?: string; credenti
   })
 }
 
+/** Agent Chat 最近对话查询配置 */
+export function createChatConversationsQueryOptions() {
+  return queryOptions({
+    queryKey: TOKEN_HUB_QUERY_KEYS.chatConversations,
+    queryFn: TokenHubService.getChatConversations,
+    staleTime: 60_000,
+  })
+}
+
 /** 模型目录查询配置 */
 export function createModelsQueryOptions() {
   return queryOptions({
@@ -234,6 +249,11 @@ export function useReportBreakdownQuery(by: TokenHub.CostBreakdownBy = 'model') 
 /** MCP 市场(hook) */
 export function useMcpMarketQuery(filters?: { price?: string; credential?: string; status?: string }) {
   return useSuspenseQuery(createMcpMarketQueryOptions(filters))
+}
+
+/** Agent Chat 最近对话(hook) */
+export function useChatConversationsQuery() {
+  return useSuspenseQuery(createChatConversationsQueryOptions())
 }
 
 /** 启用 / 禁用 MCP 服务(mutation,成功后失效市场列表) */

@@ -241,6 +241,42 @@ declare namespace TokenHub {
     status: McpServiceStatus
   }
 
+  // ================= Agent Chat =================
+
+  /** 方向建议(空状态起始点) */
+  export interface ChatDirection {
+    id: string
+    title: string
+    desc: string
+  }
+
+  /** 聊天消息 */
+  export interface ChatMessage {
+    id: string
+    role: 'user' | 'assistant' | 'system'
+    content: string
+    /** 推理内容(思考模式) */
+    reasoning_content?: string
+    created_at: string
+  }
+
+  /** 最近对话 */
+  export interface ChatConversation {
+    id: string
+    title: string
+    /** 使用的模型名 */
+    model: string
+    /** 所属工作区 */
+    workspace: string
+    last_message_at: string
+    messages: ChatMessage[]
+  }
+
+  /** 会话列表响应 */
+  export interface ChatConversationsResponse {
+    items: ChatConversation[]
+  }
+
   /** 账户余额信息 */
   export interface BalanceInfo {
     enabled: boolean
