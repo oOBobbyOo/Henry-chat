@@ -37,6 +37,24 @@ export const TokenHubService = {
       baseURL: LOCAL_BASE_URL,
       params: { days, ...filters },
     }),
+  /** 成本分析核心指标 */
+  getReportSummary: (days = 30) =>
+    request.get<TokenHub.CostReportSummary>('/api/token-hub/reports/summary', {
+      baseURL: LOCAL_BASE_URL,
+      params: { days },
+    }),
+  /** 成本走势 */
+  getReportTrend: (granularity: 'day' | 'week' | 'month' | 'year' = 'month', days = 365) =>
+    request.get<TokenHub.CostReportTrendResponse>('/api/token-hub/reports/trend', {
+      baseURL: LOCAL_BASE_URL,
+      params: { granularity, days },
+    }),
+  /** 成本构成(按模型 / 供应商 / API Key / 客户端) */
+  getReportBreakdown: (by: TokenHub.CostBreakdownBy = 'model') =>
+    request.get<TokenHub.CostBreakdownResponse>('/api/token-hub/reports/breakdown', {
+      baseURL: LOCAL_BASE_URL,
+      params: { by },
+    }),
   /** 模型目录(模型广场) */
   getModels: () => request.get<TokenHub.CatalogResponse>('/api/token-hub/catalog/models', { baseURL: LOCAL_BASE_URL }),
   /** 模型近 30 分钟性能指标 */
@@ -66,6 +84,9 @@ export const TOKEN_HUB_QUERY_KEYS = {
   trend: ['token-hub', 'trend'],
   modelTrend: ['token-hub', 'model-trend'],
   modelStats: ['token-hub', 'model-stats'],
+  reportSummary: ['token-hub', 'reports-summary'],
+  reportTrend: ['token-hub', 'reports-trend'],
+  reportBreakdown: ['token-hub', 'reports-breakdown'],
   models: ['token-hub', 'catalog-models'],
   modelMetrics: ['token-hub', 'catalog-metrics'],
   keys: ['token-hub', 'keys'],
@@ -108,6 +129,33 @@ export function createModelStatsQueryOptions(days = 7, filters?: { model?: strin
   })
 }
 
+/** 成本分析核心指标查询配置(默认当月) */
+export function createReportSummaryQueryOptions(days = 30) {
+  return queryOptions({
+    queryKey: [...TOKEN_HUB_QUERY_KEYS.reportSummary, days],
+    queryFn: () => TokenHubService.getReportSummary(days),
+    staleTime: 60_000,
+  })
+}
+
+/** 成本走势查询配置(默认按月) */
+export function createReportTrendQueryOptions(granularity: 'day' | 'week' | 'month' | 'year' = 'month', days = 365) {
+  return queryOptions({
+    queryKey: [...TOKEN_HUB_QUERY_KEYS.reportTrend, granularity, days],
+    queryFn: () => TokenHubService.getReportTrend(granularity, days),
+    staleTime: 60_000,
+  })
+}
+
+/** 成本构成查询配置(默认按模型) */
+export function createReportBreakdownQueryOptions(by: TokenHub.CostBreakdownBy = 'model') {
+  return queryOptions({
+    queryKey: [...TOKEN_HUB_QUERY_KEYS.reportBreakdown, by],
+    queryFn: () => TokenHubService.getReportBreakdown(by),
+    staleTime: 60_000,
+  })
+}
+
 /** 模型目录查询配置 */
 export function createModelsQueryOptions() {
   return queryOptions({
@@ -144,6 +192,21 @@ export function useModelTrendQuery(granularity: 'hour' | 'day' = 'hour', days = 
 /** 模型表现明细(hook) */
 export function useModelStatsQuery(days = 7, filters?: { model?: string; provider?: string; client?: string }) {
   return useSuspenseQuery(createModelStatsQueryOptions(days, filters))
+}
+
+/** 成本分析核心指标(hook) */
+export function useReportSummaryQuery(days = 30) {
+  return useSuspenseQuery(createReportSummaryQueryOptions(days))
+}
+
+/** 成本走势(hook) */
+export function useReportTrendQuery(granularity: 'day' | 'week' | 'month' | 'year' = 'month', days = 365) {
+  return useSuspenseQuery(createReportTrendQueryOptions(granularity, days))
+}
+
+/** 成本构成(hook) */
+export function useReportBreakdownQuery(by: TokenHub.CostBreakdownBy = 'model') {
+  return useSuspenseQuery(createReportBreakdownQueryOptions(by))
 }
 
 /** 模型目录(hook) */

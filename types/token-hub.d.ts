@@ -124,6 +124,69 @@ declare namespace TokenHub {
     items: ModelStatsItem[]
   }
 
+  // ================= 成本分析 (Reports) =================
+
+  /** 成本分析 —— 核心指标 */
+  export interface CostReportSummary {
+    /** 统计口径(如当月) */
+    period: string
+    /** 我的成本(CNY) */
+    my_cost: number
+    /** 我的请求总数 */
+    my_requests: number
+    /** 主要模型名 */
+    main_model: string
+    /** 主要模型成本占比(0..1) */
+    main_model_share: number
+    /** 平均每次请求成本(CNY) */
+    avg_cost_per_request: number
+    /** 平均每次请求 Token 数 */
+    avg_tokens_per_request: number
+    /** 调用成功率(0..1) */
+    success_rate: number
+    /** 缓存命中率(0..1) */
+    cache_hit_rate: number
+    /** 缓存读取 Tokens */
+    cache_read_tokens: number
+    /** 缓存写入 Tokens */
+    cache_write_tokens: number
+  }
+
+  /** 成本走势单个数据点 */
+  export interface CostReportTrendPoint {
+    /** 时间点(ISO 8601) */
+    date: string
+    /** 该窗口成本(CNY) */
+    cost: number
+  }
+
+  /** 成本走势响应 */
+  export interface CostReportTrendResponse {
+    /** 聚合粒度: day / week / month / year */
+    granularity: string
+    items: CostReportTrendPoint[]
+  }
+
+  /** 成本构成视角 */
+  export type CostBreakdownBy = 'model' | 'provider' | 'key' | 'client'
+
+  /** 成本构成单项 */
+  export interface CostBreakdownItem {
+    name: string
+    /** 成本(CNY) */
+    cost: number
+    /** 成本占比(0..1) */
+    share: number
+    /** 请求次数 */
+    requests: number
+  }
+
+  /** 成本构成响应 */
+  export interface CostBreakdownResponse {
+    by: CostBreakdownBy
+    items: CostBreakdownItem[]
+  }
+
   /** 账户余额信息 */
   export interface BalanceInfo {
     enabled: boolean

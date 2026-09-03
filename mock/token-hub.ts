@@ -190,6 +190,101 @@ function buildModelStats(_days = 7): TokenHub.ModelStatsResponse {
   return { days: _days, items }
 }
 
+// ================= 成本分析 (Reports) =================
+
+/** 近 12 个月成本(元),末位为当月(对齐生产: 当月 ¥17.3) */
+const MONTHLY_COST = [12.4, 15.1, 18.7, 22.3, 19.5, 24.8, 21.2, 27.6, 25.9, 30.2, 25.1, 17.3]
+
+/** 成本分析 —— 核心指标(对齐生产: 当月 ¥17.3 / 484 请求 / DeepSeek 95.3%) */
+function buildCostSummary(_days = 30): TokenHub.CostReportSummary {
+  return {
+    period: 'month',
+    my_cost: 17.3,
+    my_requests: 484,
+    main_model: 'DeepSeek V4 Flash',
+    main_model_share: 0.953,
+    avg_cost_per_request: 17.3 / 484,
+    avg_tokens_per_request: 191000,
+    success_rate: 0.99,
+    cache_hit_rate: 0.98,
+    cache_read_tokens: 90300000,
+    cache_write_tokens: 46700,
+  }
+}
+
+/** 成本走势 —— 按粒度生成;当月成本 17.3 落在最近窗口(对齐生产 09-01 ～ 09-03 形态) */
+function buildCostTrend(granularity: 'day' | 'week' | 'month' | 'year' = 'month', _days = 30): TokenHub.CostReportTrendResponse {
+  const now = dayjs()
+  let items: TokenHub.CostReportTrendPoint[] = []
+
+  if (granularity === 'month') {
+    items = MONTHLY_COST.map((cost, i) => ({
+      date: now
+        .subtract(MONTHLY_COST.length - 1 - i, 'month')
+        .startOf('month')
+        .toISOString(),
+      cost,
+    }))
+  } else if (granularity === 'week') {
+    const WEEKLY = [4.8, 5.2, 6.1, 5.9, 6.4, 6.8, 6.2, 5.7, 6.5, 6.1, 5.8, 17.3]
+    items = WEEKLY.map((cost, i) => ({
+      date: now
+        .subtract(WEEKLY.length - 1 - i, 'week')
+        .startOf('week')
+        .toISOString(),
+      cost,
+    }))
+  } else if (granularity === 'year') {
+    const YEARLY = [8.4, 42.6, 88.3, 156.7, 213.9]
+    items = YEARLY.map((cost, i) => ({
+      date: now
+        .subtract(YEARLY.length - 1 - i, 'year')
+        .startOf('year')
+        .toISOString(),
+      cost,
+    }))
+  } else {
+    // day: 最近 14 天,当月成本 17.3 分布在最近 3 天(对齐生产 09-01 ～ 09-03)
+    const DAILY = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4.5, 6.8, 6.0]
+    items = DAILY.map((cost, i) => ({
+      date: now
+        .subtract(DAILY.length - 1 - i, 'day')
+        .startOf('day')
+        .toISOString(),
+      cost,
+    }))
+  }
+
+  return { granularity, items }
+}
+
+/** 成本构成 —— 模型 / 供应商 / API Key / 客户端 四个视角(对齐生产实测占比) */
+function buildCostBreakdown(by: TokenHub.CostBreakdownBy = 'model'): TokenHub.CostBreakdownResponse {
+  const data: Record<TokenHub.CostBreakdownBy, TokenHub.CostBreakdownItem[]> = {
+    model: [
+      { name: 'DeepSeek V4 Flash', cost: 16.5, share: 0.953, requests: 478 },
+      { name: 'GPT-5.6 Terra', cost: 0.8, share: 0.047, requests: 5 },
+      { name: 'GPT-5.6 Luna', cost: 0.0, share: 0.001, requests: 1 },
+    ],
+    provider: [
+      { name: '腾讯云（中国）', cost: 14.0, share: 0.809, requests: 326 },
+      { name: '阿里云（中国）', cost: 1.5, share: 0.085, requests: 99 },
+      { name: '阿里云（新加坡）', cost: 1.0, share: 0.059, requests: 53 },
+      { name: 'ZenMux', cost: 0.8, share: 0.047, requests: 5 },
+      { name: 'Vercel AI Gateway', cost: 0.0, share: 0.001, requests: 1 },
+    ],
+    key: [
+      { name: 'BBGame_Claude', cost: 16.5, share: 0.953, requests: 478 },
+      { name: 'BBGame_Codex', cost: 0.8, share: 0.048, requests: 6 },
+    ],
+    client: [
+      { name: 'OpenAI SDK', cost: 16.5, share: 0.953, requests: 478 },
+      { name: 'Codex', cost: 0.8, share: 0.048, requests: 6 },
+    ],
+  }
+  return { by, items: data[by] }
+}
+
 export const tokenHubMock = {
   profile: MOCK_PROFILE,
   balance: MOCK_BALANCE,
@@ -197,4 +292,7 @@ export const tokenHubMock = {
   trend: buildTrend,
   modelTrend: buildModelTrend,
   modelStats: buildModelStats,
+  costSummary: buildCostSummary,
+  costTrend: buildCostTrend,
+  costBreakdown: buildCostBreakdown,
 }
