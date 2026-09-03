@@ -93,6 +93,37 @@ declare namespace TokenHub {
     items: ModelTrendItem[]
   }
 
+  /** 模型表现统计(用量分析 —— 按模型聚合的明细行) */
+  export interface ModelStatsItem {
+    /** 模型名 */
+    model: string
+    /** 供应商 */
+    provider: string
+    /** 客户端 */
+    client: string
+    /** 总消耗 Tokens */
+    tokens: number
+    /** 请求次数 */
+    requests: number
+    /** 累计成本(CNY) */
+    cost: number
+    /** 成功率(0..1) */
+    success_rate: number
+    /** 平均首包延迟(ms) */
+    avg_ttft_ms: number
+    /** 吞吐 P50(tokens/s) */
+    p50_tps: number
+    /** 缓存命中率(0..1) */
+    cache_hit_rate: number
+  }
+
+  /** 模型表现统计响应 */
+  export interface ModelStatsResponse {
+    /** 统计窗口天数 */
+    days: number
+    items: ModelStatsItem[]
+  }
+
   /** 账户余额信息 */
   export interface BalanceInfo {
     enabled: boolean

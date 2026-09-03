@@ -31,6 +31,12 @@ export const TokenHubService = {
       baseURL: LOCAL_BASE_URL,
       params: { days, granularity, mine: true },
     }),
+  /** 按模型聚合的表现明细(用量分析) */
+  getModelStats: (days = 7, filters?: { model?: string; provider?: string; client?: string }) =>
+    request.get<TokenHub.ModelStatsResponse>('/api/token-hub/usage/model-stats', {
+      baseURL: LOCAL_BASE_URL,
+      params: { days, ...filters },
+    }),
   /** 模型目录(模型广场) */
   getModels: () => request.get<TokenHub.CatalogResponse>('/api/token-hub/catalog/models', { baseURL: LOCAL_BASE_URL }),
   /** 模型近 30 分钟性能指标 */
@@ -59,6 +65,7 @@ export const TOKEN_HUB_QUERY_KEYS = {
   summary: ['token-hub', 'summary'],
   trend: ['token-hub', 'trend'],
   modelTrend: ['token-hub', 'model-trend'],
+  modelStats: ['token-hub', 'model-stats'],
   models: ['token-hub', 'catalog-models'],
   modelMetrics: ['token-hub', 'catalog-metrics'],
   keys: ['token-hub', 'keys'],
@@ -88,6 +95,15 @@ export function createModelTrendQueryOptions(granularity: 'hour' | 'day' = 'hour
   return queryOptions({
     queryKey: [...TOKEN_HUB_QUERY_KEYS.modelTrend, granularity, days],
     queryFn: () => TokenHubService.getModelTrend(granularity, days),
+    staleTime: 60_000,
+  })
+}
+
+/** 模型表现明细查询配置(默认最近 7 天) */
+export function createModelStatsQueryOptions(days = 7, filters?: { model?: string; provider?: string; client?: string }) {
+  return queryOptions({
+    queryKey: [...TOKEN_HUB_QUERY_KEYS.modelStats, days, filters?.model ?? '', filters?.provider ?? '', filters?.client ?? ''],
+    queryFn: () => TokenHubService.getModelStats(days, filters),
     staleTime: 60_000,
   })
 }
@@ -123,6 +139,11 @@ export function useTrendQuery(granularity: 'hour' | 'day' = 'hour', days = 1) {
 /** 按模型趋势(hook) */
 export function useModelTrendQuery(granularity: 'hour' | 'day' = 'hour', days = 1) {
   return useSuspenseQuery(createModelTrendQueryOptions(granularity, days))
+}
+
+/** 模型表现明细(hook) */
+export function useModelStatsQuery(days = 7, filters?: { model?: string; provider?: string; client?: string }) {
+  return useSuspenseQuery(createModelStatsQueryOptions(days, filters))
 }
 
 /** 模型目录(hook) */

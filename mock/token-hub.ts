@@ -84,21 +84,24 @@ function buildTrend(granularity: 'hour' | 'day' = 'hour', days = 1): TokenHub.Tr
   const now = dayjs().startOf(granularity)
 
   // 单小时流量分布(生产实测最后一小时: DeepSeek V4 Flash / GPT-5.6 Terra / GPT-5.6 Luna)
-  const activeIndex = count - 1
+  // 日粒度下把流量分散到最近几天,让多天窗口有可读的趋势;小时粒度仅最后一小时有流量
+  const dailyActiveCount = granularity === 'day' ? Math.min(days, 5) : 1
   const items: TokenHub.TrendPoint[] = Array.from({ length: count }, (_, i) => {
-    const active = i === activeIndex
+    const active = i >= count - dailyActiveCount
+    // 衰减系数: 越靠近现在流量越大,总量与单小时基准一致
+    const weight = active ? (i - (count - dailyActiveCount) + 1) / dailyActiveCount : 0
     return {
       date: now.subtract(count - 1 - i, granularity).toISOString(),
-      tokens: active ? 1179873 : 0,
-      input_tokens: active ? 1162082 : 0,
-      output_tokens: active ? 17791 : 0,
-      cache_tokens: active ? 1094764 : 0,
-      cost: active ? 1.0415 : 0,
-      requests: active ? 36 : 0,
-      cache_read_tokens: active ? 1048018 : 0,
-      cache_write_tokens: active ? 46746 : 0,
-      requests_per_minute: active ? 36 / 60 : 0,
-      success_requests_per_minute: active ? 36 / 60 : 0,
+      tokens: active ? Math.round(1179873 * weight) : 0,
+      input_tokens: active ? Math.round(1162082 * weight) : 0,
+      output_tokens: active ? Math.round(17791 * weight) : 0,
+      cache_tokens: active ? Math.round(1094764 * weight) : 0,
+      cost: active ? Number((1.0415 * weight).toFixed(4)) : 0,
+      requests: active ? Math.round(36 * weight) : 0,
+      cache_read_tokens: active ? Math.round(1048018 * weight) : 0,
+      cache_write_tokens: active ? Math.round(46746 * weight) : 0,
+      requests_per_minute: active ? (36 * weight) / 60 : 0,
+      success_requests_per_minute: active ? (36 * weight) / 60 : 0,
       failed_requests_per_minute: 0,
       avg_ttft_ms: active ? 1927.8 : 0,
       output_token_latency_ms: active ? 24.5 : 0,
@@ -124,15 +127,67 @@ function buildModelTrend(granularity: 'hour' | 'day' = 'hour', days = 1): TokenH
     { model: 'GPT-5.6 Luna', tokens: 6431, cost: 0.011 },
   ]
 
+  const dailyActiveCount = granularity === 'day' ? Math.min(days, 5) : 1
   const items: TokenHub.ModelTrendItem[] = Array.from({ length: count }, (_, i) => {
-    const active = i === count - 1
+    const active = i >= count - dailyActiveCount
+    const weight = active ? (i - (count - dailyActiveCount) + 1) / dailyActiveCount : 0
     return {
       date: now.subtract(count - 1 - i, granularity).toISOString(),
-      models: active ? traffic.map((t) => ({ ...t })) : [],
+      models: active
+        ? traffic.map((m) => ({
+            model: m.model,
+            tokens: Math.round(m.tokens * weight),
+            cost: Number((m.cost * weight).toFixed(4)),
+          }))
+        : [],
     }
   })
 
   return { granularity, step_seconds: step, models, items }
+}
+
+/** 按模型聚合的表现明细(用量分析 —— 模型表现表格;对齐生产最近一小时三条模型的用量) */
+function buildModelStats(_days = 7): TokenHub.ModelStatsResponse {
+  const items: TokenHub.ModelStatsItem[] = [
+    {
+      model: 'DeepSeek V4 Flash',
+      provider: 'ZenMux',
+      client: 'Claude Code',
+      tokens: 1028383,
+      requests: 18,
+      cost: 0.2201,
+      success_rate: 1.0,
+      avg_ttft_ms: 1604.2,
+      p50_tps: 84.6,
+      cache_hit_rate: 0.9172,
+    },
+    {
+      model: 'GPT-5.6 Terra',
+      provider: 'Vercel AI Gateway',
+      client: 'Codex CLI',
+      tokens: 145059,
+      requests: 14,
+      cost: 0.8104,
+      success_rate: 1.0,
+      avg_ttft_ms: 2451.7,
+      p50_tps: 57.3,
+      cache_hit_rate: 0.8635,
+    },
+    {
+      model: 'GPT-5.6 Luna',
+      provider: '阿里云(中国)',
+      client: '内部应用',
+      tokens: 6431,
+      requests: 4,
+      cost: 0.011,
+      success_rate: 0.75,
+      avg_ttft_ms: 3120.5,
+      p50_tps: 41.2,
+      cache_hit_rate: 0.7021,
+    },
+  ]
+
+  return { days: _days, items }
 }
 
 export const tokenHubMock = {
@@ -141,4 +196,5 @@ export const tokenHubMock = {
   summary: buildSummary,
   trend: buildTrend,
   modelTrend: buildModelTrend,
+  modelStats: buildModelStats,
 }
