@@ -7,6 +7,7 @@ import { BarChart3, Blocks, Bot, CircleHelp, LayoutDashboard, Plug, ScanLine, Us
 import { useT } from 'next-i18next/client'
 
 import { useHealthQuery } from '@/services/token-hub'
+import { BrandLogo } from '@/components/brand-logo'
 
 /** 控制台侧边栏 —— 导航 + 网关健康状态 + 快速开始入口 */
 export function ConsoleSidebar() {
@@ -41,17 +42,7 @@ export function ConsoleSidebar() {
           aria-label="Token Hub 控制台"
           className="shrink-0 rounded-lg px-2 transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none"
         >
-          <span className="inline-flex items-center gap-3">
-            <span className="relative grid h-9 w-9 place-items-center overflow-hidden rounded-xl border border-white/10 bg-[#10234f] shadow-[0_6px_16px_rgb(16_35_79/0.15)]">
-              <span className="absolute h-4 w-4 rounded-[5px] border-2 border-[#e4e8f3] bg-[#10234f]" />
-              <span className="absolute -top-0.5 -right-0.5 h-3 w-3 rounded-bl-lg bg-[#3059e8]" />
-              <span className="absolute -bottom-0.5 -left-0.5 h-3 w-3 rounded-tr-lg bg-[#ffc45a]" />
-            </span>
-            <span className="leading-none">
-              <span className="block text-[15px] font-semibold tracking-[-0.035em] text-[#0f1c3a]">{t('Token Hub')}</span>
-              <span className="mt-1 block text-[9px] font-bold tracking-[0.16em] text-[#8a9bc0] uppercase">{t('AI Gateway')}</span>
-            </span>
-          </span>
+          <BrandLogo />
         </Link>
       </div>
 
