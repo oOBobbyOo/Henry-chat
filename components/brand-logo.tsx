@@ -1,12 +1,12 @@
 import Link from 'next/link'
 
 /** Token Hub 品牌 Logo —— 蓝色圆形底 + 白色无限符号 + 中心 token 圆环 */
-export function BrandLogo() {
+export function BrandLogo({ href = "/" }: { href?: string }) {
   return (
     <Link
-      href="/"
-      aria-label="Token Hub 首页"
-      className="rounded-lg focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none"
+      href={href}
+      aria-label="Token Hub"
+      className="shrink-0 rounded-lg px-2 focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none"
     >
       <span className="inline-flex items-center gap-3">
         <span
@@ -37,7 +37,7 @@ export function BrandLogo() {
             />
           </svg>
         </span>
-        <span className="leading-none">
+        <span className="leading-none hidden lg:block">
           <span className="block text-[15px] font-semibold tracking-[-0.04em] text-[#1c2c4d]">Token Hub</span>
           <span className="mt-1 block text-[9px] font-bold tracking-[0.18em] text-[#b1bfd0] uppercase">AI Gateway</span>
         </span>

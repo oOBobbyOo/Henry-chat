@@ -37,13 +37,7 @@ export function ConsoleSidebar() {
     >
       {/* Logo */}
       <div className="flex shrink-0 items-center justify-between gap-3 px-4">
-        <Link
-          href="/token-hub/dashboard"
-          aria-label="Token Hub 控制台"
-          className="shrink-0 rounded-lg px-2 transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none"
-        >
-          <BrandLogo />
-        </Link>
+        <BrandLogo href="/token-hub/dashboard" />
       </div>
 
       {/* 导航 */}
