@@ -295,4 +295,57 @@ export const tokenHubMock = {
   costSummary: buildCostSummary,
   costTrend: buildCostTrend,
   costBreakdown: buildCostBreakdown,
+  balanceTransactions: buildBalanceTransactions,
+}
+
+/** 余额明细总数(对齐生产: 共 1410 笔) */
+const BALANCE_TOTAL = 1410
+
+/** 每页条数(对齐生产: 每页 10 条,共 141 页) */
+const BALANCE_PAGE_SIZE = 10
+
+/**
+ * 余额明细 —— 分页生成模拟扣费流水(对齐生产: 1410 笔 / 141 页)
+ * 起点余额 572.11,每笔 -0.03 ~ -0.14 元递减
+ */
+function buildBalanceTransactions(page = 1, pageSize = BALANCE_PAGE_SIZE): TokenHub.BalanceTransactionsResponse {
+  const total = BALANCE_TOTAL
+  const safePage = Math.min(Math.max(page, 1), Math.ceil(total / pageSize))
+  const start = (safePage - 1) * pageSize
+  const end = Math.min(start + pageSize, total)
+
+  // 末笔余额(第 1410 笔后为 571.58,与生产一致)
+  const finalBalance = 571.58
+  // 伪随机但确定性的扣费金额序列(0.03 ~ 0.14)
+  const amounts: number[] = []
+  for (let i = 0; i < total; i++) {
+    const seed = (i * 2654435761) % 100
+    amounts.push(0.03 + (seed % 12) / 100 + (seed % 7) / 1000)
+  }
+
+  // 自后向前推演每笔的变动后余额
+  const balances: number[] = new Array(total)
+  let acc = finalBalance
+  for (let i = total - 1; i >= 0; i--) {
+    balances[i] = acc
+    acc = Number((acc - amounts[i]).toFixed(4))
+  }
+
+  // 时间序列: 从最新(2026-09-04 00:38)向前推,每笔间隔约 1 分钟
+  const now = dayjs('2026-09-04T00:38:00')
+  const items: TokenHub.BalanceTransaction[] = []
+  for (let i = start; i < end; i++) {
+    const amount = -Number(amounts[i].toFixed(4))
+    items.push({
+      id: `bt-${i}`,
+      type: 'deduct',
+      title: '模型调用扣费',
+      subtitle: '模型调用扣费',
+      created_at: now.subtract(i, 'minute').toISOString(),
+      balance_after: Number(balances[i].toFixed(4)),
+      amount_delta: amount,
+    })
+  }
+
+  return { total, page: safePage, page_size: pageSize, items }
 }

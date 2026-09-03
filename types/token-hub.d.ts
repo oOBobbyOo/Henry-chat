@@ -277,6 +277,37 @@ declare namespace TokenHub {
     items: ChatConversation[]
   }
 
+  // ================= 个人中心 (Profile) =================
+
+  /** 余额变动类型 */
+  export type BalanceTransactionType = 'charge' | 'deduct'
+
+  /** 余额明细单项 */
+  export interface BalanceTransaction {
+    id: string
+    /** 变动类型: charge 充值 / deduct 扣费 */
+    type: BalanceTransactionType
+    /** 明细标题(如 模型调用扣费) */
+    title: string
+    /** 明细副标题(如 模型调用扣费) */
+    subtitle: string
+    /** 发生时间(ISO) */
+    created_at: string
+    /** 变动后余额(CNY) */
+    balance_after: number
+    /** 变动金额(正=增加,负=扣减) */
+    amount_delta: number
+  }
+
+  /** 余额明细响应(分页) */
+  export interface BalanceTransactionsResponse {
+    /** 总笔数 */
+    total: number
+    page: number
+    page_size: number
+    items: BalanceTransaction[]
+  }
+
   /** 账户余额信息 */
   export interface BalanceInfo {
     enabled: boolean

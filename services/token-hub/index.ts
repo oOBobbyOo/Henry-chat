@@ -72,6 +72,12 @@ export const TokenHubService = {
     request.get<TokenHub.ChatConversationsResponse>('/api/token-hub/chat/conversations', {
       baseURL: LOCAL_BASE_URL,
     }),
+  /** 余额明细(分页) */
+  getBalanceTransactions: (page = 1, pageSize = 10) =>
+    request.get<TokenHub.BalanceTransactionsResponse>('/api/token-hub/me/balance/transactions', {
+      baseURL: LOCAL_BASE_URL,
+      params: { page, page_size: pageSize },
+    }),
   /** 模型目录(模型广场) */
   getModels: () => request.get<TokenHub.CatalogResponse>('/api/token-hub/catalog/models', { baseURL: LOCAL_BASE_URL }),
   /** 模型近 30 分钟性能指标 */
@@ -106,6 +112,7 @@ export const TOKEN_HUB_QUERY_KEYS = {
   reportBreakdown: ['token-hub', 'reports-breakdown'],
   mcpMarket: ['token-hub', 'mcp-market'],
   chatConversations: ['token-hub', 'chat-conversations'],
+  balanceTransactions: ['token-hub', 'balance-transactions'],
   models: ['token-hub', 'catalog-models'],
   modelMetrics: ['token-hub', 'catalog-metrics'],
   keys: ['token-hub', 'keys'],
@@ -193,6 +200,15 @@ export function createChatConversationsQueryOptions() {
   })
 }
 
+/** 余额明细查询配置(分页) */
+export function createBalanceTransactionsQueryOptions(page = 1, pageSize = 10) {
+  return queryOptions({
+    queryKey: [...TOKEN_HUB_QUERY_KEYS.balanceTransactions, page, pageSize],
+    queryFn: () => TokenHubService.getBalanceTransactions(page, pageSize),
+    staleTime: 60_000,
+  })
+}
+
 /** 模型目录查询配置 */
 export function createModelsQueryOptions() {
   return queryOptions({
@@ -254,6 +270,11 @@ export function useMcpMarketQuery(filters?: { price?: string; credential?: strin
 /** Agent Chat 最近对话(hook) */
 export function useChatConversationsQuery() {
   return useSuspenseQuery(createChatConversationsQueryOptions())
+}
+
+/** 余额明细(hook,分页) */
+export function useBalanceTransactionsQuery(page = 1, pageSize = 10) {
+  return useSuspenseQuery(createBalanceTransactionsQueryOptions(page, pageSize))
 }
 
 /** 启用 / 禁用 MCP 服务(mutation,成功后失效市场列表) */
