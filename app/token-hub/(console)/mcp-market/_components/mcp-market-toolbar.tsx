@@ -1,9 +1,9 @@
 'use client'
 
-import { ChevronDown, SlidersHorizontal } from 'lucide-react'
+import { SlidersHorizontal } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectTrigger, ConsoleSelectValue } from '@/components/token-hub/select'
 
 import { FILTER_ALL, type McpFilters } from '../page'
 
@@ -12,8 +12,6 @@ import { FILTER_ALL, type McpFilters } from '../page'
  */
 export function McpMarketToolbar({ filters, onFilterChange, shown }: { filters: McpFilters; onFilterChange: (key: keyof McpFilters, value: string) => void; shown: number }) {
   const { t } = useT('token-hub')
-
-  const selectClass = 'h-10 w-auto cursor-pointer border-[#dce5f6] bg-white text-[#0f1c3a] shadow-[0_1px_1px_rgb(15_38_79/0.02)]'
 
   return (
     <section
@@ -26,62 +24,50 @@ export function McpMarketToolbar({ filters, onFilterChange, shown }: { filters: 
       </span>
 
       {/* 价格筛选 */}
-      <Select
+      <ConsoleSelect
         value={filters.price}
         onValueChange={(v) => onFilterChange('price', v)}
       >
-        <SelectTrigger
-          aria-label={t('Mcp Filter Price')}
-          className={selectClass}
-        >
-          <SelectValue />
-          <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value={FILTER_ALL}>{t('Mcp Filter Price All')}</SelectItem>
-          <SelectItem value="free">{t('Mcp Price Free')}</SelectItem>
-          <SelectItem value="paid">{t('Mcp Price Paid')}</SelectItem>
-        </SelectContent>
-      </Select>
+        <ConsoleSelectTrigger aria-label={t('Mcp Filter Price')}>
+          <ConsoleSelectValue />
+        </ConsoleSelectTrigger>
+        <ConsoleSelectContent>
+          <ConsoleSelectItem value={FILTER_ALL}>{t('Mcp Filter Price All')}</ConsoleSelectItem>
+          <ConsoleSelectItem value="free">{t('Mcp Price Free')}</ConsoleSelectItem>
+          <ConsoleSelectItem value="paid">{t('Mcp Price Paid')}</ConsoleSelectItem>
+        </ConsoleSelectContent>
+      </ConsoleSelect>
 
       {/* 凭据筛选 */}
-      <Select
+      <ConsoleSelect
         value={filters.credential}
         onValueChange={(v) => onFilterChange('credential', v)}
       >
-        <SelectTrigger
-          aria-label={t('Mcp Filter Credential')}
-          className={selectClass}
-        >
-          <SelectValue />
-          <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value={FILTER_ALL}>{t('Mcp Filter Credential All')}</SelectItem>
-          <SelectItem value="platform">{t('Mcp Credential Platform')}</SelectItem>
-          <SelectItem value="user">{t('Mcp Credential User')}</SelectItem>
-          <SelectItem value="none">{t('Mcp Credential None')}</SelectItem>
-        </SelectContent>
-      </Select>
+        <ConsoleSelectTrigger aria-label={t('Mcp Filter Credential')}>
+          <ConsoleSelectValue />
+        </ConsoleSelectTrigger>
+        <ConsoleSelectContent>
+          <ConsoleSelectItem value={FILTER_ALL}>{t('Mcp Filter Credential All')}</ConsoleSelectItem>
+          <ConsoleSelectItem value="platform">{t('Mcp Credential Platform')}</ConsoleSelectItem>
+          <ConsoleSelectItem value="user">{t('Mcp Credential User')}</ConsoleSelectItem>
+          <ConsoleSelectItem value="none">{t('Mcp Credential None')}</ConsoleSelectItem>
+        </ConsoleSelectContent>
+      </ConsoleSelect>
 
       {/* 状态筛选 */}
-      <Select
+      <ConsoleSelect
         value={filters.status}
         onValueChange={(v) => onFilterChange('status', v)}
       >
-        <SelectTrigger
-          aria-label={t('Mcp Filter Status')}
-          className={selectClass}
-        >
-          <SelectValue />
-          <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value={FILTER_ALL}>{t('Mcp Filter Status All')}</SelectItem>
-          <SelectItem value="active">{t('Mcp Status Active')}</SelectItem>
-          <SelectItem value="disabled">{t('Mcp Status Disabled')}</SelectItem>
-        </SelectContent>
-      </Select>
+        <ConsoleSelectTrigger aria-label={t('Mcp Filter Status')}>
+          <ConsoleSelectValue />
+        </ConsoleSelectTrigger>
+        <ConsoleSelectContent>
+          <ConsoleSelectItem value={FILTER_ALL}>{t('Mcp Filter Status All')}</ConsoleSelectItem>
+          <ConsoleSelectItem value="active">{t('Mcp Status Active')}</ConsoleSelectItem>
+          <ConsoleSelectItem value="disabled">{t('Mcp Status Disabled')}</ConsoleSelectItem>
+        </ConsoleSelectContent>
+      </ConsoleSelect>
 
       <p
         role="status"

@@ -1,9 +1,9 @@
 'use client'
 
-import { CalendarRange, ChevronDown, TimerReset } from 'lucide-react'
+import { CalendarRange, TimerReset } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectTrigger, ConsoleSelectValue } from '@/components/token-hub/select'
 
 import { FILTER_ALL, RANGE_CONFIG, type UsageFilters, type UsageRange } from '../page'
 
@@ -53,14 +53,14 @@ export function UsageFilterBar({
   /** 通用筛选下拉项 */
   const renderItems = (values: string[], allLabel: string) => (
     <>
-      <SelectItem value={FILTER_ALL}>{allLabel}</SelectItem>
+      <ConsoleSelectItem value={FILTER_ALL}>{allLabel}</ConsoleSelectItem>
       {values.map((v) => (
-        <SelectItem
+        <ConsoleSelectItem
           key={v}
           value={v}
         >
           {v}
-        </SelectItem>
+        </ConsoleSelectItem>
       ))}
     </>
   )
@@ -99,79 +99,74 @@ export function UsageFilterBar({
         </span>
 
         {/* 部门 */}
-        <Select
+        <ConsoleSelect
           value={dept}
           onValueChange={onDeptChange}
         >
-          <SelectTrigger
+          <ConsoleSelectTrigger
             aria-label={t('Usage Filter Dept')}
-            className="h-10 w-auto cursor-pointer border-[#dce5f6] bg-white text-[#0f1c3a] shadow-[0_1px_1px_rgb(15_38_79/0.02)]"
+            className="w-auto"
           >
-            <SelectValue />
-            <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-          </SelectTrigger>
-          <SelectContent>{renderItems([t('Usage Dept Tech')], t('Usage Filter Dept All'))}</SelectContent>
-        </Select>
+            <ConsoleSelectValue />
+          </ConsoleSelectTrigger>
+          <ConsoleSelectContent>{renderItems([t('Usage Dept Tech')], t('Usage Filter Dept All'))}</ConsoleSelectContent>
+        </ConsoleSelect>
 
         {/* 用户 */}
-        <Select
+        <ConsoleSelect
           value={user}
           onValueChange={onUserChange}
         >
-          <SelectTrigger
+          <ConsoleSelectTrigger
             aria-label={t('Usage Filter User')}
-            className="h-10 w-auto cursor-pointer border-[#dce5f6] bg-white text-[#0f1c3a] shadow-[0_1px_1px_rgb(15_38_79/0.02)]"
+            className="w-auto"
           >
-            <SelectValue />
-            <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-          </SelectTrigger>
-          <SelectContent>{renderItems([t('Usage User Henry')], t('Usage Filter User All'))}</SelectContent>
-        </Select>
+            <ConsoleSelectValue />
+          </ConsoleSelectTrigger>
+          <ConsoleSelectContent>{renderItems([t('Usage User Henry')], t('Usage Filter User All'))}</ConsoleSelectContent>
+        </ConsoleSelect>
 
         {/* 模型 */}
-        <Select
+        <ConsoleSelect
           value={filters.model}
           onValueChange={(v) => onFiltersChange({ ...filters, model: v })}
         >
-          <SelectTrigger
+          <ConsoleSelectTrigger
             aria-label={t('Usage Filter Model')}
-            className="h-10 w-auto max-w-44 cursor-pointer border-[#dce5f6] bg-white text-[#0f1c3a] shadow-[0_1px_1px_rgb(15_38_79/0.02)]"
+            className="w-auto max-w-44"
           >
-            <SelectValue />
-            <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-          </SelectTrigger>
-          <SelectContent>{renderItems(modelOptions, t('Usage Filter Model All'))}</SelectContent>
-        </Select>
+            <ConsoleSelectValue />
+          </ConsoleSelectTrigger>
+          <ConsoleSelectContent>{renderItems(modelOptions, t('Usage Filter Model All'))}</ConsoleSelectContent>
+        </ConsoleSelect>
 
         {/* 供应商 */}
-        <Select
+        <ConsoleSelect
           value={filters.provider}
           onValueChange={(v) => onFiltersChange({ ...filters, provider: v })}
         >
-          <SelectTrigger
+          <ConsoleSelectTrigger
             aria-label={t('Usage Filter Provider')}
-            className="h-10 w-auto max-w-44 cursor-pointer border-[#dce5f6] bg-white text-[#0f1c3a] shadow-[0_1px_1px_rgb(15_38_79/0.02)]"
+            className="w-auto max-w-44"
           >
-            <SelectValue />
-            <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-          </SelectTrigger>
-          <SelectContent>{renderItems(providerOptions, t('Usage Filter Provider All'))}</SelectContent>
-        </Select>
+            <ConsoleSelectValue />
+          </ConsoleSelectTrigger>
+          <ConsoleSelectContent>{renderItems(providerOptions, t('Usage Filter Provider All'))}</ConsoleSelectContent>
+        </ConsoleSelect>
 
         {/* 客户端 */}
-        <Select
+        <ConsoleSelect
           value={filters.client}
           onValueChange={(v) => onFiltersChange({ ...filters, client: v })}
         >
-          <SelectTrigger
+          <ConsoleSelectTrigger
             aria-label={t('Usage Filter Client')}
-            className="h-10 w-auto max-w-44 cursor-pointer border-[#dce5f6] bg-white text-[#0f1c3a] shadow-[0_1px_1px_rgb(15_38_79/0.02)]"
+            className="w-auto max-w-44"
           >
-            <SelectValue />
-            <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-          </SelectTrigger>
-          <SelectContent>{renderItems(clientOptions, t('Usage Filter Client All'))}</SelectContent>
-        </Select>
+            <ConsoleSelectValue />
+          </ConsoleSelectTrigger>
+          <ConsoleSelectContent>{renderItems(clientOptions, t('Usage Filter Client All'))}</ConsoleSelectContent>
+        </ConsoleSelect>
 
         {/* 清空筛选 */}
         <button

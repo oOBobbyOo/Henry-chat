@@ -1,9 +1,9 @@
 'use client'
 
-import { ChevronDown, Globe, Maximize2, Paperclip, SendHorizonal, Trash2, Zap } from 'lucide-react'
+import { Globe, Maximize2, Paperclip, SendHorizonal, Trash2, Zap } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectTrigger, ConsoleSelectValue } from '@/components/token-hub/select'
 
 /**
  * Agent Chat 输入栏 —— 模型选择 + 附件 + 联网搜索(固定开启)+ MCP + 思考 + 清除 + 发送
@@ -55,28 +55,27 @@ export function ChatInputBar({
         {/* 工具行 */}
         <div className="flex flex-wrap items-center gap-1.5 border-t border-[#dce5f6]/60 px-3 py-2">
           {/* 模型选择 */}
-          <Select
+          <ConsoleSelect
             value={model}
             onValueChange={onModelChange}
           >
-            <SelectTrigger
+            <ConsoleSelectTrigger
+              size="sm"
               aria-label={t('Chat Model Select')}
-              className="h-8 cursor-pointer border-[#dce5f6] bg-white text-[#0f1c3a]"
             >
-              <SelectValue />
-              <ChevronDown className="h-3.5 w-3.5 opacity-50" />
-            </SelectTrigger>
-            <SelectContent>
+              <ConsoleSelectValue />
+            </ConsoleSelectTrigger>
+            <ConsoleSelectContent>
               {modelOptions.map((m) => (
-                <SelectItem
+                <ConsoleSelectItem
                   key={m}
                   value={m}
                 >
                   {m}
-                </SelectItem>
+                </ConsoleSelectItem>
               ))}
-            </SelectContent>
-          </Select>
+            </ConsoleSelectContent>
+          </ConsoleSelect>
 
           {/* 附件 */}
           <button

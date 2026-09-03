@@ -3,7 +3,7 @@
 import { LayoutGrid, Search, SlidersHorizontal, TableProperties, TimerReset } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectTrigger, ConsoleSelectValue } from '@/components/token-hub/select'
 
 import type { PlazaCurrency } from './model-card'
 
@@ -83,43 +83,43 @@ export function PlazaToolbar({
           </div>
 
           {/* 能力筛选 */}
-          <Select
+          <ConsoleSelect
             value={capability}
             onValueChange={onCapabilityChange}
           >
-            <SelectTrigger
+            <ConsoleSelectTrigger
               aria-label={t('Plaza Filter Capability')}
-              className="h-10 w-full cursor-pointer border-[#dce5f6] bg-white/95 text-[#0f1c3a] shadow-[0_1px_1px_rgb(15_38_79/0.02)] sm:w-36"
+              className="w-full sm:w-36"
             >
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
+              <ConsoleSelectValue />
+            </ConsoleSelectTrigger>
+            <ConsoleSelectContent>
               {CAPABILITY_OPTIONS.map((opt) => (
-                <SelectItem
+                <ConsoleSelectItem
                   key={opt.value}
                   value={opt.value}
                 >
                   {t(opt.labelKey)}
-                </SelectItem>
+                </ConsoleSelectItem>
               ))}
-            </SelectContent>
-          </Select>
+            </ConsoleSelectContent>
+          </ConsoleSelect>
 
           {/* 供应商筛选 */}
-          <Select
+          <ConsoleSelect
             value={vendor}
             onValueChange={onVendorChange}
           >
-            <SelectTrigger
+            <ConsoleSelectTrigger
               aria-label={t('Plaza Filter Vendor')}
-              className="h-10 w-full cursor-pointer border-[#dce5f6] bg-white/95 text-[#0f1c3a] shadow-[0_1px_1px_rgb(15_38_79/0.02)] sm:w-44"
+              className="w-full sm:w-44"
             >
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">{t('Plaza All Vendors')}</SelectItem>
+              <ConsoleSelectValue />
+            </ConsoleSelectTrigger>
+            <ConsoleSelectContent>
+              <ConsoleSelectItem value="all">{t('Plaza All Vendors')}</ConsoleSelectItem>
               {vendorCounts.map((v) => (
-                <SelectItem
+                <ConsoleSelectItem
                   key={v.name}
                   value={v.name}
                 >
@@ -128,10 +128,10 @@ export function PlazaToolbar({
                     {v.name}
                     <span className="ml-auto pl-2 text-xs text-[#8a9bc0] tabular-nums">{v.count}</span>
                   </span>
-                </SelectItem>
+                </ConsoleSelectItem>
               ))}
-            </SelectContent>
-          </Select>
+            </ConsoleSelectContent>
+          </ConsoleSelect>
 
           {/* 清空筛选 */}
           <button
@@ -156,23 +156,23 @@ export function PlazaToolbar({
           </p>
 
           {/* 排序 */}
-          <Select
+          <ConsoleSelect
             value={sort}
             onValueChange={onSortChange}
           >
-            <SelectTrigger
+            <ConsoleSelectTrigger
               aria-label={t('Plaza Sort')}
-              className="h-10 w-36 cursor-pointer border-[#dce5f6] bg-white/95 text-[#0f1c3a] shadow-[0_1px_1px_rgb(15_38_79/0.02)]"
+              className="w-36"
             >
               <SlidersHorizontal className="h-3.5 w-3.5 shrink-0 text-[#4269ee]" />
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="newest">{t('Plaza Sort Newest')}</SelectItem>
-              <SelectItem value="price-asc">{t('Plaza Sort Price Asc')}</SelectItem>
-              <SelectItem value="price-desc">{t('Plaza Sort Price Desc')}</SelectItem>
-            </SelectContent>
-          </Select>
+              <ConsoleSelectValue />
+            </ConsoleSelectTrigger>
+            <ConsoleSelectContent>
+              <ConsoleSelectItem value="newest">{t('Plaza Sort Newest')}</ConsoleSelectItem>
+              <ConsoleSelectItem value="price-asc">{t('Plaza Sort Price Asc')}</ConsoleSelectItem>
+              <ConsoleSelectItem value="price-desc">{t('Plaza Sort Price Desc')}</ConsoleSelectItem>
+            </ConsoleSelectContent>
+          </ConsoleSelect>
 
           {/* 币种切换 */}
           <div
