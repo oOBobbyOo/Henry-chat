@@ -259,4 +259,72 @@ declare namespace TokenHub {
     minutes: number
     items: CatalogModelMetrics[]
   }
+
+  // ================= API Keys =================
+
+  /** API Key 状态 */
+  export type ApiKeyStatus = 'active' | 'disabled'
+
+  /** API Key(列表项,不包含明文) */
+  export interface ApiKey {
+    /** Key ID */
+    id: string
+    /** 名称(如 BBGame_Codex) */
+    name: string
+    /** Key 前缀(展示用,如 sk-th-M2GhI2) */
+    key_prefix: string
+    /** 是否可生成接入配置 */
+    can_generate_config: boolean
+    /** 状态: active / disabled */
+    status: ApiKeyStatus
+    /** IP 白名单(逗号分隔; null 表示不限) */
+    ip_whitelist: string | null
+    /** 允许的模型列表(null 表示不限) */
+    allowed_models: string[] | null
+    /** 配额策略 ID */
+    quota_policy_id: string | null
+    /** 过期时间(ISO; null 表示永不过期) */
+    expires_at: string | null
+    /** 最后使用时间(ISO) */
+    last_used_at: string | null
+    /** 创建时间(ISO) */
+    created_at: string
+  }
+
+  /** API Key 列表响应 */
+  export interface ApiKeysResponse {
+    items: ApiKey[]
+  }
+
+  /** 创建 API Key 请求体 */
+  export interface CreateApiKeyBody {
+    /** Key 名称 */
+    name: string
+    /** IP 白名单(每行一个; 空表示不限) */
+    ip_whitelist?: string
+  }
+
+  /** 创建 API Key 响应(仅创建时返回一次明文) */
+  export interface CreateApiKeyResponse {
+    /** 完整 Key 明文(仅此一次) */
+    key: string
+    key_prefix: string
+    name: string
+    id: string
+    created_at: string
+  }
+
+  /** 服务账号列表响应 */
+  export interface ServiceAccountsResponse {
+    items: TokenHub.ServiceAccount[]
+  }
+
+  /** 服务账号(用于游戏、网站等线上应用) */
+  export interface ServiceAccount {
+    id: string
+    name: string
+    status: ApiKeyStatus
+    created_at: string
+    last_used_at: string | null
+  }
 }

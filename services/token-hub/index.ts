@@ -1,4 +1,4 @@
-import { queryOptions, useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { queryOptions, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
 
 import { request } from '@/lib/request'
 
@@ -39,6 +39,16 @@ export const TokenHubService = {
       baseURL: LOCAL_BASE_URL,
       params: { minutes },
     }),
+  /** 个人 API Key 列表 */
+  getKeys: () => request.get<TokenHub.ApiKeysResponse>('/api/token-hub/keys', { baseURL: LOCAL_BASE_URL, params: { mine: true } }),
+  /** 创建 API Key */
+  createKey: (body: TokenHub.CreateApiKeyBody) =>
+    request.post<TokenHub.CreateApiKeyResponse>('/api/token-hub/keys', {
+      baseURL: LOCAL_BASE_URL,
+      body,
+    }),
+  /** 服务账号列表 */
+  getServiceAccounts: () => request.get<TokenHub.ServiceAccountsResponse>('/api/token-hub/keys/service-accounts', { baseURL: LOCAL_BASE_URL }),
 }
 
 /** 稳定查询键 */
@@ -51,6 +61,8 @@ export const TOKEN_HUB_QUERY_KEYS = {
   modelTrend: ['token-hub', 'model-trend'],
   models: ['token-hub', 'catalog-models'],
   modelMetrics: ['token-hub', 'catalog-metrics'],
+  keys: ['token-hub', 'keys'],
+  serviceAccounts: ['token-hub', 'service-accounts'],
 }
 
 /** 汇总统计查询配置(默认最近 1 天) */
@@ -151,5 +163,35 @@ export function useHealthQuery() {
     staleTime: 30_000,
     refetchInterval: 60_000,
     retry: 1,
+  })
+}
+
+/** 个人 API Key 列表(hook) */
+export function useKeysQuery() {
+  return useSuspenseQuery({
+    queryKey: TOKEN_HUB_QUERY_KEYS.keys,
+    queryFn: TokenHubService.getKeys,
+    staleTime: 60_000,
+  })
+}
+
+/** 服务账号列表(hook,非阻塞) */
+export function useServiceAccountsQuery() {
+  return useQuery({
+    queryKey: TOKEN_HUB_QUERY_KEYS.serviceAccounts,
+    queryFn: TokenHubService.getServiceAccounts,
+    staleTime: 60_000,
+    retry: 1,
+  })
+}
+
+/** 创建 API Key(mutation,成功后失效列表缓存) */
+export function useCreateKeyMutation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (body: TokenHub.CreateApiKeyBody) => TokenHubService.createKey(body),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: TOKEN_HUB_QUERY_KEYS.keys })
+    },
   })
 }
