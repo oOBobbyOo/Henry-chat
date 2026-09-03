@@ -187,6 +187,60 @@ declare namespace TokenHub {
     items: CostBreakdownItem[]
   }
 
+  // ================= MCP 市场 =================
+
+  /** MCP 服务状态 */
+  export type McpServiceStatus = 'active' | 'disabled'
+
+  /** MCP 服务凭据类型 */
+  export type McpCredentialType = 'platform' | 'user' | 'none'
+
+  /** MCP 服务价格类型 */
+  export type McpPriceType = 'free' | 'paid'
+
+  /** MCP 服务(市场中可启用的托管 MCP Server) */
+  export interface McpService {
+    /** 服务 ID(如 exa-search) */
+    id: string
+    /** 展示名称(如 Exa 联网搜索) */
+    name: string
+    /** 服务描述 */
+    description: string
+    /** 价格类型: free / paid */
+    price_type: McpPriceType
+    /** 单价(元/次;免费为 0) */
+    price: number
+    /** 价格单位(如 次) */
+    price_unit: string
+    /** 工具名列表(展示前 5 个,超出显示 +N) */
+    tools: string[]
+    /** 凭据类型: platform 平台托管 / user 用户自备 / none 无需凭据 */
+    credential_type: McpCredentialType
+    /** 服务状态 */
+    status: McpServiceStatus
+    /** 是否固定启用(如平台核心服务,不可禁用) */
+    pinned: boolean
+    /** 分类标签(如 搜索 / 办公 / 开发) */
+    category: string
+  }
+
+  /** MCP 市场服务列表响应 */
+  export interface McpMarketResponse {
+    items: McpService[]
+  }
+
+  /** 启用 MCP 服务请求体 */
+  export interface McpEnableBody {
+    /** 服务 ID */
+    service_id: string
+  }
+
+  /** 启用 MCP 服务响应 */
+  export interface McpEnableResponse {
+    service_id: string
+    status: McpServiceStatus
+  }
+
   /** 账户余额信息 */
   export interface BalanceInfo {
     enabled: boolean

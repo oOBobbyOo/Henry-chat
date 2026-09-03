@@ -55,6 +55,18 @@ export const TokenHubService = {
       baseURL: LOCAL_BASE_URL,
       params: { by },
     }),
+  /** MCP 市场服务列表 */
+  getMcpMarket: (filters?: { price?: string; credential?: string; status?: string }) =>
+    request.get<TokenHub.McpMarketResponse>('/api/token-hub/mcp-market', {
+      baseURL: LOCAL_BASE_URL,
+      params: { price: 'all', credential: 'all', status: 'all', ...filters },
+    }),
+  /** 启用 / 禁用 MCP 服务 */
+  setMcpEnabled: (serviceId: string, enabled: boolean) =>
+    request.post<TokenHub.McpEnableResponse>('/api/token-hub/mcp-market', {
+      baseURL: LOCAL_BASE_URL,
+      body: { service_id: serviceId, enabled },
+    }),
   /** 模型目录(模型广场) */
   getModels: () => request.get<TokenHub.CatalogResponse>('/api/token-hub/catalog/models', { baseURL: LOCAL_BASE_URL }),
   /** 模型近 30 分钟性能指标 */
@@ -87,6 +99,7 @@ export const TOKEN_HUB_QUERY_KEYS = {
   reportSummary: ['token-hub', 'reports-summary'],
   reportTrend: ['token-hub', 'reports-trend'],
   reportBreakdown: ['token-hub', 'reports-breakdown'],
+  mcpMarket: ['token-hub', 'mcp-market'],
   models: ['token-hub', 'catalog-models'],
   modelMetrics: ['token-hub', 'catalog-metrics'],
   keys: ['token-hub', 'keys'],
@@ -156,6 +169,15 @@ export function createReportBreakdownQueryOptions(by: TokenHub.CostBreakdownBy =
   })
 }
 
+/** MCP 市场查询配置 */
+export function createMcpMarketQueryOptions(filters?: { price?: string; credential?: string; status?: string }) {
+  return queryOptions({
+    queryKey: [...TOKEN_HUB_QUERY_KEYS.mcpMarket, filters?.price ?? 'all', filters?.credential ?? 'all', filters?.status ?? 'all'],
+    queryFn: () => TokenHubService.getMcpMarket(filters),
+    staleTime: 60_000,
+  })
+}
+
 /** 模型目录查询配置 */
 export function createModelsQueryOptions() {
   return queryOptions({
@@ -207,6 +229,22 @@ export function useReportTrendQuery(granularity: 'day' | 'week' | 'month' | 'yea
 /** 成本构成(hook) */
 export function useReportBreakdownQuery(by: TokenHub.CostBreakdownBy = 'model') {
   return useSuspenseQuery(createReportBreakdownQueryOptions(by))
+}
+
+/** MCP 市场(hook) */
+export function useMcpMarketQuery(filters?: { price?: string; credential?: string; status?: string }) {
+  return useSuspenseQuery(createMcpMarketQueryOptions(filters))
+}
+
+/** 启用 / 禁用 MCP 服务(mutation,成功后失效市场列表) */
+export function useSetMcpEnabledMutation() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: ({ serviceId, enabled }: { serviceId: string; enabled: boolean }) => TokenHubService.setMcpEnabled(serviceId, enabled),
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: TOKEN_HUB_QUERY_KEYS.mcpMarket })
+    },
+  })
 }
 
 /** 模型目录(hook) */
