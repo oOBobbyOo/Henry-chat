@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation'
 import { BarChart3, Blocks, Bot, CircleHelp, LayoutDashboard, Plug, ScanLine, Users, Wallet, Webhook } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { useHealthQuery } from '@/services/token-hub'
 import { BrandLogo } from '@/components/brand-logo'
+import { useHealthQuery } from '@/services/token-hub'
 
 /** 控制台侧边栏 —— 导航 + 网关健康状态 + 快速开始入口 */
 export function ConsoleSidebar() {

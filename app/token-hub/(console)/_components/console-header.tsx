@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { CircleDollarSign, Command, Plus, Search } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
+import { BrandLogo } from '@/components/brand-logo'
 import { ConsoleThemeToggle } from '@/components/theme/console-theme-toggle'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useBalanceQuery, useProfileQuery } from '@/services/token-hub'
-import { BrandLogo } from '@/components/brand-logo'
 
 /** 控制台顶栏 —— 搜索 / 主题 / 创建 Key / 余额 / 用户 */
 export function ConsoleHeader() {
@@ -24,12 +24,12 @@ export function ConsoleHeader() {
     <header className="sticky top-0 z-20 shrink-0 border-b border-[#dce5f6]/85 bg-white/80 backdrop-blur-xl">
       <div className="flex h-17 items-center gap-3 px-4 sm:px-6 lg:px-8">
         {/* 移动端 Logo */}
-        <div className='lg:hidden'>
+        <div className="lg:hidden">
           <BrandLogo href="/token-hub/dashboard" />
         </div>
 
         {/* CONTROL CENTER 徽标 */}
-        <div className="hidden items-center gap-2 text-[11px] font-bold tracking-[0.13em] text-[#8a9bc0] uppercase sm:flex">
+        <div className="hidden items-center gap-2 text-[11px] font-bold tracking-[0.13em] text-[#8a9bc0] text-nowrap uppercase md:flex">
           <Command className="h-3.5 w-3.5 text-[#294fd4]" />
           {t('Dashboard Control Center')}
         </div>
@@ -43,7 +43,7 @@ export function ConsoleHeader() {
           >
             <Search className="h-3.5 w-3.5" />
             <span className="hidden min-w-36 text-left sm:block">{t('Dashboard Console Search')}</span>
-            <span className="hidden rounded-md border border-[#dce5f6] bg-[#eef3ff] px-1.5 py-0.5 text-[10px] font-medium text-[#8a9bc0] md:block">⌘ K</span>
+            <span className="hidden rounded-md border border-[#dce5f6] bg-[#eef3ff] px-1.5 py-0.5 text-[10px] font-medium text-[#8a9bc0] text-nowrap md:block">⌘ K</span>
           </button>
         </div>
 
@@ -53,7 +53,7 @@ export function ConsoleHeader() {
           {/* 创建 Key */}
           <Link
             href="/token-hub/keys"
-            className="hidden items-center gap-1.5 rounded-xl bg-[#294fd4] px-3.5 py-2 text-xs font-semibold text-white shadow-[0_4px_12px_rgb(49_88_232/0.18)] transition hover:bg-[#4269ee] focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none sm:flex"
+            className="hidden items-center gap-1.5 rounded-xl bg-[#294fd4] px-3.5 py-2 text-xs font-semibold text-white shadow-[0_4px_12px_rgb(49_88_232/0.18)] transition hover:bg-[#4269ee] focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none text-nowrap sm:flex"
           >
             <Plus className="h-3.5 w-3.5" />
             {t('Dashboard Create Key')}

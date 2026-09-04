@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 /** Token Hub 品牌 Logo —— 蓝色圆形底 + 白色无限符号 + 中心 token 圆环 */
-export function BrandLogo({ href = "/" }: { href?: string }) {
+export function BrandLogo({ href = '/' }: { href?: string }) {
   return (
     <Link
       href={href}

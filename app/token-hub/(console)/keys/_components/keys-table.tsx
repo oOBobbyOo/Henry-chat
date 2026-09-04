@@ -32,11 +32,7 @@ export function KeysTable({ keys }: { keys: TokenHub.ApiKey[] }) {
               {[t('Keys Col Name'), t('Keys Col Prefix'), t('Keys Col IP'), t('Keys Col Status'), t('Keys Col Created'), t('Keys Col LastUsed'), t('Keys Col Actions')].map((h, i) => (
                 <th
                   key={h}
-                  className={cn(
-                    'h-10 px-4 text-[11px] font-semibold tracking-[0.07em] whitespace-nowrap text-[#8a9bc0] uppercase align-middle',
-                    i === 0 && 'text-left',
-                    i === 6 && 'w-85 text-right',
-                  )}
+                  className={cn('h-10 px-4 text-[11px] font-semibold tracking-[0.07em] whitespace-nowrap text-[#8a9bc0] uppercase align-middle', i === 0 && 'text-left', i === 6 && 'w-85 text-right')}
                 >
                   {h}
                 </th>
