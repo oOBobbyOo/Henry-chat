@@ -68,8 +68,9 @@ export function PlazaToolbar({
       aria-label={t('Plaza Filter')}
       className="grid gap-2.5 rounded-[18px] border border-[#dce5f6]/80 bg-[#f7f9fd]/70 px-4 py-3.5 shadow-[0_6px_18px_rgb(19_48_93/0.03)] sm:px-5"
     >
-      <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex w-full flex-col gap-2 sm:flex-row lg:w-auto">
+      <div className="flex flex-wrap items-center justify-between gap-2.5">
+        {/* 左簇:搜索 / 能力 / 供应商 / 清空(放不下自动换行) */}
+        <div className="flex min-w-0 flex-wrap items-center gap-2">
           {/* 搜索 */}
           <div className="relative min-w-0 w-full sm:w-72 lg:w-80">
             <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[#8a9bc0]" />
@@ -146,7 +147,8 @@ export function PlazaToolbar({
           </button>
         </div>
 
-        <div className="flex min-h-10 w-full flex-wrap items-center gap-2 lg:w-auto">
+        {/* 右簇:计数 / 排序 / 币种 / 视图(ml-auto 保证与左簇两端对齐) */}
+        <div className="ml-auto flex min-h-10 w-full flex-wrap items-center gap-2 lg:w-auto">
           <p
             role="status"
             aria-live="polite"

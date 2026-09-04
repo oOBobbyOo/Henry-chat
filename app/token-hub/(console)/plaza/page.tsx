@@ -10,6 +10,7 @@ import { useT } from 'next-i18next/client'
 import { useModelsQuery } from '@/services/token-hub'
 
 import { ModelCard, type PlazaCurrency } from './_components/model-card'
+import { PlazaTable } from './_components/plaza-table'
 import { PlazaToolbar, type PlazaView } from './_components/plaza-toolbar'
 
 /**
@@ -128,16 +129,23 @@ export default function PlazaPage() {
           <p className="hidden text-xs text-[#8a9bc0] sm:block">{t('Plaza Price Note')}</p>
         </div>
 
-        {/* 模型网格 */}
-        <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 [@media(min-width:1600px)_and_(max-height:1200px)]:grid-cols-4">
-          {filtered.map((model) => (
-            <ModelCard
-              key={model.alias}
-              model={model}
-              currency={currency}
-            />
-          ))}
-        </section>
+        {/* 模型列表: 卡片网格 / 表格视图 */}
+        {view === 'list' ? (
+          <PlazaTable
+            models={filtered}
+            currency={currency}
+          />
+        ) : (
+          <section className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 [@media(min-width:1600px)_and_(max-height:1200px)]:grid-cols-4">
+            {filtered.map((model) => (
+              <ModelCard
+                key={model.alias}
+                model={model}
+                currency={currency}
+              />
+            ))}
+          </section>
+        )}
       </div>
     </main>
   )

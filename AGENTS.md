@@ -29,7 +29,7 @@ Always respond in Chinese. 请始终使用中文进行回复、解释和编写�
 
 ## 三、代码风格（由 oxfmt 强制）
 
-- `printWidth: 200`，`tabWidth: 2`，无分号（`semi: false`），单引号（`singleQuote: true`）
+- `printWidth: 100`，`tabWidth: 2`，无分号（`semi: false`），单引号（`singleQuote: true`）
 - `trailingComma: "all"`，`arrowParens: "always"`，`bracketSpacing: true`
 - JSX 属性每行一个（`singleAttributePerLine: true`）
 - import 自动排序并分组，分组顺序固定（见 `.oxfmtrc.json` 的 `sortImports`）：
@@ -66,7 +66,7 @@ drizzle/              # 数据库迁移文件（勿手改）
 1. **RSC 优先**：组件默认作为服务端组件（无 `'use client'`）。仅在需要 hooks / 事件 / 浏览器 API 时才在文件顶部加 `'use client'`。
 2. **页面私有组件**：路由专属组件放 `app/<route>/_components/`，命名用 kebab-case 文件名（如 `home-promo-carousel.tsx`）。
 3. **共享组件**：跨路由复用的组件放 `components/`，导出用**具名导出**（`export function AppHeader()`），避免 default export（lint 有 `import/no-anonymous-default-export` 警告）。布局/页面文件按 Next.js 要求使用 default export。
-4. **shadcn 组件**：基础 UI 组件放 `components/ui/`，通过 `pnpm dlx shadcn@latest add <name>` 添加，不手写；图标用 `lucide-react`。
+4. **shadcn 组件**：基础 UI 组件放 `components/ui/`，通过 `pnpm dlx shadcn@latest add <name>` 添加, 能用 shadcn/ui 组件实现的用组件实现，不手写；图标用 `lucide-react`,=。
 5. **样式**：优先用 Tailwind 工具类 + `cn()`（`@/lib/utils`）组合；`components.json` 中 `rsc: true`、`tsx: true`、`style: radix-nova`、`baseColor: neutral`。涉及图表/可视化时先读 `dataviz` skill。
 
 ## 六、数据请求规范
