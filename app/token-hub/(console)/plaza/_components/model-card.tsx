@@ -5,10 +5,9 @@ import { useState } from 'react'
 import { Activity, AudioLines, Check, Clock3, Copy, FileText, Image, Percent, Sparkles, Type, Video, Zap, type LucideIcon } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
+import { getFamilyIcon, getProviderIcon } from '@/components/token-hub/family-icon'
 import { cn } from '@/lib/utils'
 import { useModelMetricsQuery } from '@/services/token-hub'
-
-import { getFamilyIcon, getProviderIcon } from './family-icon'
 
 /** 展示币种 */
 export type PlazaCurrency = 'CNY' | 'USD'

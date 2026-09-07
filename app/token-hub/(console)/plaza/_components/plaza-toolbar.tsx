@@ -3,11 +3,10 @@
 import { LayoutGrid, Search, SlidersHorizontal, TableProperties, TimerReset } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
+import { getProviderIcon } from '@/components/token-hub/family-icon'
 import { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectTrigger, ConsoleSelectValue } from '@/components/token-hub/select'
 
 import type { PlazaCurrency } from './model-card'
-
-import { getProviderIcon } from './family-icon'
 
 /** 能力选项(与生产一致) */
 const CAPABILITY_OPTIONS = [

@@ -5,13 +5,12 @@ import { useState } from 'react'
 import { AudioLines, Check, Copy, FileText, Image, Sparkles, Type, Video, type LucideIcon } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
+import { getFamilyIcon, getProviderIcon } from '@/components/token-hub/family-icon'
 import { ConsoleTable, ConsoleTableBody, ConsoleTableCell, ConsoleTableHead, ConsoleTableHeader, ConsoleTableRow } from '@/components/token-hub/table'
 import { cn } from '@/lib/utils'
 import { useModelMetricsQuery } from '@/services/token-hub'
 
 import type { PlazaCurrency } from './model-card'
-
-import { getFamilyIcon, getProviderIcon } from './family-icon'
 
 /** 模态图标映射(与 model-card 一致) */
 const MODALITY_ICON: Record<string, LucideIcon> = {

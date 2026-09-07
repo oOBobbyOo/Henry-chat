@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { Check, Download, KeyRound, Loader2, Plug, ShieldCheck, X } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
+import { getAppIcon, getFamilyIcon } from '@/components/token-hub/family-icon'
 import { cn } from '@/lib/utils'
 import { useHealthQuery, useKeysQuery, useModelsQuery } from '@/services/token-hub'
 
@@ -125,7 +126,10 @@ export default function IntegrationsPage() {
                     )}
                   >
                     <span className="flex items-center justify-between gap-2">
-                      <span className="text-[13px] font-semibold text-[#0f1c3a]">{item.name}</span>
+                      <span className="flex min-w-0 items-center gap-2">
+                        <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-[#dce5f6]/80 bg-[#edf1ff]/65 text-[#0f1c3a]">{getAppIcon(item.id, 16)}</span>
+                        <span className="truncate text-[13px] font-semibold text-[#0f1c3a]">{item.name}</span>
+                      </span>
                       {app.id === item.id && <Check className="h-3.5 w-3.5 shrink-0 text-[#3867ff]" />}
                     </span>
                     <span className="text-[11px] leading-4 text-[#8a9bc0]">{item.desc}</span>
@@ -157,9 +161,12 @@ export default function IntegrationsPage() {
                         effectiveModelAlias === model.alias ? 'border-[#294fd4] bg-[#edf1ff]/60' : 'border-[#dce5f6] bg-white hover:border-[#4269ee]/40 hover:bg-[#f7f9fd]',
                       )}
                     >
-                      <span className="min-w-0">
-                        <span className="block truncate text-[13px] font-semibold text-[#0f1c3a]">{model.display_name}</span>
-                        <code className="block truncate font-mono text-[11px] text-[#8a9bc0]">{model.alias}</code>
+                      <span className="flex min-w-0 items-center gap-2.5">
+                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-[#dce5f6]/80 bg-[#edf1ff]/65">{getFamilyIcon(model.family, 18)}</span>
+                        <span className="min-w-0">
+                          <span className="block truncate text-[13px] font-semibold text-[#0f1c3a]">{model.display_name}</span>
+                          <code className="block truncate font-mono text-[11px] text-[#8a9bc0]">{model.alias}</code>
+                        </span>
                       </span>
                       <span className="flex shrink-0 items-center gap-2">
                         <span className="hidden rounded-md bg-[#eef3ff] px-1.5 py-0.5 text-[10px] font-semibold text-[#3867ff] md:inline">{app.protocolLabel}</span>
