@@ -210,7 +210,7 @@ export function ConfigStep({ app, model, keyName, keyPrefix }: { app: Integratio
           >
             {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
           </button>
-          <pre className="scrollbar-hidden max-h-80 overflow-y-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">{configText}</pre>
+          <pre className="scrollbar-slim-dark max-h-80 overflow-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">{configText}</pre>
         </div>
 
         {/* 后续步骤提示 */}

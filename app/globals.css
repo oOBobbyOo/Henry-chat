@@ -134,6 +134,56 @@
 }
 
 @layer utilities {
+  /* —— 滚动条 —— */
+  /* 隐藏滚动条(保留滚动能力) */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* 细滚动条 —— 浅色容器用 */
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(15 38 79 / 0.18) transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-slim::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: rgb(15 38 79 / 0.18);
+  }
+  .scrollbar-slim::-webkit-scrollbar-thumb:hover {
+    background: rgb(15 38 79 / 0.3);
+  }
+
+  /* 细滚动条 —— 深色代码块用 */
+  .scrollbar-slim-dark {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 0.22) transparent;
+  }
+  .scrollbar-slim-dark::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-slim-dark::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-slim-dark::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: rgb(255 255 255 / 0.22);
+  }
+  .scrollbar-slim-dark::-webkit-scrollbar-thumb:hover {
+    background: rgb(255 255 255 / 0.35);
+  }
+
   /* 淡入 + 上滑 组合动画 */
   .animate-fade-slide-up {
     opacity: 0;
