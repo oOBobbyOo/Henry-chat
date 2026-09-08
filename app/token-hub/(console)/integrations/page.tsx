@@ -158,7 +158,7 @@ export default function IntegrationsPage() {
                     {matchedModels.length} {t('Integ Matching Models')}
                   </span>
                 </div>
-                <div className="scrollbar-hidden mt-3 flex max-h-64 flex-col gap-1.5 overflow-y-auto pr-1">
+                <div className="scrollbar-hidden mt-3 flex max-h-85 flex-col gap-1.5 overflow-y-auto pr-1">
                   {matchedModels.map((model) => (
                     <button
                       key={model.alias}
