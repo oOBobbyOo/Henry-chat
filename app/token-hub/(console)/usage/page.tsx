@@ -109,18 +109,20 @@ export default function UsagePage() {
     <main className="mx-auto w-full max-w-[1600px] px-4 py-7 sm:px-6 sm:py-8 lg:px-4 lg:py-9">
       <div className="space-y-6">
         {/* 标题区 + 自动刷新开关 */}
-        <header className="flex flex-col gap-4 border-b border-[#dce5f6]/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
+        <header className="flex flex-col gap-4 border-b border-(--tc-border)/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="text-[28px] font-semibold tracking-tighter text-[#0f1c3a] sm:text-[32px]">{t('Usage Title')}</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5b6b8c]">{t('Usage Subtitle')}</p>
+            <h1 className="text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">{t('Usage Title')}</h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">{t('Usage Subtitle')}</p>
           </div>
           <div className="flex shrink-0 items-center gap-2.5">
             <button
               type="button"
               onClick={() => setLive((v) => !v)}
               aria-pressed={live}
-              className={`inline-flex h-9 cursor-pointer items-center gap-2 rounded-xl border px-3.5 text-xs font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none ${
-                live ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100' : 'border-[#dce5f6] bg-white text-[#5b6b8c] hover:bg-[#eef3ff] hover:text-[#294fd4]'
+              className={`inline-flex h-9 cursor-pointer items-center gap-2 rounded-xl border px-3.5 text-xs font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none ${
+                live
+                  ? 'border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+                  : 'border-(--tc-border) bg-(--tc-surface) text-(--tc-body) hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)'
               }`}
             >
               {live ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
@@ -136,7 +138,7 @@ export default function UsagePage() {
               }}
               title={t('Usage Refresh')}
               aria-label={t('Usage Refresh')}
-              className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-xl border border-[#dce5f6] bg-white text-[#5b6b8c] transition hover:bg-[#eef3ff] hover:text-[#294fd4] focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none active:rotate-180 active:duration-300"
+              className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-xl border border-(--tc-border) bg-(--tc-surface) text-(--tc-body) transition hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none active:rotate-180 active:duration-300"
             >
               <RefreshCw className="h-4 w-4" />
             </button>
@@ -144,14 +146,14 @@ export default function UsagePage() {
         </header>
 
         {/* 页签 */}
-        <div className="inline-flex max-w-full items-center gap-5 overflow-x-auto border-b border-[#dce5f6] scrollbar-none">
+        <div className="inline-flex max-w-full items-center gap-5 overflow-x-auto border-b border-(--tc-border) scrollbar-none">
           {tabs.map(({ key, label }) => (
             <button
               key={key}
               type="button"
               onClick={() => setTab(key)}
-              className={`inline-flex min-h-10 shrink-0 cursor-pointer items-center justify-center -mb-px border-b-2 px-4 text-[12px] font-semibold whitespace-nowrap transition-colors duration-200 focus-visible:ring-4 focus-visible:ring-[#4269ee]/20 focus-visible:outline-none ${
-                tab === key ? 'relative z-10 border-b-4 border-b-[#294fd4] text-[#3867ff]' : 'border-b-transparent text-[#8a9bc0] hover:border-b-[#dce5f6] hover:text-[#5b6b8c]'
+              className={`inline-flex min-h-10 shrink-0 cursor-pointer items-center justify-center -mb-px border-b-2 px-4 text-[12px] font-semibold whitespace-nowrap transition-colors duration-200 focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/20 focus-visible:outline-none ${
+                tab === key ? 'relative z-10 border-b-4 border-b-[#294fd4] text-(--tc-blue-bright)' : 'border-b-transparent text-(--tc-muted) hover:border-b-[#dce5f6] hover:text-(--tc-body)'
               }`}
             >
               {label}

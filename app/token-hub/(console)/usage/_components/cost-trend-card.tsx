@@ -45,20 +45,20 @@ export function CostTrendCard({
   const granularityLabel = range === '24h' ? t('Usage Granularity Hour') : t('Usage Granularity Day')
 
   return (
-    <div className="h-full overflow-hidden rounded-[15px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
-      <div className="flex flex-col gap-3 border-b border-[#dce5f6] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <div className="h-full overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
+      <div className="flex flex-col gap-3 border-b border-(--tc-border) px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Usage Trend Title')}</h2>
+            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Usage Trend Title')}</h2>
           </div>
-          <p className="mt-1.5 text-xs text-[#8a9bc0]">
+          <p className="mt-1.5 text-xs text-(--tc-muted)">
             {granularityLabel} · {t('Usage Trend Subtitle')}
           </p>
         </div>
       </div>
 
       {/* 指标切换 */}
-      <div className="scrollbar-none flex max-w-full items-center gap-1 overflow-x-auto border-b border-[#dce5f6] px-5 pt-3 sm:px-6">
+      <div className="scrollbar-none flex max-w-full items-center gap-1 overflow-x-auto border-b border-(--tc-border) px-5 pt-3 sm:px-6">
         {METRIC_TABS.map(({ key, labelKey }) => (
           <button
             key={key}
@@ -66,8 +66,8 @@ export function CostTrendCard({
             aria-pressed={metric === key}
             onClick={() => setMetric(key)}
             className={cn(
-              'inline-flex h-8 shrink-0 cursor-pointer items-center justify-center rounded-lg px-3 text-xs font-semibold whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-[#4269ee]/15 focus-visible:outline-none',
-              metric === key ? 'bg-[#edf1ff] text-[#3867ff]' : 'text-[#8a9bc0] hover:bg-[#f4f7ff] hover:text-[#5b6b8c]',
+              'inline-flex h-8 shrink-0 cursor-pointer items-center justify-center rounded-lg px-3 text-xs font-semibold whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none',
+              metric === key ? 'bg-(--tc-blue-soft) text-(--tc-blue-bright)' : 'text-(--tc-muted) hover:bg-(--tc-blue-soft) hover:text-(--tc-body)',
             )}
           >
             {t(labelKey)}

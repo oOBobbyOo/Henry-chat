@@ -41,15 +41,15 @@ export default function McpMarketPage() {
     <main className="mx-auto w-full max-w-[1600px] px-4 py-7 sm:px-6 sm:py-8 lg:px-4 lg:py-9">
       <div className="space-y-6">
         {/* 标题区 */}
-        <header className="flex flex-col gap-4 border-b border-[#dce5f6]/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
+        <header className="flex flex-col gap-4 border-b border-(--tc-border)/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="flex items-center gap-2.5 text-[28px] font-semibold tracking-tighter text-[#0f1c3a] sm:text-[32px]">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#edf1ff] text-[#3867ff]">
+            <h1 className="flex items-center gap-2.5 text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-(--tc-blue-soft) text-(--tc-blue-bright)">
                 <Blocks className="h-5 w-5" />
               </span>
               {t('Mcp Title')}
             </h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5b6b8c]">{t('Mcp Subtitle')}</p>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">{t('Mcp Subtitle')}</p>
           </div>
         </header>
 
@@ -62,12 +62,12 @@ export default function McpMarketPage() {
 
         {/* 服务卡片网格 */}
         {data.items.length === 0 ? (
-          <div className="flex flex-col items-center justify-center gap-3 rounded-[15px] border border-dashed border-[#dce5f6] bg-white/60 px-6 py-20 text-center">
-            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-[#eef3ff] text-[#4269ee]">
+          <div className="flex flex-col items-center justify-center gap-3 rounded-[15px] border border-dashed border-(--tc-border) bg-(--tc-surface)/60 px-6 py-20 text-center">
+            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-(--tc-blue-soft) text-(--tc-primary-text)">
               <Blocks className="h-5 w-5" />
             </span>
-            <p className="text-sm font-medium text-[#0f1c3a]">{t('Mcp Empty Title')}</p>
-            <p className="max-w-md text-xs leading-5 text-[#8a9bc0]">{t('Mcp Empty Desc')}</p>
+            <p className="text-sm font-medium text-(--tc-strong)">{t('Mcp Empty Title')}</p>
+            <p className="max-w-md text-xs leading-5 text-(--tc-muted)">{t('Mcp Empty Desc')}</p>
           </div>
         ) : (
           <section className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">

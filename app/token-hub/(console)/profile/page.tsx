@@ -46,17 +46,17 @@ export default function ProfilePage() {
     <main className="mx-auto w-full max-w-[1600px] px-4 py-7 sm:px-6 sm:py-8 lg:px-4 lg:py-9">
       <div className="space-y-6">
         {/* 标题区 */}
-        <header className="flex items-center justify-between gap-4 border-b border-[#dce5f6]/80 pb-5">
+        <header className="flex items-center justify-between gap-4 border-b border-(--tc-border)/80 pb-5">
           <div>
-            <h1 className="text-[24px] font-semibold tracking-[-0.045em] text-[#0f1c3a] sm:text-[26px]">{t('Profile Title')}</h1>
-            <p className="mt-1.5 text-sm text-[#5b6b8c]">{t('Profile Subtitle')}</p>
+            <h1 className="text-[24px] font-semibold tracking-[-0.045em] text-(--tc-strong) sm:text-[26px]">{t('Profile Title')}</h1>
+            <p className="mt-1.5 text-sm text-(--tc-body)">{t('Profile Subtitle')}</p>
           </div>
           <button
             type="button"
             onClick={refresh}
             title={t('Profile Refresh')}
             aria-label={t('Profile Refresh')}
-            className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-xl border border-[#dce5f6] bg-white text-[#5b6b8c] transition hover:bg-[#eef3ff] hover:text-[#294fd4] focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none active:rotate-180 active:duration-300"
+            className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-xl border border-(--tc-border) bg-(--tc-surface) text-(--tc-body) transition hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none active:rotate-180 active:duration-300"
           >
             <RefreshCw className="h-4 w-4" />
           </button>

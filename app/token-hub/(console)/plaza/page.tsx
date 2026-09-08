@@ -84,15 +84,15 @@ export default function PlazaPage() {
     <main className="mx-auto w-full max-w-[1600px] px-4 py-7 sm:px-6 sm:py-8 lg:px-4 lg:py-9">
       <div className="space-y-7">
         {/* 标题区 */}
-        <header className="flex flex-col gap-4 border-b border-[#dce5f6]/80 pb-5 sm:flex-row sm:items-end sm:justify-between">
+        <header className="flex flex-col gap-4 border-b border-(--tc-border)/80 pb-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
-            <h1 className="text-[24px] font-semibold tracking-[-0.045em] text-[#0f1c3a] sm:text-[26px]">{t('Plaza Title')}</h1>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-[#5b6b8c]">{t('Plaza Subtitle')}</p>
+            <h1 className="text-[24px] font-semibold tracking-[-0.045em] text-(--tc-strong) sm:text-[26px]">{t('Plaza Title')}</h1>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-(--tc-body)">{t('Plaza Subtitle')}</p>
           </div>
           <div className="flex shrink-0 flex-wrap items-center gap-2">
             <Link
               href="/token-hub/integrations"
-              className="inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#dce5f6] bg-white px-4 text-sm font-semibold whitespace-nowrap text-[#5b6b8c] shadow-[0_1px_1px_rgb(15_38_79/0.02)] transition-all duration-200 hover:border-[#4269ee]/40 hover:bg-[#eef3ff] hover:text-[#4269ee] focus-visible:ring-4 focus-visible:ring-[#4269ee]/15 focus-visible:outline-none"
+              className="inline-flex h-10 cursor-pointer items-center justify-center gap-2 rounded-xl border border-(--tc-border) bg-(--tc-surface) px-4 text-sm font-semibold whitespace-nowrap text-(--tc-body) shadow-[0_1px_1px_rgb(15_38_79/0.02)] transition-all duration-200 hover:border-(--tc-primary-hover)/40 hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none"
             >
               {t('Plaza Integration Guide')}
               <ArrowUpRight className="h-4 w-4" />
@@ -122,11 +122,11 @@ export default function PlazaPage() {
 
         {/* 模型列表头 */}
         <div className="flex items-center justify-between">
-          <p className="text-sm font-semibold text-[#0f1c3a]">
+          <p className="text-sm font-semibold text-(--tc-strong)">
             {t('Plaza Callable Models')}
-            <span className="ml-1 font-normal text-[#8a9bc0]">{filtered.length} 个</span>
+            <span className="ml-1 font-normal text-(--tc-muted)">{filtered.length} 个</span>
           </p>
-          <p className="hidden text-xs text-[#8a9bc0] sm:block">{t('Plaza Price Note')}</p>
+          <p className="hidden text-xs text-(--tc-muted) sm:block">{t('Plaza Price Note')}</p>
         </div>
 
         {/* 模型列表: 卡片网格 / 表格视图 */}

@@ -24,7 +24,7 @@ export function UsageMetricsGrid({ summary, trend, granularity }: { summary: Tok
       value: formatTokens(summary.tokens),
       hint: `${t('Usage Metric Active Windows')} ${activeWindows} ${unitLabel}`,
       icon: Coins,
-      tone: 'bg-[#edf1ff] text-[#3867ff]',
+      tone: 'bg-(--tc-blue-soft) text-(--tc-blue-bright)',
     },
     {
       label: t('Usage Metric Requests'),
@@ -73,7 +73,7 @@ export function UsageMetricsGrid({ summary, trend, granularity }: { summary: Tok
       value: `${formatTokens(summary.cache_read_tokens)} / ${formatTokens(summary.cache_write_tokens)}`,
       hint: `${t('Usage Metric Cache Read')} / ${t('Usage Metric Cache Write')}`,
       icon: ReceiptText,
-      tone: 'bg-[#edf1ff] text-[#3867ff]',
+      tone: 'bg-(--tc-blue-soft) text-(--tc-blue-bright)',
     },
   ]
 
@@ -82,17 +82,17 @@ export function UsageMetricsGrid({ summary, trend, granularity }: { summary: Tok
       {cards.map(({ label, value, hint, icon: Icon, tone }) => (
         <div
           key={label}
-          className="group overflow-hidden rounded-[15px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgb(28_55_105/0.06)]"
+          className="group overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgb(28_55_105/0.06)]"
         >
           <div className="p-4 sm:p-5">
             <div className="flex items-start justify-between gap-3">
-              <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-[#0f1c3a]">{label}</p>
+              <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-(--tc-strong)">{label}</p>
               <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${tone}`}>
                 <Icon className="h-4 w-4" />
               </span>
             </div>
-            <p className="mt-3 truncate text-[24px] leading-none font-semibold tracking-[-0.03em] text-[#0f1c3a] tabular-nums">{value}</p>
-            <p className="mt-2.5 truncate text-[11px] font-medium text-[#8a9bc0]">{hint}</p>
+            <p className="mt-3 truncate text-[24px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong) tabular-nums">{value}</p>
+            <p className="mt-2.5 truncate text-[11px] font-medium text-(--tc-muted)">{hint}</p>
           </div>
         </div>
       ))}

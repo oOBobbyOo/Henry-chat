@@ -33,7 +33,7 @@ function CredentialBadge({ service }: { service: TokenHub.McpService }) {
   const { t } = useT('token-hub')
   if (service.credential_type === 'platform') {
     return (
-      <span className="inline-flex items-center gap-1 rounded-md bg-[#edf1ff] px-2 py-0.5 text-[11px] font-medium text-[#3867ff]">
+      <span className="inline-flex items-center gap-1 rounded-md bg-(--tc-blue-soft) px-2 py-0.5 text-[11px] font-medium text-(--tc-blue-bright)">
         <Lock className="h-3 w-3" />
         {t('Mcp Credential Platform')}
       </span>
@@ -80,17 +80,17 @@ export function McpServiceCard({ service, onGenerateConfig }: { service: TokenHu
   const moreCount = service.tools.length - shownTools.length
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-[15px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgb(28_55_105/0.06)]">
+    <div className="group flex flex-col overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgb(28_55_105/0.06)]">
       <div className="flex flex-1 flex-col p-5">
         {/* 名称 + 价格 */}
         <div className="flex items-start justify-between gap-3">
-          <h3 className="min-w-0 truncate text-[15px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{service.name}</h3>
+          <h3 className="min-w-0 truncate text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{service.name}</h3>
           <PriceBadge service={service} />
         </div>
 
         {/* 工具数 + 凭据 */}
         <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
-          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#8a9bc0]">
+          <span className="inline-flex items-center gap-1 text-[11px] font-medium text-(--tc-muted)">
             <Wrench className="h-3 w-3" />
             {service.tools.length} {t('Mcp Tools Unit')}
           </span>
@@ -98,24 +98,24 @@ export function McpServiceCard({ service, onGenerateConfig }: { service: TokenHu
         </div>
 
         {/* 描述 */}
-        <p className="mt-3 line-clamp-2 text-xs leading-5 text-[#5b6b8c]">{service.description}</p>
+        <p className="mt-3 line-clamp-2 text-xs leading-5 text-(--tc-body)">{service.description}</p>
 
         {/* 工具 chips */}
         <div className="mt-4 flex flex-wrap gap-1.5">
           {shownTools.map((tool) => (
             <code
               key={tool}
-              className="rounded-md bg-[#f2f5fc] px-2 py-1 font-mono text-[10.5px] leading-none text-[#5b6b8c]"
+              className="rounded-md bg-(--tc-blue-soft) px-2 py-1 font-mono text-[10.5px] leading-none text-(--tc-body)"
             >
               {tool}
             </code>
           ))}
-          {moreCount > 0 && <code className="rounded-md bg-[#eef3ff] px-2 py-1 font-mono text-[10.5px] leading-none font-semibold text-[#3867ff]">+{moreCount}</code>}
+          {moreCount > 0 && <code className="rounded-md bg-(--tc-blue-soft) px-2 py-1 font-mono text-[10.5px] leading-none font-semibold text-(--tc-blue-bright)">+{moreCount}</code>}
         </div>
       </div>
 
       {/* 操作区 */}
-      <div className="flex items-center justify-between gap-2 border-t border-[#dce5f6]/80 bg-[#f7f9fd]/50 px-5 py-3.5">
+      <div className="flex items-center justify-between gap-2 border-t border-(--tc-border)/80 bg-(--tc-surface-raised)/50 px-5 py-3.5">
         {service.pinned ? (
           <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-emerald-600">
             <Lock className="h-3.5 w-3.5" />
@@ -136,7 +136,7 @@ export function McpServiceCard({ service, onGenerateConfig }: { service: TokenHu
             type="button"
             disabled={pending}
             onClick={() => void toggleEnabled(true)}
-            className="inline-flex cursor-pointer items-center rounded-lg bg-[#294fd4] px-3 py-1.5 text-[11px] font-semibold text-white shadow-[0_3px_8px_rgb(49_88_232/0.2)] transition-colors hover:bg-[#4269ee] focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+            className="inline-flex cursor-pointer items-center rounded-lg bg-(--tc-primary) px-3 py-1.5 text-[11px] font-semibold text-white shadow-[0_3px_8px_rgb(49_88_232/0.2)] transition-colors hover:bg-(--tc-primary-hover) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
           >
             {t('Mcp Enable')}
           </button>
@@ -145,7 +145,7 @@ export function McpServiceCard({ service, onGenerateConfig }: { service: TokenHu
         <button
           type="button"
           onClick={onGenerateConfig}
-          className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-[#dce5f6] bg-white px-3 py-1.5 text-[11px] font-semibold text-[#5b6b8c] transition-colors hover:border-[#4269ee]/40 hover:bg-[#eef3ff] hover:text-[#294fd4] focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none"
+          className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-(--tc-border) bg-(--tc-surface) px-3 py-1.5 text-[11px] font-semibold text-(--tc-body) transition-colors hover:border-(--tc-primary-hover)/40 hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none"
         >
           <Wrench className="h-3 w-3" />
           {t('Mcp Generate Config')}

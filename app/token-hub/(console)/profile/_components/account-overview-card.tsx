@@ -21,7 +21,7 @@ export function AccountOverviewCard({ balance, summary, activeKeyCount }: { bala
       hint: t('Profile Balance Hint'),
       value: `¥${amount}`,
       icon: Wallet,
-      tone: 'bg-[#edf1ff] text-[#3867ff]',
+      tone: 'bg-(--tc-blue-soft) text-(--tc-blue-bright)',
     },
     {
       label: t('Profile Quota'),
@@ -47,26 +47,26 @@ export function AccountOverviewCard({ balance, summary, activeKeyCount }: { bala
   ]
 
   return (
-    <div className="overflow-hidden rounded-[15px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
+    <div className="overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
       <div className="px-5 pt-5 sm:px-6">
-        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Profile Overview')}</h2>
-        <p className="mt-1 text-xs text-[#8a9bc0]">{t('Profile Overview Desc')}</p>
+        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Profile Overview')}</h2>
+        <p className="mt-1 text-xs text-(--tc-muted)">{t('Profile Overview Desc')}</p>
       </div>
 
       <div className="px-5 pb-2 pt-1 sm:px-6">
         {rows.map(({ label, hint, value, icon: Icon, tone }) => (
           <div
             key={label}
-            className="flex items-center gap-3 border-b border-[#dce5f6] py-4 last:border-b-0"
+            className="flex items-center gap-3 border-b border-(--tc-border) py-4 last:border-b-0"
           >
             <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl ${tone}`}>
               <Icon className="h-4 w-4" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="truncate text-[13px] font-semibold text-[#0f1c3a]">{label}</p>
-              <p className="mt-0.5 truncate text-[11px] text-[#8a9bc0]">{hint}</p>
+              <p className="truncate text-[13px] font-semibold text-(--tc-strong)">{label}</p>
+              <p className="mt-0.5 truncate text-[11px] text-(--tc-muted)">{hint}</p>
             </div>
-            <p className="shrink-0 text-[15px] font-semibold text-[#0f1c3a] tabular-nums">{value}</p>
+            <p className="shrink-0 text-[15px] font-semibold text-(--tc-strong) tabular-nums">{value}</p>
           </div>
         ))}
       </div>

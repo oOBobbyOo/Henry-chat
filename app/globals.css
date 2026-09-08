@@ -117,6 +117,56 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* —— Token Hub 控制台语义色板(硬编码色值 → 变量, 暗色主题在 .dark 下重定义) —— */
+:root {
+  /* 主文本 */
+  --tc-strong: #0f1c3a;
+  /* 次级文本 */
+  --tc-body: #5b6b8c;
+  /* 弱化文本/占位 */
+  --tc-muted: #8a9bc0;
+  /* 描边 */
+  --tc-border: #dce5f6;
+  /* 卡片/控件底 */
+  --tc-surface: #ffffff;
+  /* 页面底/浅面板 */
+  --tc-surface-raised: #f7f9fd;
+  /* 蓝色软底(选中/hover/徽标) */
+  --tc-blue-soft: #eef3ff;
+  /* 主色(按钮底/描边) */
+  --tc-primary: #294fd4;
+  /* 主色 hover */
+  --tc-primary-hover: #4269ee;
+  /* 主色文本(链接/强调, 暗色下单独提亮) */
+  --tc-primary-text: #294fd4;
+  /* 亮蓝(图标/徽标文本) */
+  --tc-blue-bright: #3867ff;
+  /* 代码块底/文本(两套主题均保持深色) */
+  --tc-code-bg: #0f1c3a;
+  --tc-code-text: #cdd8f0;
+  /* 警示强调 */
+  --tc-danger: #fb5a26;
+  --tc-danger-soft: #ffe5e9;
+}
+
+.dark {
+  --tc-strong: #e8eefb;
+  --tc-body: #a9b6d4;
+  --tc-muted: #7383a6;
+  --tc-border: #273350;
+  --tc-surface: #101a31;
+  --tc-surface-raised: #0b1326;
+  --tc-blue-soft: #1a2747;
+  --tc-primary: #3d63e0;
+  --tc-primary-hover: #5578f0;
+  --tc-primary-text: #7ea2ff;
+  --tc-blue-bright: #8fb0ff;
+  --tc-code-bg: #0a1122;
+  --tc-code-text: #cdd8f0;
+  --tc-danger: #ff8a63;
+  --tc-danger-soft: #381d27;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -162,6 +212,17 @@
   }
   .scrollbar-slim::-webkit-scrollbar-thumb:hover {
     background: rgb(15 38 79 / 0.3);
+  }
+
+  /* 细滚动条 —— 暗色主题下提亮滑块 */
+  .dark .scrollbar-slim {
+    scrollbar-color: rgb(255 255 255 / 0.18) transparent;
+  }
+  .dark .scrollbar-slim::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 0.18);
+  }
+  .dark .scrollbar-slim::-webkit-scrollbar-thumb:hover {
+    background: rgb(255 255 255 / 0.3);
   }
 
   /* 细滚动条 —— 深色代码块用 */

@@ -21,12 +21,12 @@ export function ConsoleThemeToggle() {
     <div
       role="radiogroup"
       aria-label="界面主题"
-      className="relative inline-flex h-9 w-22 shrink-0 items-center rounded-xl border border-[#dce5f6] bg-white p-1 shadow-[0_1px_2px_rgb(15_38_79/0.04)]"
+      className="relative inline-flex h-9 w-22 shrink-0 items-center rounded-xl border border-(--tc-border) bg-(--tc-surface) p-1 shadow-[0_1px_2px_rgb(15_38_79/0.04)]"
     >
       {/* 滑动高亮块 */}
       <span
         aria-hidden
-        className="absolute top-1 left-1 h-7 w-6.5 rounded-lg bg-[#294fd4] shadow-[0_3px_8px_rgb(49_88_232/0.20)] transition-transform duration-200 ease-out motion-reduce:transition-none"
+        className="absolute top-1 left-1 h-7 w-6.5 rounded-lg bg-(--tc-primary) shadow-[0_3px_8px_rgb(49_88_232/0.20)] transition-transform duration-200 ease-out motion-reduce:transition-none"
         style={{ transform: `translateX(${activeIndex * 26}px)` }}
       />
       {options.map(({ value, label, icon: Icon }) => {
@@ -40,8 +40,8 @@ export function ConsoleThemeToggle() {
             aria-label={label}
             title={label}
             onClick={() => setTheme(value)}
-            className={`relative z-10 grid h-7 w-6.5 shrink-0 cursor-pointer place-items-center rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none ${
-              active ? 'text-white' : 'text-[#8a9bc0] hover:text-[#294fd4]'
+            className={`relative z-10 grid h-7 w-6.5 shrink-0 cursor-pointer place-items-center rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none ${
+              active ? 'text-white' : 'text-(--tc-muted) hover:text-(--tc-primary-text)'
             }`}
           >
             <Icon

@@ -116,13 +116,13 @@ export function CostTrendCard({
   }
 
   return (
-    <div className="h-full overflow-hidden rounded-[15px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
-      <div className="flex flex-col gap-3 border-b border-[#dce5f6] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <div className="h-full overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
+      <div className="flex flex-col gap-3 border-b border-(--tc-border) px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Reports Trend Title')}</h2>
+            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Reports Trend Title')}</h2>
           </div>
-          <p className="mt-1.5 text-xs text-[#8a9bc0]">
+          <p className="mt-1.5 text-xs text-(--tc-muted)">
             {t('Reports Trend Subtitle')} · {t('Reports Trend Unit')}
           </p>
         </div>
@@ -131,7 +131,7 @@ export function CostTrendCard({
         <div
           role="group"
           aria-label={t('Reports Trend Granularity Group')}
-          className="flex h-10 shrink-0 items-center gap-0.5 rounded-lg border border-[#dce5f6] bg-[#f7f9fd] px-1.25 py-1"
+          className="flex h-10 shrink-0 items-center gap-0.5 rounded-lg border border-(--tc-border) bg-(--tc-surface-raised) px-1.25 py-1"
         >
           {GRANULARITY_TABS.map(({ key, labelKey }) => (
             <button
@@ -140,8 +140,8 @@ export function CostTrendCard({
               aria-pressed={granularity === key}
               onClick={() => onGranularityChange(key)}
               className={cn(
-                'inline-flex h-7 cursor-pointer items-center justify-center rounded-md px-3.5 text-xs font-semibold leading-none whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-[#4269ee]/15 focus-visible:outline-none',
-                granularity === key ? 'bg-[#294fd4] text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-[#8a9bc0] hover:bg-white hover:text-[#4269ee]',
+                'inline-flex h-7 cursor-pointer items-center justify-center rounded-md px-3.5 text-xs font-semibold leading-none whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none',
+                granularity === key ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)',
               )}
             >
               {t(labelKey)}

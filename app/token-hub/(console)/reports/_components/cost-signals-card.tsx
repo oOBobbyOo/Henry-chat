@@ -37,24 +37,24 @@ export function CostSignalsCard({ summary }: { summary: TokenHub.CostReportSumma
   ]
 
   return (
-    <div className="flex h-full flex-col rounded-[15px] border border-[#dce5f6] bg-white p-5 shadow-[0_1px_2px_rgb(15_38_79/0.04)] sm:p-6">
+    <div className="flex h-full flex-col rounded-[15px] border border-(--tc-border) bg-(--tc-surface) p-5 shadow-[0_1px_2px_rgb(15_38_79/0.04)] sm:p-6">
       <div>
         <div className="flex items-center gap-2">
-          <BellRing className="h-4 w-4 text-[#294fd4]" />
-          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Reports Signals Title')}</h2>
+          <BellRing className="h-4 w-4 text-(--tc-primary-text)" />
+          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Reports Signals Title')}</h2>
         </div>
-        <p className="mt-1.5 text-xs text-[#8a9bc0]">{t('Reports Signals Subtitle')}</p>
+        <p className="mt-1.5 text-xs text-(--tc-muted)">{t('Reports Signals Subtitle')}</p>
       </div>
 
       <div className="mt-5 space-y-3">
         {signals.map(({ label, value, hint, muted }) => (
           <div
             key={label}
-            className="rounded-xl border border-[#dce5f6]/80 bg-[#f7f9fd]/70 p-3.5"
+            className="rounded-xl border border-(--tc-border)/80 bg-(--tc-surface-raised)/70 p-3.5"
           >
-            <p className="text-[11px] font-bold tracking-[0.06em] text-[#8a9bc0] uppercase">{label}</p>
-            <p className={`mt-2 truncate text-[17px] leading-none font-semibold tracking-[-0.02em] tabular-nums ${muted ? 'text-[#8a9bc0]' : 'text-[#0f1c3a]'}`}>{value}</p>
-            <p className="mt-2 text-[11px] leading-4 text-[#8a9bc0]">{hint}</p>
+            <p className="text-[11px] font-bold tracking-[0.06em] text-(--tc-muted) uppercase">{label}</p>
+            <p className={`mt-2 truncate text-[17px] leading-none font-semibold tracking-[-0.02em] tabular-nums ${muted ? 'text-(--tc-muted)' : 'text-(--tc-strong)'}`}>{value}</p>
+            <p className="mt-2 text-[11px] leading-4 text-(--tc-muted)">{hint}</p>
           </div>
         ))}
       </div>

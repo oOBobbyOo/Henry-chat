@@ -74,7 +74,7 @@ export function MetricCard({
   tone?: 'primary' | 'green' | 'amber' | 'violet' | 'sky'
 }) {
   const toneMap = {
-    primary: { icon: 'bg-[#edf1ff] text-[#3867ff]', spark: 'text-[#3867ff]' },
+    primary: { icon: 'bg-(--tc-blue-soft) text-(--tc-blue-bright)', spark: 'text-(--tc-blue-bright)' },
     green: { icon: 'bg-emerald-50 text-emerald-600', spark: 'text-emerald-500' },
     amber: { icon: 'bg-amber-50 text-amber-600', spark: 'text-amber-500' },
     violet: { icon: 'bg-violet-50 text-violet-600', spark: 'text-violet-500' },
@@ -82,10 +82,10 @@ export function MetricCard({
   }[tone]
 
   return (
-    <div className="group overflow-hidden rounded-[15px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgb(28_55_105/0.06)]">
+    <div className="group overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgb(28_55_105/0.06)]">
       <div className="p-3.5 sm:p-4">
         <div className="flex items-start justify-between gap-3">
-          <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-[#0f1c3a]">{label}</p>
+          <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-(--tc-strong)">{label}</p>
           <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${toneMap.icon}`}>
             <Icon className="h-4 w-4" />
           </span>
@@ -95,13 +95,13 @@ export function MetricCard({
           <div className="min-w-0">
             <div className="flex items-baseline gap-1">
               {display ? (
-                <span className="truncate text-[24px] leading-none font-semibold tracking-[-0.03em] text-[#0f1c3a] tabular-nums">{display}</span>
+                <span className="truncate text-[24px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong) tabular-nums">{display}</span>
               ) : (
                 <>
-                  <span className="text-[24px] leading-none font-semibold tracking-[-0.03em] text-[#0f1c3a]">
+                  <span className="text-[24px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong)">
                     <AnimatedNumber value={value} />
                   </span>
-                  {unit && <span className="text-sm font-semibold text-[#8a9bc0]">{unit}</span>}
+                  {unit && <span className="text-sm font-semibold text-(--tc-muted)">{unit}</span>}
                 </>
               )}
             </div>
@@ -114,7 +114,7 @@ export function MetricCard({
           </div>
         </div>
 
-        <p className="mt-2.5 truncate text-[11px] font-medium text-[#8a9bc0]">{hint}</p>
+        <p className="mt-2.5 truncate text-[11px] font-medium text-(--tc-muted)">{hint}</p>
       </div>
     </div>
   )

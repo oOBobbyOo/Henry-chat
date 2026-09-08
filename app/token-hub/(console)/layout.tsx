@@ -15,7 +15,7 @@ export default function ConsoleLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div className="min-h-screen bg-[#f7f9fd]">
+    <div className="min-h-screen bg-(--tc-surface-raised)">
       <ConsoleSidebar />
       <div className="min-w-0 transition-[padding] duration-300 ease-out lg:pl-67">
         <ConsoleHeader />

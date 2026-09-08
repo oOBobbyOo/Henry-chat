@@ -23,9 +23,9 @@ const MODALITY_ICON: Record<string, LucideIcon> = {
 
 /** 模态图标颜色(与生产一致的语义色,本地项目无 radix-nova 变量,用具体色值) */
 const MODALITY_TONE: Record<string, string> = {
-  text: 'bg-[#eef3ff] text-[#4269ee]',
+  text: 'bg-(--tc-blue-soft) text-(--tc-primary-text)',
   image: 'bg-emerald-50 text-emerald-600',
-  video: 'bg-red-50 text-[#fb5a26]',
+  video: 'bg-red-50 text-(--tc-danger)',
   audio: 'bg-amber-50 text-amber-600',
   file: 'bg-sky-50 text-sky-600',
 }
@@ -93,14 +93,14 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
   }
 
   return (
-    <article className="group relative flex min-h-109.5 flex-col overflow-hidden rounded-[15px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)] transition duration-200 hover:-translate-y-0.5 hover:border-[#4269ee]/40 hover:shadow-[0_16px_32px_rgb(28_55_105/0.08)]">
+    <article className="group relative flex min-h-109.5 flex-col overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)] transition duration-200 hover:-translate-y-0.5 hover:border-(--tc-primary-hover)/40 hover:shadow-[0_16px_32px_rgb(28_55_105/0.08)]">
       <div className="flex flex-1 flex-col p-5 sm:px-6 sm:pb-6">
         {/* 头部: 图标 + 名称 + 徽章 */}
         <div className="flex items-start gap-3">
-          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-[#dce5f6]/80 bg-[#edf1ff]/65">{getFamilyIcon(model.family, 25)}</span>
+          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl border border-(--tc-border)/80 bg-(--tc-blue-soft)/65">{getFamilyIcon(model.family, 25)}</span>
           <div className="min-w-0 flex-1">
             <div className="flex items-start gap-2">
-              <h2 className="min-w-0 truncate text-[16px] font-semibold tracking-[-0.03em] text-[#0f1c3a]">{model.display_name}</h2>
+              <h2 className="min-w-0 truncate text-[16px] font-semibold tracking-[-0.03em] text-(--tc-strong)">{model.display_name}</h2>
               <span className="inline-flex shrink-0 items-center rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-600">{t('Plaza Callable')}</span>
               {isNew && (
                 <span className="inline-flex shrink-0 items-center gap-1 rounded-md border border-amber-500/55 bg-amber-50 px-1.5 py-0.5 text-[10px] font-bold text-amber-600">
@@ -110,7 +110,7 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
               )}
             </div>
             {/* 别名 + 复制 */}
-            <div className="mt-1 flex min-w-0 items-center gap-2 text-xs text-[#8a9bc0]">
+            <div className="mt-1 flex min-w-0 items-center gap-2 text-xs text-(--tc-muted)">
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 <code className="min-w-0 truncate">{model.alias}</code>
                 <button
@@ -118,7 +118,7 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
                   onClick={handleCopy}
                   aria-label={`${t('Plaza Copy Id')} ${model.alias}`}
                   title={t('Plaza Copy Id')}
-                  className="grid h-6 w-6 shrink-0 cursor-pointer place-items-center rounded-md text-[#8a9bc0] transition hover:bg-[#eef3ff] hover:text-[#4269ee] focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none"
+                  className="grid h-6 w-6 shrink-0 cursor-pointer place-items-center rounded-md text-(--tc-muted) transition hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none"
                 >
                   {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
                 </button>
@@ -151,11 +151,11 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
           className="mt-4 flex flex-wrap items-center gap-1.5"
           aria-label={t('Plaza Protocols')}
         >
-          <span className="mr-0.5 text-[11px] font-medium text-[#8a9bc0]">{t('Plaza Protocols')}</span>
+          <span className="mr-0.5 text-[11px] font-medium text-(--tc-muted)">{t('Plaza Protocols')}</span>
           {model.supported_protocols.map((p) => (
             <span
               key={p}
-              className="inline-flex items-center rounded-md bg-[#eef3ff] px-2 py-0.5 text-xs font-semibold tracking-[0.01em] text-[#5b6b8c]"
+              className="inline-flex items-center rounded-md bg-(--tc-blue-soft) px-2 py-0.5 text-xs font-semibold tracking-[0.01em] text-(--tc-body)"
             >
               {PROTOCOL_LABEL[p] ?? p}
             </span>
@@ -164,7 +164,7 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
 
         {/* 描述 */}
         <p
-          className="mt-3 line-clamp-2 min-h-10 text-[13px] leading-5 text-[#5b6b8c]"
+          className="mt-3 line-clamp-2 min-h-10 text-[13px] leading-5 text-(--tc-body)"
           title={`${model.family}: ${model.description}`}
         >
           {model.family}: {model.description}
@@ -172,12 +172,12 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
 
         {/* 多模态能力 */}
         <section
-          className="mt-3 rounded-xl bg-[#eef3ff] px-3 py-2.5"
+          className="mt-3 rounded-xl bg-(--tc-blue-soft) px-3 py-2.5"
           aria-label={`${model.display_name} 的多模态能力`}
         >
           <div className="flex items-center gap-2.5">
             <div className="min-w-0 flex-1">
-              <p className="text-[10px] font-semibold tracking-[0.09em] text-[#8a9bc0] uppercase">{t('Plaza Input')}</p>
+              <p className="text-[10px] font-semibold tracking-[0.09em] text-(--tc-muted) uppercase">{t('Plaza Input')}</p>
               <div className="mt-1.5 flex flex-nowrap gap-1.5">
                 {model.input_modalities.map((mod) => {
                   const Icon = MODALITY_ICON[mod]
@@ -186,7 +186,7 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
                     <span
                       key={mod}
                       title={mod}
-                      className={cn('grid h-7 w-7 shrink-0 place-items-center rounded-lg', MODALITY_TONE[mod] ?? 'bg-[#eef3ff] text-[#4269ee]')}
+                      className={cn('grid h-7 w-7 shrink-0 place-items-center rounded-lg', MODALITY_TONE[mod] ?? 'bg-(--tc-blue-soft) text-(--tc-primary-text)')}
                     >
                       <Icon
                         className="h-4 w-4"
@@ -198,8 +198,8 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
                 })}
               </div>
             </div>
-            <div className="min-w-0 flex-1 border-l border-[#dce5f6] pl-2.5">
-              <p className="text-[10px] font-semibold tracking-[0.09em] text-[#8a9bc0] uppercase">{t('Plaza Output')}</p>
+            <div className="min-w-0 flex-1 border-l border-(--tc-border) pl-2.5">
+              <p className="text-[10px] font-semibold tracking-[0.09em] text-(--tc-muted) uppercase">{t('Plaza Output')}</p>
               <div className="mt-1.5 flex flex-nowrap gap-1.5">
                 {model.output_modalities.map((mod) => {
                   const Icon = MODALITY_ICON[mod]
@@ -208,7 +208,7 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
                     <span
                       key={mod}
                       title={mod}
-                      className={cn('grid h-7 w-7 shrink-0 place-items-center rounded-lg', MODALITY_TONE[mod] ?? 'bg-[#eef3ff] text-[#4269ee]')}
+                      className={cn('grid h-7 w-7 shrink-0 place-items-center rounded-lg', MODALITY_TONE[mod] ?? 'bg-(--tc-blue-soft) text-(--tc-primary-text)')}
                     >
                       <Icon
                         className="h-4 w-4"
@@ -225,12 +225,12 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
 
         {/* 定价 */}
         <div
-          className="mt-3 grid grid-cols-[0.72fr_repeat(3,minmax(0,1fr))] border-y border-[#dce5f6]/80 py-3"
+          className="mt-3 grid grid-cols-[0.72fr_repeat(3,minmax(0,1fr))] border-y border-(--tc-border)/80 py-3"
           aria-label={`${model.display_name} 的价格信息（每百万 Token）`}
         >
           <div className="min-w-0 pr-1.5 sm:pr-2">
-            <p className="text-[9px] font-semibold tracking-[-0.02em] text-[#8a9bc0] whitespace-nowrap sm:text-[10px]">{t('Plaza Context')}</p>
-            <p className="mt-1 flex min-h-5 items-center text-[11px] font-semibold text-[#0f1c3a] whitespace-nowrap tabular-nums sm:text-sm">{formatContext(model.context_window)}</p>
+            <p className="text-[9px] font-semibold tracking-[-0.02em] text-(--tc-muted) whitespace-nowrap sm:text-[10px]">{t('Plaza Context')}</p>
+            <p className="mt-1 flex min-h-5 items-center text-[11px] font-semibold text-(--tc-strong) whitespace-nowrap tabular-nums sm:text-sm">{formatContext(model.context_window)}</p>
           </div>
           <PriceCell
             label={t('Plaza Input Price')}
@@ -257,18 +257,18 @@ export function ModelCard({ model, currency }: { model: TokenHub.CatalogModel; c
           className="mt-3 flex items-center gap-2"
           aria-label={`${model.display_name} 的供应商信息`}
         >
-          <span className="text-[11px] font-semibold text-[#8a9bc0]">{t('Plaza Vendors')}</span>
+          <span className="text-[11px] font-semibold text-(--tc-muted)">{t('Plaza Vendors')}</span>
           <div className="flex min-w-0 items-center gap-1.5">
             {providers.map((p) => (
               <span
                 key={p}
                 title={p}
-                className="grid h-6 w-6 place-items-center rounded-md border border-[#dce5f6] bg-[#f7f9fd]"
+                className="grid h-6 w-6 place-items-center rounded-md border border-(--tc-border) bg-(--tc-surface-raised)"
               >
                 {getProviderIcon(p, 15)}
               </span>
             ))}
-            {model.mappings.length > providers.length && <span className="text-[11px] font-semibold text-[#8a9bc0]">+{model.mappings.length - providers.length}</span>}
+            {model.mappings.length > providers.length && <span className="text-[11px] font-semibold text-(--tc-muted)">+{model.mappings.length - providers.length}</span>}
           </div>
         </div>
       </div>
@@ -281,21 +281,21 @@ function PriceCell({ label, price, currency }: { label: string; price: { origina
   const symbol = currency === 'CNY' ? '¥' : '$'
   if (!price) {
     return (
-      <div className="min-w-0 border-l border-[#dce5f6] px-1.5 sm:px-2">
-        <p className="text-[9px] font-semibold tracking-[-0.02em] text-[#8a9bc0] whitespace-nowrap sm:text-[10px]">{label}</p>
-        <p className="mt-1 flex min-h-5 items-center text-[11px] font-semibold text-[#0f1c3a] whitespace-nowrap tabular-nums sm:text-sm">—</p>
+      <div className="min-w-0 border-l border-(--tc-border) px-1.5 sm:px-2">
+        <p className="text-[9px] font-semibold tracking-[-0.02em] text-(--tc-muted) whitespace-nowrap sm:text-[10px]">{label}</p>
+        <p className="mt-1 flex min-h-5 items-center text-[11px] font-semibold text-(--tc-strong) whitespace-nowrap tabular-nums sm:text-sm">—</p>
       </div>
     )
   }
   const hasDiscount = price.discounted < price.original - 1e-9
   return (
-    <div className="min-w-0 border-l border-[#dce5f6] px-1.5 sm:px-2">
-      <p className="text-[9px] font-semibold tracking-[-0.02em] text-[#8a9bc0] whitespace-nowrap sm:text-[10px]">{label}</p>
-      <p className="mt-1 flex min-h-5 items-center text-[11px] font-semibold text-[#0f1c3a] whitespace-nowrap tabular-nums sm:text-sm">
+    <div className="min-w-0 border-l border-(--tc-border) px-1.5 sm:px-2">
+      <p className="text-[9px] font-semibold tracking-[-0.02em] text-(--tc-muted) whitespace-nowrap sm:text-[10px]">{label}</p>
+      <p className="mt-1 flex min-h-5 items-center text-[11px] font-semibold text-(--tc-strong) whitespace-nowrap tabular-nums sm:text-sm">
         {hasDiscount ? (
           <span className="inline-flex flex-col items-end leading-none">
             <span
-              className="text-[8px] leading-none font-normal text-[#8a9bc0] line-through decoration-[#8a9bc0]/70"
+              className="text-[8px] leading-none font-normal text-(--tc-muted) line-through decoration-(--tc-muted)/70"
               aria-hidden
             >
               {symbol}
@@ -336,34 +336,34 @@ function MetricsSection({ model }: { model: TokenHub.CatalogModel }) {
       aria-label={`${model.display_name} 的近 30 分钟调用表现`}
     >
       <div className="mb-1.5 flex items-center justify-between">
-        <p className="text-[10px] font-semibold tracking-[0.09em] text-[#8a9bc0] uppercase">{t('Plaza Performance')}</p>
-        <p className="text-[10px] text-[#8a9bc0]">{hasData ? `${metric!.requests} ${t('Plaza Requests')}` : t('Plaza No Data')}</p>
+        <p className="text-[10px] font-semibold tracking-[0.09em] text-(--tc-muted) uppercase">{t('Plaza Performance')}</p>
+        <p className="text-[10px] text-(--tc-muted)">{hasData ? `${metric!.requests} ${t('Plaza Requests')}` : t('Plaza No Data')}</p>
       </div>
-      <div className="grid grid-cols-3 rounded-xl bg-[#f7f9fd]/60 py-2.5">
+      <div className="grid grid-cols-3 rounded-xl bg-(--tc-surface-raised)/60 py-2.5">
         <div className="min-w-0 px-2.5">
-          <p className="flex items-center gap-1 text-[10px] font-medium text-[#8a9bc0]">
+          <p className="flex items-center gap-1 text-[10px] font-medium text-(--tc-muted)">
             <Clock3 className="h-3 w-3" />
             {t('Plaza Latency')}
           </p>
-          <p className="mt-1 truncate text-[13px] font-semibold text-[#0f1c3a] tabular-nums">{latency}</p>
+          <p className="mt-1 truncate text-[13px] font-semibold text-(--tc-strong) tabular-nums">{latency}</p>
         </div>
         <div
-          className="min-w-0 border-l border-[#dce5f6] px-2.5"
+          className="min-w-0 border-l border-(--tc-border) px-2.5"
           title={t('Plaza Throughput Title')}
         >
-          <p className="flex items-center gap-1 text-[10px] font-medium text-[#8a9bc0]">
+          <p className="flex items-center gap-1 text-[10px] font-medium text-(--tc-muted)">
             <Zap className="h-3 w-3" />
             {t('Plaza Throughput')}
           </p>
-          <p className="mt-1 truncate text-[13px] font-semibold text-[#0f1c3a] tabular-nums">{tps}</p>
-          <p className="mt-0.5 truncate text-[10px] text-[#8a9bc0] tabular-nums">非流式 {nonStreamTps}</p>
+          <p className="mt-1 truncate text-[13px] font-semibold text-(--tc-strong) tabular-nums">{tps}</p>
+          <p className="mt-0.5 truncate text-[10px] text-(--tc-muted) tabular-nums">非流式 {nonStreamTps}</p>
         </div>
-        <div className="min-w-0 border-l border-[#dce5f6] px-2.5">
-          <p className="flex items-center gap-1 text-[10px] font-medium text-[#8a9bc0]">
+        <div className="min-w-0 border-l border-(--tc-border) px-2.5">
+          <p className="flex items-center gap-1 text-[10px] font-medium text-(--tc-muted)">
             <Activity className="h-3 w-3" />
             {t('Plaza Availability')}
           </p>
-          <p className="mt-1 truncate text-[13px] font-semibold text-[#0f1c3a] tabular-nums">{availability}</p>
+          <p className="mt-1 truncate text-[13px] font-semibold text-(--tc-strong) tabular-nums">{availability}</p>
         </div>
       </div>
     </section>

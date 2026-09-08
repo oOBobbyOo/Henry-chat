@@ -68,14 +68,14 @@ export function UsageFilterBar({
   return (
     <section
       aria-label={t('Usage Filter Label')}
-      className="grid gap-2.5 rounded-[18px] border border-[#dce5f6]/80 bg-[#f7f9fd]/70 px-4 py-3.5 shadow-[0_6px_18px_rgb(19_48_93/0.03)] sm:px-5"
+      className="grid gap-2.5 rounded-[18px] border border-(--tc-border)/80 bg-(--tc-surface-raised)/70 px-4 py-3.5 shadow-[0_6px_18px_rgb(19_48_93/0.03)] sm:px-5"
     >
       <div className="flex flex-wrap items-center gap-2.5">
         {/* 时间范围切换 */}
         <div
           role="group"
           aria-label={t('Usage Range Group')}
-          className="flex h-10 shrink-0 items-center gap-0.5 rounded-lg border border-[#dce5f6] bg-white px-1.25 py-1"
+          className="flex h-10 shrink-0 items-center gap-0.5 rounded-lg border border-(--tc-border) bg-(--tc-surface) px-1.25 py-1"
         >
           {rangeOptions.map(({ key, label }) => (
             <button
@@ -83,8 +83,8 @@ export function UsageFilterBar({
               type="button"
               aria-pressed={range === key}
               onClick={() => onRangeChange(key)}
-              className={`inline-flex h-7 cursor-pointer items-center justify-center rounded-md px-3 text-xs font-semibold leading-none whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-[#4269ee]/15 focus-visible:outline-none ${
-                range === key ? 'bg-[#294fd4] text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-[#8a9bc0] hover:bg-[#f4f7ff] hover:text-[#4269ee]'
+              className={`inline-flex h-7 cursor-pointer items-center justify-center rounded-md px-3 text-xs font-semibold leading-none whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none ${
+                range === key ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-muted) hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)'
               }`}
             >
               {label}
@@ -93,8 +93,8 @@ export function UsageFilterBar({
         </div>
 
         {/* 粒度徽标 */}
-        <span className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border border-[#dce5f6] bg-white px-3 text-xs font-semibold whitespace-nowrap text-[#5b6b8c]">
-          <CalendarRange className="h-3.5 w-3.5 text-[#4269ee]" />
+        <span className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border border-(--tc-border) bg-(--tc-surface) px-3 text-xs font-semibold whitespace-nowrap text-(--tc-body)">
+          <CalendarRange className="h-3.5 w-3.5 text-(--tc-primary-text)" />
           {granularityLabel}
         </span>
 
@@ -174,7 +174,7 @@ export function UsageFilterBar({
           onClick={onClear}
           disabled={!hasFilter}
           title={t('Usage Clear Title')}
-          className="inline-flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#294fd4] px-4 text-sm font-semibold whitespace-nowrap text-white shadow-[0_5px_14px_rgb(49_88_232/0.22)] transition-all duration-200 hover:bg-[#4269ee] hover:shadow-[0_8px_20px_rgb(49_88_232/0.28)] focus-visible:ring-4 focus-visible:ring-[#4269ee]/15 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+          className="inline-flex h-10 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-xl bg-(--tc-primary) px-4 text-sm font-semibold whitespace-nowrap text-white shadow-[0_5px_14px_rgb(49_88_232/0.22)] transition-all duration-200 hover:bg-(--tc-primary-hover) hover:shadow-[0_8px_20px_rgb(49_88_232/0.28)] focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
         >
           <TimerReset className="h-3.5 w-3.5" />
           {t('Usage Clear')}

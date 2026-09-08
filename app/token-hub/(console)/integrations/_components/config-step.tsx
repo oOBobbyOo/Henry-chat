@@ -133,11 +133,11 @@ curl ${base}/v1/chat/completions \\
 /** 绑定信息标签(应用 / 模型 / API Key) */
 function BoundChip({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle?: string }) {
   return (
-    <span className="inline-flex min-w-0 items-center gap-2 rounded-xl border border-[#dce5f6] bg-[#f7f9fd] px-3 py-2">
-      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-[#dce5f6]/80 bg-[#edf1ff]/65 text-[#0f1c3a]">{icon}</span>
+    <span className="inline-flex min-w-0 items-center gap-2 rounded-xl border border-(--tc-border) bg-(--tc-surface-raised) px-3 py-2">
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-(--tc-border)/80 bg-(--tc-blue-soft)/65 text-(--tc-strong)">{icon}</span>
       <span className="min-w-0">
-        <span className="block truncate text-[12px] font-semibold text-[#0f1c3a]">{title}</span>
-        {subtitle && <code className="block truncate font-mono text-[10px] text-[#8a9bc0]">{subtitle}</code>}
+        <span className="block truncate text-[12px] font-semibold text-(--tc-strong)">{title}</span>
+        {subtitle && <code className="block truncate font-mono text-[10px] text-(--tc-muted)">{subtitle}</code>}
       </span>
     </span>
   )
@@ -164,13 +164,13 @@ export function ConfigStep({ app, model, keyName, keyPrefix }: { app: Integratio
   }
 
   return (
-    <section className="overflow-hidden scroll-mt-6 rounded-[18px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
+    <section className="overflow-hidden scroll-mt-6 rounded-[18px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
       {/* 步骤头 */}
-      <div className="flex items-center gap-4 border-b border-[#dce5f6] px-5 py-4 sm:px-6">
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#edf1ff] text-[15px] font-bold text-[#3867ff]">02</span>
+      <div className="flex items-center gap-4 border-b border-(--tc-border) px-5 py-4 sm:px-6">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-(--tc-blue-soft) text-[15px] font-bold text-(--tc-blue-bright)">02</span>
         <div className="min-w-0">
-          <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Integ Step2 Title')}</h2>
-          <p className="mt-1 text-xs leading-5 text-[#8a9bc0]">{t('Integ Step2 Desc')}</p>
+          <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Integ Step2 Title')}</h2>
+          <p className="mt-1 text-xs leading-5 text-(--tc-muted)">{t('Integ Step2 Desc')}</p>
         </div>
       </div>
 
@@ -200,7 +200,7 @@ export function ConfigStep({ app, model, keyName, keyPrefix }: { app: Integratio
           />
         </div>
 
-        <div className="relative rounded-xl border border-[#dce5f6] bg-[#0f1c3a] p-4">
+        <div className="relative rounded-xl border border-(--tc-border) bg-(--tc-code-bg) p-4">
           <button
             type="button"
             onClick={handleCopy}
@@ -214,8 +214,8 @@ export function ConfigStep({ app, model, keyName, keyPrefix }: { app: Integratio
         </div>
 
         {/* 后续步骤提示 */}
-        <p className="flex items-start gap-2 rounded-xl border border-[#dce5f6] bg-[#f7f9fd]/70 px-3.5 py-2.5 text-xs leading-5 text-[#5b6b8c]">
-          <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#3867ff]" />
+        <p className="flex items-start gap-2 rounded-xl border border-(--tc-border) bg-(--tc-surface-raised)/70 px-3.5 py-2.5 text-xs leading-5 text-(--tc-body)">
+          <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-(--tc-blue-bright)" />
           {t('Integ Config Next Tip')}
         </p>
       </div>

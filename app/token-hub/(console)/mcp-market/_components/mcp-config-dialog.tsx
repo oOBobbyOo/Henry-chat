@@ -47,20 +47,20 @@ export function McpConfigDialog({ service, onClose }: { service: TokenHub.McpSer
         if (!isOpen) onClose()
       }}
     >
-      <DialogContent className="w-full max-w-lg rounded-[22px] border border-[#dce5f6] bg-white p-6 shadow-[0_24px_80px_rgb(16_38_79/0.22)]">
+      <DialogContent className="w-full max-w-lg rounded-[22px] border border-(--tc-border) bg-(--tc-surface) p-6 shadow-[0_24px_80px_rgb(16_38_79/0.22)]">
         <DialogHeader className="mb-4 space-y-1 text-left">
           <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#edf1ff] text-[#3867ff]">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-(--tc-blue-soft) text-(--tc-blue-bright)">
               <Wrench className="h-4 w-4" />
             </span>
-            <DialogTitle className="text-base font-semibold text-[#0f1c3a]">
+            <DialogTitle className="text-base font-semibold text-(--tc-strong)">
               {service.name} · {t('Mcp Config Title')}
             </DialogTitle>
           </div>
-          <DialogDescription className="text-sm text-[#8a9bc0]">{t('Mcp Config Desc')}</DialogDescription>
+          <DialogDescription className="text-sm text-(--tc-muted)">{t('Mcp Config Desc')}</DialogDescription>
         </DialogHeader>
 
-        <div className="relative rounded-xl border border-[#dce5f6] bg-[#0f1c3a] p-4">
+        <div className="relative rounded-xl border border-(--tc-border) bg-(--tc-code-bg) p-4">
           <button
             type="button"
             onClick={handleCopy}
@@ -76,7 +76,7 @@ export function McpConfigDialog({ service, onClose }: { service: TokenHub.McpSer
         <div className="mt-5 flex justify-end gap-2">
           <Button
             onClick={onClose}
-            className="h-10 bg-[#294fd4] px-4 text-sm font-semibold text-white shadow-[0_5px_14px_rgb(49_88_232/0.22)] transition hover:bg-[#4269ee]"
+            className="h-10 bg-(--tc-primary) px-4 text-sm font-semibold text-white shadow-[0_5px_14px_rgb(49_88_232/0.22)] transition hover:bg-(--tc-primary-hover)"
           >
             {t('Mcp Config Done')}
           </Button>

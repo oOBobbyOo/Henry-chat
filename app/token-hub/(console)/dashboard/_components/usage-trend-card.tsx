@@ -20,20 +20,20 @@ export function UsageTrendCard() {
   }
 
   return (
-    <div className="h-full overflow-hidden rounded-[15px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
-      <div className="flex flex-col gap-3 border-b border-[#dce5f6] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+    <div className="h-full overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
+      <div className="flex flex-col gap-3 border-b border-(--tc-border) px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Dashboard Trend Title')}</h2>
+            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Dashboard Trend Title')}</h2>
           </div>
-          <p className="mt-1.5 text-xs text-[#8a9bc0]">{t('Dashboard Trend Subtitle')}</p>
+          <p className="mt-1.5 text-xs text-(--tc-muted)">{t('Dashboard Trend Subtitle')}</p>
         </div>
         <button
           type="button"
           onClick={handleRefresh}
           title={t('Dashboard Trend Refresh')}
           aria-label={t('Dashboard Trend Refresh')}
-          className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-xl text-[#5b6b8c] transition hover:bg-[#eef3ff] hover:text-[#294fd4] focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none active:rotate-180 active:duration-300"
+          className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-xl text-(--tc-body) transition hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none active:rotate-180 active:duration-300"
         >
           <RefreshCw className="h-4 w-4" />
         </button>

@@ -21,7 +21,7 @@ export function UsageSideCard({ summary, modelTrend, days }: { summary: TokenHub
       label: t('Usage Health Active Models'),
       value: activeModels.toLocaleString(),
       icon: Activity,
-      tone: 'bg-[#edf1ff] text-[#3867ff]',
+      tone: 'bg-(--tc-blue-soft) text-(--tc-blue-bright)',
     },
     {
       label: t('Usage Health Success'),
@@ -44,28 +44,28 @@ export function UsageSideCard({ summary, modelTrend, days }: { summary: TokenHub
   ]
 
   return (
-    <div className="flex h-full flex-col rounded-[15px] border border-[#dce5f6] bg-white p-5 shadow-[0_1px_2px_rgb(15_38_79/0.04)] sm:p-6">
+    <div className="flex h-full flex-col rounded-[15px] border border-(--tc-border) bg-(--tc-surface) p-5 shadow-[0_1px_2px_rgb(15_38_79/0.04)] sm:p-6">
       <div>
-        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Usage Health Title')}</h2>
-        <p className="mt-1.5 text-xs text-[#8a9bc0]">{t('Usage Health Subtitle')}</p>
+        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Usage Health Title')}</h2>
+        <p className="mt-1.5 text-xs text-(--tc-muted)">{t('Usage Health Subtitle')}</p>
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-3">
         {stats.map(({ label, value, icon: Icon, tone }) => (
           <div
             key={label}
-            className="rounded-xl border border-[#dce5f6]/80 bg-[#f7f9fd]/70 p-3.5"
+            className="rounded-xl border border-(--tc-border)/80 bg-(--tc-surface-raised)/70 p-3.5"
           >
             <span className={`grid h-8 w-8 place-items-center rounded-lg ${tone}`}>
               <Icon className="h-4 w-4" />
             </span>
-            <p className="mt-3 truncate text-[20px] leading-none font-semibold tracking-[-0.02em] text-[#0f1c3a] tabular-nums">{value}</p>
-            <p className="mt-2 truncate text-[11px] font-medium text-[#8a9bc0]">{label}</p>
+            <p className="mt-3 truncate text-[20px] leading-none font-semibold tracking-[-0.02em] text-(--tc-strong) tabular-nums">{value}</p>
+            <p className="mt-2 truncate text-[11px] font-medium text-(--tc-muted)">{label}</p>
           </div>
         ))}
       </div>
 
-      <p className="mt-auto border-t border-[#dce5f6]/80 pt-4 text-xs text-[#8a9bc0]">
+      <p className="mt-auto border-t border-(--tc-border)/80 pt-4 text-xs text-(--tc-muted)">
         {t('Usage Health Range')}: {t('Usage Health Range Days', { count: days })}
       </p>
     </div>

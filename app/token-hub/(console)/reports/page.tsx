@@ -61,19 +61,21 @@ export default function ReportsPage() {
     <main className="mx-auto w-full max-w-[1600px] px-4 py-7 sm:px-6 sm:py-8 lg:px-4 lg:py-9">
       <div className="space-y-6">
         {/* 标题区 */}
-        <header className="flex flex-col gap-4 border-b border-[#dce5f6]/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
+        <header className="flex flex-col gap-4 border-b border-(--tc-border)/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="text-[28px] font-semibold tracking-tighter text-[#0f1c3a] sm:text-[32px]">{t('Reports Title')}</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5b6b8c]">{t('Reports Subtitle')}</p>
+            <h1 className="text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">{t('Reports Title')}</h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">{t('Reports Subtitle')}</p>
           </div>
           <div className="flex shrink-0 items-center gap-2.5">
-            <span className="inline-flex h-9 items-center rounded-xl border border-[#dce5f6] bg-white px-3.5 text-xs font-semibold whitespace-nowrap text-[#5b6b8c] tabular-nums">{rangeLabel}</span>
+            <span className="inline-flex h-9 items-center rounded-xl border border-(--tc-border) bg-(--tc-surface) px-3.5 text-xs font-semibold whitespace-nowrap text-(--tc-body) tabular-nums">
+              {rangeLabel}
+            </span>
             <button
               type="button"
               onClick={refresh}
               title={t('Reports Refresh')}
               aria-label={t('Reports Refresh')}
-              className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-xl border border-[#dce5f6] bg-white text-[#5b6b8c] transition hover:bg-[#eef3ff] hover:text-[#294fd4] focus-visible:ring-2 focus-visible:ring-[#4269ee]/35 focus-visible:outline-none active:rotate-180 active:duration-300"
+              className="grid h-9 w-9 shrink-0 cursor-pointer place-items-center rounded-xl border border-(--tc-border) bg-(--tc-surface) text-(--tc-body) transition hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none active:rotate-180 active:duration-300"
             >
               <RefreshCw className="h-4 w-4" />
             </button>
@@ -82,19 +84,19 @@ export default function ReportsPage() {
 
         {/* 分析视角 */}
         <section className="flex flex-wrap items-center gap-3">
-          <p className="text-xs font-bold tracking-[0.14em] text-[#8a9bc0] uppercase">{t('Reports Perspective')}</p>
-          <span className="inline-flex items-center gap-2 rounded-xl border border-[#294fd4]/25 bg-[#edf1ff] px-3.5 py-2 text-[13px] font-semibold text-[#3867ff]">
+          <p className="text-xs font-bold tracking-[0.14em] text-(--tc-muted) uppercase">{t('Reports Perspective')}</p>
+          <span className="inline-flex items-center gap-2 rounded-xl border border-(--tc-primary)/25 bg-(--tc-blue-soft) px-3.5 py-2 text-[13px] font-semibold text-(--tc-blue-bright)">
             <UserRound className="h-4 w-4" />
             {t('Reports Perspective Personal')}
-            <span className="hidden text-xs font-medium text-[#5b6b8c] sm:inline">· {t('Reports Perspective Personal Desc')}</span>
+            <span className="hidden text-xs font-medium text-(--tc-body) sm:inline">· {t('Reports Perspective Personal Desc')}</span>
           </span>
         </section>
 
         {/* 成本总览 */}
         <section className="space-y-5">
           <div className="flex items-baseline gap-2">
-            <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Reports Overview Title')}</h2>
-            <span className="text-xs text-[#8a9bc0]">{t('Reports Overview Period')}</span>
+            <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Reports Overview Title')}</h2>
+            <span className="text-xs text-(--tc-muted)">{t('Reports Overview Period')}</span>
           </div>
 
           {/* 核心指标 */}

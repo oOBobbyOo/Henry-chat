@@ -24,20 +24,20 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
   }
 
   return (
-    <div className="overflow-hidden rounded-[15px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
+    <div className="overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
       {/* 标题 */}
-      <div className="flex flex-col gap-3 border-b border-[#dce5f6] px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div className="flex flex-col gap-3 border-b border-(--tc-border) px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div>
-          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Profile Balance Details')}</h2>
-          <p className="mt-1 text-xs text-[#8a9bc0]">{t('Profile Balance Details Desc')}</p>
+          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Profile Balance Details')}</h2>
+          <p className="mt-1 text-xs text-(--tc-muted)">{t('Profile Balance Details Desc')}</p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <span className="text-xs whitespace-nowrap text-[#8a9bc0]">
-            {t('Profile Total')} <span className="font-semibold text-[#0f1c3a] tabular-nums">{total}</span> {t('Profile Total Unit')}
+          <span className="text-xs whitespace-nowrap text-(--tc-muted)">
+            {t('Profile Total')} <span className="font-semibold text-(--tc-strong) tabular-nums">{total}</span> {t('Profile Total Unit')}
           </span>
           <button
             type="button"
-            className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg border border-[#dce5f6] bg-white px-3 text-xs font-semibold text-[#5b6b8c] transition hover:bg-[#eef3ff] hover:text-[#294fd4]"
+            className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg border border-(--tc-border) bg-(--tc-surface) px-3 text-xs font-semibold text-(--tc-body) transition hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)"
           >
             <ListFilter className="h-3.5 w-3.5" />
             {t('Profile Detail')}
@@ -49,28 +49,28 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
       <div className="overflow-x-auto">
         <table className="w-full min-w-140 border-collapse text-left">
           <thead>
-            <tr className="border-b border-[#dce5f6] bg-[#f7f9fd]/70">
+            <tr className="border-b border-(--tc-border) bg-(--tc-surface-raised)/70">
               <th
                 scope="col"
-                className="px-5 py-3 text-[11px] font-bold tracking-[0.06em] whitespace-nowrap text-[#8a9bc0] uppercase"
+                className="px-5 py-3 text-[11px] font-bold tracking-[0.06em] whitespace-nowrap text-(--tc-muted) uppercase"
               >
                 {t('Profile Col Detail')}
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 text-[11px] font-bold tracking-[0.06em] whitespace-nowrap text-[#8a9bc0] uppercase"
+                className="px-5 py-3 text-[11px] font-bold tracking-[0.06em] whitespace-nowrap text-(--tc-muted) uppercase"
               >
                 {t('Profile Col Time')}
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 text-right text-[11px] font-bold tracking-[0.06em] whitespace-nowrap text-[#8a9bc0] uppercase"
+                className="px-5 py-3 text-right text-[11px] font-bold tracking-[0.06em] whitespace-nowrap text-(--tc-muted) uppercase"
               >
                 {t('Profile Col After')}
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 text-right text-[11px] font-bold tracking-[0.06em] whitespace-nowrap text-[#8a9bc0] uppercase"
+                className="px-5 py-3 text-right text-[11px] font-bold tracking-[0.06em] whitespace-nowrap text-(--tc-muted) uppercase"
               >
                 {t('Profile Col Amount')}
               </th>
@@ -80,17 +80,17 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
             {transactions.items.map((tx) => (
               <tr
                 key={tx.id}
-                className="border-b border-[#dce5f6]/60 transition-colors last:border-b-0 hover:bg-[#f7f9fd]/60"
+                className="border-b border-(--tc-border)/60 transition-colors last:border-b-0 hover:bg-(--tc-surface-raised)/60"
               >
                 <td className="px-5 py-3.5">
-                  <span className="flex items-center gap-2 text-[13px] font-medium text-[#0f1c3a]">
-                    <ReceiptText className="h-3.5 w-3.5 shrink-0 text-[#8a9bc0]" />
+                  <span className="flex items-center gap-2 text-[13px] font-medium text-(--tc-strong)">
+                    <ReceiptText className="h-3.5 w-3.5 shrink-0 text-(--tc-muted)" />
                     {tx.title}
                   </span>
                 </td>
-                <td className="px-5 py-3.5 text-[12px] whitespace-nowrap text-[#8a9bc0] tabular-nums">{formatDateTime(tx.created_at)}</td>
-                <td className="px-5 py-3.5 text-right text-[12px] whitespace-nowrap text-[#0f1c3a] tabular-nums">¥{tx.balance_after.toFixed(2)}</td>
-                <td className={cn('px-5 py-3.5 text-right text-[12px] font-semibold whitespace-nowrap tabular-nums', tx.amount_delta > 0 ? 'text-emerald-600' : 'text-[#0f1c3a]')}>
+                <td className="px-5 py-3.5 text-[12px] whitespace-nowrap text-(--tc-muted) tabular-nums">{formatDateTime(tx.created_at)}</td>
+                <td className="px-5 py-3.5 text-right text-[12px] whitespace-nowrap text-(--tc-strong) tabular-nums">¥{tx.balance_after.toFixed(2)}</td>
+                <td className={cn('px-5 py-3.5 text-right text-[12px] font-semibold whitespace-nowrap tabular-nums', tx.amount_delta > 0 ? 'text-emerald-600' : 'text-(--tc-strong)')}>
                   {tx.amount_delta > 0 ? '+' : '-'}¥{Math.abs(tx.amount_delta).toFixed(4)}
                 </td>
               </tr>
@@ -100,8 +100,8 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
       </div>
 
       {/* 分页 */}
-      <div className="flex flex-col gap-3 border-t border-[#dce5f6] bg-[#f7f9fd]/50 px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <p className="text-xs text-[#8a9bc0]">
+      <div className="flex flex-col gap-3 border-t border-(--tc-border) bg-(--tc-surface-raised)/50 px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <p className="text-xs text-(--tc-muted)">
           {t('Profile Pagination Info')} {total} {t('Profile Pagination Unit')}，{t('Profile Pagination Page')} {page} / {totalPages} {t('Profile Pagination Page Unit')}
         </p>
         <div className="flex items-center gap-1">
@@ -110,7 +110,7 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
             disabled={page <= 1}
             onClick={() => onPageChange(page - 1)}
             aria-label={t('Profile Prev')}
-            className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-[#dce5f6] bg-white text-[#5b6b8c] transition hover:bg-[#eef3ff] hover:text-[#294fd4] disabled:pointer-events-none disabled:opacity-40"
+            className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-(--tc-border) bg-(--tc-surface) text-(--tc-body) transition hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) disabled:pointer-events-none disabled:opacity-40"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -123,14 +123,14 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
                 key={p}
                 className="flex items-center gap-1"
               >
-                {showGap && <span className="px-1 text-xs text-[#8a9bc0]">…</span>}
+                {showGap && <span className="px-1 text-xs text-(--tc-muted)">…</span>}
                 <button
                   type="button"
                   onClick={() => onPageChange(p)}
                   aria-current={p === page ? 'page' : undefined}
                   className={cn(
                     'inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-xs font-semibold tabular-nums transition',
-                    p === page ? 'bg-[#294fd4] text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-[#5b6b8c] hover:bg-[#eef3ff] hover:text-[#294fd4]',
+                    p === page ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-body) hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)',
                   )}
                 >
                   {p}
@@ -144,7 +144,7 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
             disabled={page >= totalPages}
             onClick={() => onPageChange(page + 1)}
             aria-label={t('Profile Next')}
-            className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-[#dce5f6] bg-white text-[#5b6b8c] transition hover:bg-[#eef3ff] hover:text-[#294fd4] disabled:pointer-events-none disabled:opacity-40"
+            className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-(--tc-border) bg-(--tc-surface) text-(--tc-body) transition hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) disabled:pointer-events-none disabled:opacity-40"
           >
             <ChevronRight className="h-4 w-4" />
           </button>

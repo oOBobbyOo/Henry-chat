@@ -18,10 +18,10 @@ export default function DashboardPage() {
     <main className="mx-auto w-full max-w-[1600px] px-4 py-7 sm:px-6 sm:py-8 lg:px-4 lg:py-9">
       <div className="space-y-7">
         {/* 概览标题 */}
-        <section className="flex flex-col gap-5 border-b border-[#dce5f6]/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
+        <section className="flex flex-col gap-5 border-b border-(--tc-border)/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="text-[28px] font-semibold tracking-tighter text-[#0f1c3a] sm:text-[32px]">{t('Dashboard Overview')}</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5b6b8c]">{t('Dashboard Overview Desc')}</p>
+            <h1 className="text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">{t('Dashboard Overview')}</h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">{t('Dashboard Overview Desc')}</p>
           </div>
         </section>
 

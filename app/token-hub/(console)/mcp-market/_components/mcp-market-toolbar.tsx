@@ -16,10 +16,10 @@ export function McpMarketToolbar({ filters, onFilterChange, shown }: { filters: 
   return (
     <section
       aria-label={t('Mcp Filter Label')}
-      className="flex flex-wrap items-center gap-2.5 rounded-[18px] border border-[#dce5f6]/80 bg-[#f7f9fd]/70 px-4 py-3.5 shadow-[0_6px_18px_rgb(19_48_93/0.03)] sm:px-5"
+      className="flex flex-wrap items-center gap-2.5 rounded-[18px] border border-(--tc-border)/80 bg-(--tc-surface-raised)/70 px-4 py-3.5 shadow-[0_6px_18px_rgb(19_48_93/0.03)] sm:px-5"
     >
-      <span className="inline-flex items-center gap-1.5 text-xs font-semibold whitespace-nowrap text-[#5b6b8c]">
-        <SlidersHorizontal className="h-3.5 w-3.5 text-[#4269ee]" />
+      <span className="inline-flex items-center gap-1.5 text-xs font-semibold whitespace-nowrap text-(--tc-body)">
+        <SlidersHorizontal className="h-3.5 w-3.5 text-(--tc-primary-text)" />
         {t('Mcp Filter Label')}
       </span>
 
@@ -72,9 +72,9 @@ export function McpMarketToolbar({ filters, onFilterChange, shown }: { filters: 
       <p
         role="status"
         aria-live="polite"
-        className="ml-auto text-xs whitespace-nowrap text-[#8a9bc0]"
+        className="ml-auto text-xs whitespace-nowrap text-(--tc-muted)"
       >
-        {t('Mcp Services Label')} <span className="font-semibold text-[#0f1c3a]">{shown}</span> {t('Mcp Services Unit')}
+        {t('Mcp Services Label')} <span className="font-semibold text-(--tc-strong)">{shown}</span> {t('Mcp Services Unit')}
       </p>
     </section>
   )
