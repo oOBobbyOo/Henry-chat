@@ -83,7 +83,8 @@ export function CreateKeyDialog() {
           {t('Keys Create')}
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full max-w-md rounded-[22px] border border-(--tc-border) bg-(--tc-surface) p-6 shadow-[0_24px_80px_rgb(16_38_79/0.22)]">
+      {/* sm:max-w-md 覆盖 shadcn 默认的 sm:max-w-sm, 否则桌面端弹窗被压到 384px */}
+      <DialogContent className="w-full max-w-md sm:max-w-md rounded-[22px] border border-(--tc-border) bg-(--tc-surface) p-6 shadow-[0_24px_80px_rgb(16_38_79/0.22)]">
         {step === 'form' ? (
           <>
             <DialogHeader className="mb-4 space-y-1 text-left">

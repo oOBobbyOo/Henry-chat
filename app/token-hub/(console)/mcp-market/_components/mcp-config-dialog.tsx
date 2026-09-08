@@ -9,6 +9,9 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 
+/** MCP 网关地址(MCP Server 接入端点) */
+const MCP_GATEWAY_BASE_URL = process.env.NEXT_PUBLIC_MCP_GATEWAY_URL ?? ''
+
 /**
  * 生成 MCP 接入配置弹窗 —— 展示该服务的 MCP Server 配置 JSON + 复制
  */
@@ -21,7 +24,7 @@ export function McpConfigDialog({ service, onClose }: { service: TokenHub.McpSer
     mcpServers: {
       [service.id]: {
         type: 'remote',
-        url: `https://api.aimix.bbgameonline.com/mcp/${service.id}`,
+        url: `${MCP_GATEWAY_BASE_URL}/mcp/${service.id}`,
         headers: {
           Authorization: 'Bearer sk-********',
         },
@@ -47,7 +50,7 @@ export function McpConfigDialog({ service, onClose }: { service: TokenHub.McpSer
         if (!isOpen) onClose()
       }}
     >
-      <DialogContent className="w-full max-w-lg rounded-[22px] border border-(--tc-border) bg-(--tc-surface) p-6 shadow-[0_24px_80px_rgb(16_38_79/0.22)]">
+      <DialogContent className="w-full max-w-2xl sm:max-w-lg rounded-[22px] border border-(--tc-border) bg-(--tc-surface) p-6 shadow-[0_24px_80px_rgb(16_38_79/0.22)]">
         <DialogHeader className="mb-4 space-y-1 text-left">
           <div className="flex items-center gap-2">
             <span className="grid h-8 w-8 place-items-center rounded-lg bg-(--tc-blue-soft) text-(--tc-blue-bright)">
@@ -60,7 +63,7 @@ export function McpConfigDialog({ service, onClose }: { service: TokenHub.McpSer
           <DialogDescription className="text-sm text-(--tc-muted)">{t('Mcp Config Desc')}</DialogDescription>
         </DialogHeader>
 
-        <div className="relative rounded-xl border border-(--tc-border) bg-(--tc-code-bg) p-4">
+        <div className="relative min-w-0 overflow-hidden rounded-xl border border-(--tc-border) bg-(--tc-code-bg) p-4">
           <button
             type="button"
             onClick={handleCopy}
@@ -70,7 +73,7 @@ export function McpConfigDialog({ service, onClose }: { service: TokenHub.McpSer
           >
             {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
           </button>
-          <pre className="scrollbar-hidden overflow-x-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">{configText}</pre>
+          <pre className="scrollbar-slim-dark overflow-x-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">{configText}</pre>
         </div>
 
         <div className="mt-5 flex justify-end gap-2">
