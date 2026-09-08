@@ -471,6 +471,8 @@
   "Integ Manage Keys": "管理 API Keys",
   "Integ Step Title": "选择接入方式、模型与 API Key",
   "Integ Step Desc": "模型只来自模型广场，并按当前应用协议自动筛选；生成后即可直接使用。",
+  "Integ Step2 Title": "获取完整配置",
+  "Integ Step2 Desc": "配置已绑定所选模型与 API Key，复制后写入对应文件即可直接使用。",
   "Integ Ways": "种接入方式",
   "Integ Choose App": "选择应用或 SDK",
   "Integ Choose Model": "选择模型",

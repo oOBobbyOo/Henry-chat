@@ -471,6 +471,8 @@
   "Integ Manage Keys": "Manage API Keys",
   "Integ Step Title": "Choose access method, model and API Key",
   "Integ Step Desc": "Models come from the Model Plaza only, auto-filtered by the current app protocol; ready to use once generated.",
+  "Integ Step2 Title": "Get the full config",
+  "Integ Step2 Desc": "The config is bound to the selected model and API Key — copy it into the target file and it's ready to use.",
   "Integ Ways": "access methods",
   "Integ Choose App": "Choose app or SDK",
   "Integ Choose Model": "Choose model",

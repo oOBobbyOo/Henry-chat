@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useMemo, useRef, useState } from 'react'
 
 import Link from 'next/link'
 
@@ -11,7 +11,7 @@ import { getAppIcon, getFamilyIcon } from '@/components/token-hub/family-icon'
 import { cn } from '@/lib/utils'
 import { useHealthQuery, useKeysQuery, useModelsQuery } from '@/services/token-hub'
 
-import { ConfigDialog } from './_components/config-dialog'
+import { ConfigStep } from './_components/config-step'
 import { INTEGRATION_APPS, filterModelsByProtocol, type IntegrationApp } from './types'
 
 /** 网关连通性检查状态 */
@@ -19,7 +19,7 @@ type HealthState = 'idle' | 'checking' | 'ok' | 'fail'
 
 /**
  * Token Hub 控制台 —— 应用接入
- * 标题 + 下载 CC Switch / 管理 API Keys + 第一步向导(选择接入方式 / 模型 / API Key)+ 底部连通性检查
+ * 标题 + 下载 CC Switch / 管理 API Keys + 第一步向导(选择接入方式 / 模型 / API Key) + 第二步(页内展开生成完整配置) + 底部连通性检查
  * 布局对齐生产: 应用选择 3 列网格 → 模型 + Key 两列并排 → 卡片底部操作栏
  */
 export default function IntegrationsPage() {
@@ -34,8 +34,11 @@ export default function IntegrationsPage() {
   const [app, setApp] = useState<IntegrationApp>(INTEGRATION_APPS[0])
   const [modelAlias, setModelAlias] = useState<string>('')
   const [keyId, setKeyId] = useState<string>('')
-  const [configOpen, setConfigOpen] = useState(false)
+  const [configVisible, setConfigVisible] = useState(false)
   const [health, setHealth] = useState<HealthState>('idle')
+
+  // 第二步区块引用(生成后滚动定位)
+  const configRef = useRef<HTMLDivElement>(null)
 
   // 按当前应用协议筛选模型
   const matchedModels = useMemo(() => filterModelsByProtocol(modelsData.items, app.protocol), [modelsData.items, app.protocol])
@@ -49,6 +52,12 @@ export default function IntegrationsPage() {
   const selectedKey = activeKeys.find((k) => k.id === keyId) ?? activeKeys[0]
 
   const canGenerate = Boolean(selectedModel && selectedKey)
+
+  /** 生成完整配置: 展开第二步区块并平滑滚动到该区块 */
+  const generateConfig = () => {
+    setConfigVisible(true)
+    requestAnimationFrame(() => configRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+  }
 
   /** 连通性检查: 复用健康检查查询 */
   const runHealthCheck = async () => {
@@ -221,7 +230,7 @@ export default function IntegrationsPage() {
                 <div className="mt-4 flex flex-col gap-2.5">
                   <button
                     type="button"
-                    onClick={() => setConfigOpen(true)}
+                    onClick={generateConfig}
                     disabled={!canGenerate}
                     className="inline-flex h-10 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#294fd4] px-4 text-sm font-semibold text-white shadow-[0_5px_14px_rgb(49_88_232/0.22)] transition-all duration-200 hover:bg-[#4269ee] hover:shadow-[0_8px_20px_rgb(49_88_232/0.28)] focus-visible:ring-4 focus-visible:ring-[#4269ee]/15 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
                   >
@@ -270,18 +279,19 @@ export default function IntegrationsPage() {
             </div>
           </div>
         </section>
-      </div>
 
-      {/* 生成配置对话框 */}
-      {configOpen && selectedModel && selectedKey && (
-        <ConfigDialog
-          app={app}
-          model={selectedModel}
-          keyName={selectedKey.name}
-          keyPrefix={selectedKey.key_prefix}
-          onClose={() => setConfigOpen(false)}
-        />
-      )}
+        {/* 第二步: 生成完整配置(页内展开, 随第一步选择实时更新) */}
+        <div ref={configRef}>
+          {configVisible && selectedModel && selectedKey && (
+            <ConfigStep
+              app={app}
+              model={selectedModel}
+              keyName={selectedKey.name}
+              keyPrefix={selectedKey.key_prefix}
+            />
+          )}
+        </div>
+      </div>
     </main>
   )
 }

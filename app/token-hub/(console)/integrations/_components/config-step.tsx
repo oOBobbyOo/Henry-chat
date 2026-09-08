@@ -1,18 +1,17 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
-import { Check, Copy, Plug } from 'lucide-react'
+import { Check, Copy, KeyRound } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 import { toast } from 'sonner'
 
-import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { getAppIcon, getFamilyIcon } from '@/components/token-hub/family-icon'
 
 import type { IntegrationApp } from '../types'
 
 /** 生产网关地址(配置生成的目标端点) */
-const GATEWAY_BASE_URL = 'https://aimix.bbgameonline.com'
+const GATEWAY_BASE_URL = process.env.NEXT_PUBLIC_GATEWAY_URL ?? ''
 
 /**
  * 生成指定应用的接入配置文本
@@ -131,14 +130,28 @@ curl ${base}/v1/chat/completions \\
   }
 }
 
+/** 绑定信息标签(应用 / 模型 / API Key) */
+function BoundChip({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle?: string }) {
+  return (
+    <span className="inline-flex min-w-0 items-center gap-2 rounded-xl border border-[#dce5f6] bg-[#f7f9fd] px-3 py-2">
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-[#dce5f6]/80 bg-[#edf1ff]/65 text-[#0f1c3a]">{icon}</span>
+      <span className="min-w-0">
+        <span className="block truncate text-[12px] font-semibold text-[#0f1c3a]">{title}</span>
+        {subtitle && <code className="block truncate font-mono text-[10px] text-[#8a9bc0]">{subtitle}</code>}
+      </span>
+    </span>
+  )
+}
+
 /**
- * 生成完整配置弹窗 —— 按所选应用输出配置文本 + 复制
+ * 第二步 —— 生成完整配置(页内展开, 不用弹窗)
+ * 随第一步选择的应用 / 模型 / Key 实时更新
  */
-export function ConfigDialog({ app, model, keyName, keyPrefix, onClose }: { app: IntegrationApp; model: TokenHub.CatalogModel; keyName: string; keyPrefix: string; onClose: () => void }) {
+export function ConfigStep({ app, model, keyName, keyPrefix }: { app: IntegrationApp; model: TokenHub.CatalogModel; keyName: string; keyPrefix: string }) {
   const { t } = useT('token-hub')
   const [copied, setCopied] = useState(false)
 
-  const configText = buildAppConfig(app, model, keyPrefix)
+  const configText = useMemo(() => buildAppConfig(app, model, keyPrefix), [app, model, keyPrefix])
 
   const handleCopy = async () => {
     try {
@@ -151,26 +164,35 @@ export function ConfigDialog({ app, model, keyName, keyPrefix, onClose }: { app:
   }
 
   return (
-    <Dialog
-      open
-      onOpenChange={(isOpen) => {
-        if (!isOpen) onClose()
-      }}
-    >
-      <DialogContent className="w-full max-w-xl rounded-[22px] border border-[#dce5f6] bg-white p-6 shadow-[0_24px_80px_rgb(16_38_79/0.22)]">
-        <DialogHeader className="mb-4 space-y-1 text-left">
-          <div className="flex items-center gap-2">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#edf1ff] text-[#3867ff]">
-              <Plug className="h-4 w-4" />
-            </span>
-            <DialogTitle className="text-base font-semibold text-[#0f1c3a]">
-              {app.name} · {t('Integ Config Title')}
-            </DialogTitle>
-          </div>
-          <DialogDescription className="text-sm text-[#8a9bc0]">
-            {t('Integ Config Desc')} <span className="font-semibold text-[#0f1c3a]">{keyName}</span>
-          </DialogDescription>
-        </DialogHeader>
+    <section className="overflow-hidden scroll-mt-6 rounded-[18px] border border-[#dce5f6] bg-white shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
+      {/* 步骤头 */}
+      <div className="flex items-center gap-4 border-b border-[#dce5f6] px-5 py-4 sm:px-6">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-[#edf1ff] text-[15px] font-bold text-[#3867ff]">02</span>
+        <div className="min-w-0">
+          <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-[#0f1c3a]">{t('Integ Step2 Title')}</h2>
+          <p className="mt-1 text-xs leading-5 text-[#8a9bc0]">{t('Integ Step2 Desc')}</p>
+        </div>
+      </div>
+
+      {/* 主体: 绑定信息 + 配置代码块 */}
+      <div className="space-y-4 px-5 py-5 sm:px-6 sm:pb-6">
+        <div className="flex flex-wrap items-center gap-2">
+          <BoundChip
+            icon={getAppIcon(app.id, 16)}
+            title={app.name}
+            subtitle={app.protocolLabel}
+          />
+          <BoundChip
+            icon={getFamilyIcon(model.family, 16)}
+            title={model.display_name}
+            subtitle={model.alias}
+          />
+          <BoundChip
+            icon={<KeyRound className="h-3.5 w-3.5" />}
+            title={keyName}
+            subtitle={`${keyPrefix}…`}
+          />
+        </div>
 
         <div className="relative rounded-xl border border-[#dce5f6] bg-[#0f1c3a] p-4">
           <button
@@ -184,16 +206,7 @@ export function ConfigDialog({ app, model, keyName, keyPrefix, onClose }: { app:
           </button>
           <pre className="scrollbar-hidden max-h-80 overflow-y-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">{configText}</pre>
         </div>
-
-        <div className="mt-5 flex justify-end gap-2">
-          <Button
-            onClick={onClose}
-            className="h-10 bg-[#294fd4] px-4 text-sm font-semibold text-white shadow-[0_5px_14px_rgb(49_88_232/0.22)] transition hover:bg-[#4269ee]"
-          >
-            {t('Integ Config Done')}
-          </Button>
-        </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </section>
   )
 }
