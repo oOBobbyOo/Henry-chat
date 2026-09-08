@@ -6,9 +6,11 @@ import { useQueryClient } from '@tanstack/react-query'
 import { RefreshCw, UserRound } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { formatDate } from '@/lib/time'
 import { TOKEN_HUB_QUERY_KEYS, useReportBreakdownQuery, useReportSummaryQuery, useReportTrendQuery } from '@/services/token-hub'
 
+import type { DateRangeValue } from '../_components/date-range-picker'
+
+import { DateRangePicker, createPresetRange } from '../_components/date-range-picker'
 import { CostBreakdownCard } from './_components/cost-breakdown-card'
 import { CostSignalsCard } from './_components/cost-signals-card'
 import { CostTrendCard } from './_components/cost-trend-card'
@@ -20,13 +22,8 @@ export type ReportGranularity = 'day' | 'week' | 'month' | 'year'
 /** 成本构成视角 */
 export type BreakdownBy = TokenHub.CostBreakdownBy
 
-/** 粒度 → 请求窗口天数 */
-export const GRANULARITY_DAYS: Record<ReportGranularity, number> = {
-  day: 14,
-  week: 90,
-  month: 365,
-  year: 730,
-}
+/** 与粒度上限对齐的最大窗口天数 */
+const REPORT_MAX_DAYS = 730
 
 /**
  * Token Hub 控制台 —— 成本 Reports
@@ -37,19 +34,14 @@ export default function ReportsPage() {
   const queryClient = useQueryClient()
 
   // —— 状态 ——
+  const [range, setRange] = useState<DateRangeValue>(() => createPresetRange('cm'))
   const [granularity, setGranularity] = useState<ReportGranularity>('day')
   const [by, setBy] = useState<BreakdownBy>('model')
 
   // —— 数据 ——
-  const { data: summary } = useReportSummaryQuery(30)
-  const { data: trend } = useReportTrendQuery(granularity, GRANULARITY_DAYS[granularity])
+  const { data: summary } = useReportSummaryQuery(range.days)
+  const { data: trend } = useReportTrendQuery(granularity, range.days)
   const { data: breakdown } = useReportBreakdownQuery(by)
-
-  // 日期范围(取走势数据首尾非零窗口)
-  const nonZero = trend.items.filter((i) => i.cost > 0)
-  const rangeStart = nonZero[0]?.date ?? trend.items[0]?.date
-  const rangeEnd = trend.items[trend.items.length - 1]?.date
-  const rangeLabel = rangeStart && rangeEnd ? `${formatDate(rangeStart)} ～ ${formatDate(rangeEnd)}` : '—'
 
   const refresh = () => {
     void queryClient.refetchQueries({ queryKey: TOKEN_HUB_QUERY_KEYS.reportSummary })
@@ -67,9 +59,11 @@ export default function ReportsPage() {
             <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">{t('Reports Subtitle')}</p>
           </div>
           <div className="flex shrink-0 items-center gap-2.5">
-            <span className="inline-flex h-9 items-center rounded-xl border border-(--tc-border) bg-(--tc-surface) px-3.5 text-xs font-semibold whitespace-nowrap text-(--tc-body) tabular-nums">
-              {rangeLabel}
-            </span>
+            <DateRangePicker
+              value={range}
+              onChange={setRange}
+              maxDays={REPORT_MAX_DAYS}
+            />
             <button
               type="button"
               onClick={refresh}
