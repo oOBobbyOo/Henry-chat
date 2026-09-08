@@ -16,6 +16,8 @@ export interface McpFilters {
   price: string
   credential: string
   status: string
+  /** 搜索关键字(匹配名称/描述/工具/分类) */
+  q: string
 }
 
 /** 筛选选项 */
@@ -23,12 +25,12 @@ export const FILTER_ALL = 'all'
 
 /**
  * Token Hub 控制台 —— MCP 市场
- * 标题 + 筛选(价格/凭据/状态)+ 服务数量 + 服务卡片网格
+ * 标题 + 筛选(搜索/价格/凭据/状态)+ 服务数量 + 服务卡片网格
  */
 export default function McpMarketPage() {
   const { t } = useT('token-hub')
 
-  const [filters, setFilters] = useState<McpFilters>({ price: FILTER_ALL, credential: FILTER_ALL, status: FILTER_ALL })
+  const [filters, setFilters] = useState<McpFilters>({ price: FILTER_ALL, credential: FILTER_ALL, status: FILTER_ALL, q: '' })
   const [configTarget, setConfigTarget] = useState<TokenHub.McpService | null>(null)
 
   const { data } = useMcpMarketQuery(filters)

@@ -435,6 +435,8 @@
   "Mcp Title": "MCP 市场",
   "Mcp Subtitle": "平台统一托管的 MCP 服务：无需自行部署，启用后用自己的 API Key 即接即用，调用统一计量与审计。",
   "Mcp Filter Label": "筛选",
+  "Mcp Search Placeholder": "搜索服务、描述或工具…",
+  "Mcp Search Clear": "清空搜索",
   "Mcp Filter Price": "按价格筛选",
   "Mcp Filter Price All": "全部价格",
   "Mcp Price Free": "免费",

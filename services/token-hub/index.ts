@@ -56,7 +56,7 @@ export const TokenHubService = {
       params: { by },
     }),
   /** MCP 市场服务列表 */
-  getMcpMarket: (filters?: { price?: string; credential?: string; status?: string }) =>
+  getMcpMarket: (filters?: { price?: string; credential?: string; status?: string; q?: string }) =>
     request.get<TokenHub.McpMarketResponse>('/api/token-hub/mcp-market', {
       baseURL: LOCAL_BASE_URL,
       params: { price: 'all', credential: 'all', status: 'all', ...filters },
@@ -183,9 +183,9 @@ export function createReportBreakdownQueryOptions(by: TokenHub.CostBreakdownBy =
 }
 
 /** MCP 市场查询配置 */
-export function createMcpMarketQueryOptions(filters?: { price?: string; credential?: string; status?: string }) {
+export function createMcpMarketQueryOptions(filters?: { price?: string; credential?: string; status?: string; q?: string }) {
   return queryOptions({
-    queryKey: [...TOKEN_HUB_QUERY_KEYS.mcpMarket, filters?.price ?? 'all', filters?.credential ?? 'all', filters?.status ?? 'all'],
+    queryKey: [...TOKEN_HUB_QUERY_KEYS.mcpMarket, filters?.price ?? 'all', filters?.credential ?? 'all', filters?.status ?? 'all', filters?.q ?? ''],
     queryFn: () => TokenHubService.getMcpMarket(filters),
     staleTime: 60_000,
   })

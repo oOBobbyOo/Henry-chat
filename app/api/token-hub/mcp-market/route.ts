@@ -3,8 +3,8 @@ import { NextResponse } from 'next/server'
 import { mcpMarketMock } from '@/mock/mcp-market'
 
 /**
- * GET /api/token-hub/mcp-market?price=free&credential=platform&status=active
- * MCP 市场服务列表(支持价格 / 凭据 / 状态筛选)
+ * GET /api/token-hub/mcp-market?price=free&credential=platform&status=active&q=搜索词
+ * MCP 市场服务列表(支持价格 / 凭据 / 状态 / 关键字筛选)
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -12,6 +12,7 @@ export async function GET(request: Request) {
     price: searchParams.get('price') ?? 'all',
     credential: searchParams.get('credential') ?? 'all',
     status: searchParams.get('status') ?? 'all',
+    q: searchParams.get('q') ?? '',
   }
   return NextResponse.json(mcpMarketMock.list(filters))
 }

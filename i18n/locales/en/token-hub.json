@@ -435,6 +435,8 @@
   "Mcp Title": "MCP Market",
   "Mcp Subtitle": "Platform-hosted MCP services: no self-deployment needed. Enable one, use your own API Key, and every call is metered and audited.",
   "Mcp Filter Label": "Filters",
+  "Mcp Search Placeholder": "Search services, descriptions or tools…",
+  "Mcp Search Clear": "Clear search",
   "Mcp Filter Price": "Filter by price",
   "Mcp Filter Price All": "All prices",
   "Mcp Price Free": "Free",

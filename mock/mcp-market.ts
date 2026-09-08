@@ -315,8 +315,19 @@ const MCP_SERVICES: TokenHub.McpService[] = [
 ]
 
 /** 市场列表(可筛选) */
-function buildMcpMarket(filters?: { price?: string; credential?: string; status?: string }): TokenHub.McpMarketResponse {
+function buildMcpMarket(filters?: { price?: string; credential?: string; status?: string; q?: string }): TokenHub.McpMarketResponse {
   let items = MCP_SERVICES
+  if (filters?.q && filters.q.trim()) {
+    const kw = filters.q.trim().toLowerCase()
+    items = items.filter(
+      (s) =>
+        s.name.toLowerCase().includes(kw) ||
+        s.description.toLowerCase().includes(kw) ||
+        s.category.toLowerCase().includes(kw) ||
+        s.id.toLowerCase().includes(kw) ||
+        s.tools.some((tool) => tool.toLowerCase().includes(kw)),
+    )
+  }
   if (filters?.price && filters.price !== 'all') {
     items = items.filter((s) => s.price_type === filters.price)
   }
