@@ -473,6 +473,8 @@
   "Integ Step Desc": "模型只来自模型广场，并按当前应用协议自动筛选；生成后即可直接使用。",
   "Integ Step2 Title": "获取完整配置",
   "Integ Step2 Desc": "配置已绑定所选模型与 API Key，复制后写入对应文件即可直接使用。",
+  "Integ Config Key Warning": "这份配置包含 API Key，请勿提交到 Git、截图分享或发给未授权人员。",
+  "Integ Config Next Tip": "配置完成后：回到模型广场确认模型 ID，再在你的应用里发起第一条请求。",
   "Integ Ways": "种接入方式",
   "Integ Choose App": "选择应用或 SDK",
   "Integ Choose Model": "选择模型",

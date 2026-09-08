@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 
-import { Check, Copy, KeyRound } from 'lucide-react'
+import { Check, Copy, Info, KeyRound, TriangleAlert } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 import { toast } from 'sonner'
 
@@ -174,8 +174,14 @@ export function ConfigStep({ app, model, keyName, keyPrefix }: { app: Integratio
         </div>
       </div>
 
-      {/* 主体: 绑定信息 + 配置代码块 */}
+      {/* 主体: 安全提示 + 绑定信息 + 配置代码块 */}
       <div className="space-y-4 px-5 py-5 sm:px-6 sm:pb-6">
+        {/* 安全提示: 配置含 API Key */}
+        <p className="flex items-start gap-2 rounded-xl border border-amber-200/70 bg-amber-50/80 px-3.5 py-2.5 text-xs leading-5 text-amber-700">
+          <TriangleAlert className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+          {t('Integ Config Key Warning')}
+        </p>
+
         <div className="flex flex-wrap items-center gap-2">
           <BoundChip
             icon={getAppIcon(app.id, 16)}
@@ -206,6 +212,12 @@ export function ConfigStep({ app, model, keyName, keyPrefix }: { app: Integratio
           </button>
           <pre className="scrollbar-hidden max-h-80 overflow-y-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">{configText}</pre>
         </div>
+
+        {/* 后续步骤提示 */}
+        <p className="flex items-start gap-2 rounded-xl border border-[#dce5f6] bg-[#f7f9fd]/70 px-3.5 py-2.5 text-xs leading-5 text-[#5b6b8c]">
+          <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#3867ff]" />
+          {t('Integ Config Next Tip')}
+        </p>
       </div>
     </section>
   )
