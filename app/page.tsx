@@ -1,16 +1,18 @@
-import { AppHeader } from '@/components/app-header'
+'use client'
 
-import { HomePromoCarousel } from './_components/home-promo-carousel'
+import { PlazaFeedSection } from './_components/plaza-feed-section'
+import { PlazaHero, PlazaSkillsSection } from './_components/plaza-hero'
 
-export default async function HomePage() {
+/**
+ * 首页 Plaza(广场)
+ * 首页 plaza —— Hero 创作框 + Agent 技能横滑 + 灵感瀑布流
+ */
+export default function HomePage() {
   return (
-    <div className="bg-background flex min-h-full flex-col">
-      <AppHeader />
-      <div className="flex min-h-0 flex-1 flex-col">
-        <div className="mx-auto w-full max-w-(--app-content-max-width) flex-1 px-4 pt-8 pb-10 lg:px-5">
-          <HomePromoCarousel />
-        </div>
-      </div>
+    <div className="plaza-page-shell mx-auto w-full max-w-(--app-content-max-width) space-y-4 overflow-x-hidden px-5 pt-6 pb-8">
+      <PlazaHero />
+      <PlazaSkillsSection />
+      <PlazaFeedSection />
     </div>
   )
 }
