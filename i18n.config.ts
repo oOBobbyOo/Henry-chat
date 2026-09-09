@@ -14,7 +14,7 @@ const i18nConfig: I18nConfig = {
   supportedLngs: ['zh', 'en'],
   fallbackLng: 'zh',
   defaultNS: 'common',
-  ns: ['common', 'rankings', 'token-hub', 'plaza'],
+  ns: ['common', 'rankings', 'token-hub', 'plaza', 'projects'],
   localeInPath: false,
   resourceLoader,
 }
