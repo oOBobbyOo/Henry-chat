@@ -180,7 +180,7 @@
 }
 
 @theme {
-  --app-content-max-width: 1760px;
+  --app-content-max-width: 1560px;
 }
 
 @layer utilities {

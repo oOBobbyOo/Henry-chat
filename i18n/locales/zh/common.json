@@ -1,3 +1,12 @@
 {
-  "Action": "操作"
+  "Action": "操作",
+  "Plaza": "广场",
+  "xFlow": "xFlow",
+  "Workbench": "创作工坊",
+  "3D Modeling": "3D建模",
+  "Assets": "资产",
+  "My Team": "我的团队",
+  "Creation platform": "创作平台",
+  "Back to home": "返回首页",
+  "Sign in": "登录"
 }

@@ -1,18 +1,9 @@
-'use client'
-
-import { PlazaFeedSection } from './_components/plaza-feed-section'
-import { PlazaHero, PlazaSkillsSection } from './_components/plaza-hero'
+import { redirect } from 'next/navigation'
 
 /**
- * 首页 Plaza(广场)
- * 首页 plaza —— Hero 创作框 + Agent 技能横滑 + 灵感瀑布流
+ * 首页 (/) —— 重定向到 Plaza(广场)页
+ * Plaza 页面本体在 app/(studio)/plaza;左侧共用导航栏由 (studio)/layout.tsx 提供
  */
 export default function HomePage() {
-  return (
-    <div className="plaza-page-shell mx-auto w-full max-w-(--app-content-max-width) space-y-4 overflow-x-hidden px-5 pt-6 pb-8">
-      <PlazaHero />
-      <PlazaSkillsSection />
-      <PlazaFeedSection />
-    </div>
-  )
+  redirect('/plaza')
 }
