@@ -60,11 +60,15 @@
 
 :root {
   --app-font-sans:
-    'MiSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, ui-sans-serif, system-ui, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Source Han Sans SC', sans-serif;
+    'MiSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, ui-sans-serif, system-ui,
+    'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'Source Han Sans SC',
+    sans-serif;
 }
 
 html[lang='en'] {
-  --app-font-sans: 'MiSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, ui-sans-serif, system-ui, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --app-font-sans:
+    'MiSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, ui-sans-serif, system-ui,
+    'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 :root {
@@ -277,6 +281,38 @@ html[lang='en'] {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* 3D 建模页 —— 面数控制滑杆 */
+  .studio3d-slider {
+    appearance: none;
+    height: 10px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      to right,
+      rgba(56, 103, 255, 0.92) var(--slider-fill, 0%),
+      rgba(12, 24, 36, 0.1) var(--slider-fill, 0%)
+    );
+    cursor: pointer;
+    outline: none;
+    transition: background 0.05s linear;
+  }
+  .studio3d-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+      0 2px 6px rgba(255, 255, 255, 0.24),
+      0 4px 10px rgba(0, 0, 0, 0.28);
+    cursor: pointer;
+  }
+  .studio3d-slider::-webkit-slider-runnable-track {
+    height: 10px;
+    border-radius: 9999px;
+    background: transparent;
   }
 
   /* 尊重系统减弱动态效果设置 */
