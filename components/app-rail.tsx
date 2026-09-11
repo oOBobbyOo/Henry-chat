@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation'
 import { Compass, Folder, Navigation, Paintbrush, Palette, UsersRound } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
+import { AppLogo } from '@/components/app-logo'
+
 /**
  * 左侧悬浮导航栏(App Rail)
  * 品牌 logo 区 + 图标/文字导航项(激活态浅蓝高亮) + 底部社交/登录。
@@ -39,17 +41,20 @@ export function AppRail() {
           aria-label={t('Back to home')}
           className="group block w-full rounded-[20px] transition focus-visible:ring-2 focus-visible:ring-[#3867ff]/30 focus-visible:outline-none"
         >
-          <div className="relative overflow-hidden rounded-[22px] border border-[#dce5f6] bg-[linear-gradient(180deg,#0f1c3a,#16284a)] px-2.5 pt-3.5 pb-4 text-center transition duration-200 dark:border-white/8">
+          <div className="relative overflow-hidden rounded-[22px] border border-[#dce5f6] px-2.5 pt-3.5 pb-4 text-center transition duration-200 dark:border-white/8">
             <span
               aria-hidden
-              className="absolute inset-x-3.5 top-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent"
+              className="absolute inset-x-3.5 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(56,103,255,0.18)] to-transparent dark:via-white/25"
             />
-            <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-[14px] bg-gradient-to-br from-[#3898bc] to-[#3867ff] text-[18px] font-bold text-white shadow-[0_10px_22px_rgba(56,103,255,0.35)] transition duration-200 group-hover:scale-[1.03]">
-              H
-            </span>
+            <AppLogo
+              size={50}
+              className="mx-auto transition duration-200 group-hover:scale-[1.04]"
+            />
             <div className="mt-2.5 flex flex-col items-center">
-              <p className="bg-gradient-to-b from-[#f4f9ff] via-[#6fd0ff] to-[#c4f1ee] bg-clip-text text-[20px] leading-none font-bold tracking-[-0.05em] text-transparent">Henry</p>
-              <p className="mt-1.5 text-[11px] leading-none font-semibold tracking-[0.24em] text-[#4e6585] uppercase dark:text-[#8fa5c4]">Chat</p>
+              <p className="bg-[linear-gradient(180deg,#9fe8ff,#38bdf8_26%,#6366f1_58%,#8b5cf6_82%,#4d4fa6)] bg-clip-text text-[22px] leading-none font-bold tracking-[-0.05em] text-transparent dark:from-[#f4f9ff] dark:via-[#6fd0ff] dark:to-[#c4f1ee]">
+                Henry
+              </p>
+              <p className="mt-1.5 text-[11px] leading-none font-semibold tracking-[0.24em] text-[#4e6585] uppercase dark:text-[#8fa5c4]">Studio</p>
               <div className="mx-auto mt-2 h-px w-10 bg-gradient-to-r from-transparent via-[rgba(120,136,158,0.2)] to-transparent" />
               <p className="mt-2 max-w-[72px] text-center text-[10px] leading-[1.45] font-semibold tracking-[0.03em] text-[#71839a] dark:text-[#6b7f9d]">{t('Creation platform')}</p>
             </div>
@@ -59,7 +64,7 @@ export function AppRail() {
         <div className="mx-auto h-px w-10 bg-gradient-to-r from-transparent via-[rgba(120,136,158,0.2)] to-transparent" />
 
         {/* 导航项列表 */}
-        <nav className="mt-0.5 flex min-h-0 w-full flex-1 flex-col gap-1.5 overflow-y-auto px-0.5 pb-1.5 [scrollbar-width:none]">
+        <nav className="mt-0.5 flex min-h-0 w-full flex-1 [scrollbar-width:none] flex-col gap-1.5 overflow-y-auto px-0.5 pb-1.5">
           {RAIL_NAV_ITEMS.map((item) => {
             const active = isRailItemActive(pathname, item.href)
             const Icon = item.icon
