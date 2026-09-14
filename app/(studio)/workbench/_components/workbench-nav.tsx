@@ -1,6 +1,20 @@
 'use client'
 
-import { Sparkles, Wand2 } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+
+import {
+  AudioWaveform,
+  BookAudio,
+  Eraser,
+  Image,
+  ImageUp,
+  Mic,
+  Music,
+  Orbit,
+  Scissors,
+  Speech,
+  Video,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { cn } from '@/lib/utils'
@@ -8,6 +22,21 @@ import { cn } from '@/lib/utils'
 /**
  * Workbench 左侧功能导航 —— 创作 / 编辑两组,激活项左侧 3px 竖条 + 语义色
  */
+
+/** 能力 ID → lucide 图标(与参考站一致) */
+const CAPABILITY_ICONS: Record<string, LucideIcon> = {
+  'image-gen': Image,
+  'video-gen': Video,
+  'sound-gen': AudioWaveform,
+  'music-gen': Music,
+  'voice-gen': Mic,
+  'image-edit': Eraser,
+  'video-sr': ImageUp,
+  'video-matte': Scissors,
+  'video-lip-sync': BookAudio,
+  'motion-sync': Orbit,
+  'avatar-portrait': Speech,
+}
 
 interface WorkbenchNavProps {
   /** 全部能力项(config 接口返回) */
@@ -18,32 +47,15 @@ interface WorkbenchNavProps {
   onSelect: (id: string) => void
 }
 
-/** 能力项图标(按模态匹配,细节可后续替换为品牌图标) */
-function CapabilityIcon({ modality }: { modality: Workbench.AssetModality }) {
-  const cls = 'h-4.5 w-4.5'
-  switch (modality) {
-    case 'image':
-      return (
-        <Wand2
-          className={cls}
-          strokeWidth={1.75}
-        />
-      )
-    case 'video':
-      return (
-        <Sparkles
-          className={cls}
-          strokeWidth={1.75}
-        />
-      )
-    default:
-      return (
-        <Sparkles
-          className={cls}
-          strokeWidth={1.75}
-        />
-      )
-  }
+/** 能力项图标(按能力 ID 匹配,未命中回退图片图标) */
+function CapabilityIcon({ capabilityId }: { capabilityId: string }) {
+  const Icon = CAPABILITY_ICONS[capabilityId] ?? Image
+  return (
+    <Icon
+      className="h-4.5 w-4.5"
+      strokeWidth={1.75}
+    />
+  )
 }
 
 export function WorkbenchNav({ capabilities, activeId, onSelect }: WorkbenchNavProps) {
@@ -93,7 +105,7 @@ export function WorkbenchNav({ capabilities, activeId, onSelect }: WorkbenchNavP
                       />
                       <div className="relative flex min-w-0 items-center gap-2 px-3 py-2.5">
                         <div className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-[12px] border border-[rgba(12,24,36,0.06)] bg-[rgba(237,241,255,0.8)] text-[#3867ff] dark:border-white/8 dark:bg-white/6 dark:text-[#8fa5ff]">
-                          <CapabilityIcon modality={item.modality} />
+                          <CapabilityIcon capabilityId={item.id} />
                         </div>
                         <div className="min-w-0 flex-1">
                           <div

@@ -107,12 +107,8 @@ export function Studio3dHistory({ assets, selectedAssetId, onSelectAsset }: Stud
                       strokeWidth={1.75}
                     />
                   </div>
-                  <p className="text-[11px] leading-tight font-semibold text-[#091423] dark:text-[#eef4ff]">
-                    {t('Upload 3D model')}
-                  </p>
-                  <p className="text-[10px] leading-3 text-[#8a9bc0] dark:text-[#6b7f9d]">
-                    {t('OBJ FBX STL GLB')}
-                  </p>
+                  <p className="text-[11px] leading-tight font-semibold text-[#091423] dark:text-[#eef4ff]">{t('Upload 3D model')}</p>
+                  <p className="text-[10px] leading-3 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('OBJ FBX STL GLB')}</p>
                   <input
                     accept=".obj,.fbx,.stl,.glb,.gltf,.ply,.splat"
                     className="sr-only"
@@ -138,9 +134,7 @@ export function Studio3dHistory({ assets, selectedAssetId, onSelectAsset }: Stud
                       <AssetCover />
                     </div>
                     <div className="px-2 py-1.5">
-                      <p className="truncate text-[11px] font-medium text-[#091423] dark:text-[#eef4ff]">
-                        {item.name}
-                      </p>
+                      <p className="truncate text-[11px] font-medium text-[#091423] dark:text-[#eef4ff]">{item.name}</p>
                       <p className="mt-0.5 truncate text-[10px] text-[#8a9bc0] dark:text-[#6b7f9d]">
                         {item.format} · {item.faceCountK}K
                       </p>
@@ -149,11 +143,7 @@ export function Studio3dHistory({ assets, selectedAssetId, onSelectAsset }: Stud
                 )
               })}
             </div>
-            {filtered.length === 0 ? (
-              <p className="pt-6 text-center text-[12px] text-[#8a9bc0] dark:text-[#6b7f9d]">
-                {t('No assets for this filter')}
-              </p>
-            ) : null}
+            {filtered.length === 0 ? <p className="pt-6 text-center text-[12px] text-[#8a9bc0] dark:text-[#6b7f9d]">{t('No assets for this filter')}</p> : null}
           </div>
         </div>
       </div>

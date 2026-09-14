@@ -26,37 +26,12 @@ export function Panel({ className, children }: { className?: string; children: R
 }
 
 /** uppercase 小节标题 pill(卡内标题/标签通用) */
-export function KpiLabel({
-  children,
-  className,
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
-  return (
-    <span
-      className={cn(
-        'text-[10.5px] font-medium tracking-[0.12em] text-[#4e6585] uppercase dark:text-[#7a8db0]',
-        className,
-      )}
-    >
-      {children}
-    </span>
-  )
+export function KpiLabel({ children, className }: { children: React.ReactNode; className?: string }) {
+  return <span className={cn('text-[10.5px] font-medium tracking-[0.12em] text-[#4e6585] uppercase dark:text-[#7a8db0]', className)}>{children}</span>
 }
 
 /** 卡头(图标框 + 标题 + 副描述) */
-export function CardHeader({
-  icon,
-  title,
-  desc,
-  right,
-}: {
-  icon: React.ReactNode
-  title: React.ReactNode
-  desc?: React.ReactNode
-  right?: React.ReactNode
-}) {
+export function CardHeader({ icon, title, desc, right }: { icon: React.ReactNode; title: React.ReactNode; desc?: React.ReactNode; right?: React.ReactNode }) {
   return (
     <div className="flex flex-wrap items-start justify-between gap-3">
       <div className="flex items-start gap-2.5">
@@ -64,14 +39,8 @@ export function CardHeader({
           {icon}
         </span>
         <div>
-          <h3 className="text-[14px] leading-5 font-semibold text-[#091423] dark:text-[#eef4ff]">
-            {title}
-          </h3>
-          {desc ? (
-            <p className="mt-0.5 text-[12px] leading-4 text-[#4e6585] dark:text-[#7a8db0]">
-              {desc}
-            </p>
-          ) : null}
+          <h3 className="text-[14px] leading-5 font-semibold text-[#091423] dark:text-[#eef4ff]">{title}</h3>
+          {desc ? <p className="mt-0.5 text-[12px] leading-4 text-[#4e6585] dark:text-[#7a8db0]">{desc}</p> : null}
         </div>
       </div>
       {right}
@@ -109,15 +78,7 @@ export function PrimaryButton({
 }
 
 /** 次级按钮(幽灵/描边) */
-export function GhostButton({
-  children,
-  onClick,
-  className,
-}: {
-  children: React.ReactNode
-  onClick?: () => void
-  className?: string
-}) {
+export function GhostButton({ children, onClick, className }: { children: React.ReactNode; onClick?: () => void; className?: string }) {
   return (
     <button
       type="button"
@@ -155,13 +116,7 @@ const FEATURE_ICONS = {
 } as const
 
 /** 空态:创建你的第一个团队工作区 */
-export function TeamEmptyState({
-  features,
-  onCreate,
-}: {
-  features: Team.Feature[]
-  onCreate: () => void
-}) {
+export function TeamEmptyState({ features, onCreate }: { features: Team.Feature[]; onCreate: () => void }) {
   const { t } = useT('team')
 
   return (
@@ -174,12 +129,8 @@ export function TeamEmptyState({
             strokeWidth={1.75}
           />
         </div>
-        <h2 className="mt-5 text-[22px] font-semibold tracking-[-0.02em] text-[#091423] dark:text-[#eef4ff]">
-          {t('Create your first team workspace')}
-        </h2>
-        <p className="mt-2 text-[13px] leading-6 text-[#4a6080] dark:text-[#8fa5c4]">
-          {t('Empty state desc')}
-        </p>
+        <h2 className="mt-5 text-[22px] font-semibold tracking-[-0.02em] text-[#091423] dark:text-[#eef4ff]">{t('Create your first team workspace')}</h2>
+        <p className="mt-2 text-[13px] leading-6 text-[#4a6080] dark:text-[#8fa5c4]">{t('Empty state desc')}</p>
         <div className="mt-7 grid w-full gap-3 sm:grid-cols-3">
           {features.map((feature) => {
             const Icon = FEATURE_ICONS[feature.icon]
@@ -195,12 +146,8 @@ export function TeamEmptyState({
                     strokeWidth={1.75}
                   />
                 </div>
-                <p className="mt-3 text-[13px] font-semibold text-[#091423] dark:text-[#eef4ff]">
-                  {t(feature.titleKey)}
-                </p>
-                <p className="mt-1 text-[11.5px] leading-5 text-[#4e6585] dark:text-[#7a8db0]">
-                  {t(feature.descKey)}
-                </p>
+                <p className="mt-3 text-[13px] font-semibold text-[#091423] dark:text-[#eef4ff]">{t(feature.titleKey)}</p>
+                <p className="mt-1 text-[11.5px] leading-5 text-[#4e6585] dark:text-[#7a8db0]">{t(feature.descKey)}</p>
               </div>
             )
           })}
@@ -216,9 +163,7 @@ export function TeamEmptyState({
           />
           {t('Create team workspace')}
         </PrimaryButton>
-        <p className="mt-3 text-[11px] text-[#4e6585] dark:text-[#7a8db0]">
-          {t('Free default hint')}
-        </p>
+        <p className="mt-3 text-[11px] text-[#4e6585] dark:text-[#7a8db0]">{t('Free default hint')}</p>
       </div>
     </Panel>
   )

@@ -12,6 +12,15 @@ export async function GET() {
       aspectRatios: workbenchMock.aspectRatios,
       resolutions: workbenchMock.resolutions,
       formats: workbenchMock.formats,
+      video: workbenchMock.video,
+      sound: workbenchMock.sound,
+      music: workbenchMock.music,
+      voice: workbenchMock.voice,
+      imageEdit: workbenchMock.imageEdit,
+      videoUpscale: workbenchMock.videoUpscale,
+      videoRemoveBg: workbenchMock.videoRemoveBg,
+      lipsync: workbenchMock.lipsync,
+      digitalHuman: workbenchMock.digitalHuman,
     },
   })
 }

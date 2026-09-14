@@ -70,6 +70,111 @@ declare namespace Workbench {
     qualityLabel: string
   }
 
+  /** 视频创作模式 */
+  export type VideoCreateMode = 't2v' | 'first-last-frame' | 'omni-reference'
+
+  /** 视频分辨率档位 */
+  export interface VideoResolutionOption {
+    /** 档位名(480P / 720P / 1080P) */
+    value: string
+  }
+
+  /** 视频时长档位 */
+  export interface VideoDurationOption {
+    /** 秒数 */
+    seconds: number
+  }
+
+  /** 视频生成能力配置(切到视频生成时下发) */
+  export interface VideoCapabilityConfig {
+    /** 模型列表 */
+    models: ModelOption[]
+    /** 创作模式字典 */
+    createModes: Array<{ value: VideoCreateMode; labelKey: string }>
+    /** 分辨率字典 */
+    resolutions: VideoResolutionOption[]
+    /** 画幅比例字典(自动 + 固定档) */
+    aspectRatios: AspectRatioOption[]
+    /** 时长字典 */
+    durations: VideoDurationOption[]
+  }
+
+  /** 音效生成配置 */
+  export interface SoundCapabilityConfig {
+    /** 生成方式(文生音效/视频生音效/视频配音效) */
+    generateModes: string[]
+    /** 目标时长选项(秒) */
+    durations: number[]
+    /** 输出格式 */
+    formats: string[]
+  }
+
+  /** 音乐生成配置 */
+  export interface MusicCapabilityConfig {
+    /** 音乐模型列表 */
+    models: ModelOption[]
+    /** 创作形态(歌词成曲/纯音乐) */
+    forms: string[]
+    /** 采样率 */
+    sampleRates: string[]
+    /** 比特率 */
+    bitrates: string[]
+    /** 输出格式 */
+    formats: string[]
+  }
+
+  /** 配音生成配置 */
+  export interface VoiceCapabilityConfig {
+    /** 语音模型列表 */
+    models: ModelOption[]
+    /** 音色 */
+    voices: string[]
+    /** 输出格式 */
+    formats: string[]
+    /** 采样率 */
+    sampleRates: string[]
+    /** Opus 码率(仅 Opus 支持) */
+    opusBitrates: string[]
+    /** 目标语言 */
+    languages: string[]
+  }
+
+  /** 图片编辑:编辑工具(badge: 新功能) */
+  export interface ImageEditCapabilityConfig {
+    /** 编辑工具列表 */
+    tools: string[]
+  }
+
+  /** 视频超分配置 */
+  export interface VideoUpscaleCapabilityConfig {
+    /** 超分模型 */
+    models: ModelOption[]
+    /** 放大倍率 */
+    scales: string[]
+    /** 目标帧率 */
+    frameRates: string[]
+  }
+
+  /** 视频去背景配置 */
+  export interface VideoRemoveBgCapabilityConfig {
+    /** 输出背景 */
+    outputs: string[]
+  }
+
+  /** 视频对口型配置 */
+  export interface LipsyncCapabilityConfig {
+    /** 对齐模型(Sync LipSync / Kling LipSync) */
+    models: string[]
+    /** 对齐模式(截断/循环补齐/往返补齐/静音补齐/时长重映射) */
+    alignModes: string[]
+  }
+
+  /** 数字人像生成参数 */
+  export interface DigitalHumanCapabilityConfig {
+    /** 分辨率(1080p≤30s / 720p≤60s) */
+    resolutions: string[]
+  }
+
   /** 素材上传项 */
   export interface ReferenceAsset {
     /** 素材 ID */
@@ -130,6 +235,24 @@ declare namespace Workbench {
       resolutions: ResolutionOption[]
       /** 输出格式字典 */
       formats: FormatOption[]
+      /** 视频生成能力配置 */
+      video: VideoCapabilityConfig
+      /** 音效生成配置 */
+      sound: SoundCapabilityConfig
+      /** 音乐生成配置 */
+      music: MusicCapabilityConfig
+      /** 配音生成配置 */
+      voice: VoiceCapabilityConfig
+      /** 图片编辑配置 */
+      imageEdit: ImageEditCapabilityConfig
+      /** 视频超分配置 */
+      videoUpscale: VideoUpscaleCapabilityConfig
+      /** 视频去背景配置 */
+      videoRemoveBg: VideoRemoveBgCapabilityConfig
+      /** 视频对口型配置 */
+      lipsync: LipsyncCapabilityConfig
+      /** 数字人像配置 */
+      digitalHuman: DigitalHumanCapabilityConfig
     }
   }
 
