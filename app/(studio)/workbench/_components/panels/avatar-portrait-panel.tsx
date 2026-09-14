@@ -1,9 +1,9 @@
 'use client'
 
-import { ImagePlus } from 'lucide-react'
+import { ImagePlus, UserRound, AudioLines, SlidersHorizontal, Maximize, Zap } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { FieldLabel, PanelCard, Seg, UploadGlyph, UploadZone } from './shared'
+import { FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, Seg, UploadGlyph, UploadZone } from './shared'
 
 /**
  * 数字人像面板 —— 参考站结构:① 人像参考图(肖像要求)+ ② 驱动音频(规格约束)+ 生成参数(分辨率 / 加速模式)
@@ -16,7 +16,10 @@ export function AvatarPortraitPanel({ configs }: { configs: Workbench.ConfigResp
   return (
     <>
       {/* 人像参考图 */}
-      <PanelCard title={t('Portrait reference')}>
+      <PanelCard
+        icon={<PanelIcon icon={UserRound} />}
+        title={t('Portrait reference')}
+      >
         <UploadZone
           hintLines={[t('Portrait reference hint')]}
           icon={
@@ -30,7 +33,10 @@ export function AvatarPortraitPanel({ configs }: { configs: Workbench.ConfigResp
       </PanelCard>
 
       {/* 驱动音频 */}
-      <PanelCard title={t('Driver audio')}>
+      <PanelCard
+        icon={<PanelIcon icon={AudioLines} />}
+        title={t('Driver audio')}
+      >
         <UploadZone
           hintLines={[t('Driver audio constraints')]}
           icon={<UploadGlyph />}
@@ -39,11 +45,17 @@ export function AvatarPortraitPanel({ configs }: { configs: Workbench.ConfigResp
       </PanelCard>
 
       {/* 生成参数 */}
-      <PanelCard title={t('Generation parameters')}>
+      <PanelCard
+        icon={<PanelIcon icon={SlidersHorizontal} />}
+        title={t('Generation parameters')}
+      >
         <div className="grid gap-1.5">
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Resolution')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Maximize} />
+                {t('Resolution')}
+              </span>
             </FieldLabel>
             <Seg
               onChange={() => {}}
@@ -53,7 +65,10 @@ export function AvatarPortraitPanel({ configs }: { configs: Workbench.ConfigResp
           </div>
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Acceleration mode')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Zap} />
+                {t('Acceleration mode')}
+              </span>
             </FieldLabel>
             <Seg
               onChange={() => {}}

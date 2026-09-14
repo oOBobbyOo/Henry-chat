@@ -151,6 +151,9 @@ export const workbenchMock: {
   aspectRatios: Workbench.AspectRatioOption[]
   resolutions: Workbench.ResolutionOption[]
   formats: Workbench.FormatOption[]
+  qualityTiers: Workbench.QualityTierOption[]
+  backgrounds: Workbench.BackgroundOption[]
+  compressions: Workbench.CompressionOption[]
   video: Workbench.VideoCapabilityConfig
   sound: Workbench.SoundCapabilityConfig
   music: Workbench.MusicCapabilityConfig
@@ -255,6 +258,24 @@ export const workbenchMock: {
     { value: 'JPEG', qualityLabel: '标准格式' },
     { value: 'PNG', qualityLabel: '无损格式' },
     { value: 'WEBP', qualityLabel: '轻量格式' },
+  ],
+  /** 质量档位字典 */
+  qualityTiers: [
+    { value: 'standard', labelKey: 'Standard' },
+    { value: 'high', labelKey: 'High' },
+    { value: 'ultra', labelKey: 'Ultra' },
+  ],
+  /** 生成背景字典 */
+  backgrounds: [
+    { value: 'auto', labelKey: 'Auto match' },
+    { value: 'transparent', labelKey: 'Transparent' },
+    { value: 'opaque', labelKey: 'Opaque' },
+  ],
+  /** 输出压缩档位字典 */
+  compressions: [
+    { value: 'high', labelKey: 'High quality' },
+    { value: 'balanced', labelKey: 'Balanced' },
+    { value: 'small', labelKey: 'Small size' },
   ],
   /** 视频生成能力配置(模型选项逐字对齐参考站实测) */
   video: {

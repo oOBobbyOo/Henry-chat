@@ -28,6 +28,9 @@ export default function WorkbenchPage() {
   const aspectRatios = configData?.data.aspectRatios ?? []
   const resolutions = configData?.data.resolutions ?? []
   const formats = configData?.data.formats ?? []
+  const qualityTiers = configData?.data.qualityTiers ?? []
+  const backgrounds = configData?.data.backgrounds ?? []
+  const compressions = configData?.data.compressions ?? []
 
   return (
     <div className="mx-auto flex w-full max-w-[var(--app-content-max-width)] px-4 pt-2 pb-8 lg:px-5 xl:h-[calc(100dvh-88px)] xl:min-h-0 xl:pb-4">
@@ -43,6 +46,9 @@ export default function WorkbenchPage() {
           aspectRatios={aspectRatios}
           configs={configData?.data}
           formats={formats}
+          qualityTiers={qualityTiers}
+          backgrounds={backgrounds}
+          compressions={compressions}
           models={models}
           resolutions={resolutions}
           videoConfig={configData?.data.video}

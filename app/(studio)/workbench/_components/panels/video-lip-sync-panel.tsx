@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 
+import { Mic, ImageUp, AudioLines, AlignHorizontalJustifyCenter } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Chips, PanelCard, Seg, UploadGlyph, UploadZone } from './shared'
+import { Chips, PanelCard, PanelIcon, Seg, UploadGlyph, UploadZone } from './shared'
 
 /**
  * 视频对口型面板 —— 参考站结构:对口型模型(Sync LipSync / Kling LipSync)+ 添加源视频 + 驱动音频(必填)+ 对齐模式(截断 / 循环补齐 / 往返补齐 / 静音补齐 / 时长重映射)
@@ -19,7 +20,10 @@ export function VideoLipSyncPanel({ configs }: { configs: Workbench.ConfigRespon
   return (
     <>
       {/* 对口型模型 */}
-      <PanelCard title={t('Lip sync model')}>
+      <PanelCard
+        icon={<PanelIcon icon={Mic} />}
+        title={t('Lip sync model')}
+      >
         <Seg
           onChange={setLipsyncModel}
           options={configs.lipsync.models.map((m) => ({ value: m, label: t(`Lipsync model.${m}`) }))}
@@ -28,7 +32,10 @@ export function VideoLipSyncPanel({ configs }: { configs: Workbench.ConfigRespon
       </PanelCard>
 
       {/* 添加源视频 */}
-      <PanelCard title={t('Add source video')}>
+      <PanelCard
+        icon={<PanelIcon icon={ImageUp} />}
+        title={t('Add source video')}
+      >
         <UploadZone
           hintLines={[t('Click or drag a video')]}
           icon={<UploadGlyph />}
@@ -38,6 +45,7 @@ export function VideoLipSyncPanel({ configs }: { configs: Workbench.ConfigRespon
 
       {/* 驱动音频(必填) */}
       <PanelCard
+        icon={<PanelIcon icon={AudioLines} />}
         title={t('Driver audio')}
         right={t('Required')}
       >
@@ -49,7 +57,10 @@ export function VideoLipSyncPanel({ configs }: { configs: Workbench.ConfigRespon
       </PanelCard>
 
       {/* 对齐模式 */}
-      <PanelCard title={t('Alignment mode')}>
+      <PanelCard
+        icon={<PanelIcon icon={AlignHorizontalJustifyCenter} />}
+        title={t('Alignment mode')}
+      >
         <Chips
           onToggle={(v) => setAlignModes((prev) => (prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v]))}
           options={configs.lipsync.alignModes.map((m) => ({ value: m, label: t(`Align mode.${m}`) }))}

@@ -1,9 +1,9 @@
 'use client'
 
-import { ImagePlus } from 'lucide-react'
+import { ImagePlus, Image, Clapperboard, WandSparkles } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { PanelCard, UploadGlyph, UploadZone } from './shared'
+import { PanelCard, PanelIcon, UploadGlyph, UploadZone } from './shared'
 
 /**
  * 动作同步面板 —— 参考站结构:参考图(约束提示)+ 参考视频(建议提示 + 时长说明)+ 提示词(可选)
@@ -16,7 +16,10 @@ export function MotionSyncPanel() {
   return (
     <>
       {/* 参考图 */}
-      <PanelCard title={t('Reference image')}>
+      <PanelCard
+        icon={<PanelIcon icon={Image} />}
+        title={t('Reference image')}
+      >
         <UploadZone
           hintLines={[t('Reference image hint')]}
           icon={
@@ -30,7 +33,10 @@ export function MotionSyncPanel() {
       </PanelCard>
 
       {/* 参考视频 */}
-      <PanelCard title={t('Reference video')}>
+      <PanelCard
+        icon={<PanelIcon icon={Clapperboard} />}
+        title={t('Reference video')}
+      >
         <UploadZone
           hintLines={[t('Reference video hint')]}
           icon={<UploadGlyph />}
@@ -41,6 +47,7 @@ export function MotionSyncPanel() {
 
       {/* 提示词(可选) */}
       <PanelCard
+        icon={<PanelIcon icon={WandSparkles} />}
         title={t('Prompt')}
         right={t('Optional')}
       >

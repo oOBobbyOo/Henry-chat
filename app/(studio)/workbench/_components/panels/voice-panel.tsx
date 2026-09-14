@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 
+import { SlidersHorizontal, Settings2, Mic, Speech, FileArchive, Activity, Waves, Languages, MessageSquare, Code, Braces, Wrench, AudioWaveform, Volume2, Music2 } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Drop, FieldGrid, FieldLabel, PanelCard, Seg, SliderField } from './shared'
+import { Drop, FieldGrid, FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, Seg, SliderField } from './shared'
 
 /**
  * 配音生成面板 —— 参考站结构:参数面板(语音模型 / 音色 / 输出格式 / 采样率 / Opus 码率 / 目标语言 / 语速 / 音量 / 音调)+ 高级参数(表达指令 / SSML / Markdown 过滤 / 文本热修复)
@@ -27,13 +28,17 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
     <>
       {/* 参数面板 */}
       <PanelCard
+        icon={<PanelIcon icon={SlidersHorizontal} />}
         title={t('Parameter panel')}
         right={t('Fill in model parameters directly')}
       >
         <div className="grid gap-1.5">
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Voice model')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Mic} />
+                {t('Voice model')}
+              </span>
             </FieldLabel>
             <Drop
               onChange={() => {}}
@@ -43,7 +48,10 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
           </div>
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Voice timbre')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Speech} />
+                {t('Voice timbre')}
+              </span>
             </FieldLabel>
             <Seg
               onChange={setVoice}
@@ -54,7 +62,10 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
           <FieldGrid>
             <div>
               <FieldLabel>
-                <span className="flex min-w-0 items-center gap-1.5">{t('Output format')}</span>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={FileArchive} />
+                  {t('Output format')}
+                </span>
               </FieldLabel>
               <Drop
                 onChange={setVoiceFormat}
@@ -64,7 +75,10 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
             </div>
             <div>
               <FieldLabel>
-                <span className="flex min-w-0 items-center gap-1.5">{t('Sample rate')}</span>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={Activity} />
+                  {t('Sample rate')}
+                </span>
               </FieldLabel>
               <Drop
                 onChange={setVoiceSampleRate}
@@ -74,7 +88,10 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
             </div>
             <div>
               <FieldLabel>
-                <span className="flex min-w-0 items-center gap-1.5">{t('Opus bitrate')}</span>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={Waves} />
+                  {t('Opus bitrate')}
+                </span>
               </FieldLabel>
               <Drop
                 onChange={setOpusBitrate}
@@ -84,7 +101,10 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
             </div>
             <div>
               <FieldLabel>
-                <span className="flex min-w-0 items-center gap-1.5">{t('Target language')}</span>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={Languages} />
+                  {t('Target language')}
+                </span>
               </FieldLabel>
               <Drop
                 onChange={setLanguage}
@@ -95,6 +115,7 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
           </FieldGrid>
           <p className="mt-0.5 -mb-1 text-[10px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Opus bitrate hint')}</p>
           <SliderField
+            icon={<FieldLabelIcon icon={AudioWaveform} />}
             label={t('Speech rate')}
             max={2}
             min={0.5}
@@ -103,6 +124,7 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
             value={speed}
           />
           <SliderField
+            icon={<FieldLabelIcon icon={Volume2} />}
             label={t('Volume')}
             max={100}
             min={0}
@@ -111,6 +133,7 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
             value={volume}
           />
           <SliderField
+            icon={<FieldLabelIcon icon={Music2} />}
             label={t('Pitch')}
             max={2}
             min={0.5}
@@ -123,13 +146,17 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
 
       {/* 高级参数 */}
       <PanelCard
+        icon={<PanelIcon icon={Settings2} />}
         title={t('Advanced parameters')}
         right={t('Optional')}
       >
         <div className="grid gap-1.5">
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Expression instruction')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={MessageSquare} />
+                {t('Expression instruction')}
+              </span>
             </FieldLabel>
             <textarea
               aria-label={t('Expression instruction')}
@@ -139,7 +166,10 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
           </div>
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('SSML')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Code} />
+                {t('SSML')}
+              </span>
             </FieldLabel>
             <Seg
               onChange={setSsml}
@@ -152,7 +182,10 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
           </div>
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Markdown filter')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Braces} />
+                {t('Markdown filter')}
+              </span>
             </FieldLabel>
             <Seg
               onChange={setMdFilter}
@@ -165,7 +198,10 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
           </div>
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Text hotfix')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Wrench} />
+                {t('Text hotfix')}
+              </span>
             </FieldLabel>
             <textarea
               aria-label={t('Text hotfix')}

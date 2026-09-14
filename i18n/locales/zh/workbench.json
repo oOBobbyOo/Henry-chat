@@ -192,5 +192,17 @@
   "Start background removal": "开始去背景",
   "Start lip sync": "开始对口型",
   "Start sync": "开始同步",
-  "Generate digital avatar": "生成数字人像"
+  "Generate digital avatar": "生成数字人像",
+  "Quality tier": "质量档位",
+  "Output compression": "输出压缩",
+  "Background": "背景",
+  "Standard": "标准",
+  "High": "高",
+  "Ultra": "超清",
+  "High quality": "高质量",
+  "Balanced": "均衡",
+  "Small size": "小体积",
+  "Auto match": "自动匹配",
+  "Transparent": "透明",
+  "Opaque": "不透明"
 }

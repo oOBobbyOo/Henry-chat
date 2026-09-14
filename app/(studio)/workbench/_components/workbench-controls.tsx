@@ -1,12 +1,36 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
-import { ChevronDown, ImagePlus, Library, Lightbulb, BookOpen, SlidersHorizontal, Trash2 } from 'lucide-react'
+import {
+  Aperture,
+  BookOpen,
+  BrainCircuit,
+  Check,
+  ChevronDown,
+  Clapperboard,
+  Clock,
+  Dices,
+  FileArchive,
+  Film,
+  Frame,
+  Gauge,
+  ImagePlus,
+  Layers,
+  Library,
+  Lightbulb,
+  Maximize,
+  MessageSquareOff,
+  SlidersHorizontal,
+  Trash2,
+  Upload,
+  WandSparkles,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { cn } from '@/lib/utils'
 
+import { ProviderLogo } from './provider-logos'
 import { CapabilityPanels } from './workbench-capability-panels'
 
 /**
@@ -26,6 +50,12 @@ interface WorkbenchControlsProps {
   resolutions: Workbench.ResolutionOption[]
   /** 输出格式字典 */
   formats: Workbench.FormatOption[]
+  /** 质量档位字典 */
+  qualityTiers: Workbench.QualityTierOption[]
+  /** 生成背景字典 */
+  backgrounds: Workbench.BackgroundOption[]
+  /** 输出压缩档位字典 */
+  compressions: Workbench.CompressionOption[]
   /** 视频生成能力配置 */
   videoConfig?: Workbench.VideoCapabilityConfig
   /** 各能力配置全集(音效/音乐/配音/编辑类) */
@@ -39,17 +69,54 @@ interface WorkbenchControlsProps {
 const insetPanelCls =
   'border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(237,241,255,0.9),rgba(226,233,250,0.85))] dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(9,14,25,0.98),rgba(7,11,22,0.98))]'
 
-/** 通用下拉(轻量实现,radix Select 会与受控布局耦合,这里用原生 button + 绝对定位列表) */
-function MiniDropdown({ label, options, value, onChange }: { label: string; options: Array<{ value: string; label: string }>; value: string; onChange: (value: string) => void }) {
+/** 通用下拉(轻量实现,radix Select 会与受控布局耦合,这里用原生 button + 绝对定位列表)
+ *  变体:list = 纯文字行(参考站分辨率/输出格式样式,h-9 行 + 选中项 Check);grid = 比例缩略卡网格 */
+function MiniDropdown({
+  label,
+  options,
+  value,
+  onChange,
+  variant = 'list',
+}: {
+  label: string
+  options: Array<{ value: string; label: string }>
+  value: string
+  onChange: (value: string) => void
+  variant?: 'list' | 'grid'
+}) {
   const [open, setOpen] = useState(false)
+  const rootRef = useRef<HTMLDivElement | null>(null)
+  // 与参考站 Headless UI 行为一致:点击外部或 Escape 关闭
+  useEffect(() => {
+    if (!open) return
+    const onDocClick = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) setOpen(false)
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onDocClick)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDocClick)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+  const ratioOf = (v: string) => {
+    const [w, h] = v.split(':').map(Number)
+    if (!w || !h) return { w: 18, h: 18 }
+    const scale = 18 / Math.max(w, h)
+    return { w: Math.max(6, Math.round(w * scale)), h: Math.max(6, Math.round(h * scale)) }
+  }
   return (
-    <div className="relative">
+    <div
+      className="relative"
+      ref={rootRef}
+    >
       <button
         aria-expanded={open}
         aria-haspopup="listbox"
-        className={cn(
-          'inline-flex h-9 w-full items-center gap-2 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.9)] px-3 text-[13px] font-medium text-[#091423] transition-colors hover:border-[rgba(56,103,255,0.35)] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:hover:border-white/20',
-        )}
+        className="inline-flex h-9 w-full items-center gap-2 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.9)] px-3 text-[13px] font-medium text-[#091423] transition-colors hover:border-[rgba(56,103,255,0.35)] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:hover:border-white/20"
         onClick={() => setOpen((prev) => !prev)}
         type="button"
       >
@@ -62,37 +129,87 @@ function MiniDropdown({ label, options, value, onChange }: { label: string; opti
       {open ? (
         <ul
           aria-label={label}
-          className="absolute top-[calc(100%+4px)] right-0 z-30 min-w-full overflow-hidden rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-white p-1 shadow-[0_16px_40px_rgba(8,20,48,0.16)] dark:border-white/10 dark:bg-[#101828]"
+          className={cn(
+            'absolute top-[calc(100%+4px)] right-0 z-30 overflow-hidden rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-white p-1 shadow-[0_16px_40px_rgba(8,20,48,0.16)] dark:border-white/10 dark:bg-[#101828]',
+            variant === 'grid' ? 'grid w-full grid-cols-4 gap-1 p-1.5' : 'min-w-full',
+          )}
           role="listbox"
         >
-          {options.map((opt) => (
-            <li
-              aria-selected={opt.value === value}
-              key={opt.value}
-              role="option"
-            >
-              <button
-                className={cn(
-                  'w-full cursor-pointer rounded-[9px] px-3 py-1.5 text-left text-[13px] whitespace-nowrap transition-colors',
-                  opt.value === value ? 'bg-[rgba(56,103,255,0.1)] font-medium text-[#3867ff]' : 'text-[#2e4268] hover:bg-[rgba(12,24,36,0.04)] dark:text-[#b6c4dc] dark:hover:bg-white/6',
-                )}
-                onClick={() => {
-                  onChange(opt.value)
-                  setOpen(false)
-                }}
-                type="button"
+          {options.map((opt) => {
+            const selected = opt.value === value
+            const ratio = ratioOf(opt.value)
+            return (
+              <li
+                aria-selected={selected}
+                className={variant === 'grid' ? 'contents' : undefined}
+                key={opt.value}
+                role="option"
               >
-                {opt.label}
-              </button>
-            </li>
-          ))}
+                {variant === 'grid' ? (
+                  <button
+                    className={cn(
+                      'flex cursor-pointer flex-col items-center gap-1.5 rounded-[10px] border px-1 py-2 transition-colors',
+                      selected
+                        ? 'border-transparent bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white'
+                        : 'border-transparent text-[#4a6080] hover:bg-[rgba(12,24,36,0.04)] dark:text-[#b6c4dc] dark:hover:bg-white/6',
+                    )}
+                    onClick={() => {
+                      onChange(opt.value)
+                      setOpen(false)
+                    }}
+                    type="button"
+                  >
+                    <span className="flex h-[18px] w-[26px] items-center justify-center">
+                      <span
+                        className="rounded-[2px] border border-current"
+                        style={{ width: ratio.w, height: ratio.h }}
+                      />
+                    </span>
+                    <span className="text-[10px] leading-none font-medium">{opt.label}</span>
+                  </button>
+                ) : (
+                  <button
+                    className={cn(
+                      'flex w-full cursor-pointer items-center gap-1.5 rounded-[9px] px-3 py-2 text-left text-[13px] whitespace-nowrap transition-colors',
+                      selected ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white' : 'text-[#2e4268] hover:bg-[rgba(12,24,36,0.04)] dark:text-[#b6c4dc] dark:hover:bg-white/6',
+                    )}
+                    onClick={() => {
+                      onChange(opt.value)
+                      setOpen(false)
+                    }}
+                    type="button"
+                  >
+                    <span className="min-w-0 flex-1 truncate">{opt.label}</span>
+                    {selected ? (
+                      <Check
+                        className="h-3.5 w-3.5 shrink-0 text-[#3867ff] dark:text-[#8fa5ff]"
+                        strokeWidth={2}
+                      />
+                    ) : null}
+                  </button>
+                )}
+              </li>
+            )
+          })}
         </ul>
       ) : null}
     </div>
   )
 }
 
-export function WorkbenchControls({ activeCapability, activeNameKey, models, aspectRatios, resolutions, formats, videoConfig, configs }: WorkbenchControlsProps) {
+export function WorkbenchControls({
+  activeCapability,
+  activeNameKey,
+  models,
+  aspectRatios,
+  resolutions,
+  formats,
+  qualityTiers,
+  backgrounds,
+  compressions,
+  videoConfig,
+  configs,
+}: WorkbenchControlsProps) {
   const { t } = useT('workbench')
 
   const isImage = activeCapability === 'image-gen'
@@ -143,6 +260,9 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
   const [aspectRatio, setAspectRatio] = useState('1:1')
   const [resolution, setResolution] = useState('2K')
   const [format, setFormat] = useState('JPEG')
+  const [qualityTier, setQualityTier] = useState('standard')
+  const [background, setBackground] = useState('auto')
+  const [compression, setCompression] = useState('high')
   const [optimize, setOptimize] = useState<'on' | 'off'>('off')
   const [count, setCount] = useState(1)
   const [prompt, setPrompt] = useState('')
@@ -204,6 +324,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                 <div className="mt-3 rounded-[16px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(56,103,255,0.02),transparent)] p-1.5 dark:border-white/8">
                   <div className="mb-1 flex min-w-0 items-start justify-between gap-2">
                     <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                      <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                        <BrainCircuit
+                          className="h-3.5 w-3.5"
+                          strokeWidth={1.75}
+                        />
+                      </span>
                       <span>{t('Generation model')}</span>
                     </p>
                   </div>
@@ -217,6 +343,10 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     >
                       <span className="min-w-0 flex-1">
                         <span className="flex min-w-0 items-center gap-2 overflow-hidden">
+                          <ProviderLogo
+                            className="h-4 w-4 shrink-0 text-[#3867ff] dark:text-[#8fa5ff]"
+                            provider={model?.provider ?? ''}
+                          />
                           <span className="min-w-0 truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">{model?.displayName}</span>
                           {model?.badge ? (
                             <span className="inline-flex shrink-0 items-center rounded-[7px] border border-[rgba(56,103,255,0.3)] bg-[rgba(56,103,255,0.1)] px-1.5 text-[10px] font-semibold text-[#3867ff] dark:border-[rgba(143,165,255,0.3)] dark:text-[#8fa5ff]">
@@ -260,6 +390,10 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                               type="button"
                             >
                               <span className="flex items-center gap-1.5">
+                                <ProviderLogo
+                                  className="h-4 w-4 shrink-0 text-[#3867ff] dark:text-[#8fa5ff]"
+                                  provider={m.provider}
+                                />
                                 <span className="shrink-0 text-[10px] font-semibold text-[#8a9bc0] dark:text-[#8a9bc0]">{m.provider}</span>
                                 <span className={cn('text-[13px] font-medium', m.id === (isVideo ? videoModelId : modelId) ? 'text-[#3867ff]' : 'text-[#091423] dark:text-[#eef4ff]')}>
                                   {m.displayName}
@@ -285,6 +419,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                 <div className="rounded-[16px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(56,103,255,0.02),transparent)] p-1.5 dark:border-white/8">
                   <div className="mb-1 flex min-w-0 items-start justify-between gap-2">
                     <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                      <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                        <WandSparkles
+                          className="h-3.5 w-3.5"
+                          strokeWidth={1.75}
+                        />
+                      </span>
                       <span>
                         {t(promptMeta.titleKey)}
                         {promptMeta.required ? <span className="ml-0.5 text-rose-600 dark:text-rose-300">*</span> : null}
@@ -354,6 +494,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                 <div className="rounded-[16px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(56,103,255,0.02),transparent)] p-1.5 dark:border-white/8">
                   <div className="mb-1 flex min-w-0 items-start justify-between gap-2">
                     <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                      <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                        <Clapperboard
+                          className="h-3.5 w-3.5"
+                          strokeWidth={1.75}
+                        />
+                      </span>
                       <span>{t('Creation mode')}</span>
                     </p>
                   </div>
@@ -363,7 +509,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                         className={cn(
                           'inline-flex h-9 items-center rounded-[12px] border px-3 text-[13px] transition-colors',
                           videoMode === mode.value
-                            ? 'border-[rgba(56,103,255,0.4)] bg-[rgba(56,103,255,0.1)] font-medium text-[#3867ff] dark:text-[#8fa5ff]'
+                            ? 'border-transparent bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white'
                             : 'border-[rgba(12,24,36,0.1)] text-[#5b6b8c] hover:border-[rgba(56,103,255,0.3)] dark:border-white/10 dark:text-[#b6c4dc] dark:hover:border-white/20',
                         )}
                         key={mode.value}
@@ -382,6 +528,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                 <div className="rounded-[16px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(56,103,255,0.02),transparent)] p-1.5 dark:border-white/8">
                   <div className="mb-1.5 flex min-w-0 items-start justify-between gap-2">
                     <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                      <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                        <SlidersHorizontal
+                          className="h-3.5 w-3.5"
+                          strokeWidth={1.75}
+                        />
+                      </span>
                       <span>{t('Video console')}</span>
                     </p>
                     <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">
@@ -389,56 +541,83 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     </span>
                   </div>
                   <div className="grid min-w-0 gap-1.5">
-                    {/* 分辨率 segment */}
-                    <div>
-                      <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Resolution')}</div>
+                    {/* 分辨率 + 画幅比例(pc 一行两列,移动端堆叠换行) */}
+                    <div className="grid min-w-0 grid-cols-1 gap-1.5 md:grid-cols-2">
+                      {/* 分辨率 segment */}
+                      <div>
+                        <div className="mb-1 flex items-center justify-between gap-2">
+                          <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                            <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                              <Film
+                                className="h-3.5 w-3.5"
+                                strokeWidth={1.75}
+                              />
+                            </span>
+                            {t('Resolution')}
+                          </div>
+                        </div>
+                        <div className="flex h-9 items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5">
+                          {videoConfig.resolutions.map((r) => (
+                            <button
+                              className={cn(
+                                'inline-flex min-h-7 min-w-0 flex-1 items-center justify-center rounded-[9px] text-[12px] transition-colors',
+                                videoResolution === r.value
+                                  ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white'
+                                  : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
+                              )}
+                              key={r.value}
+                              onClick={() => setVideoResolution(r.value)}
+                              type="button"
+                            >
+                              {r.value}
+                            </button>
+                          ))}
+                        </div>
                       </div>
-                      <div className="flex h-9 items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5">
-                        {videoConfig.resolutions.map((r) => (
-                          <button
-                            className={cn(
-                              'inline-flex min-h-7 min-w-0 flex-1 items-center justify-center rounded-[9px] text-[12px] transition-colors',
-                              videoResolution === r.value
-                                ? 'bg-[rgba(56,103,255,0.12)] font-medium text-[#3867ff] dark:bg-[rgba(143,165,255,0.16)] dark:text-[#8fa5ff]'
-                                : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
-                            )}
-                            key={r.value}
-                            onClick={() => setVideoResolution(r.value)}
-                            type="button"
-                          >
-                            {r.value}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    {/* 画幅比例 segment */}
-                    <div>
-                      <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Aspect ratio')}</div>
-                      </div>
-                      <div className="flex h-9 items-center gap-1 overflow-x-auto rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 [scrollbar-width:none] dark:border-white/10 dark:bg-white/5 [&::-webkit-scrollbar]:hidden">
-                        {videoConfig.aspectRatios.map((r) => (
-                          <button
-                            className={cn(
-                              'inline-flex min-h-7 min-w-0 flex-1 items-center justify-center rounded-[9px] text-[12px] whitespace-nowrap transition-colors',
-                              videoAspectRatio === r.value
-                                ? 'bg-[rgba(56,103,255,0.12)] font-medium text-[#3867ff] dark:bg-[rgba(143,165,255,0.16)] dark:text-[#8fa5ff]'
-                                : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
-                            )}
-                            key={r.value}
-                            onClick={() => setVideoAspectRatio(r.value)}
-                            type="button"
-                          >
-                            {r.value === 'auto' ? t('Auto') : r.value}
-                          </button>
-                        ))}
+                      {/* 画幅比例 segment */}
+                      <div>
+                        <div className="mb-1 flex items-center justify-between gap-2">
+                          <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                            <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                              <Maximize
+                                className="h-3.5 w-3.5"
+                                strokeWidth={1.75}
+                              />
+                            </span>
+                            {t('Aspect ratio')}
+                          </div>
+                        </div>
+                        <div className="flex h-9 items-center gap-1 overflow-x-auto rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 [scrollbar-width:none] dark:border-white/10 dark:bg-white/5 [&::-webkit-scrollbar]:hidden">
+                          {videoConfig.aspectRatios.map((r) => (
+                            <button
+                              className={cn(
+                                'inline-flex min-h-7 min-w-0 flex-1 items-center justify-center rounded-[9px] text-[12px] whitespace-nowrap transition-colors',
+                                videoAspectRatio === r.value
+                                  ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white'
+                                  : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
+                              )}
+                              key={r.value}
+                              onClick={() => setVideoAspectRatio(r.value)}
+                              type="button"
+                            >
+                              {r.value === 'auto' ? t('Auto') : r.value}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     </div>
                     {/* 时长 segment(更短 ← 5 秒 → 更长) */}
                     <div>
                       <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Duration')}</div>
+                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                          <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                            <Clock
+                              className="h-3.5 w-3.5"
+                              strokeWidth={1.75}
+                            />
+                          </span>
+                          {t('Duration')}
+                        </div>
                       </div>
                       <div className="flex h-9 items-center gap-2 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 dark:border-white/10 dark:bg-white/5">
                         <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Shorter')}</span>
@@ -459,16 +638,22 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     {/* 提示词增强 segment */}
                     <div>
                       <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Prompt optimization')}</div>
+                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                          <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                            <Lightbulb
+                              className="h-3.5 w-3.5"
+                              strokeWidth={1.75}
+                            />
+                          </span>
+                          {t('Prompt optimization')}
+                        </div>
                       </div>
                       <div className="flex h-9 items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5">
                         {(['on', 'off'] as const).map((opt) => (
                           <button
                             className={cn(
                               'inline-flex min-h-7 min-w-0 flex-1 items-center justify-center rounded-[9px] text-[12px] transition-colors',
-                              optimize === opt
-                                ? 'bg-[rgba(56,103,255,0.12)] font-medium text-[#3867ff] dark:bg-[rgba(143,165,255,0.16)] dark:text-[#8fa5ff]'
-                                : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
+                              optimize === opt ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white' : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
                             )}
                             key={opt}
                             onClick={() => setOptimize(opt)}
@@ -482,7 +667,15 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     {/* 负向提示词 */}
                     <div>
                       <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Negative prompt')}</div>
+                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                          <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                            <MessageSquareOff
+                              className="h-3.5 w-3.5"
+                              strokeWidth={1.75}
+                            />
+                          </span>
+                          {t('Negative prompt')}
+                        </div>
                       </div>
                       <input
                         aria-label={t('Negative prompt')}
@@ -495,7 +688,15 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     {/* 随机种子 */}
                     <div>
                       <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Random seed')}</div>
+                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                          <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                            <Dices
+                              className="h-3.5 w-3.5"
+                              strokeWidth={1.75}
+                            />
+                          </span>
+                          {t('Random seed')}
+                        </div>
                       </div>
                       <input
                         aria-label={t('Random seed')}
@@ -522,27 +723,46 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                 <div className="rounded-[16px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(56,103,255,0.02),transparent)] p-1.5 dark:border-white/8">
                   <div className="mb-1 flex min-w-0 items-start justify-between gap-2">
                     <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                      <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                        <SlidersHorizontal
+                          className="h-3.5 w-3.5"
+                          strokeWidth={1.75}
+                        />
+                      </span>
                       <span>{t('Parameter panel')}</span>
                     </p>
                     <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Fill in model parameters directly')}</span>
                   </div>
-                  <div className="grid grid-cols-2 gap-1">
-                    {/* 宽高比 */}
+                  <div className="grid grid-cols-2 gap-x-1.5 gap-y-2.5">
+                    {/* 宽高比(参考站同款:比例缩略卡网格下拉) */}
                     <div>
-                      <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Aspect ratio')}</div>
+                      <div className="mb-1 flex items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                        <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                          <Aperture
+                            className="h-3.5 w-3.5"
+                            strokeWidth={1.75}
+                          />
+                        </span>
+                        {t('Aspect ratio')}
                       </div>
                       <MiniDropdown
                         label={t('Aspect ratio')}
                         onChange={setAspectRatio}
                         options={aspectRatios.map((a) => ({ value: a.value, label: a.value }))}
                         value={aspectRatio}
+                        variant="grid"
                       />
                     </div>
                     {/* 分辨率 */}
                     <div>
-                      <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Resolution')}</div>
+                      <div className="mb-1 flex items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                        <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                          <Maximize
+                            className="h-3.5 w-3.5"
+                            strokeWidth={1.75}
+                          />
+                        </span>
+                        {t('Resolution')}
                       </div>
                       <MiniDropdown
                         label={t('Resolution')}
@@ -551,44 +771,114 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                         value={resolution}
                       />
                     </div>
+                    {/* 质量档位 */}
+                    <div>
+                      <div className="mb-1 flex items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                        <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                          <Gauge
+                            className="h-3.5 w-3.5"
+                            strokeWidth={1.75}
+                          />
+                        </span>
+                        {t('Quality tier')}
+                      </div>
+                      <MiniDropdown
+                        label={t('Quality tier')}
+                        onChange={setQualityTier}
+                        options={qualityTiers.map((q) => ({ value: q.value, label: t(q.labelKey) }))}
+                        value={t(qualityTiers.find((q) => q.value === qualityTier)?.labelKey ?? 'Standard')}
+                      />
+                    </div>
+                    {/* 输出压缩 */}
+                    <div>
+                      <div className="mb-1 flex items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                        <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                          <FileArchive
+                            className="h-3.5 w-3.5"
+                            strokeWidth={1.75}
+                          />
+                        </span>
+                        {t('Output compression')}
+                      </div>
+                      <MiniDropdown
+                        label={t('Output compression')}
+                        onChange={setCompression}
+                        options={compressions.map((c) => ({ value: c.value, label: t(c.labelKey) }))}
+                        value={t(compressions.find((c) => c.value === compression)?.labelKey ?? 'High quality')}
+                      />
+                    </div>
                     {/* 宽高像素值(静态) */}
                     <div>
-                      <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Pixel dimensions')}</div>
+                      <div className="mb-1 flex items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                        <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                          <Maximize
+                            className="h-3.5 w-3.5"
+                            strokeWidth={1.75}
+                          />
+                        </span>
+                        {t('Pixel dimensions')}
                       </div>
                       <div className="flex h-9 items-center rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 text-[13px] text-[#5b6b8c] dark:border-white/10 dark:bg-white/5 dark:text-[#b6c4dc]">
                         {pixelSize}
                       </div>
                     </div>
-                    {/* 输出格式 */}
+                    {/* 背景 */}
                     <div>
-                      <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Output format')}</div>
+                      <div className="mb-1 flex items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                        <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                          <Frame
+                            className="h-3.5 w-3.5"
+                            strokeWidth={1.75}
+                          />
+                        </span>
+                        {t('Background')}
+                      </div>
+                      <MiniDropdown
+                        label={t('Background')}
+                        onChange={setBackground}
+                        options={backgrounds.map((b) => ({ value: b.value, label: t(b.labelKey) }))}
+                        value={t(backgrounds.find((b) => b.value === background)?.labelKey ?? 'Auto match')}
+                      />
+                    </div>
+                    {/* 输出格式(跨列) */}
+                    <div className="col-span-2">
+                      <div className="mb-1 flex items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                        <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                          <Layers
+                            className="h-3.5 w-3.5"
+                            strokeWidth={1.75}
+                          />
+                        </span>
+                        {t('Output format')}
                       </div>
                       <MiniDropdown
                         label={t('Output format')}
                         onChange={setFormat}
                         options={formats.map((f) => ({
-                          value: f.value,
-                          label: `${f.value} ${f.qualityLabel}`,
+                          value: `${f.value} · ${t(f.qualityLabel)}`,
+                          label: `${f.value} · ${t(f.qualityLabel)}`,
                         }))}
-                        value={`${format} ${formats.find((f) => f.value === format)?.qualityLabel ?? ''}`}
+                        value={`${format} · ${t(formats.find((f) => f.value === format)?.qualityLabel ?? '')}`}
                       />
                     </div>
-                    {/* 提示词优化(跨列 segment) */}
+                    {/* 提示词优化(跨列 segment,参考站 lightbulb 图标) */}
                     <div className="col-span-2">
-                      <div className="mb-1 flex items-center justify-between gap-2">
-                        <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Prompt optimization')}</div>
-                        <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Follow original prompt')}</span>
+                      <div className="mb-1 flex items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                        <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                          <Lightbulb
+                            className="h-3.5 w-3.5"
+                            strokeWidth={1.75}
+                          />
+                        </span>
+                        {t('Prompt optimization')}
+                        <span className="min-w-0 flex-1 truncate text-right text-[11px] font-normal text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Follow original prompt')}</span>
                       </div>
                       <div className="flex h-9 items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5">
                         {(['on', 'off'] as const).map((opt) => (
                           <button
                             className={cn(
                               'inline-flex min-h-7 min-w-0 flex-1 items-center justify-center rounded-[9px] text-[12px] transition-colors',
-                              optimize === opt
-                                ? 'bg-[rgba(56,103,255,0.12)] font-medium text-[#3867ff] dark:bg-[rgba(143,165,255,0.16)] dark:text-[#8fa5ff]'
-                                : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
+                              optimize === opt ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white' : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
                             )}
                             key={opt}
                             onClick={() => setOptimize(opt)}
@@ -608,6 +898,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                 <div className="rounded-[16px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(56,103,255,0.02),transparent)] p-1.5 dark:border-white/8">
                   <div className="mb-1 flex min-w-0 items-start justify-between gap-2">
                     <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                      <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">
+                        <Upload
+                          className="h-3.5 w-3.5"
+                          strokeWidth={1.75}
+                        />
+                      </span>
                       <span>{t('Reference assets')}</span>
                     </p>
                   </div>

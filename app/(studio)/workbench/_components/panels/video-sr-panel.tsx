@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 
+import { ImageUp, Maximize, Settings2, Boxes, Film, FileArchive, Activity } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Drop, FieldGrid, FieldLabel, PanelCard, SliderField, UploadGlyph, UploadZone } from './shared'
+import { Drop, FieldGrid, FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, SliderField, UploadGlyph, UploadZone } from './shared'
 
 /**
  * 视频超分面板 —— 参考站结构:添加源视频 + 超分配置(超分模型 / 放大倍率 / 目标帧率)+ 高级参数(压缩 / 噪点滑块)
@@ -21,7 +22,10 @@ export function VideoSrPanel({ configs }: { configs: Workbench.ConfigResponse['d
   return (
     <>
       {/* 添加源视频 */}
-      <PanelCard title={t('Add source video')}>
+      <PanelCard
+        icon={<PanelIcon icon={ImageUp} />}
+        title={t('Add source video')}
+      >
         <UploadZone
           hintLines={[t('Click or drag a video')]}
           icon={<UploadGlyph />}
@@ -30,11 +34,17 @@ export function VideoSrPanel({ configs }: { configs: Workbench.ConfigResponse['d
       </PanelCard>
 
       {/* 超分配置 */}
-      <PanelCard title={t('Upscale config')}>
+      <PanelCard
+        icon={<PanelIcon icon={Maximize} />}
+        title={t('Upscale config')}
+      >
         <div className="grid gap-1.5">
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Upscale model')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Boxes} />
+                {t('Upscale model')}
+              </span>
             </FieldLabel>
             <Drop
               onChange={() => {}}
@@ -46,7 +56,10 @@ export function VideoSrPanel({ configs }: { configs: Workbench.ConfigResponse['d
           <FieldGrid>
             <div>
               <FieldLabel>
-                <span className="flex min-w-0 items-center gap-1.5">{t('Scale factor')}</span>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={Maximize} />
+                  {t('Scale factor')}
+                </span>
               </FieldLabel>
               <Drop
                 onChange={setUpscaleScale}
@@ -56,7 +69,10 @@ export function VideoSrPanel({ configs }: { configs: Workbench.ConfigResponse['d
             </div>
             <div>
               <FieldLabel>
-                <span className="flex min-w-0 items-center gap-1.5">{t('Target frame rate')}</span>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={Film} />
+                  {t('Target frame rate')}
+                </span>
               </FieldLabel>
               <Drop
                 onChange={setFrameRate}
@@ -69,9 +85,13 @@ export function VideoSrPanel({ configs }: { configs: Workbench.ConfigResponse['d
       </PanelCard>
 
       {/* 高级参数 */}
-      <PanelCard title={t('Advanced parameters')}>
+      <PanelCard
+        icon={<PanelIcon icon={Settings2} />}
+        title={t('Advanced parameters')}
+      >
         <div className="grid gap-1.5">
           <SliderField
+            icon={<FieldLabelIcon icon={FileArchive} />}
             label={t('Compression')}
             max={100}
             min={0}
@@ -80,6 +100,7 @@ export function VideoSrPanel({ configs }: { configs: Workbench.ConfigResponse['d
             value={compress}
           />
           <SliderField
+            icon={<FieldLabelIcon icon={Activity} />}
             label={t('Noise')}
             max={100}
             min={0}

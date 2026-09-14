@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 
+import { ImageUp, Scissors, Frame, Volume2 } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { FieldLabel, PanelCard, Seg, UploadGlyph, UploadZone } from './shared'
+import { FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, Seg, UploadGlyph, UploadZone } from './shared'
 
 /**
  * 视频去背景面板 —— 参考站结构:添加源视频 + 去背景配置(输出背景 / 保留原音)
@@ -19,7 +20,10 @@ export function VideoMattePanel({ configs }: { configs: Workbench.ConfigResponse
   return (
     <>
       {/* 添加源视频 */}
-      <PanelCard title={t('Add source video')}>
+      <PanelCard
+        icon={<PanelIcon icon={ImageUp} />}
+        title={t('Add source video')}
+      >
         <UploadZone
           hintLines={[t('Click or drag a video')]}
           icon={<UploadGlyph />}
@@ -28,11 +32,17 @@ export function VideoMattePanel({ configs }: { configs: Workbench.ConfigResponse
       </PanelCard>
 
       {/* 去背景配置 */}
-      <PanelCard title={t('Background removal config')}>
+      <PanelCard
+        icon={<PanelIcon icon={Scissors} />}
+        title={t('Background removal config')}
+      >
         <div className="grid gap-1.5">
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Output background')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Frame} />
+                {t('Output background')}
+              </span>
             </FieldLabel>
             <Seg
               onChange={setBgOutput}
@@ -42,7 +52,10 @@ export function VideoMattePanel({ configs }: { configs: Workbench.ConfigResponse
           </div>
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Keep original audio')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Volume2} />
+                {t('Keep original audio')}
+              </span>
             </FieldLabel>
             <Seg
               onChange={setKeepAudio}

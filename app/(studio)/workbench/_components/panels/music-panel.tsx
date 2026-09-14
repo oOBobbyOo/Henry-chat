@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 
-import { BookOpen } from 'lucide-react'
+import { BookOpen, Music, SlidersHorizontal, Music2, Shapes, Sparkles, Activity, Waves, FileArchive } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Drop, FieldGrid, FieldLabel, PanelCard, Seg } from './shared'
+import { Drop, FieldGrid, FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, Seg } from './shared'
 
 /**
  * 音乐生成面板 —— 参考站结构:歌词工作台(新写完整歌词 / 续写编辑 + 智能写词)+ 参数面板(音乐模型 / 创作形态 / 智能写词 / 采样率 / 比特率 / 输出格式)
@@ -24,6 +24,7 @@ export function MusicPanel({ configs }: { configs: Workbench.ConfigResponse['dat
     <>
       {/* 歌词工作台 */}
       <PanelCard
+        icon={<PanelIcon icon={Music} />}
         title={t('Lyric workbench')}
         right={t('Supports smart lyrics / manual editing')}
       >
@@ -54,13 +55,17 @@ export function MusicPanel({ configs }: { configs: Workbench.ConfigResponse['dat
 
       {/* 参数面板 */}
       <PanelCard
+        icon={<PanelIcon icon={SlidersHorizontal} />}
         title={t('Parameter panel')}
         right={t('Fill in model parameters directly')}
       >
         <div className="grid gap-1.5">
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Music model')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Music2} />
+                {t('Music model')}
+              </span>
             </FieldLabel>
             <Drop
               onChange={() => {}}
@@ -70,7 +75,10 @@ export function MusicPanel({ configs }: { configs: Workbench.ConfigResponse['dat
           </div>
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Creation form')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Shapes} />
+                {t('Creation form')}
+              </span>
             </FieldLabel>
             <Seg
               onChange={setMusicForm}
@@ -80,7 +88,10 @@ export function MusicPanel({ configs }: { configs: Workbench.ConfigResponse['dat
           </div>
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Smart lyrics')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={Sparkles} />
+                {t('Smart lyrics')}
+              </span>
             </FieldLabel>
             <Seg
               onChange={setSmartLyrics}
@@ -94,7 +105,10 @@ export function MusicPanel({ configs }: { configs: Workbench.ConfigResponse['dat
           <FieldGrid>
             <div>
               <FieldLabel>
-                <span className="flex min-w-0 items-center gap-1.5">{t('Sample rate')}</span>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={Activity} />
+                  {t('Sample rate')}
+                </span>
               </FieldLabel>
               <Drop
                 onChange={setSampleRate}
@@ -104,7 +118,10 @@ export function MusicPanel({ configs }: { configs: Workbench.ConfigResponse['dat
             </div>
             <div>
               <FieldLabel>
-                <span className="flex min-w-0 items-center gap-1.5">{t('Bitrate')}</span>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={Waves} />
+                  {t('Bitrate')}
+                </span>
               </FieldLabel>
               <Drop
                 onChange={setBitrate}
@@ -115,7 +132,10 @@ export function MusicPanel({ configs }: { configs: Workbench.ConfigResponse['dat
           </FieldGrid>
           <div>
             <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">{t('Output format')}</span>
+              <span className="flex min-w-0 items-center gap-1.5">
+                <FieldLabelIcon icon={FileArchive} />
+                {t('Output format')}
+              </span>
             </FieldLabel>
             <Drop
               onChange={setMusicFormat}

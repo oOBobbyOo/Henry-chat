@@ -192,5 +192,17 @@
   "Start background removal": "Start background removal",
   "Start lip sync": "Start lip sync",
   "Start sync": "Start sync",
-  "Generate digital avatar": "Generate digital avatar"
+  "Generate digital avatar": "Generate digital avatar",
+  "Quality tier": "Quality",
+  "Output compression": "Compression",
+  "Background": "Background",
+  "Standard": "Standard",
+  "High": "High",
+  "Ultra": "Ultra",
+  "High quality": "High quality",
+  "Balanced": "Balanced",
+  "Small size": "Small size",
+  "Auto match": "Auto match",
+  "Transparent": "Transparent",
+  "Opaque": "Opaque"
 }

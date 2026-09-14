@@ -70,6 +70,30 @@ declare namespace Workbench {
     qualityLabel: string
   }
 
+  /** 质量档位选项 */
+  export interface QualityTierOption {
+    /** 档位值(standard / high / ultra) */
+    value: string
+    /** 显示名(i18n key) */
+    labelKey: string
+  }
+
+  /** 生成背景选项 */
+  export interface BackgroundOption {
+    /** 背景值(auto / transparent / opaque) */
+    value: string
+    /** 显示名(i18n key) */
+    labelKey: string
+  }
+
+  /** 输出压缩档位选项 */
+  export interface CompressionOption {
+    /** 档位值(high / balanced / small) */
+    value: string
+    /** 显示名(i18n key) */
+    labelKey: string
+  }
+
   /** 视频创作模式 */
   export type VideoCreateMode = 't2v' | 'first-last-frame' | 'omni-reference'
 
@@ -235,6 +259,12 @@ declare namespace Workbench {
       resolutions: ResolutionOption[]
       /** 输出格式字典 */
       formats: FormatOption[]
+      /** 质量档位字典 */
+      qualityTiers: QualityTierOption[]
+      /** 生成背景字典 */
+      backgrounds: BackgroundOption[]
+      /** 输出压缩档位字典 */
+      compressions: CompressionOption[]
       /** 视频生成能力配置 */
       video: VideoCapabilityConfig
       /** 音效生成配置 */

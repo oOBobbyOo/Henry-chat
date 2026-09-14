@@ -2,9 +2,10 @@
 
 import { useState } from 'react'
 
+import { SlidersHorizontal, Shapes, Timer, FileArchive } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Drop, FieldLabel, PanelCard, Seg } from './shared'
+import { Drop, FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, Seg } from './shared'
 
 /**
  * 音效生成面板 —— 参考站结构:参数面板(生成方式 / 目标时长 / 输出格式)
@@ -18,6 +19,7 @@ export function SoundPanel({ configs }: { configs: Workbench.ConfigResponse['dat
 
   return (
     <PanelCard
+      icon={<PanelIcon icon={SlidersHorizontal} />}
       title={t('Parameter panel')}
       right={t('Fill in model parameters directly')}
     >
@@ -25,7 +27,10 @@ export function SoundPanel({ configs }: { configs: Workbench.ConfigResponse['dat
         {/* 生成方式 */}
         <div>
           <FieldLabel>
-            <span className="flex min-w-0 items-center gap-1.5">{t('Generation method')}</span>
+            <span className="flex min-w-0 items-center gap-1.5">
+              <FieldLabelIcon icon={Shapes} />
+              {t('Generation method')}
+            </span>
           </FieldLabel>
           <Seg
             onChange={(v) => setSoundMode(v === soundMode ? null : v)}
@@ -36,7 +41,10 @@ export function SoundPanel({ configs }: { configs: Workbench.ConfigResponse['dat
         {/* 目标时长 */}
         <div>
           <FieldLabel>
-            <span className="flex min-w-0 items-center gap-1.5">{t('Target duration')}</span>
+            <span className="flex min-w-0 items-center gap-1.5">
+              <FieldLabelIcon icon={Timer} />
+              {t('Target duration')}
+            </span>
           </FieldLabel>
           <Drop
             onChange={setSoundDuration}
@@ -47,7 +55,10 @@ export function SoundPanel({ configs }: { configs: Workbench.ConfigResponse['dat
         {/* 输出格式 */}
         <div>
           <FieldLabel>
-            <span className="flex min-w-0 items-center gap-1.5">{t('Output format')}</span>
+            <span className="flex min-w-0 items-center gap-1.5">
+              <FieldLabelIcon icon={FileArchive} />
+              {t('Output format')}
+            </span>
           </FieldLabel>
           <Drop
             onChange={setSoundFormat}
