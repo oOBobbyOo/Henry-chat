@@ -20,7 +20,7 @@ export function PanelCard({ title, right, children }: { title: string; right?: R
         <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
           <span>{title}</span>
         </p>
-        {right ? <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{right}</span> : null}
+        {right ? <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{right}</span> : null}
       </div>
       {children}
     </div>
@@ -100,7 +100,7 @@ export function Drop({ options, value, onChange }: { options: Array<{ value: str
       >
         <span className="min-w-0 flex-1 truncate text-left">{value}</span>
         <ChevronDown
-          className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform', open && 'rotate-180')}
+          className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform dark:text-[#8a9bc0]', open && 'rotate-180')}
           strokeWidth={1.75}
         />
       </button>
@@ -157,13 +157,13 @@ export function SliderField({ label, min, max, step, value, onChange }: { label:
   )
 }
 
-/** 深色上传区(与图片参考素材一致:灰色虚线图标 + 从资产库选择) */
+/** 上传区(亮色浅灰蓝底 / 暗色深底,与 controls 内 insetPanelCls 一致) */
 export function UploadZone({ icon, title, hintLines, multiple }: { icon: React.ReactNode; title: string; hintLines?: string[]; multiple?: boolean }) {
   const { t } = useT('workbench')
   return (
-    <div className="mt-1.5 rounded-[14px] border border-[rgba(255,255,255,0.06)] bg-[linear-gradient(180deg,rgba(9,17,32,0.96),rgba(7,13,25,0.98))] px-3 py-3 dark:bg-[linear-gradient(180deg,rgba(7,11,22,0.96),rgba(5,8,16,0.98))]">
+    <div className="mt-1.5 rounded-[14px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(237,241,255,0.9),rgba(226,233,250,0.85))] px-3 py-3 dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(7,11,22,0.96),rgba(5,8,16,0.98))]">
       <div className="flex flex-wrap items-center gap-2">
-        <label className="flex h-12 w-12 shrink-0 cursor-pointer flex-col items-center justify-center rounded-[12px] border border-dashed border-white/16 bg-white/4 text-[#8a9bc0] transition-colors hover:border-[rgba(56,103,255,0.5)] hover:text-[#3867ff]">
+        <label className="flex h-12 w-12 shrink-0 cursor-pointer flex-col items-center justify-center rounded-[12px] border border-dashed border-[rgba(12,24,36,0.16)] bg-white/70 text-[#4a6080] transition-colors hover:border-[rgba(56,103,255,0.5)] hover:text-[#3867ff] dark:border-white/16 dark:bg-white/4 dark:text-[#8a9bc0] dark:hover:border-[rgba(143,165,255,0.5)] dark:hover:text-[#8fa5ff]">
           {icon}
           <span className="mt-1 text-[10px] leading-none">{title}</span>
           <input
@@ -176,7 +176,7 @@ export function UploadZone({ icon, title, hintLines, multiple }: { icon: React.R
           <div className="min-w-0 flex-1 space-y-0.5">
             {hintLines.map((line) => (
               <p
-                className="text-[11px] leading-4 text-[#8a9bc0]"
+                className="text-[11px] leading-4 text-[#4a6080] dark:text-[#8a9bc0]"
                 key={line}
               >
                 {line}
@@ -186,7 +186,7 @@ export function UploadZone({ icon, title, hintLines, multiple }: { icon: React.R
         ) : null}
         <div className="flex shrink-0 flex-wrap items-center gap-1.5">
           <button
-            className="inline-flex items-center gap-2 rounded-full border border-white/14 px-2.5 py-1 text-[11px] text-[#b6c4dc] transition-colors hover:bg-white/8"
+            className="inline-flex items-center gap-2 rounded-full border border-[rgba(12,24,36,0.12)] px-2.5 py-1 text-[11px] text-[#4a6080] transition-colors hover:bg-[rgba(12,24,36,0.05)] hover:text-[#3867ff] dark:border-white/14 dark:text-[#b6c4dc] dark:hover:bg-white/8 dark:hover:text-white"
             type="button"
           >
             <Library

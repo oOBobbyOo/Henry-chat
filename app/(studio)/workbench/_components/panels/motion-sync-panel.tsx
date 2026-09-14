@@ -46,7 +46,7 @@ export function MotionSyncPanel() {
       >
         <textarea
           aria-label={t('Prompt')}
-          className="min-h-[64px] w-full resize-none rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 py-2 text-[13px] leading-5 text-[#091423] outline-none placeholder:text-[#8a9bc0] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#5b6b8c]"
+          className="min-h-[64px] w-full resize-none rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 py-2 text-[13px] leading-5 text-[#091423] outline-none placeholder:text-[#8a9bc0] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#8a9bc0]"
           placeholder={t('Motion sync prompt placeholder')}
         />
       </PanelCard>

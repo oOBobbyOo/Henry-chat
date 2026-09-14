@@ -98,11 +98,11 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
             <div className="relative">
               <Search
                 aria-hidden
-                className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[#8a9bc0]"
+                className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-[#8a9bc0] dark:text-[#8a9bc0]"
                 strokeWidth={1.75}
               />
               <input
-                className="h-10 w-full rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(245,249,255,0.9)] pr-3 pl-9 text-[13px] text-[#091423] transition-colors outline-none placeholder:text-[#8a9bc0] focus:border-[rgba(56,103,255,0.4)] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#5b6b8c]"
+                className="h-10 w-full rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(245,249,255,0.9)] pr-3 pl-9 text-[13px] text-[#091423] transition-colors outline-none placeholder:text-[#8a9bc0] focus:border-[rgba(56,103,255,0.4)] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#8a9bc0]"
                 onChange={(e) => setKeyword(e.target.value)}
                 placeholder={t('Search history')}
                 value={keyword}
@@ -188,10 +188,10 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
 
         {/* 内容区 */}
         <div className="relative min-h-0 flex-1">
-          <div className="h-full min-h-0 overflow-y-auto overscroll-contain">
+          <div className="h-full min-h-0 overflow-y-auto overscroll-contain scrollbar-slim">
             {empty ? (
               /* 空态 + 社群灵感卡 */
-              <div className="mx-3 my-3 rounded-[22px] border border-dashed border-[rgba(12,24,36,0.14)] p-5 dark:border-white/12">
+              <div className="mx-3 my-3 rounded-[22px] border border-dashed border-[rgba(12,24,36,0.14)] p-5 dark:border-white/20">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="min-w-0">
                     <p className="text-[16px] font-semibold text-[#091423] dark:text-[#eef4ff]">{t('No creation records for this filter')}</p>
@@ -262,7 +262,7 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
                     </div>
                     <div className="border-t border-[rgba(12,24,36,0.08)] px-3 py-3 dark:border-white/8">
                       <p className="truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">{item.title}</p>
-                      <p className="mt-0.5 truncate text-[11px] text-[#8a9bc0]">{item.modelName}</p>
+                      <p className="mt-0.5 truncate text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{item.modelName}</p>
                     </div>
                   </article>
                 ))}

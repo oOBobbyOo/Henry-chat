@@ -32,8 +32,12 @@ interface WorkbenchControlsProps {
   configs?: Workbench.ConfigResponse['data']
 }
 
-/** 深色内嵌面板通用样式(工具条 / 上传区 / footer 与参考站一致的深色渐变) */
-const darkInsetCls = 'border border-transparent bg-[linear-gradient(180deg,rgba(12,19,34,0.98),rgba(10,16,30,0.98))] dark:bg-[linear-gradient(180deg,rgba(9,14,25,0.98),rgba(7,11,22,0.98))]'
+/**
+ * 内嵌面板通用样式:亮色主题浅灰蓝渐变底,暗色主题深色渐变底
+ * (提示词工具条 / 上传区 / footer 共用,双主题分别适配)
+ */
+const insetPanelCls =
+  'border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(237,241,255,0.9),rgba(226,233,250,0.85))] dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(9,14,25,0.98),rgba(7,11,22,0.98))]'
 
 /** 通用下拉(轻量实现,radix Select 会与受控布局耦合,这里用原生 button + 绝对定位列表) */
 function MiniDropdown({ label, options, value, onChange }: { label: string; options: Array<{ value: string; label: string }>; value: string; onChange: (value: string) => void }) {
@@ -51,7 +55,7 @@ function MiniDropdown({ label, options, value, onChange }: { label: string; opti
       >
         <span className="min-w-0 flex-1 truncate text-left font-medium">{value}</span>
         <ChevronDown
-          className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform', open && 'rotate-180')}
+          className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform dark:text-[#8a9bc0]', open && 'rotate-180')}
           strokeWidth={1.75}
         />
       </button>
@@ -193,7 +197,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
         </div>
 
         <div className="flex min-h-0 flex-1 flex-col">
-          <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-2.5 pt-2.5 pb-[92px]">
+          <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto overscroll-contain px-2.5 pt-2.5 pb-[92px] scrollbar-slim">
             <div className="grid gap-2.5">
               {/* 生成模型(仅图片/视频生成有独立模型卡;其余能力模型在各自面板内) */}
               {isImage || isVideo ? (
@@ -227,7 +231,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                         </span>
                       </span>
                       <ChevronDown
-                        className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform', modelOpen && 'rotate-180')}
+                        className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform dark:text-[#8a9bc0]', modelOpen && 'rotate-180')}
                         strokeWidth={1.75}
                       />
                     </button>
@@ -256,7 +260,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                               type="button"
                             >
                               <span className="flex items-center gap-1.5">
-                                <span className="shrink-0 text-[10px] font-semibold text-[#8a9bc0] dark:text-[#6b7f9d]">{m.provider}</span>
+                                <span className="shrink-0 text-[10px] font-semibold text-[#8a9bc0] dark:text-[#8a9bc0]">{m.provider}</span>
                                 <span className={cn('text-[13px] font-medium', m.id === (isVideo ? videoModelId : modelId) ? 'text-[#3867ff]' : 'text-[#091423] dark:text-[#eef4ff]')}>
                                   {m.displayName}
                                 </span>
@@ -266,7 +270,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                                   </span>
                                 ) : null}
                               </span>
-                              <span className="mt-0.5 line-clamp-2 block text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{m.description}</span>
+                              <span className="mt-0.5 line-clamp-2 block text-[11px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{m.description}</span>
                             </button>
                           </li>
                         ))}
@@ -286,12 +290,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                         {promptMeta.required ? <span className="ml-0.5 text-rose-600 dark:text-rose-300">*</span> : null}
                       </span>
                     </p>
-                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{promptMeta.hintKey ? t(promptMeta.hintKey) : ''}</span>
+                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{promptMeta.hintKey ? t(promptMeta.hintKey) : ''}</span>
                   </div>
                   {/* 配音:Instruction 提示 + 标签 chips */}
                   {activeCapability === 'voice-gen' ? (
                     <div className="mb-1.5 flex flex-wrap items-center gap-1.5">
-                      <span className="text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Voice instruction hint')}</span>
+                      <span className="text-[11px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Voice instruction hint')}</span>
                       <span className="inline-flex items-center rounded-[7px] border border-[rgba(56,103,255,0.3)] bg-[rgba(56,103,255,0.08)] px-1.5 py-0.5 text-[10px] font-medium text-[#3867ff] dark:border-[rgba(143,165,255,0.3)] dark:text-[#8fa5ff]">
                         {t('Control tags')}
                       </span>
@@ -300,13 +304,13 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                       </span>
                     </div>
                   ) : null}
-                  {/* 提示词工具条(深色) */}
-                  <div className={cn('workbench-prompt-toolbar mt-1.5 rounded-[14px] px-3 py-1.5', darkInsetCls)}>
+                  {/* 提示词工具条(亮色浅灰蓝底 / 暗色深底) */}
+                  <div className={cn('workbench-prompt-toolbar mt-1.5 rounded-[14px] px-3 py-1.5', insetPanelCls)}>
                     <div className="flex items-center gap-2.5">
-                      <p className="min-w-0 flex-1 overflow-hidden text-[11px] text-ellipsis whitespace-nowrap text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Prompt toolbar')}</p>
+                      <p className="min-w-0 flex-1 overflow-hidden text-[11px] text-ellipsis whitespace-nowrap text-[#4a6080] dark:text-[#8a9bc0]">{t('Prompt toolbar')}</p>
                       <div className="flex shrink-0 items-center gap-1">
                         <button
-                          className="inline-flex h-7 items-center justify-center gap-1 rounded-full px-2 text-[11px] text-[#b6c4dc] transition-colors hover:bg-white/8 hover:text-white"
+                          className="inline-flex h-7 items-center justify-center gap-1 rounded-full px-2 text-[11px] text-[#4a6080] transition-colors hover:bg-[rgba(12,24,36,0.06)] hover:text-[#3867ff] dark:text-[#b6c4dc] dark:hover:bg-white/8 dark:hover:text-white"
                           type="button"
                         >
                           <BookOpen
@@ -316,7 +320,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                           {t('Prompt library')}
                         </button>
                         <button
-                          className="inline-flex h-7 items-center justify-center gap-1 rounded-full px-2 text-[11px] text-[#b6c4dc] transition-colors hover:bg-white/8 hover:text-white"
+                          className="inline-flex h-7 items-center justify-center gap-1 rounded-full px-2 text-[11px] text-[#4a6080] transition-colors hover:bg-[rgba(12,24,36,0.06)] hover:text-[#3867ff] dark:text-[#b6c4dc] dark:hover:bg-white/8 dark:hover:text-white"
                           type="button"
                         >
                           <Lightbulb
@@ -332,7 +336,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                   <div className="mt-1.5 rounded-[14px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 py-2.5 dark:border-white/10 dark:bg-white/5">
                     <textarea
                       aria-label={t(promptMeta.titleKey)}
-                      className="min-h-[88px] w-full resize-none bg-transparent text-[14px] leading-6 text-[#091423] outline-none placeholder:text-[#8a9bc0] dark:text-[#eef4ff] dark:placeholder:text-[#5b6b8c]"
+                      className="min-h-[64px] w-full resize-none bg-transparent text-[14px] leading-6 text-[#091423] outline-none placeholder:text-[#8a9bc0] dark:text-[#eef4ff] dark:placeholder:text-[#8a9bc0]"
                       onChange={(e) => {
                         setPrompt(e.target.value)
                         if (e.target.value.trim()) setSubmittedEmpty(false)
@@ -380,14 +384,14 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
                       <span>{t('Video console')}</span>
                     </p>
-                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">
+                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">
                       {t('Current mode')}: {t(videoConfig.createModes.find((m) => m.value === videoMode)?.labelKey ?? 'Text to video')}
                     </span>
                   </div>
                   <div className="grid min-w-0 gap-1.5">
                     {/* 分辨率 segment */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Resolution')}</div>
                       </div>
                       <div className="flex h-9 items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5">
@@ -410,7 +414,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     </div>
                     {/* 画幅比例 segment */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Aspect ratio')}</div>
                       </div>
                       <div className="flex h-9 items-center gap-1 overflow-x-auto rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 [scrollbar-width:none] dark:border-white/10 dark:bg-white/5 [&::-webkit-scrollbar]:hidden">
@@ -433,11 +437,11 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     </div>
                     {/* 时长 segment(更短 ← 5 秒 → 更长) */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Duration')}</div>
                       </div>
                       <div className="flex h-9 items-center gap-2 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 dark:border-white/10 dark:bg-white/5">
-                        <span className="shrink-0 text-[11px] text-[#8a9bc0]">{t('Shorter')}</span>
+                        <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Shorter')}</span>
                         <div className="flex min-w-0 flex-1 items-center justify-center gap-1">
                           {videoConfig.durations.map((d) => (
                             <button
@@ -449,12 +453,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                             </button>
                           ))}
                         </div>
-                        <span className="shrink-0 text-[11px] text-[#8a9bc0]">{t('Longer')}</span>
+                        <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Longer')}</span>
                       </div>
                     </div>
                     {/* 提示词增强 segment */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Prompt optimization')}</div>
                       </div>
                       <div className="flex h-9 items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5">
@@ -477,12 +481,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     </div>
                     {/* 负向提示词 */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Negative prompt')}</div>
                       </div>
                       <input
                         aria-label={t('Negative prompt')}
-                        className="h-9 w-full rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 text-[13px] text-[#091423] outline-none transition-colors placeholder:text-[#8a9bc0] focus:border-[rgba(56,103,255,0.4)] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#5b6b8c]"
+                        className="h-9 w-full rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 text-[13px] text-[#091423] outline-none transition-colors placeholder:text-[#8a9bc0] focus:border-[rgba(56,103,255,0.4)] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#8a9bc0]"
                         onChange={(e) => setNegativePrompt(e.target.value)}
                         placeholder={t('Negative prompt placeholder')}
                         value={negativePrompt}
@@ -490,12 +494,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     </div>
                     {/* 随机种子 */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Random seed')}</div>
                       </div>
                       <input
                         aria-label={t('Random seed')}
-                        className="h-9 w-full rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 text-[13px] text-[#091423] outline-none transition-colors placeholder:text-[#8a9bc0] focus:border-[rgba(56,103,255,0.4)] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#5b6b8c]"
+                        className="h-9 w-full rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 text-[13px] text-[#091423] outline-none transition-colors placeholder:text-[#8a9bc0] focus:border-[rgba(56,103,255,0.4)] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#8a9bc0]"
                         onChange={(e) => setRandomSeed(e.target.value)}
                         placeholder={t('Random seed placeholder')}
                         value={randomSeed}
@@ -520,12 +524,12 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
                       <span>{t('Parameter panel')}</span>
                     </p>
-                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Fill in model parameters directly')}</span>
+                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Fill in model parameters directly')}</span>
                   </div>
-                  <div className="grid grid-cols-2 gap-1.5">
+                  <div className="grid grid-cols-2 gap-1">
                     {/* 宽高比 */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Aspect ratio')}</div>
                       </div>
                       <MiniDropdown
@@ -537,7 +541,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     </div>
                     {/* 分辨率 */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Resolution')}</div>
                       </div>
                       <MiniDropdown
@@ -549,7 +553,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     </div>
                     {/* 宽高像素值(静态) */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Pixel dimensions')}</div>
                       </div>
                       <div className="flex h-9 items-center rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 text-[13px] text-[#5b6b8c] dark:border-white/10 dark:bg-white/5 dark:text-[#b6c4dc]">
@@ -558,7 +562,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     </div>
                     {/* 输出格式 */}
                     <div>
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Output format')}</div>
                       </div>
                       <MiniDropdown
@@ -573,9 +577,9 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                     </div>
                     {/* 提示词优化(跨列 segment) */}
                     <div className="col-span-2">
-                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                      <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Prompt optimization')}</div>
-                        <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Follow original prompt')}</span>
+                        <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Follow original prompt')}</span>
                       </div>
                       <div className="flex h-9 items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5">
                         {(['on', 'off'] as const).map((opt) => (
@@ -607,9 +611,9 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                       <span>{t('Reference assets')}</span>
                     </p>
                   </div>
-                  <div className="mt-1.5 rounded-[14px] border border-[rgba(255,255,255,0.06)] bg-[linear-gradient(180deg,rgba(9,17,32,0.96),rgba(7,13,25,0.98))] px-3 py-3">
+                  <div className={cn('mt-1.5 rounded-[14px] px-3 py-2.5', insetPanelCls)}>
                     <div className="flex flex-wrap items-center gap-2">
-                      <label className="flex h-12 w-12 shrink-0 cursor-pointer flex-col items-center justify-center rounded-[12px] border border-dashed border-white/16 bg-white/4 text-[#8a9bc0] transition-colors hover:border-[rgba(56,103,255,0.5)] hover:text-[#3867ff]">
+                      <label className="flex h-12 w-12 shrink-0 cursor-pointer flex-col items-center justify-center rounded-[12px] border border-dashed border-[rgba(12,24,36,0.16)] bg-white/70 text-[#4a6080] transition-colors hover:border-[rgba(56,103,255,0.5)] hover:text-[#3867ff] dark:border-white/16 dark:bg-white/4 dark:text-[#8a9bc0] dark:hover:border-[rgba(143,165,255,0.5)] dark:hover:text-[#8fa5ff]">
                         <ImagePlus
                           className="h-4.5 w-4.5"
                           strokeWidth={1.75}
@@ -623,13 +627,13 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                         />
                       </label>
                       <div className="min-w-0 flex-1">
-                        <p className="text-[11px] leading-5 text-[#8a9bc0]">
+                        <p className="text-[11px] leading-5 text-[#4a6080] dark:text-[#8a9bc0]">
                           {t('Uploaded')} 0/10 · {t('Drag here or pick from asset library')}
                         </p>
                       </div>
                       <div className="flex shrink-0 flex-wrap items-center gap-1.5">
                         <button
-                          className="inline-flex items-center gap-2 rounded-full border border-white/14 px-2.5 py-1 text-[11px] text-[#b6c4dc] transition-colors hover:bg-white/8"
+                          className="inline-flex items-center gap-2 rounded-full border border-[rgba(12,24,36,0.12)] px-2.5 py-1 text-[11px] text-[#4a6080] transition-colors hover:bg-[rgba(12,24,36,0.05)] hover:text-[#3867ff] dark:border-white/14 dark:text-[#b6c4dc] dark:hover:bg-white/8 dark:hover:text-white"
                           type="button"
                         >
                           <Library
@@ -646,8 +650,8 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
             </div>
           </div>
 
-          {/* 提交 footer(深色渐变) */}
-          <div className="shrink-0 border-t border-[rgba(255,255,255,0.06)] bg-[linear-gradient(180deg,rgba(7,11,20,0.9),rgba(7,11,20,0.98))] px-2.5 pt-2.5 pb-4.5 dark:bg-[linear-gradient(180deg,rgba(7,11,20,0.95),rgba(5,8,16,0.98))]">
+          {/* 提交 footer(亮色浅底 / 暗色深底) */}
+          <div className="shrink-0 border-t border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(245,249,255,0.98),rgba(237,241,255,0.96))] px-2.5 pt-2.5 pb-4.5 backdrop-blur-md dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(7,11,20,0.95),rgba(5,8,16,0.98))]">
             <div className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(0,1fr)_auto_auto]">
               <button
                 className="inline-flex h-11 max-w-full min-w-0 cursor-pointer items-center justify-center gap-2 rounded-[14px] border border-transparent bg-[linear-gradient(135deg,#8ccfe3,#5dafce,#7077e0)] text-[14px] font-medium text-[rgb(7,16,28)] transition-all duration-200 hover:opacity-90"
@@ -677,7 +681,7 @@ export function WorkbenchControls({ activeCapability, activeNameKey, models, asp
                 </div>
               ) : null}
               <button
-                className="inline-flex h-11 max-w-full min-w-0 cursor-pointer items-center justify-center gap-2 rounded-[14px] border border-white/12 px-4 text-[13px] font-medium text-[#b6c4dc] transition-colors hover:bg-white/8"
+                className="inline-flex h-11 max-w-full min-w-0 cursor-pointer items-center justify-center gap-2 rounded-[14px] border border-[rgba(12,24,36,0.12)] px-4 text-[13px] font-medium text-[#4a6080] transition-colors hover:bg-[rgba(12,24,36,0.05)] hover:text-[#3867ff] dark:border-white/12 dark:text-[#b6c4dc] dark:hover:bg-white/8 dark:hover:text-white"
                 onClick={() => {
                   setPrompt('')
                   setSubmittedEmpty(false)

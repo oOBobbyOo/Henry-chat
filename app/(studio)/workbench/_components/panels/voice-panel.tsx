@@ -133,7 +133,7 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
             </FieldLabel>
             <textarea
               aria-label={t('Expression instruction')}
-              className="min-h-[56px] w-full resize-none rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 py-2 text-[13px] leading-5 text-[#091423] outline-none placeholder:text-[#8a9bc0] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#5b6b8c]"
+              className="min-h-[56px] w-full resize-none rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 py-2 text-[13px] leading-5 text-[#091423] outline-none placeholder:text-[#8a9bc0] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#8a9bc0]"
               placeholder={t('Expression instruction placeholder')}
             />
           </div>
@@ -169,7 +169,7 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
             </FieldLabel>
             <textarea
               aria-label={t('Text hotfix')}
-              className="min-h-[52px] w-full resize-none rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 py-2 font-mono text-[12px] leading-5 text-[#091423] outline-none placeholder:text-[#8a9bc0] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#5b6b8c]"
+              className="min-h-[52px] w-full resize-none rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 py-2 font-mono text-[12px] leading-5 text-[#091423] outline-none placeholder:text-[#8a9bc0] dark:border-white/10 dark:bg-white/5 dark:text-[#eef4ff] dark:placeholder:text-[#8a9bc0]"
               placeholder={t('Text hotfix placeholder')}
             />
           </div>
