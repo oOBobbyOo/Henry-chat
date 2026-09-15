@@ -272,6 +272,8 @@ export function WorkbenchControls({
   const [videoMode, setVideoMode] = useState<Workbench.VideoCreateMode>('t2v')
   const [videoResolution, setVideoResolution] = useState('480P')
   const [videoAspectRatio, setVideoAspectRatio] = useState('auto')
+  // 时长滑块(秒,0–30 步长 1)
+  const [videoDuration, setVideoDuration] = useState(videoConfig?.durations[0]?.seconds ?? 5)
   const [negativePrompt, setNegativePrompt] = useState('')
   const [randomSeed, setRandomSeed] = useState('')
 
@@ -606,7 +608,7 @@ export function WorkbenchControls({
                         </div>
                       </div>
                     </div>
-                    {/* 时长 segment(更短 ← 5 秒 → 更长) */}
+                    {/* 时长滑块(更短 ← 5 秒 → 更长,离散档位) */}
                     <div>
                       <div className="mb-1 flex items-center justify-between gap-2">
                         <div className="flex min-w-0 items-center gap-1.5 text-[12px] text-[#091423] dark:text-[#eef4ff]">
@@ -618,20 +620,20 @@ export function WorkbenchControls({
                           </span>
                           {t('Duration')}
                         </div>
+                        <span className="shrink-0 text-[11px] font-medium text-[#3867ff] dark:text-[#8fa5ff]">{t('{{seconds}} seconds', { seconds: videoDuration })}</span>
                       </div>
-                      <div className="flex h-9 items-center gap-2 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] px-3 dark:border-white/10 dark:bg-white/5">
+                      <div className="flex h-9 items-center gap-3">
                         <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Shorter')}</span>
-                        <div className="flex min-w-0 flex-1 items-center justify-center gap-1">
-                          {videoConfig.durations.map((d) => (
-                            <button
-                              className="inline-flex min-h-7 items-center justify-center rounded-[9px] bg-[rgba(56,103,255,0.12)] px-3 text-[12px] font-medium text-[#3867ff] dark:bg-[rgba(143,165,255,0.16)] dark:text-[#8fa5ff]"
-                              key={d.seconds}
-                              type="button"
-                            >
-                              {t('{{seconds}} seconds', { seconds: d.seconds })}
-                            </button>
-                          ))}
-                        </div>
+                        <input
+                          aria-label={t('Duration')}
+                          className="h-2 min-w-0 flex-1 cursor-pointer appearance-none rounded-full bg-[rgba(56,103,255,0.15)] accent-[#3867ff] dark:bg-[rgba(143,165,255,0.15)]"
+                          max={30}
+                          min={0}
+                          onChange={(e) => setVideoDuration(Number(e.target.value))}
+                          step={1}
+                          type="range"
+                          value={videoDuration}
+                        />
                         <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Longer')}</span>
                       </div>
                     </div>

@@ -245,6 +245,26 @@ declare namespace Workbench {
     featured: boolean
   }
 
+  /** 资产库条目(「从资产库选择」弹窗用) */
+  export interface LibraryAsset {
+    /** 资产 ID */
+    id: string
+    /** 资产名 */
+    name: string
+    /** 资产模态 */
+    assetType: AssetModality
+    /** 文件格式 */
+    format: string
+    /** 产出模型 */
+    modelName: string
+    /** 尺寸(如 2048x2048) */
+    dimensions: string
+    /** 创建时间 */
+    createdAt: string
+    /** 是否收藏 */
+    favorite: boolean
+  }
+
   /** GET /api/workbench/config 响应(能力 + 模型 + 参数字典) */
   export interface ConfigResponse {
     success: boolean
@@ -273,6 +293,8 @@ declare namespace Workbench {
       music: MusicCapabilityConfig
       /** 配音生成配置 */
       voice: VoiceCapabilityConfig
+      /** 资产库条目(从资产库选择弹窗) */
+      libraryAssets: LibraryAsset[]
       /** 图片编辑配置 */
       imageEdit: ImageEditCapabilityConfig
       /** 视频超分配置 */

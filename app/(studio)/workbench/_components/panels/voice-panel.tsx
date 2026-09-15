@@ -164,37 +164,40 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
               placeholder={t('Expression instruction placeholder')}
             />
           </div>
-          <div>
-            <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">
-                <FieldLabelIcon icon={Code} />
-                {t('SSML')}
-              </span>
-            </FieldLabel>
-            <Seg
-              onChange={setSsml}
-              options={[
-                { value: 'on', label: t('On') },
-                { value: 'off', label: t('Off') },
-              ]}
-              value={ssml}
-            />
-          </div>
-          <div>
-            <FieldLabel>
-              <span className="flex min-w-0 items-center gap-1.5">
-                <FieldLabelIcon icon={Braces} />
-                {t('Markdown filter')}
-              </span>
-            </FieldLabel>
-            <Seg
-              onChange={setMdFilter}
-              options={[
-                { value: 'on', label: t('On') },
-                { value: 'off', label: t('Off') },
-              ]}
-              value={mdFilter}
-            />
+          {/* SSML + Markdown 过滤(pc 一行两列,移动端堆叠换行) */}
+          <div className="grid min-w-0 grid-cols-1 gap-1.5 md:grid-cols-2">
+            <div>
+              <FieldLabel>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={Code} />
+                  {t('SSML')}
+                </span>
+              </FieldLabel>
+              <Seg
+                onChange={setSsml}
+                options={[
+                  { value: 'on', label: t('On') },
+                  { value: 'off', label: t('Off') },
+                ]}
+                value={ssml}
+              />
+            </div>
+            <div>
+              <FieldLabel>
+                <span className="flex min-w-0 items-center gap-1.5">
+                  <FieldLabelIcon icon={Braces} />
+                  {t('Markdown filter')}
+                </span>
+              </FieldLabel>
+              <Seg
+                onChange={setMdFilter}
+                options={[
+                  { value: 'on', label: t('On') },
+                  { value: 'off', label: t('Off') },
+                ]}
+                value={mdFilter}
+              />
+            </div>
           </div>
           <div>
             <FieldLabel>

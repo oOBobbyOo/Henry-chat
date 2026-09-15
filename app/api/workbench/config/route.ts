@@ -19,6 +19,7 @@ export async function GET() {
       sound: workbenchMock.sound,
       music: workbenchMock.music,
       voice: workbenchMock.voice,
+      libraryAssets: workbenchMock.libraryAssets,
       imageEdit: workbenchMock.imageEdit,
       videoUpscale: workbenchMock.videoUpscale,
       videoRemoveBg: workbenchMock.videoRemoveBg,

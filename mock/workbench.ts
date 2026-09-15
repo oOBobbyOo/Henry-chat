@@ -145,6 +145,90 @@ const imageModels: Workbench.ModelOption[] = [
   },
 ]
 
+/** 「从资产库选择」弹窗的资产条目(仅图片可用作源图,视频用于验证类型过滤) */
+const libraryAssets: Workbench.LibraryAsset[] = [
+  {
+    id: 'lib-001',
+    name: '赛博街景 · 雨夜霓虹',
+    assetType: 'image',
+    format: 'JPG',
+    modelName: 'Seedream 5.0 Pro',
+    dimensions: '2048x2048',
+    createdAt: '2026/9/15 09:12:40',
+    favorite: true,
+  },
+  {
+    id: 'lib-002',
+    name: '人像特写 · 侧光',
+    assetType: 'image',
+    format: 'JPG',
+    modelName: 'Nano Banana 2 Pro',
+    dimensions: '1536x2048',
+    createdAt: '2026/9/15 11:33:07',
+    favorite: false,
+  },
+  {
+    id: 'lib-003',
+    name: '产品渲染 · 香水瓶',
+    assetType: 'image',
+    format: 'PNG',
+    modelName: 'GPT Images 2.0',
+    dimensions: '2048x1536',
+    createdAt: '2026/9/14 18:20:55',
+    favorite: true,
+  },
+  {
+    id: 'lib-004',
+    name: '水彩风景 · 晨雾',
+    assetType: 'image',
+    format: 'JPG',
+    modelName: 'Qwen Image 3.0 Pro',
+    dimensions: '2048x1152',
+    createdAt: '2026/9/14 09:41:28',
+    favorite: false,
+  },
+  {
+    id: 'lib-005',
+    name: '产品主图 · 晨光玻璃器皿',
+    assetType: 'image',
+    format: 'PNG',
+    modelName: 'Seedream 5.0 Pro',
+    dimensions: '1600x1600',
+    createdAt: '2026/9/13 20:05:12',
+    favorite: false,
+  },
+  {
+    id: 'lib-006',
+    name: '中式极简海报底图',
+    assetType: 'image',
+    format: 'JPG',
+    modelName: 'Qwen Image 3.0',
+    dimensions: '1440x2160',
+    createdAt: '2026/9/13 14:52:03',
+    favorite: false,
+  },
+  {
+    id: 'lib-007',
+    name: '城市延时 · 天际线',
+    assetType: 'video',
+    format: 'MP4',
+    modelName: 'Kling V3',
+    dimensions: '1920x1080',
+    createdAt: '2026/9/12 16:30:19',
+    favorite: false,
+  },
+  {
+    id: 'lib-008',
+    name: '产品旋开展示',
+    assetType: 'video',
+    format: 'MP4',
+    modelName: 'Kling V3',
+    dimensions: '1920x1080',
+    createdAt: '2026/9/12 10:18:44',
+    favorite: false,
+  },
+]
+
 export const workbenchMock: {
   capabilities: Workbench.Capability[]
   models: Workbench.ModelOption[]
@@ -158,6 +242,7 @@ export const workbenchMock: {
   sound: Workbench.SoundCapabilityConfig
   music: Workbench.MusicCapabilityConfig
   voice: Workbench.VoiceCapabilityConfig
+  libraryAssets: Workbench.LibraryAsset[]
   imageEdit: Workbench.ImageEditCapabilityConfig
   videoUpscale: Workbench.VideoUpscaleCapabilityConfig
   videoRemoveBg: Workbench.VideoRemoveBgCapabilityConfig
@@ -415,8 +500,8 @@ export const workbenchMock: {
       { value: '3:4', width: 3, height: 4 },
       { value: '9:16', width: 9, height: 16 },
     ],
-    /** 时长字典(参考站 segment:更短 ← 5 秒 → 更长) */
-    durations: [{ seconds: 5 }],
+    /** 时长档位字典(滑块离散选择) */
+    durations: [{ seconds: 5 }, { seconds: 10 }],
   },
   /** 音效生成配置 */
   sound: {
@@ -473,6 +558,8 @@ export const workbenchMock: {
     /** 目标语言 */
     languages: ['zh', 'en', 'ja'],
   },
+  /** 资产库条目(从资产库选择弹窗) */
+  libraryAssets,
   /** 图片编辑工具 */
   imageEdit: {
     tools: ['inpaint', 'crop', 'super-resolution', 'scratch-removal', 'extract-subject', 'extract-lineart', 'remove-bg'],

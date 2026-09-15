@@ -60,14 +60,20 @@ export function FieldGrid({ children }: { children: React.ReactNode }) {
   return <div className="grid grid-cols-1 gap-1.5 md:grid-cols-2">{children}</div>
 }
 
-/** 分段单选按钮(生成方式 / 音色 / 开启关闭等) */
-export function Seg({ options, value, onChange }: { options: Array<{ value: string; label: string }>; value: string; onChange: (value: string) => void }) {
+/** 分段单选按钮(生成方式 / 音色 / 开启关闭等);wrap=true 时按内容宽度排布并允许换行(选项多且标签长时用) */
+export function Seg({ options, value, onChange, wrap = false }: { options: Array<{ value: string; label: string }>; value: string; onChange: (value: string) => void; wrap?: boolean }) {
   return (
-    <div className="flex h-9 items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5">
+    <div
+      className={cn(
+        'flex items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5',
+        wrap ? 'flex-wrap md:h-9 md:flex-nowrap' : 'h-9',
+      )}
+    >
       {options.map((opt) => (
         <button
           className={cn(
-            'inline-flex min-h-7 min-w-0 flex-1 items-center justify-center rounded-[9px] text-[12px] whitespace-nowrap transition-colors',
+            'inline-flex min-h-7 items-center justify-center rounded-[9px] text-[12px] whitespace-nowrap transition-colors',
+            wrap ? 'grow basis-[calc(25%-0.25rem)] px-1.5 md:min-w-0 md:basis-0 md:flex-1' : 'min-w-0 flex-1',
             value === opt.value ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white' : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
           )}
           key={opt.value}

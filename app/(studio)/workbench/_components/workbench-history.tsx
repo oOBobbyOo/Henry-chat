@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 
-import { ArrowDown, History, RefreshCw, Search } from 'lucide-react'
+import { ArrowDown, History, Image, LayoutGrid, ListVideo, Music, RefreshCw, Rows3, Search, Volume2, Mic } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { cn } from '@/lib/utils'
@@ -34,6 +34,16 @@ const MODALITIES: Array<{ key: Workbench.AssetModality; labelKey: string }> = [
   { key: 'music', labelKey: 'Music' },
   { key: 'voice', labelKey: 'Voice' },
 ]
+
+/** 类型 tab 图标映射(all 用 History,其余按模态语义) */
+const TAB_ICONS: Record<string, typeof History> = {
+  all: History,
+  image: Image,
+  video: ListVideo,
+  sound: Volume2,
+  music: Music,
+  voice: Mic,
+}
 
 /** 社群卡封面占位(渐变底 + 模态图标,签名 CDN URL 会过期故用本地占位) */
 function CaseCover() {
@@ -119,8 +129,8 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
                     className={cn(
                       'inline-flex h-7 items-center rounded-full border px-3 text-[12px] transition-colors',
                       range === key
-                        ? 'border-[rgba(56,103,255,0.35)] bg-[rgba(56,103,255,0.1)] font-medium text-[#3867ff] dark:text-[#8fa5ff]'
-                        : 'border-[rgba(12,24,36,0.1)] text-[#5b6b8c] hover:bg-[rgba(12,24,36,0.04)] dark:border-white/10 dark:text-[#8a9bc0] dark:hover:bg-white/6',
+                        ? 'border-transparent bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white'
+                        : 'border-[rgba(12,24,36,0.1)] text-[#5b6b8c] hover:border-[rgba(56,103,255,0.35)] hover:bg-[rgba(56,103,255,0.08)] dark:border-white/10 dark:text-[#8a9bc0] dark:hover:bg-white/6',
                     )}
                     key={key}
                     onClick={() => setRange(key)}
@@ -136,24 +146,31 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
               <div className="inline-flex items-center gap-0.5 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(245,249,255,0.9)] p-[2px] dark:border-white/10 dark:bg-white/5">
                 {(
                   [
-                    { key: 'cards', label: 'Record cards' },
-                    { key: 'board', label: 'Board view' },
+                    { key: 'cards', icon: Rows3, label: 'Record cards' },
+                    { key: 'board', icon: LayoutGrid, label: 'Board view' },
                   ] as const
-                ).map((opt) => (
-                  <button
-                    className={cn(
-                      'inline-flex h-8 items-center gap-1.5 rounded-[9px] px-3 text-[12px] font-semibold transition-colors',
-                      view === opt.key
-                        ? 'bg-white text-[#091423] shadow-[0_1px_3px_rgba(8,20,48,0.12)] dark:bg-white/12 dark:text-[#eef4ff]'
-                        : 'text-[#8a9bc0] hover:text-[#2e4268] dark:hover:text-[#b6c4dc]',
-                    )}
-                    key={opt.key}
-                    onClick={() => setView(opt.key)}
-                    type="button"
-                  >
-                    <span className="whitespace-nowrap">{t(opt.label)}</span>
-                  </button>
-                ))}
+                ).map((opt) => {
+                  const Icon = opt.icon
+                  return (
+                    <button
+                      className={cn(
+                        'inline-flex h-8 items-center gap-1.5 rounded-[9px] px-3 text-[12px] font-semibold transition-colors',
+                        view === opt.key
+                          ? 'bg-white text-[#3867ff] shadow-[0_1px_3px_rgba(8,20,48,0.12)] dark:bg-white/12 dark:text-[#8fa5ff]'
+                          : 'text-[#8a9bc0] hover:text-[#2e4268] dark:hover:text-[#b6c4dc]',
+                      )}
+                      key={opt.key}
+                      onClick={() => setView(opt.key)}
+                      type="button"
+                    >
+                      <Icon
+                        className="h-4 w-4 shrink-0"
+                        strokeWidth={1.75}
+                      />
+                      <span className="whitespace-nowrap">{t(opt.label)}</span>
+                    </button>
+                  )
+                })}
               </div>
             </div>
           </div>
@@ -164,6 +181,7 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
               <div className="flex items-center gap-5">
                 {[{ key: 'all' as const, labelKey: 'All' }, ...MODALITIES].map((tab) => {
                   const active = modality === tab.key
+                  const TabIcon = TAB_ICONS[tab.key]
                   return (
                     <button
                       className={cn(
@@ -175,6 +193,10 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
                       type="button"
                     >
                       <span className="inline-flex items-center gap-1.5">
+                        <TabIcon
+                          className={cn('h-3.5 w-3.5', active ? 'text-[#3867ff] dark:text-[#8fa5ff]' : 'text-[#8a9bc0]')}
+                          strokeWidth={1.75}
+                        />
                         <span>{t(tab.labelKey)}</span>
                       </span>
                       <span className={cn('absolute right-0 -bottom-px left-0 h-[2px] rounded-full bg-gradient-to-r from-[#3898bc] to-[#3867ff]', active ? 'opacity-100' : 'opacity-0')} />
