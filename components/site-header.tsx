@@ -4,13 +4,14 @@ import { useMemo } from 'react'
 
 import { usePathname } from 'next/navigation'
 
-import { ChevronRight, Compass, LayoutDashboard } from 'lucide-react'
+import { Compass } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { LanguageSwitcher } from './language-switcher'
 import { ProfileDropdownMenu } from './profile-dropdown-menu'
 import { AppThemeToggle } from './theme/app-theme-toggle'
 import { TopUpCredits } from './top-up-credits'
+import { WorkspaceChip } from './workspace-chip'
 
 /**
  * 页面顶部横条(Site Header)
@@ -63,31 +64,8 @@ export function SiteHeader() {
 
         {/* 右侧:工作区 chip / 语言 chip / 工具条 */}
         <div className="flex min-w-0 flex-wrap items-center justify-end gap-2">
-          {/* 工作区 chip */}
-          <button
-            type="button"
-            aria-label={t('Switch workspace')}
-            className="inline-flex h-9 items-center gap-2.5 rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(243,247,251,0.96))] px-3.5 text-[12px] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.94),0_1px_0_rgba(12,24,36,0.06),0_10px_24px_rgba(8,20,48,0.07)] backdrop-blur-2xl transition hover:border-[rgba(93,175,206,0.35)] hover:bg-[linear-gradient(180deg,rgba(252,254,255,1),rgba(240,247,253,0.98))] dark:border-white/8 dark:bg-white/4 dark:text-zinc-200 dark:hover:border-white/14 dark:hover:bg-white/8"
-          >
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(250,252,255,0.98),rgba(239,245,251,0.96))] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.05)] dark:border-white/8 dark:bg-white/6 dark:text-zinc-300">
-              <LayoutDashboard
-                className="h-3.5 w-3.5"
-                strokeWidth={1.75}
-              />
-            </span>
-            <span className="flex max-w-[224px] min-w-0 items-center gap-2">
-              <span className="truncate text-left text-[12px] text-[#091423] dark:text-[#eef4ff]">
-                {t('Workspace')}
-              </span>
-              <span className="shrink-0 text-[12px] text-[#4e6585] dark:text-[#6b7f9d]">
-                · {t('Admin')}
-              </span>
-              <ChevronRight
-                className="h-3.5 w-3.5 shrink-0 text-[#4e6585] transition-transform duration-200 dark:text-[#6b7f9d]"
-                strokeWidth={1.75}
-              />
-            </span>
-          </button>
+          {/* 工作区 chip(封装组件 WorkspaceChip,点击切换工作区) */}
+          <WorkspaceChip />
 
           {/* 语言切换(封装组件 LanguageSwitcher,chip 形态含下拉) */}
           <LanguageSwitcher
