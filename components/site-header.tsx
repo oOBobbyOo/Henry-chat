@@ -74,7 +74,7 @@ export function SiteHeader() {
           />
 
           {/* 充值 + 积分 + 主题 + 头像 工具条 */}
-          <div className="inline-flex h-10 items-center rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,248,252,0.96))] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.06),0_12px_26px_rgba(8,20,48,0.08)] backdrop-blur-[24px] dark:border-white/8 dark:bg-white/4 dark:text-zinc-200">
+          <div className="inline-flex h-10 items-center rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,248,252,0.96))] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.06),0_12px_26px_rgba(8,20,48,0.08)] backdrop-blur-[24px] dark:border-white/8 dark:bg-none dark:bg-white/4 dark:text-zinc-200 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_1px_0_rgba(0,0,0,0.2),0_12px_26px_rgba(2,6,23,0.35)]">
             {/* 充值 + 积分(封装组件 TopUpCredits) */}
             <TopUpCredits />
 

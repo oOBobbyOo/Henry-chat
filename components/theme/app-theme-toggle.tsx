@@ -13,7 +13,7 @@ export function AppThemeToggle() {
     <div
       role="group"
       aria-label={t('Theme')}
-      className="inline-flex h-8 shrink-0 items-center gap-1 rounded-full border border-[rgba(12,24,36,0.08)] bg-[rgba(15,23,42,0.04)] p-[3px] text-[#4e6585] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.05)] transition-colors dark:border-white/8 dark:bg-white/6 dark:text-[#8fa5c4]"
+      className="inline-flex h-8 shrink-0 items-center gap-1 rounded-full border border-[rgba(12,24,36,0.08)] bg-[rgba(15,23,42,0.04)] p-[3px] text-[#4e6585] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.05)] transition-colors dark:border-white/8 dark:bg-white/6 dark:text-[#8fa5c4] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_1px_0_rgba(0,0,0,0.2)]"
     >
       <button
         type="button"
@@ -22,7 +22,7 @@ export function AppThemeToggle() {
         onClick={() => setTheme('light')}
         className={`inline-flex h-6 w-6 items-center justify-center rounded-full transition focus-visible:ring-2 focus-visible:outline-none ${
           isLight
-            ? 'bg-white text-[#091423] shadow-[0_6px_16px_rgba(15,23,42,0.12)] dark:bg-white/12 dark:text-white'
+            ? 'bg-white text-[#091423] shadow-[0_6px_16px_rgba(15,23,42,0.12)] dark:bg-white/12 dark:text-white dark:shadow-[0_4px_12px_rgba(2,6,23,0.45)]'
             : 'hover:text-zinc-800 dark:hover:text-zinc-200'
         }`}
       >
@@ -38,7 +38,7 @@ export function AppThemeToggle() {
         onClick={() => setTheme('dark')}
         className={`inline-flex h-6 w-6 items-center justify-center rounded-full transition focus-visible:ring-2 focus-visible:outline-none ${
           !isLight
-            ? 'bg-white text-[#091423] shadow-[0_6px_16px_rgba(15,23,42,0.12)] dark:bg-white/12 dark:text-white'
+            ? 'bg-white text-[#091423] shadow-[0_6px_16px_rgba(15,23,42,0.12)] dark:bg-white/12 dark:text-white dark:shadow-[0_4px_12px_rgba(2,6,23,0.45)]'
             : 'hover:text-zinc-800 dark:hover:text-zinc-200'
         }`}
       >
