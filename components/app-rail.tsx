@@ -3,24 +3,53 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { Compass, Folder, Navigation, Paintbrush, Palette, UsersRound } from 'lucide-react'
+import {
+  Compass,
+  Folder,
+  Globe,
+  MessageSquare,
+  Navigation,
+  Paintbrush,
+  Palette,
+  Send,
+  UsersRound,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { AppLogo } from '@/components/app-logo'
 
 /**
  * 左侧悬浮导航栏(App Rail)
- * 品牌 logo 区 + 图标/文字导航项(激活态浅蓝高亮) + 底部社交/登录。
+ * 品牌 logo 区 + 图标/文字导航项(激活态浅蓝高亮,部分项带角标) + 底部社交图标。
  */
 
-/** 导航项定义 */
+/** 导航项定义，badge 为可选角标 */
 const RAIL_NAV_ITEMS = [
   { href: '/plaza', titleKey: 'Plaza', icon: Compass },
-  { href: '/projects', titleKey: 'xFlow', icon: Navigation },
-  { href: '/workbench', titleKey: 'Workbench', icon: Paintbrush },
+  {
+    href: '/projects',
+    titleKey: 'xFlow',
+    icon: Navigation,
+    badgeKey: 'Infinite canvas',
+    badgeVariant: 'unlimited',
+  },
+  {
+    href: '/workbench',
+    titleKey: 'Workbench',
+    icon: Paintbrush,
+    badgeKey: 'Autonomous generation',
+    badgeVariant: 'new',
+  },
   { href: '/3d', titleKey: '3D Modeling', icon: Palette },
   { href: '/assets', titleKey: 'Assets', icon: Folder },
   { href: '/team', titleKey: 'My Team', icon: UsersRound },
+] as const
+
+/** 底部社交图标 */
+const RAIL_SOCIAL_ITEMS = [
+  { labelKey: 'Official site', href: '#', Icon: Globe },
+  { labelKey: 'Discord', href: '#', Icon: MessageSquare },
+  { labelKey: 'Telegram', href: '#', Icon: Send },
 ] as const
 
 /** 判断导航项是否激活:href 与 pathname 同坐标系(无路由组前缀) */
@@ -54,9 +83,13 @@ export function AppRail() {
               <p className="bg-[linear-gradient(180deg,#9fe8ff,#38bdf8_26%,#6366f1_58%,#8b5cf6_82%,#4d4fa6)] bg-clip-text text-[22px] leading-none font-bold tracking-[-0.05em] text-transparent dark:from-[#f4f9ff] dark:via-[#6fd0ff] dark:to-[#c4f1ee]">
                 Henry
               </p>
-              <p className="mt-1.5 text-[11px] leading-none font-semibold tracking-[0.24em] text-[#4e6585] uppercase dark:text-[#8fa5c4]">Studio</p>
+              <p className="mt-1.5 text-[11px] leading-none font-semibold tracking-[0.24em] text-[#4e6585] uppercase dark:text-[#8fa5c4]">
+                Studio
+              </p>
               <div className="mx-auto mt-2 h-px w-10 bg-gradient-to-r from-transparent via-[rgba(120,136,158,0.2)] to-transparent" />
-              <p className="mt-2 max-w-[72px] text-center text-[10px] leading-[1.45] font-semibold tracking-[0.03em] text-[#71839a] dark:text-[#6b7f9d]">{t('Creation platform')}</p>
+              <p className="mt-2 max-w-[72px] text-center text-[10px] leading-[1.45] font-semibold tracking-[0.03em] text-[#71839a] dark:text-[#6b7f9d]">
+                {t('Creation platform')}
+              </p>
             </div>
           </div>
         </Link>
@@ -68,6 +101,8 @@ export function AppRail() {
           {RAIL_NAV_ITEMS.map((item) => {
             const active = isRailItemActive(pathname, item.href)
             const Icon = item.icon
+            const { badgeVariant: badge, badgeKey } =
+              'badgeVariant' in item ? item : { badgeVariant: undefined, badgeKey: undefined }
             return (
               <Link
                 key={item.href}
@@ -77,15 +112,26 @@ export function AppRail() {
                 className={`group relative flex min-w-0 flex-col items-center gap-[5px] rounded-[20px] border px-1 pt-[7px] pb-[9px] transition duration-200 active:scale-[0.985] ${
                   active
                     ? 'border-[rgba(97,149,216,0.2)] bg-[linear-gradient(180deg,rgba(243,249,255,0.99),rgba(226,239,255,0.96))] text-[#3f7fd8] shadow-[inset_0_1px_0_rgba(255,255,255,1),0_12px_24px_rgba(58,110,198,0.1)] dark:border-[rgba(97,149,216,0.25)] dark:bg-[linear-gradient(180deg,rgba(56,103,255,0.16),rgba(56,103,255,0.08))] dark:text-[#7fb2ff]'
-                    : 'border-transparent text-[#6f829b] hover:-translate-y-px hover:border-[rgba(105,147,204,0.17)] hover:bg-[linear-gradient(180deg,rgba(249,252,255,0.98),rgba(236,244,253,0.9))] hover:text-[#557aa8] hover:shadow-[inset_0_1px_0_rgba(255,255,255,1),0_10px_18px_rgba(76,117,187,0.07)] dark:text-zinc-400 dark:hover:border-white/8 dark:hover:bg-white/4 dark:hover:text-zinc-200'
+                    : 'border-transparent text-[#6f829b] hover:-translate-y-px hover:border-[rgba(105,147,204,0.17)] hover:bg-[linear-gradient(180deg,rgba(249,252,255,0.98),rgba(236,244,253,0.9))] hover:text-[#557aa8] hover:shadow-[inset_0_1px_0_rgba(255,255,255,1),0_10px_18px_rgba(76,117,187,0.07)] dark:text-zinc-400 dark:hover:border-white/8 dark:hover:bg-white/4 dark:hover:bg-none dark:hover:text-zinc-200 dark:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_10px_18px_rgba(2,6,23,0.35)]'
                 }`}
               >
-                <span className="flex h-9 w-9 items-center justify-center">
+                <span className="relative flex h-9 w-9 items-center justify-center">
+                  {badge ? (
+                    <span
+                      className={`absolute -top-3 left-1/2 z-1 flex -translate-x-1/2 items-center justify-center rounded-full border px-[7px] py-[2px] text-center text-[12px] leading-none font-medium tracking-[0.02em] whitespace-nowrap shadow-[0_8px_18px_rgba(15,23,42,0.12)] ${
+                        badge === 'unlimited'
+                          ? 'border-[#d7a8ff] bg-[linear-gradient(180deg,#c23ad2,#8755f0)] text-[#f7eaff] dark:border-[#d5b7ff] dark:bg-[linear-gradient(180deg,#f6ebff,#ead7ff)] dark:text-[#6b21a8]'
+                          : 'border-[#36c78f] bg-[linear-gradient(180deg,#148761,#0f6d4e)] text-[#e6fff5] dark:border-[#9adfc0] dark:bg-[linear-gradient(180deg,#ebfff4,#d1f7e3)] dark:text-[#055f46]'
+                      }`}
+                    >
+                      {t(badgeKey)}
+                    </span>
+                  ) : null}
                   <span
                     className={`flex h-[34px] w-[34px] items-center justify-center rounded-[14px] border transition duration-200 ${
                       active
                         ? 'border-[rgba(76,139,226,0.28)] bg-[linear-gradient(180deg,rgba(122,183,255,0.28),rgba(59,130,246,0.16))] text-[#3f7fd8] shadow-[inset_0_1px_0_rgba(255,255,255,0.92),0_10px_20px_rgba(59,130,246,0.14)] dark:text-[#7fb2ff]'
-                        : 'border-transparent text-[#7b8da4] group-hover:border-[rgba(109,156,222,0.2)] group-hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(235,244,255,0.82))] group-hover:text-[#557aa8] dark:text-zinc-400 dark:group-hover:border-white/8 dark:group-hover:bg-white/6'
+                        : 'border-transparent text-[#7b8da4] group-hover:border-[rgba(109,156,222,0.2)] group-hover:bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(235,244,255,0.82))] group-hover:text-[#557aa8] dark:text-zinc-400 dark:group-hover:border-white/8 dark:group-hover:bg-white/6 dark:group-hover:bg-none'
                     }`}
                   >
                     <Icon
@@ -94,42 +140,31 @@ export function AppRail() {
                     />
                   </span>
                 </span>
-                <span className="block w-full min-w-0 truncate text-center text-[13px] leading-[1.12] font-semibold tracking-[0.01em]">{t(item.titleKey)}</span>
+                <span className="block w-full min-w-0 truncate text-center text-[13px] leading-[1.12] font-semibold tracking-[0.01em]">
+                  {t(item.titleKey)}
+                </span>
               </Link>
             )
           })}
         </nav>
       </div>
 
-      {/* 底部:登录入口 */}
-      <div className="mt-3 flex justify-center">
-        <Link
-          href="/login"
-          title={t('Sign in')}
-          className="group flex h-12 w-12 items-center justify-center rounded-[16px] border border-[rgba(105,147,204,0.17)] bg-[linear-gradient(180deg,rgba(255,255,255,0.995),rgba(243,247,251,0.965))] text-[#557aa8] shadow-[inset_0_1px_0_rgba(255,255,255,1)] transition duration-200 hover:-translate-y-px hover:border-[rgba(97,149,216,0.2)] hover:text-[#3f7fd8] dark:border-white/8 dark:bg-white/4 dark:text-zinc-300 dark:hover:border-[rgba(97,149,216,0.25)] dark:hover:text-[#7fb2ff]"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden
+      {/* 底部:社交图标 */}
+      <div className="mt-3 flex items-center justify-center gap-1">
+        {RAIL_SOCIAL_ITEMS.map(({ labelKey, href, Icon }) => (
+          <Link
+            key={labelKey}
+            href={href}
+            title={t(labelKey)}
+            aria-label={t(labelKey)}
+            className="flex h-9 w-9 items-center justify-center rounded-[12px] text-[#8a99ae] transition duration-200 hover:bg-[rgba(120,136,158,0.1)] hover:text-[#557aa8] dark:text-zinc-500 dark:hover:bg-white/6 dark:hover:text-zinc-200"
           >
-            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-            <polyline points="10 17 15 12 10 7" />
-            <line
-              x1="15"
-              x2="3"
-              y1="12"
-              y2="12"
+            <Icon
+              className="h-[18px] w-[18px]"
+              strokeWidth={1.75}
             />
-          </svg>
-        </Link>
+          </Link>
+        ))}
       </div>
     </aside>
   )
