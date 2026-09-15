@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { ChevronRight, Compass, Globe, LayoutDashboard, ShoppingBag } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
+import { ProfileDropdownMenu } from './profile-dropdown-menu'
 import { AppThemeToggle } from './theme/app-theme-toggle'
 
 /**
@@ -173,23 +174,11 @@ export function SiteHeader() {
               <AppThemeToggle />
             </div>
 
-            {/* 账户头像 */}
-            <button
-              type="button"
-              aria-haspopup="menu"
-              className="inline-flex h-full min-w-0 items-center gap-2 rounded-r-full pr-3.5 pl-1.5 transition hover:bg-[rgba(15,23,42,0.04)] focus-visible:ring-2 focus-visible:ring-[rgba(93,175,206,0.4)] focus-visible:outline-none focus-visible:ring-inset dark:hover:bg-white/6"
-            >
-              <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[linear-gradient(180deg,rgba(250,252,255,0.98),rgba(239,245,251,0.96))] ring-1 ring-[rgba(12,24,36,0.08)] ring-inset dark:bg-white/8 dark:ring-white/10">
-                <span className="text-[11px] font-bold text-[#3867ff] dark:text-[#7fb2ff]">B</span>
-              </span>
-              <span className="max-w-[112px] truncate text-[12px] text-[#091423] dark:text-[#eef4ff]">
-                {t('Account')}
-              </span>
-              <ChevronRight
-                className="h-3 w-3 shrink-0 text-[#4a6080] transition-transform duration-200 dark:text-[#7a8db0]"
-                strokeWidth={1.75}
-              />
-            </button>
+            {/* 账户头像(封装组件 ProfileDropdownMenu,含下拉菜单) */}
+            <ProfileDropdownMenu
+              avatarFallback="B"
+              userName={t('Account')}
+            />
           </div>
         </div>
       </div>

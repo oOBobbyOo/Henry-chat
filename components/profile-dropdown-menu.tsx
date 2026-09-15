@@ -5,7 +5,16 @@ import { ChevronRight, CircleQuestionMark, LayoutDashboard, LogOut, Settings, Sh
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 
-export function ProfileDropdownMenu() {
+interface ProfileDropdownMenuProps {
+  /** 显示的用户名(不传则显示默认文案) */
+  userName?: string
+  /** 头像兜底字符(传入时显示字符,否则显示 User 图标) */
+  avatarFallback?: string
+  /** 头像图片地址 */
+  avatarSrc?: string
+}
+
+export function ProfileDropdownMenu({ userName, avatarFallback, avatarSrc }: ProfileDropdownMenuProps) {
   const isLogin = true
 
   return (
@@ -30,14 +39,18 @@ export function ProfileDropdownMenu() {
               >
                 <Avatar className="inline-flex h-7 w-7 shrink-0 overflow-hidden rounded-full bg-gray-100 ring-1 ring-gray-300 dark:bg-[#0c1320] dark:ring-white/10">
                   <AvatarImage
-                    src={''}
-                    alt={'User'}
+                    src={avatarSrc ?? ''}
+                    alt={userName ?? 'User'}
                   />
                   <AvatarFallback className="text-gray-500 dark:text-zinc-200">
-                    <User className="h-3.5 w-3.5" />
+                    {avatarFallback ? (
+                      <span className="text-[11px] font-bold">{avatarFallback}</span>
+                    ) : (
+                      <User className="h-3.5 w-3.5" />
+                    )}
                   </AvatarFallback>
                 </Avatar>
-                <span className="hidden text-[12px] text-gray-700 sm:inline dark:text-zinc-200">用户名</span>
+                <span className="hidden text-[12px] text-gray-700 sm:inline dark:text-zinc-200">{userName ?? '用户名'}</span>
                 <ChevronRight className="h-3.5 w-3.5 text-gray-400 dark:text-current" />
               </button>
             </DropdownMenuTrigger>
