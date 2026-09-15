@@ -4,9 +4,10 @@ import { useMemo } from 'react'
 
 import { usePathname } from 'next/navigation'
 
-import { ChevronRight, Compass, Globe, LayoutDashboard, Moon, ShoppingBag, Sun } from 'lucide-react'
+import { ChevronRight, Compass, Globe, LayoutDashboard, ShoppingBag } from 'lucide-react'
 import { useT } from 'next-i18next/client'
-import { useTheme } from 'next-themes'
+
+import { AppThemeToggle } from './theme/app-theme-toggle'
 
 /**
  * 页面顶部横条(Site Header)
@@ -27,13 +28,14 @@ const HEADER_TITLES: Array<{ prefix: string; titleKey: string; hintKey: string }
 export function SiteHeader() {
   const { t } = useT('common')
   const pathname = usePathname()
-  const { resolvedTheme, setTheme } = useTheme()
 
   const current = useMemo(() => {
-    return HEADER_TITLES.find((item) => pathname === item.prefix || pathname.startsWith(`${item.prefix}/`)) ?? HEADER_TITLES[0]
+    return (
+      HEADER_TITLES.find(
+        (item) => pathname === item.prefix || pathname.startsWith(`${item.prefix}/`),
+      ) ?? HEADER_TITLES[0]
+    )
   }, [pathname])
-
-  const isLight = resolvedTheme !== 'dark'
 
   return (
     <header className="sticky top-3 z-40 px-4 lg:px-5">
@@ -46,8 +48,12 @@ export function SiteHeader() {
               strokeWidth={1.75}
             />
             <div className="flex min-w-0 items-center gap-2.5">
-              <h1 className="truncate text-[22px] leading-none font-semibold tracking-[-0.025em] text-[#091423] dark:text-[#eef4ff]">{t(current.titleKey)}</h1>
-              <p className="max-w-[20ch] truncate text-[12px] leading-[1.35] text-[#4a6080] dark:text-[#7a8db0]">{t(current.hintKey)}</p>
+              <h1 className="truncate text-[22px] leading-none font-semibold tracking-[-0.025em] text-[#091423] dark:text-[#eef4ff]">
+                {t(current.titleKey)}
+              </h1>
+              <p className="max-w-[20ch] truncate text-[12px] leading-[1.35] text-[#4a6080] dark:text-[#7a8db0]">
+                {t(current.hintKey)}
+              </p>
             </div>
           </div>
         </div>
@@ -67,8 +73,12 @@ export function SiteHeader() {
               />
             </span>
             <span className="flex max-w-[224px] min-w-0 items-center gap-2">
-              <span className="truncate text-left text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Workspace')}</span>
-              <span className="shrink-0 text-[12px] text-[#4e6585] dark:text-[#6b7f9d]">· {t('Admin')}</span>
+              <span className="truncate text-left text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                {t('Workspace')}
+              </span>
+              <span className="shrink-0 text-[12px] text-[#4e6585] dark:text-[#6b7f9d]">
+                · {t('Admin')}
+              </span>
               <ChevronRight
                 className="h-3.5 w-3.5 shrink-0 text-[#4e6585] transition-transform duration-200 dark:text-[#6b7f9d]"
                 strokeWidth={1.75}
@@ -115,7 +125,9 @@ export function SiteHeader() {
                 />
                 <span className="inline-flex min-w-0 items-baseline truncate">
                   {t('Membership from')}
-                  <span className="mx-0.5 text-[15px] leading-none font-extrabold tracking-normal text-[#c8102e] [text-shadow:0_1px_0_rgba(255,222,140,0.7),0_0_6px_rgba(200,16,46,0.32)]">6</span>
+                  <span className="mx-0.5 text-[15px] leading-none font-extrabold tracking-normal text-[#c8102e] [text-shadow:0_1px_0_rgba(255,222,140,0.7),0_0_6px_rgba(200,16,46,0.32)]">
+                    6
+                  </span>
                   {t('Percent off')}
                 </span>
               </span>
@@ -158,40 +170,7 @@ export function SiteHeader() {
 
             {/* 主题切换 */}
             <div className="my-1 inline-flex items-center px-1.5">
-              <div
-                role="group"
-                aria-label={t('Theme')}
-                className="inline-flex h-8 shrink-0 items-center gap-1 rounded-full border border-[rgba(12,24,36,0.08)] bg-[rgba(15,23,42,0.04)] p-[3px] text-[#4e6585] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.05)] transition-colors dark:border-white/8 dark:bg-white/6 dark:text-[#8fa5c4]"
-              >
-                <button
-                  type="button"
-                  aria-pressed={isLight}
-                  title={t('Light')}
-                  onClick={() => setTheme('light')}
-                  className={`inline-flex h-6 w-6 items-center justify-center rounded-full transition focus-visible:ring-2 focus-visible:outline-none ${
-                    isLight ? 'bg-white text-[#091423] shadow-[0_6px_16px_rgba(15,23,42,0.12)] dark:bg-white/12 dark:text-white' : 'hover:text-zinc-800 dark:hover:text-zinc-200'
-                  }`}
-                >
-                  <Sun
-                    className="h-3.5 w-3.5"
-                    strokeWidth={1.9}
-                  />
-                </button>
-                <button
-                  type="button"
-                  aria-pressed={!isLight}
-                  title={t('Dark')}
-                  onClick={() => setTheme('dark')}
-                  className={`inline-flex h-6 w-6 items-center justify-center rounded-full transition focus-visible:ring-2 focus-visible:outline-none ${
-                    !isLight ? 'bg-white text-[#091423] shadow-[0_6px_16px_rgba(15,23,42,0.12)] dark:bg-white/12 dark:text-white' : 'hover:text-zinc-800 dark:hover:text-zinc-200'
-                  }`}
-                >
-                  <Moon
-                    className="h-3.5 w-3.5"
-                    strokeWidth={1.9}
-                  />
-                </button>
-              </div>
+              <AppThemeToggle />
             </div>
 
             {/* 账户头像 */}
@@ -203,7 +182,9 @@ export function SiteHeader() {
               <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[linear-gradient(180deg,rgba(250,252,255,0.98),rgba(239,245,251,0.96))] ring-1 ring-[rgba(12,24,36,0.08)] ring-inset dark:bg-white/8 dark:ring-white/10">
                 <span className="text-[11px] font-bold text-[#3867ff] dark:text-[#7fb2ff]">B</span>
               </span>
-              <span className="max-w-[112px] truncate text-[12px] text-[#091423] dark:text-[#eef4ff]">{t('Account')}</span>
+              <span className="max-w-[112px] truncate text-[12px] text-[#091423] dark:text-[#eef4ff]">
+                {t('Account')}
+              </span>
               <ChevronRight
                 className="h-3 w-3 shrink-0 text-[#4a6080] transition-transform duration-200 dark:text-[#7a8db0]"
                 strokeWidth={1.75}
