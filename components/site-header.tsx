@@ -4,12 +4,13 @@ import { useMemo } from 'react'
 
 import { usePathname } from 'next/navigation'
 
-import { ChevronRight, Compass, Globe, LayoutDashboard } from 'lucide-react'
+import { ChevronRight, Compass, LayoutDashboard } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { TopUpCredits } from './top-up-credits'
+import { LanguageSwitcher } from './language-switcher'
 import { ProfileDropdownMenu } from './profile-dropdown-menu'
 import { AppThemeToggle } from './theme/app-theme-toggle'
+import { TopUpCredits } from './top-up-credits'
 
 /**
  * 页面顶部横条(Site Header)
@@ -88,29 +89,11 @@ export function SiteHeader() {
             </span>
           </button>
 
-          {/* 语言 chip */}
-          <button
-            type="button"
-            aria-label={t('Interface language')}
-            className="inline-flex h-10 items-center gap-2 rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(243,247,251,0.96))] px-3 text-[12px] font-medium tracking-[0.01em] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.94),0_1px_0_rgba(12,24,36,0.06),0_10px_24px_rgba(8,20,48,0.07)] backdrop-blur-[22px] transition hover:border-[rgba(93,175,206,0.35)] hover:bg-[linear-gradient(180deg,rgba(252,254,255,1),rgba(240,247,253,0.98))] dark:border-white/8 dark:bg-white/4 dark:text-zinc-200 dark:hover:border-white/14 dark:hover:bg-white/8"
-          >
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(250,252,255,0.98),rgba(239,245,251,0.96))] text-[#4a6080] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.05)] dark:border-white/8 dark:bg-white/6 dark:text-[#8fa5c4]">
-              <Globe
-                className="h-3.5 w-3.5"
-                strokeWidth={1.75}
-              />
-            </span>
-            <span
-              title={t('Simplified Chinese')}
-              className="max-w-[104px] truncate"
-            >
-              {t('Simplified Chinese')}
-            </span>
-            <ChevronRight
-              className="h-3 w-3 shrink-0 text-[#4a6080] transition-transform duration-200 dark:text-[#7a8db0]"
-              strokeWidth={1.75}
-            />
-          </button>
+          {/* 语言切换(封装组件 LanguageSwitcher,chip 形态含下拉) */}
+          <LanguageSwitcher
+            variant="chip"
+            ariaLabel={t('Interface language')}
+          />
 
           {/* 充值 + 积分 + 主题 + 头像 工具条 */}
           <div className="inline-flex h-10 items-center rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(244,248,252,0.96))] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.06),0_12px_26px_rgba(8,20,48,0.08)] backdrop-blur-[24px] dark:border-white/8 dark:bg-white/4 dark:text-zinc-200">
