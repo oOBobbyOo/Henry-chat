@@ -70,7 +70,7 @@ export function WorkspaceChip({
         <button
           type="button"
           aria-label="切换当前工作区"
-          className="inline-flex h-9 items-center gap-2.5 rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(243,247,251,0.96))] px-3.5 text-[12px] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.94),0_1px_0_rgba(12,24,36,0.06),0_10px_24px_rgba(8,20,48,0.07)] backdrop-blur-2xl transition hover:border-[rgba(93,175,206,0.35)] hover:bg-[linear-gradient(180deg,rgba(252,254,255,1),rgba(240,247,253,0.98))] dark:border-white/8 dark:bg-none dark:bg-white/4 dark:text-zinc-200 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_1px_0_rgba(0,0,0,0.2),0_10px_24px_rgba(2,6,23,0.35)] dark:hover:border-white/14 dark:hover:bg-white/8"
+          className="inline-flex h-9 min-w-0 items-center gap-2.5 rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(243,247,251,0.96))] px-2.5 text-[12px] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.94),0_1px_0_rgba(12,24,36,0.06),0_10px_24px_rgba(8,20,48,0.07)] backdrop-blur-2xl transition hover:border-[rgba(93,175,206,0.35)] hover:bg-[linear-gradient(180deg,rgba(252,254,255,1),rgba(240,247,253,0.98))] md:px-3.5 dark:border-white/8 dark:bg-none dark:bg-white/4 dark:text-zinc-200 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_1px_0_rgba(0,0,0,0.2),0_10px_24px_rgba(2,6,23,0.35)] dark:hover:border-white/14 dark:hover:bg-white/8"
         >
           <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(250,252,255,0.98),rgba(239,245,251,0.96))] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.05)] dark:border-white/8 dark:bg-none dark:bg-white/6 dark:text-zinc-300 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_1px_0_rgba(0,0,0,0.18)]">
             <LayoutDashboard
@@ -78,12 +78,12 @@ export function WorkspaceChip({
               strokeWidth={1.75}
             />
           </span>
-          <span className="flex max-w-[224px] min-w-0 items-center gap-2">
+          <span className="flex max-w-full min-w-0 flex-1 items-center gap-2">
             <span className="truncate text-left text-[12px] text-[#091423] dark:text-[#eef4ff]">
               {displayName}
             </span>
             {displayRole ? (
-              <span className="shrink-0 text-[12px] text-[#4e6585] dark:text-[#6b7f9d]">
+              <span className="hidden shrink-0 text-[12px] text-[#4e6585] md:inline dark:text-[#6b7f9d]">
                 · {displayRole}
               </span>
             ) : null}

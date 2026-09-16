@@ -37,7 +37,7 @@ export function LanguageSwitcher({ variant = 'icon', ariaLabel }: LanguageSwitch
           <button
             type="button"
             aria-label={ariaLabel ?? '切换语言'}
-            className="inline-flex h-10 items-center gap-2 rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(243,247,251,0.96))] px-3 text-[12px] font-medium tracking-[0.01em] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.94),0_1px_0_rgba(12,24,36,0.06),0_10px_24px_rgba(8,20,48,0.07)] backdrop-blur-[22px] transition hover:border-[rgba(93,175,206,0.35)] hover:bg-[linear-gradient(180deg,rgba(252,254,255,1),rgba(240,247,253,0.98))] dark:border-white/8 dark:bg-white/4 dark:bg-none dark:text-zinc-200 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_1px_0_rgba(0,0,0,0.2),0_10px_24px_rgba(2,6,23,0.35)] dark:hover:border-white/14 dark:hover:bg-white/8"
+            className="inline-flex h-10 items-center gap-2 rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98),rgba(243,247,251,0.96))] px-2.5 text-[12px] font-medium tracking-[0.01em] text-[#091423] shadow-[inset_0_1px_0_rgba(255,255,255,0.94),0_1px_0_rgba(12,24,36,0.06),0_10px_24px_rgba(8,20,48,0.07)] backdrop-blur-[22px] transition hover:border-[rgba(93,175,206,0.35)] hover:bg-[linear-gradient(180deg,rgba(252,254,255,1),rgba(240,247,253,0.98))] md:px-3 dark:border-white/8 dark:bg-none dark:bg-white/4 dark:text-zinc-200 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_1px_0_rgba(0,0,0,0.2),0_10px_24px_rgba(2,6,23,0.35)] dark:hover:border-white/14 dark:hover:bg-white/8"
           >
             <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-[rgba(12,24,36,0.1)] bg-[linear-gradient(180deg,rgba(250,252,255,0.98),rgba(239,245,251,0.96))] text-[#4a6080] shadow-[inset_0_1px_0_rgba(255,255,255,0.96),0_1px_0_rgba(12,24,36,0.05)] dark:border-white/8 dark:bg-white/6 dark:bg-none dark:text-[#8fa5c4] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.07),0_1px_0_rgba(0,0,0,0.18)]">
               <Globe
@@ -47,12 +47,12 @@ export function LanguageSwitcher({ variant = 'icon', ariaLabel }: LanguageSwitch
             </span>
             <span
               title={currentLabel}
-              className="max-w-[104px] truncate"
+              className="hidden max-w-[104px] truncate md:inline"
             >
               {currentLabel}
             </span>
             <ChevronRight
-              className="h-3 w-3 shrink-0 text-[#4a6080] transition-transform duration-200 dark:text-[#7a8db0]"
+              className="hidden h-3 w-3 shrink-0 text-[#4a6080] transition-transform duration-200 md:block dark:text-[#7a8db0]"
               strokeWidth={1.75}
             />
           </button>

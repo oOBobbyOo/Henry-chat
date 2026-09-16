@@ -71,10 +71,10 @@ export function ProfileDropdownMenu({
                     )}
                   </AvatarFallback>
                 </Avatar>
-                <span className="hidden text-[12px] text-gray-700 sm:inline dark:text-zinc-200">
+                <span className="hidden whitespace-nowrap text-[12px] text-gray-700 lg:inline dark:text-zinc-200">
                   {userName ?? '用户名'}
                 </span>
-                <ChevronRight className="h-3.5 w-3.5 text-gray-400 dark:text-current" />
+                <ChevronRight className="hidden h-3.5 w-3.5 text-gray-400 lg:block dark:text-current" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
