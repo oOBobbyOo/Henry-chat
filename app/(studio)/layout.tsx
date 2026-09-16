@@ -16,6 +16,8 @@ export default function StudioLayout({
     <div className="min-h-full xl:pl-[128px]">
       <AppRail />
       <SiteHeader />
+      {/* 移动端为底部导航栏预留空间(栏高约 64px + bottom-3 间距 + iOS 安全区) */}
+      <div className="h-[calc(88px+env(safe-area-inset-bottom))] xl:hidden" aria-hidden />
       {children}
     </div>
   )

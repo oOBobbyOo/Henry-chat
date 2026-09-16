@@ -52,12 +52,23 @@ const RAIL_SOCIAL_ITEMS = [
   { labelKey: 'Telegram', href: '#', Icon: Send },
 ] as const
 
+/** 移动端底部导航项(参考 syna.art:6 项均分横排,含帐号;社交图标在移动端隐藏) */
+const RAIL_MOBILE_ITEMS = [
+  ...RAIL_NAV_ITEMS.map((item) => ({
+    href: item.href,
+    titleKey: item.titleKey,
+    icon: item.icon,
+    badgeVariant: 'badgeVariant' in item ? (item.badgeVariant as string | undefined) : undefined,
+    badgeKey: 'badgeKey' in item ? (item.badgeKey as string | undefined) : undefined,
+  })),
+] as const
+
 /** 判断导航项是否激活:href 与 pathname 同坐标系(无路由组前缀) */
 function isRailItemActive(pathname: string, href: string) {
   return pathname === href || (href !== '/' && pathname.startsWith(`${href}/`))
 }
 
-export function AppRail() {
+export function AppRailDesktop() {
   const { t } = useT('common')
   const pathname = usePathname()
 
@@ -167,5 +178,76 @@ export function AppRail() {
         ))}
       </div>
     </aside>
+  )
+}
+
+/**
+ * 移动端底部导航栏(< xl 显示)
+ * 浮岛式圆角面板,6 个导航项均分横排(上图下文),角标置于图标上方,社交图标不展示。
+ */
+function AppRailMobile() {
+  const { t } = useT('common')
+  const pathname = usePathname()
+
+  return (
+    <nav
+      aria-label="Mobile"
+      className="fixed inset-x-3 bottom-3 z-40 xl:hidden"
+    >
+      <div className="grid grid-cols-6 gap-1 rounded-[22px] border border-[rgba(12,24,36,0.05)] bg-[linear-gradient(180deg,rgba(255,255,255,0.97),rgba(245,249,255,0.94))] p-1.5 shadow-[inset_0_1px_0_rgba(255,255,255,1),0_1px_0_rgba(12,24,36,0.06),0_16px_36px_rgba(8,20,48,0.1)] backdrop-blur-xl sm:gap-1.5 sm:p-2 dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(15,22,36,0.94),rgba(9,14,25,0.92))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_16px_36px_rgba(2,6,23,0.35)]">
+        {RAIL_MOBILE_ITEMS.map((item) => {
+          const active = isRailItemActive(pathname, item.href)
+          const Icon = item.icon
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-label={t(item.titleKey)}
+              aria-current={active ? 'page' : undefined}
+              className={`group relative flex min-w-0 flex-col items-center gap-1 rounded-[16px] px-0.5 py-1.5 text-center transition duration-200 active:scale-[0.97] ${
+                active
+                  ? 'border border-[rgba(97,149,216,0.2)] bg-[linear-gradient(180deg,rgba(243,249,255,0.99),rgba(226,239,255,0.96))] text-[#3f7fd8] dark:border-[rgba(97,149,216,0.25)] dark:bg-[linear-gradient(180deg,rgba(56,103,255,0.16),rgba(56,103,255,0.08))] dark:text-[#7fb2ff]'
+                  : 'border border-transparent text-[#6f829b] dark:text-zinc-400'
+              }`}
+            >
+              {item.badgeKey ? (
+                <span
+                  className={`absolute -top-1 left-1/2 z-1 flex -translate-x-1/2 items-center justify-center rounded-full border px-[5px] py-[1.5px] text-center text-[9px] leading-none font-medium tracking-[0.02em] whitespace-nowrap shadow-[0_6px_14px_rgba(15,23,42,0.14)] ${
+                    item.badgeVariant === 'unlimited'
+                      ? 'border-[#d7a8ff] bg-[linear-gradient(180deg,#c23ad2,#8755f0)] text-[#f7eaff] dark:border-[#d5b7ff] dark:bg-[linear-gradient(180deg,#f6ebff,#ead7ff)] dark:text-[#6b21a8]'
+                      : 'border-[#36c78f] bg-[linear-gradient(180deg,#148761,#0f6d4e)] text-[#e6fff5] dark:border-[#9adfc0] dark:bg-[linear-gradient(180deg,#ebfff4,#d1f7e3)] dark:text-[#055f46]'
+                  }`}
+                >
+                  {t(item.badgeKey)}
+                </span>
+              ) : null}
+              <span
+                className={`flex h-7 w-7 items-center justify-center rounded-[10px] border ${
+                  active
+                    ? 'border-[rgba(76,139,226,0.28)] bg-[linear-gradient(180deg,rgba(122,183,255,0.28),rgba(59,130,246,0.16))] text-[#3f7fd8] dark:text-[#7fb2ff]'
+                    : 'border-transparent text-[#7b8da4] dark:text-zinc-400'
+                }`}
+              >
+                <Icon
+                  className="h-[18px] w-[18px]"
+                  strokeWidth={1.75}
+                />
+              </span>
+              <span className="block w-full min-w-0 truncate text-center text-[10px] leading-[1.2] font-medium">{t(item.titleKey)}</span>
+            </Link>
+          )
+        })}
+      </div>
+    </nav>
+  )
+}
+
+/** 桌面侧栏 + 移动底部栏组合导出 */
+export function AppRail() {
+  return (
+    <>
+      <AppRailDesktop />
+      <AppRailMobile />
+    </>
   )
 }
