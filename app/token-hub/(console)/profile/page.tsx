@@ -6,7 +6,14 @@ import { useQueryClient } from '@tanstack/react-query'
 import { RefreshCw } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { TOKEN_HUB_QUERY_KEYS, useBalanceQuery, useBalanceTransactionsQuery, useKeysQuery, useProfileQuery, useSummaryQuery } from '@/services/token-hub'
+import {
+  TOKEN_HUB_QUERY_KEYS,
+  useBalanceQuery,
+  useBalanceTransactionsQuery,
+  useKeysQuery,
+  useProfileQuery,
+  useSummaryQuery,
+} from '@/services/token-hub'
 
 import { AccountOverviewCard } from './_components/account-overview-card'
 import { BalanceDetailsCard } from './_components/balance-details-card'
@@ -48,7 +55,9 @@ export default function ProfilePage() {
         {/* 标题区 */}
         <header className="flex items-center justify-between gap-4 border-b border-(--tc-border)/80 pb-5">
           <div>
-            <h1 className="text-[24px] font-semibold tracking-[-0.045em] text-(--tc-strong) sm:text-[26px]">{t('Profile Title')}</h1>
+            <h1 className="text-[24px] font-semibold tracking-[-0.045em] text-(--tc-strong) sm:text-[26px]">
+              {t('Profile Title')}
+            </h1>
             <p className="mt-1.5 text-sm text-(--tc-body)">{t('Profile Subtitle')}</p>
           </div>
           <button

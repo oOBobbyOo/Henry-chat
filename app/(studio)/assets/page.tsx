@@ -38,7 +38,8 @@ export default function AssetsPage() {
   const items = useMemo(() => library?.items ?? [], [library])
 
   /** 生效中的筛选数量(有 facet / 关键词 / 非默认类型或时间) */
-  const hasActiveFilters = activeFacetIds.length > 0 || keyword.trim() !== '' || type !== 'all' || timeRange !== 'all'
+  const hasActiveFilters =
+    activeFacetIds.length > 0 || keyword.trim() !== '' || type !== 'all' || timeRange !== 'all'
 
   /** 过滤后的资产列表 */
   const filtered = useMemo(() => {
@@ -59,12 +60,15 @@ export default function AssetsPage() {
       if (type !== 'all' && item.assetType !== type) return false
       // facet 筛选:命中任一激活 facet 即保留(facet 全空视为不限制)
       if (activeFacetIds.length > 0) {
-        const matched = facets.some((group) => group.items.some((fi) => activeFacetIds.includes(fi.id) && matchesFacet(item, fi.id)))
+        const matched = facets.some((group) =>
+          group.items.some((fi) => activeFacetIds.includes(fi.id) && matchesFacet(item, fi.id)),
+        )
         if (!matched) return false
       }
       // 关键词
       const kw = keyword.trim().toLowerCase()
-      if (kw && !item.name.toLowerCase().includes(kw) && !item.modelName.toLowerCase().includes(kw)) return false
+      if (kw && !item.name.toLowerCase().includes(kw) && !item.modelName.toLowerCase().includes(kw))
+        return false
       return true
     })
   }, [activeFacetIds, facets, items, keyword, scope, timeRange, type])
@@ -260,11 +264,13 @@ export default function AssetsPage() {
 
 /** 资产是否命中 facet(本地 mock:按类型词根粗匹配 facet id) */
 function matchesFacet(item: Assets.AssetItem, facetId: string): boolean {
-  if (facetId === 'portrait' || facetId === 'product' || facetId === 'scene') return item.assetType === 'image'
+  if (facetId === 'portrait' || facetId === 'product' || facetId === 'scene')
+    return item.assetType === 'image'
   if (facetId === 'sound') return item.assetType === 'audio'
   if (facetId === 'model') return item.assetType === '3d'
   if (facetId === 'lofi') return item.assetType === 'audio'
-  if (facetId === 'cyberpunk' || facetId === 'cinematic') return item.assetType === 'image' || item.assetType === 'video'
+  if (facetId === 'cyberpunk' || facetId === 'cinematic')
+    return item.assetType === 'image' || item.assetType === 'video'
   if (facetId === 'watercolor') return item.assetType === 'image'
   return false
 }

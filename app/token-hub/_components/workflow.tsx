@@ -7,7 +7,11 @@ import { getT } from 'next-i18next/server'
 export async function Workflow() {
   const { t } = await getT('token-hub')
 
-  const adminSteps = [t('Workflow Admin Step 1'), t('Workflow Admin Step 2'), t('Workflow Admin Step 3')]
+  const adminSteps = [
+    t('Workflow Admin Step 1'),
+    t('Workflow Admin Step 2'),
+    t('Workflow Admin Step 3'),
+  ]
   const devSteps = [t('Workflow Dev Step 1'), t('Workflow Dev Step 2'), t('Workflow Dev Step 3')]
 
   return (
@@ -17,7 +21,9 @@ export async function Workflow() {
     >
       <div className="mx-auto max-w-330 px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-[30px] font-semibold leading-tight tracking-tight text-[#0f1c3a] sm:text-[36px]">{t('Workflow Heading')}</h2>
+          <h2 className="text-[30px] font-semibold leading-tight tracking-tight text-[#0f1c3a] sm:text-[36px]">
+            {t('Workflow Heading')}
+          </h2>
           <p className="mt-4 text-[15px] leading-8 text-[#5b6b8c]">{t('Workflow Desc')}</p>
         </div>
 
@@ -65,19 +71,39 @@ export async function Workflow() {
 }
 
 /** 单个角色接入路径卡片 */
-function RoleCard({ icon: Icon, tone, role, tagline, desc, steps }: { icon: typeof UserCog; tone: 'admin' | 'dev'; role: string; tagline: string; desc: string; steps: string[] }) {
+function RoleCard({
+  icon: Icon,
+  tone,
+  role,
+  tagline,
+  desc,
+  steps,
+}: {
+  icon: typeof UserCog
+  tone: 'admin' | 'dev'
+  role: string
+  tagline: string
+  desc: string
+  steps: string[]
+}) {
   const muted = tone === 'admin'
 
   return (
     <article className="flex flex-col rounded-[24px] border border-[#e4ebf9] bg-white p-7 sm:p-8">
       <div className="flex items-center gap-3">
-        <span className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${muted ? 'bg-[#eef3ff] text-[#294fd4]' : 'bg-[#eefbf6] text-[#0f9d6c]'}`}>
+        <span
+          className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl ${muted ? 'bg-[#eef3ff] text-[#294fd4]' : 'bg-[#eefbf6] text-[#0f9d6c]'}`}
+        >
           <Icon
             className="h-5 w-5"
             aria-hidden="true"
           />
         </span>
-        <p className={`text-[11px] font-bold uppercase tracking-[0.16em] ${muted ? 'text-[#294fd4]' : 'text-[#0f9d6c]'}`}>{role}</p>
+        <p
+          className={`text-[11px] font-bold uppercase tracking-[0.16em] ${muted ? 'text-[#294fd4]' : 'text-[#0f9d6c]'}`}
+        >
+          {role}
+        </p>
       </div>
 
       <h3 className="mt-5 text-lg font-semibold text-[#0f1c3a]">{tagline}</h3>
@@ -89,7 +115,11 @@ function RoleCard({ icon: Icon, tone, role, tagline, desc, steps }: { icon: type
             key={step}
             className="flex items-center gap-3"
           >
-            <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-full text-[12px] font-bold ${muted ? 'bg-[#eef3ff] text-[#294fd4]' : 'bg-[#eefbf6] text-[#0f9d6c]'}`}>{index + 1}</span>
+            <span
+              className={`grid h-7 w-7 shrink-0 place-items-center rounded-full text-[12px] font-bold ${muted ? 'bg-[#eef3ff] text-[#294fd4]' : 'bg-[#eefbf6] text-[#0f9d6c]'}`}
+            >
+              {index + 1}
+            </span>
             <span className="text-sm font-medium text-[#0f1c3a]">{step}</span>
           </li>
         ))}

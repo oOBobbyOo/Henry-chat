@@ -8,7 +8,11 @@ import { tokenHubMock } from '@/mock/token-hub'
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
-  const granularity = (searchParams.get('granularity') ?? 'month') as 'day' | 'week' | 'month' | 'year'
+  const granularity = (searchParams.get('granularity') ?? 'month') as
+    | 'day'
+    | 'week'
+    | 'month'
+    | 'year'
   const days = Number(searchParams.get('days') ?? 365)
   return NextResponse.json(tokenHubMock.costTrend(granularity, days))
 }

@@ -30,7 +30,12 @@ export const FILTER_ALL = 'all'
 export default function McpMarketPage() {
   const { t } = useT('token-hub')
 
-  const [filters, setFilters] = useState<McpFilters>({ price: FILTER_ALL, credential: FILTER_ALL, status: FILTER_ALL, q: '' })
+  const [filters, setFilters] = useState<McpFilters>({
+    price: FILTER_ALL,
+    credential: FILTER_ALL,
+    status: FILTER_ALL,
+    q: '',
+  })
   const [configTarget, setConfigTarget] = useState<TokenHub.McpService | null>(null)
 
   const { data } = useMcpMarketQuery(filters)

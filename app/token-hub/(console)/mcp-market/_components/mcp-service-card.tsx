@@ -53,7 +53,13 @@ function CredentialBadge({ service }: { service: TokenHub.McpService }) {
 /**
  * MCP 服务卡片 —— 名称 + 价格 + 工具数 + 描述 + 工具 chips + 启用/配置操作
  */
-export function McpServiceCard({ service, onGenerateConfig }: { service: TokenHub.McpService; onGenerateConfig: () => void }) {
+export function McpServiceCard({
+  service,
+  onGenerateConfig,
+}: {
+  service: TokenHub.McpService
+  onGenerateConfig: () => void
+}) {
   const { t } = useT('token-hub')
   const setMcpEnabled = useSetMcpEnabledMutation()
   const [pending, setPending] = useState(false)
@@ -84,7 +90,9 @@ export function McpServiceCard({ service, onGenerateConfig }: { service: TokenHu
       <div className="flex flex-1 flex-col p-5">
         {/* 名称 + 价格 */}
         <div className="flex items-start justify-between gap-3">
-          <h3 className="min-w-0 truncate text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{service.name}</h3>
+          <h3 className="min-w-0 truncate text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+            {service.name}
+          </h3>
           <PriceBadge service={service} />
         </div>
 
@@ -98,7 +106,9 @@ export function McpServiceCard({ service, onGenerateConfig }: { service: TokenHu
         </div>
 
         {/* 描述 */}
-        <p className="mt-3 line-clamp-2 text-xs leading-5 text-(--tc-body)">{service.description}</p>
+        <p className="mt-3 line-clamp-2 text-xs leading-5 text-(--tc-body)">
+          {service.description}
+        </p>
 
         {/* 工具 chips */}
         <div className="mt-4 flex flex-wrap gap-1.5">
@@ -110,7 +120,11 @@ export function McpServiceCard({ service, onGenerateConfig }: { service: TokenHu
               {tool}
             </code>
           ))}
-          {moreCount > 0 && <code className="rounded-md bg-(--tc-blue-soft) px-2 py-1 font-mono text-[10.5px] leading-none font-semibold text-(--tc-blue-bright)">+{moreCount}</code>}
+          {moreCount > 0 && (
+            <code className="rounded-md bg-(--tc-blue-soft) px-2 py-1 font-mono text-[10.5px] leading-none font-semibold text-(--tc-blue-bright)">
+              +{moreCount}
+            </code>
+          )}
         </div>
       </div>
 

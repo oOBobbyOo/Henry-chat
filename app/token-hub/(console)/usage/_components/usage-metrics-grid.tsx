@@ -1,6 +1,15 @@
 'use client'
 
-import { Activity, BadgePercent, Coins, Gauge, ReceiptText, ShieldCheck, Timer, Wallet } from 'lucide-react'
+import {
+  Activity,
+  BadgePercent,
+  Coins,
+  Gauge,
+  ReceiptText,
+  ShieldCheck,
+  Timer,
+  Wallet,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { formatShare, formatTokens } from '@/lib/format'
@@ -9,12 +18,21 @@ import { formatShare, formatTokens } from '@/lib/format'
  * 用量分析 —— 概览指标卡矩阵
  * Token 消耗 / 请求数 / 累计成本 / 平均首包延迟 / 平均总耗时 / 成功率 / 失败率 / 缓存命中
  */
-export function UsageMetricsGrid({ summary, trend, granularity }: { summary: TokenHub.Summary; trend: TokenHub.TrendResponse; granularity: 'hour' | 'day' }) {
+export function UsageMetricsGrid({
+  summary,
+  trend,
+  granularity,
+}: {
+  summary: TokenHub.Summary
+  trend: TokenHub.TrendResponse
+  granularity: 'hour' | 'day'
+}) {
   const { t } = useT('token-hub')
 
   // 活跃窗口数(有请求流量的时间窗口)
   const activeWindows = trend.items.filter((i) => i.requests > 0).length
-  const unitLabel = granularity === 'hour' ? t('Usage Active Unit Hour') : t('Usage Active Unit Day')
+  const unitLabel =
+    granularity === 'hour' ? t('Usage Active Unit Hour') : t('Usage Active Unit Day')
 
   const failureRate = Math.max(0, 1 - summary.success_rate)
 
@@ -86,12 +104,16 @@ export function UsageMetricsGrid({ summary, trend, granularity }: { summary: Tok
         >
           <div className="p-4 sm:p-5">
             <div className="flex items-start justify-between gap-3">
-              <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-(--tc-strong)">{label}</p>
+              <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-(--tc-strong)">
+                {label}
+              </p>
               <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${tone}`}>
                 <Icon className="h-4 w-4" />
               </span>
             </div>
-            <p className="mt-3 truncate text-[24px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong) tabular-nums">{value}</p>
+            <p className="mt-3 truncate text-[24px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong) tabular-nums">
+              {value}
+            </p>
             <p className="mt-2.5 truncate text-[11px] font-medium text-(--tc-muted)">{hint}</p>
           </div>
         </div>

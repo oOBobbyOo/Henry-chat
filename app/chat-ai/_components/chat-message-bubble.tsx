@@ -4,13 +4,24 @@ import { useState } from 'react'
 
 import Image from 'next/image'
 
-import { Bot, Brain, ChevronDown, ChevronUp, ClipboardCopy, Download, Link, Loader2, Sparkles, User } from 'lucide-react'
+import {
+  Bot,
+  Brain,
+  ChevronDown,
+  ChevronUp,
+  ClipboardCopy,
+  Download,
+  Link,
+  Loader2,
+  Sparkles,
+  User,
+} from 'lucide-react'
 
 import { ReactMarkdownRenderer } from '@/components/markdown/react-markdown-renderer'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 
-import { ChatActionButtons } from './ChatActionButtons'
+import { ChatActionButtons } from './chat-action-buttons'
 
 interface ChatMessageBubbleProps {
   message: Chat.Message
@@ -49,11 +60,18 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
         </div>
 
         {/* 内容 */}
-        <div className={cn('flex flex-col gap-2', isUser ? 'max-w-[85%] md:max-w-[75%]' : 'w-full md:max-w-[75%]')}>
+        <div
+          className={cn(
+            'flex flex-col gap-2',
+            isUser ? 'max-w-[85%] md:max-w-[75%]' : 'w-full md:max-w-[75%]',
+          )}
+        >
           <div
             className={cn(
               'overflow-hidden rounded-2xl text-sm leading-relaxed',
-              isUser ? 'w-fit rounded-tr-sm bg-blue-500 text-white shadow-md' : 'rounded-tl-sm border border-gray-100 bg-white text-gray-800 shadow-sm',
+              isUser
+                ? 'w-fit rounded-tr-sm bg-blue-500 text-white shadow-md'
+                : 'rounded-tl-sm border border-gray-100 bg-white text-gray-800 shadow-sm',
             )}
           >
             {isUser ? (
@@ -128,7 +146,9 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
                       className="group flex w-full items-center gap-2 px-4 py-3 text-left text-xs font-medium text-gray-600 transition-all duration-200 hover:bg-gray-50/80"
                     >
                       <Brain className="h-4 w-4 shrink-0 text-blue-500" />
-                      <span className="flex-1">{message.isStreaming && !message.content ? '正在思考...' : '深度思考'}</span>
+                      <span className="flex-1">
+                        {message.isStreaming && !message.content ? '正在思考...' : '深度思考'}
+                      </span>
                       {showReasoning ? (
                         <ChevronUp className="h-4 w-4 shrink-0 text-gray-400 transition-colors group-hover:text-gray-600" />
                       ) : (
@@ -136,7 +156,12 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
                       )}
                     </button>
 
-                    <div className={cn('grid transition-all duration-300 ease-in-out', showReasoning ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0')}>
+                    <div
+                      className={cn(
+                        'grid transition-all duration-300 ease-in-out',
+                        showReasoning ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
+                      )}
+                    >
                       <div className="overflow-hidden">
                         <div className="bg-gray-50/50 px-4 pt-2 pb-4">
                           <div
@@ -171,7 +196,9 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
                     className={cn(
                       'prose prose-sm prose-gray prose-p:my-1 prose-ul:my-1 prose-ol:my-1 prose-li:my-0.5 prose-pre:my-2 prose-code:text-blue-600 prose-code:bg-blue-50 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none max-w-none',
                       // 添加打字机光标效果：仅在主回复有内容且正在流式输出时显示
-                      message.isStreaming && message.content && 'after:ml-1 after:inline-block after:animate-pulse after:align-middle after:text-blue-500 after:content-["▋"]',
+                      message.isStreaming &&
+                        message.content &&
+                        'after:ml-1 after:inline-block after:animate-pulse after:align-middle after:text-blue-500 after:content-["▋"]',
                     )}
                   >
                     {message.content ? (
@@ -192,7 +219,14 @@ export function ChatMessageBubble({ message, isGenerating = false }: ChatMessage
 
       {/* 消息操作按钮 */}
       {!message.isStreaming && (
-        <div className={cn('mt-1.5 flex items-center gap-1', isUser ? 'justify-end opacity-0 transition-opacity group-hover:opacity-100 md:pr-11' : 'md:pl-11')}>
+        <div
+          className={cn(
+            'mt-1.5 flex items-center gap-1',
+            isUser
+              ? 'justify-end opacity-0 transition-opacity group-hover:opacity-100 md:pr-11'
+              : 'md:pl-11',
+          )}
+        >
           <ChatActionButtons
             onRegenerate={() => console.log('onRegenerate')}
             content={message.content}

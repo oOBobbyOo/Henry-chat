@@ -6,7 +6,13 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Pause, Play, RefreshCw } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { TOKEN_HUB_QUERY_KEYS, useModelStatsQuery, useModelTrendQuery, useSummaryQuery, useTrendQuery } from '@/services/token-hub'
+import {
+  TOKEN_HUB_QUERY_KEYS,
+  useModelStatsQuery,
+  useModelTrendQuery,
+  useSummaryQuery,
+  useTrendQuery,
+} from '@/services/token-hub'
 
 import { CostTrendCard } from './_components/cost-trend-card'
 import { EmptyState } from './_components/empty-state'
@@ -51,7 +57,11 @@ export default function UsagePage() {
   const [range, setRange] = useState<UsageRange>('7d')
   const [dept, setDept] = useState(FILTER_ALL)
   const [user, setUser] = useState(FILTER_ALL)
-  const [filters, setFilters] = useState<UsageFilters>({ model: FILTER_ALL, provider: FILTER_ALL, client: FILTER_ALL })
+  const [filters, setFilters] = useState<UsageFilters>({
+    model: FILTER_ALL,
+    provider: FILTER_ALL,
+    client: FILTER_ALL,
+  })
   const [live, setLive] = useState(true)
 
   const { granularity, days } = RANGE_CONFIG[range]
@@ -91,7 +101,12 @@ export default function UsagePage() {
   }, [modelStats.items])
 
   // —— 是否有活跃筛选 ——
-  const hasFilter = dept !== FILTER_ALL || user !== FILTER_ALL || filters.model !== FILTER_ALL || filters.provider !== FILTER_ALL || filters.client !== FILTER_ALL
+  const hasFilter =
+    dept !== FILTER_ALL ||
+    user !== FILTER_ALL ||
+    filters.model !== FILTER_ALL ||
+    filters.provider !== FILTER_ALL ||
+    filters.client !== FILTER_ALL
 
   const clearFilters = () => {
     setDept(FILTER_ALL)
@@ -111,8 +126,12 @@ export default function UsagePage() {
         {/* 标题区 + 自动刷新开关 */}
         <header className="flex flex-col gap-4 border-b border-(--tc-border)/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">{t('Usage Title')}</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">{t('Usage Subtitle')}</p>
+            <h1 className="text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">
+              {t('Usage Title')}
+            </h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">
+              {t('Usage Subtitle')}
+            </p>
           </div>
           <div className="flex shrink-0 items-center gap-2.5">
             <button
@@ -153,7 +172,9 @@ export default function UsagePage() {
               type="button"
               onClick={() => setTab(key)}
               className={`inline-flex min-h-10 shrink-0 cursor-pointer items-center justify-center -mb-px border-b-2 px-4 text-[12px] font-semibold whitespace-nowrap transition-colors duration-200 focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/20 focus-visible:outline-none ${
-                tab === key ? 'relative z-10 border-b-4 border-b-[#294fd4] text-(--tc-blue-bright)' : 'border-b-transparent text-(--tc-muted) hover:border-b-[#dce5f6] hover:text-(--tc-body)'
+                tab === key
+                  ? 'relative z-10 border-b-4 border-b-[#294fd4] text-(--tc-blue-bright)'
+                  : 'border-b-transparent text-(--tc-muted) hover:border-b-[#dce5f6] hover:text-(--tc-body)'
               }`}
             >
               {label}

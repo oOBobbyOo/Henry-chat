@@ -23,7 +23,9 @@ export function AverageCostCard() {
             <BadgeDollarSign className="h-4 w-4" />
             {t('Dashboard Avg Cost Title')}
           </p>
-          <p className="mt-4 text-[28px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong) tabular-nums">¥{avgCost.toFixed(3)}</p>
+          <p className="mt-4 text-[28px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong) tabular-nums">
+            ¥{avgCost.toFixed(3)}
+          </p>
           <p className="mt-2.5 text-xs text-(--tc-body)">{t('Dashboard Avg Cost Subtitle')}</p>
         </div>
       </div>
@@ -35,7 +37,8 @@ export function AverageCostCard() {
 
       <div className="mt-4 flex items-center gap-2 text-xs text-(--tc-body)">
         <Activity className="h-3.5 w-3.5 text-(--tc-primary-text)" />
-        {t('Dashboard Avg Cost Per Request')} {avgTokens >= 1000 ? `${(avgTokens / 1000).toFixed(1)}K` : avgTokens.toFixed(0)} tokens
+        {t('Dashboard Avg Cost Per Request')}{' '}
+        {avgTokens >= 1000 ? `${(avgTokens / 1000).toFixed(1)}K` : avgTokens.toFixed(0)} tokens
       </div>
     </div>
   )

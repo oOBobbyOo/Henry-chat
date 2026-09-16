@@ -16,7 +16,10 @@ export function ModelLink(props: ModelLinkProps) {
   return (
     <Link
       href={`/pricing/${props.modelName}`}
-      className={cn('decoration-foreground/30 hover:decoration-foreground underline decoration-1 underline-offset-4 transition-colors', props.className)}
+      className={cn(
+        'decoration-foreground/30 hover:decoration-foreground underline decoration-1 underline-offset-4 transition-colors',
+        props.className,
+      )}
     >
       {props.children ?? props.modelName}
     </Link>
@@ -37,7 +40,10 @@ export function VendorLink(props: VendorLinkProps) {
           vendor: props.vendor,
         },
       }}
-      className={cn('hover:text-foreground underline decoration-current/40 decoration-1 underline-offset-2 transition-colors hover:decoration-current', props.className)}
+      className={cn(
+        'hover:text-foreground underline decoration-current/40 decoration-1 underline-offset-2 transition-colors hover:decoration-current',
+        props.className,
+      )}
     >
       {props.children ?? props.vendor}
     </Link>

@@ -11,7 +11,13 @@ export async function Metrics() {
     { value: t('Metric 4 Value'), label: t('Metric 4 Label'), desc: t('Metric 4 Desc') },
   ]
 
-  const toolchain = [t('Toolchain 1'), t('Toolchain 2'), t('Toolchain 3'), t('Toolchain 4'), t('Toolchain 5')]
+  const toolchain = [
+    t('Toolchain 1'),
+    t('Toolchain 2'),
+    t('Toolchain 3'),
+    t('Toolchain 4'),
+    t('Toolchain 5'),
+  ]
 
   return (
     <section className="border-b border-[#dce5f6] bg-white">
@@ -23,7 +29,9 @@ export async function Metrics() {
               key={metric.label}
               className="rounded-[20px] border border-[#e4ebf9] bg-[#f7f9fd] px-5 py-6"
             >
-              <dt className="text-2xl font-semibold tracking-tight text-[#0f1c3a]">{metric.value}</dt>
+              <dt className="text-2xl font-semibold tracking-tight text-[#0f1c3a]">
+                {metric.value}
+              </dt>
               <dd className="mt-1 text-sm font-semibold text-[#294fd4]">{metric.label}</dd>
               <dd className="mt-2 text-xs leading-relaxed text-[#8a9bc0]">{metric.desc}</dd>
             </div>

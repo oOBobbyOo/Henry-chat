@@ -1,6 +1,17 @@
 'use client'
 
-import { Activity, ArrowDownToLine, ArrowUpFromLine, Coins, Database, Gauge, ShieldCheck, Users, Wallet, Zap } from 'lucide-react'
+import {
+  Activity,
+  ArrowDownToLine,
+  ArrowUpFromLine,
+  Coins,
+  Database,
+  Gauge,
+  ShieldCheck,
+  Users,
+  Wallet,
+  Zap,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { formatShare } from '@/lib/format'

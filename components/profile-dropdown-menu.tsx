@@ -1,9 +1,24 @@
 'use client'
 
-import { ChevronRight, CircleQuestionMark, LayoutDashboard, LogOut, Settings, ShieldCheck, User } from 'lucide-react'
+import {
+  ChevronRight,
+  CircleQuestionMark,
+  LayoutDashboard,
+  LogOut,
+  Settings,
+  ShieldCheck,
+  User,
+} from 'lucide-react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 interface ProfileDropdownMenuProps {
   /** 显示的用户名(不传则显示默认文案) */
@@ -14,7 +29,11 @@ interface ProfileDropdownMenuProps {
   avatarSrc?: string
 }
 
-export function ProfileDropdownMenu({ userName, avatarFallback, avatarSrc }: ProfileDropdownMenuProps) {
+export function ProfileDropdownMenu({
+  userName,
+  avatarFallback,
+  avatarSrc,
+}: ProfileDropdownMenuProps) {
   const isLogin = true
 
   return (
@@ -26,7 +45,9 @@ export function ProfileDropdownMenu({ userName, avatarFallback, avatarSrc }: Pro
             className="inline-flex h-full min-w-0 cursor-pointer items-center gap-2 rounded-r-full pr-3.5 pl-1.5 transition hover:bg-gray-100 focus-visible:outline-none dark:hover:bg-white/4"
           >
             <ShieldCheck className="h-3.5 w-3.5" />
-            <span className="hidden text-[12px] text-gray-600 sm:inline dark:text-zinc-200">登录</span>
+            <span className="hidden text-[12px] text-gray-600 sm:inline dark:text-zinc-200">
+              登录
+            </span>
           </button>
         </>
       ) : (
@@ -50,7 +71,9 @@ export function ProfileDropdownMenu({ userName, avatarFallback, avatarSrc }: Pro
                     )}
                   </AvatarFallback>
                 </Avatar>
-                <span className="hidden text-[12px] text-gray-700 sm:inline dark:text-zinc-200">{userName ?? '用户名'}</span>
+                <span className="hidden text-[12px] text-gray-700 sm:inline dark:text-zinc-200">
+                  {userName ?? '用户名'}
+                </span>
                 <ChevronRight className="h-3.5 w-3.5 text-gray-400 dark:text-current" />
               </button>
             </DropdownMenuTrigger>

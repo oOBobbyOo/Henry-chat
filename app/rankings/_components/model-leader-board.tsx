@@ -1,8 +1,8 @@
 import { formatTokens } from '@/lib/format'
 import { getLobeIcon } from '@/lib/libe-icon'
 
-import { ModelLink, VendorLink } from './EntityLinks'
-import { GrowthText } from './GrowthText'
+import { ModelLink, VendorLink } from './entity-links'
+import { GrowthText } from './growth-text'
 
 type ModelLeaderboardProps = {
   rows: Ranking.ModelRanking[]
@@ -49,21 +49,39 @@ function ModelList(props: { rows: Ranking.ModelRanking[]; variant: 'default' | '
           key={row.model_name}
           className={compact ? 'flex items-center gap-3 py-2' : 'flex items-center gap-3 py-2.5'}
         >
-          <span className="text-muted-foreground/80 w-6 shrink-0 text-right font-mono text-xs tabular-nums">{row.rank}.</span>
+          <span className="text-muted-foreground/80 w-6 shrink-0 text-right font-mono text-xs tabular-nums">
+            {row.rank}.
+          </span>
           <span className="shrink-0">{getLobeIcon(row.vendor_icon, compact ? 20 : 22)}</span>
           <div className="min-w-0 flex-1">
             <ModelLink
               modelName={row.model_name}
-              className={compact ? 'text-foreground block truncate font-mono text-xs font-medium' : 'text-foreground block truncate font-mono text-sm font-medium'}
+              className={
+                compact
+                  ? 'text-foreground block truncate font-mono text-xs font-medium'
+                  : 'text-foreground block truncate font-mono text-sm font-medium'
+              }
             >
               {row.model_name}
             </ModelLink>
-            <p className={compact ? 'text-muted-foreground/80 truncate text-[11px] italic' : 'text-muted-foreground/80 truncate text-xs italic'}>
+            <p
+              className={
+                compact
+                  ? 'text-muted-foreground/80 truncate text-[11px] italic'
+                  : 'text-muted-foreground/80 truncate text-xs italic'
+              }
+            >
               by <VendorLink vendor={row.vendor}>{row.vendor.toLowerCase()}</VendorLink>
             </p>
           </div>
           <div className="shrink-0 text-right">
-            <div className={compact ? 'text-foreground font-mono text-xs font-semibold tabular-nums' : 'text-foreground font-mono text-sm font-semibold tabular-nums'}>
+            <div
+              className={
+                compact
+                  ? 'text-foreground font-mono text-xs font-semibold tabular-nums'
+                  : 'text-foreground font-mono text-sm font-semibold tabular-nums'
+              }
+            >
               {formatTokens(row.total_tokens)}
               {!compact && (
                 <>

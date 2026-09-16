@@ -2,13 +2,30 @@
 
 import { useRef, useState } from 'react'
 
-import { Brush, Crop, Eraser, Image as ImageIcon, ImageMinus, Layers, PenLine, Plus, ScanFace, Sparkles, Wand2, X } from 'lucide-react'
+import {
+  Brush,
+  Crop,
+  Eraser,
+  Image as ImageIcon,
+  ImageMinus,
+  Layers,
+  PenLine,
+  Plus,
+  ScanFace,
+  Sparkles,
+  Wand2,
+  X,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { cn } from '@/lib/utils'
 
 import { AssetPickerDialog } from '../asset-picker-dialog'
-import { DEFAULT_IMAGE_EDIT_PARAMS, type ImageEditParams, ImageEditToolForm } from './image-edit-tool-forms'
+import {
+  DEFAULT_IMAGE_EDIT_PARAMS,
+  type ImageEditParams,
+  ImageEditToolForm,
+} from './image-edit-tool-forms'
 import { PanelCard, PanelIcon } from './shared'
 
 /**
@@ -33,9 +50,15 @@ export function ImageEditPanel({ configs }: { configs: Workbench.ConfigResponse[
   // 各工具参数(集中持有,切换工具不丢值)
   const [params, setParams] = useState<ImageEditParams>(DEFAULT_IMAGE_EDIT_PARAMS)
   /** 局部更新编辑参数 */
-  const patchParams = (patch: Partial<ImageEditParams>) => setParams((prev) => ({ ...prev, ...patch }))
+  const patchParams = (patch: Partial<ImageEditParams>) =>
+    setParams((prev) => ({ ...prev, ...patch }))
   // 源图片(上传预览 / 更换 / 删除)
-  const [sourceImage, setSourceImage] = useState<{ name: string; url: string | null; width: number; height: number } | null>(null)
+  const [sourceImage, setSourceImage] = useState<{
+    name: string
+    url: string | null
+    width: number
+    height: number
+  } | null>(null)
   // 资产库选择弹窗
   const [pickerOpen, setPickerOpen] = useState(false)
   const fileRef = useRef<HTMLInputElement>(null)
@@ -45,7 +68,13 @@ export function ImageEditPanel({ configs }: { configs: Workbench.ConfigResponse[
     if (!file || !file.type.startsWith('image/')) return
     const url = URL.createObjectURL(file)
     const probe = new window.Image()
-    probe.onload = () => setSourceImage({ name: file.name, url, width: probe.naturalWidth, height: probe.naturalHeight })
+    probe.onload = () =>
+      setSourceImage({
+        name: file.name,
+        url,
+        width: probe.naturalWidth,
+        height: probe.naturalHeight,
+      })
     probe.src = url
   }
 
@@ -65,7 +94,9 @@ export function ImageEditPanel({ configs }: { configs: Workbench.ConfigResponse[
         <div className="mt-1.5 rounded-[14px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(237,241,255,0.9),rgba(226,233,250,0.85))] p-2 dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(7,11,22,0.96),rgba(5,8,16,0.98))]">
           <div className="flex min-w-0 items-center justify-between gap-2">
             <span className="flex min-w-0 items-center gap-1.5">
-              <span className="text-[11px] font-medium text-[#091423] dark:text-[#eef4ff]">{t('Source image')}</span>
+              <span className="text-[11px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                {t('Source image')}
+              </span>
               <span className="text-[10px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Loaded')}</span>
             </span>
             <span className="flex shrink-0 items-center gap-1.5">
@@ -96,7 +127,10 @@ export function ImageEditPanel({ configs }: { configs: Workbench.ConfigResponse[
             ) : (
               <span
                 className="flex h-[168px] w-[240px] items-center justify-center"
-                style={{ backgroundImage: 'linear-gradient(135deg,rgba(56,152,188,0.32),rgba(56,103,255,0.22))' }}
+                style={{
+                  backgroundImage:
+                    'linear-gradient(135deg,rgba(56,152,188,0.32),rgba(56,103,255,0.22))',
+                }}
               >
                 <ImageIcon
                   aria-hidden
@@ -152,8 +186,12 @@ export function ImageEditPanel({ configs }: { configs: Workbench.ConfigResponse[
             />
           </span>
           <span className="flex flex-col items-center gap-2">
-            <span className="text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">{t('Add source image')}</span>
-            <span className="text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Click or drag an image')}</span>
+            <span className="text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">
+              {t('Add source image')}
+            </span>
+            <span className="text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">
+              {t('Click or drag an image')}
+            </span>
             <button
               className="inline-flex h-8 items-center gap-1.5 rounded-full border border-[rgba(12,24,36,0.12)] bg-[rgba(56,103,255,0.08)] px-3 text-[12px] text-[#091423] transition-colors hover:border-[rgba(56,103,255,0.4)] hover:text-[#3867ff] dark:border-white/14 dark:bg-[rgba(143,165,255,0.12)] dark:text-[#eef4ff] dark:hover:text-[#8fa5ff]"
               onClick={(e) => {
@@ -221,7 +259,9 @@ export function ImageEditPanel({ configs }: { configs: Workbench.ConfigResponse[
       <AssetPickerDialog
         assets={configs.libraryAssets}
         onConfirm={(asset) => {
-          const [width, height] = asset.dimensions.split('x').map((value) => Number.parseInt(value, 10))
+          const [width, height] = asset.dimensions
+            .split('x')
+            .map((value) => Number.parseInt(value, 10))
           setSourceImage({
             name: asset.name,
             url: null,

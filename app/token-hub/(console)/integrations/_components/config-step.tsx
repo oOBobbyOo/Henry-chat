@@ -17,7 +17,11 @@ const GATEWAY_BASE_URL = process.env.NEXT_PUBLIC_GATEWAY_URL ?? ''
  * 生成指定应用的接入配置文本
  * 按应用类型输出不同格式: settings.json / config.toml / opencode.json / 命令 / SDK 代码 / cURL
  */
-export function buildAppConfig(app: IntegrationApp, model: TokenHub.CatalogModel, keyPrefix: string): string {
+export function buildAppConfig(
+  app: IntegrationApp,
+  model: TokenHub.CatalogModel,
+  keyPrefix: string,
+): string {
   const base = GATEWAY_BASE_URL
   const key = `${keyPrefix}…`
   const modelId = model.alias
@@ -131,13 +135,25 @@ curl ${base}/v1/chat/completions \\
 }
 
 /** 绑定信息标签(应用 / 模型 / API Key) */
-function BoundChip({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle?: string }) {
+function BoundChip({
+  icon,
+  title,
+  subtitle,
+}: {
+  icon: React.ReactNode
+  title: string
+  subtitle?: string
+}) {
   return (
     <span className="inline-flex min-w-0 items-center gap-2 rounded-xl border border-(--tc-border) bg-(--tc-surface-raised) px-3 py-2">
-      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-(--tc-border)/80 bg-(--tc-blue-soft)/65 text-(--tc-strong)">{icon}</span>
+      <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-(--tc-border)/80 bg-(--tc-blue-soft)/65 text-(--tc-strong)">
+        {icon}
+      </span>
       <span className="min-w-0">
         <span className="block truncate text-[12px] font-semibold text-(--tc-strong)">{title}</span>
-        {subtitle && <code className="block truncate font-mono text-[10px] text-(--tc-muted)">{subtitle}</code>}
+        {subtitle && (
+          <code className="block truncate font-mono text-[10px] text-(--tc-muted)">{subtitle}</code>
+        )}
       </span>
     </span>
   )
@@ -147,7 +163,17 @@ function BoundChip({ icon, title, subtitle }: { icon: React.ReactNode; title: st
  * 第二步 —— 生成完整配置(页内展开, 不用弹窗)
  * 随第一步选择的应用 / 模型 / Key 实时更新
  */
-export function ConfigStep({ app, model, keyName, keyPrefix }: { app: IntegrationApp; model: TokenHub.CatalogModel; keyName: string; keyPrefix: string }) {
+export function ConfigStep({
+  app,
+  model,
+  keyName,
+  keyPrefix,
+}: {
+  app: IntegrationApp
+  model: TokenHub.CatalogModel
+  keyName: string
+  keyPrefix: string
+}) {
   const { t } = useT('token-hub')
   const [copied, setCopied] = useState(false)
 
@@ -167,9 +193,13 @@ export function ConfigStep({ app, model, keyName, keyPrefix }: { app: Integratio
     <section className="overflow-hidden scroll-mt-6 rounded-[18px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
       {/* 步骤头 */}
       <div className="flex items-center gap-4 border-b border-(--tc-border) px-5 py-4 sm:px-6">
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-(--tc-blue-soft) text-[15px] font-bold text-(--tc-blue-bright)">02</span>
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-(--tc-blue-soft) text-[15px] font-bold text-(--tc-blue-bright)">
+          02
+        </span>
         <div className="min-w-0">
-          <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Integ Step2 Title')}</h2>
+          <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+            {t('Integ Step2 Title')}
+          </h2>
           <p className="mt-1 text-xs leading-5 text-(--tc-muted)">{t('Integ Step2 Desc')}</p>
         </div>
       </div>
@@ -210,7 +240,9 @@ export function ConfigStep({ app, model, keyName, keyPrefix }: { app: Integratio
           >
             {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
           </button>
-          <pre className="scrollbar-slim-dark max-h-80 overflow-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">{configText}</pre>
+          <pre className="scrollbar-slim-dark max-h-80 overflow-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">
+            {configText}
+          </pre>
         </div>
 
         {/* 后续步骤提示 */}

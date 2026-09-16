@@ -8,9 +8,15 @@ import { request } from '@/lib/request'
  */
 export const ProjectsService = {
   /** 技能市场列表 */
-  getSkills: () => request.get<Projects.SkillsResponse>('/api/projects/skills', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getSkills: () =>
+    request.get<Projects.SkillsResponse>('/api/projects/skills', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
   /** 最近项目列表(本地会话态) */
-  getRecent: () => request.get<Projects.RecentResponse>('/api/projects/recent', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getRecent: () =>
+    request.get<Projects.RecentResponse>('/api/projects/recent', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
 }
 
 export const PROJECTS_QUERY_KEYS = {

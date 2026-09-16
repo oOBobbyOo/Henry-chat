@@ -84,7 +84,8 @@ drizzle/              # 数据库迁移文件（勿手改）
 
    export const CHAT_QUERY_KEYS = { getModels: ['getModels'] }
 
-   export const createModelsQueryOptions = () => queryOptions({ queryKey: CHAT_QUERY_KEYS.getModels, queryFn: ChatService.getModels })
+   export const createModelsQueryOptions = () =>
+     queryOptions({ queryKey: CHAT_QUERY_KEYS.getModels, queryFn: ChatService.getModels })
 
    export function useModelsQuery() {
      return useSuspenseQuery(createModelsQueryOptions())

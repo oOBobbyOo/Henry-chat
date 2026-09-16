@@ -21,7 +21,14 @@
   content: '';
   position: absolute;
   inset: -200%;
-  background: conic-gradient(from 0deg, rgba(34, 211, 238, 0) 0deg, rgba(207, 250, 254, 0.9) 50deg, rgba(34, 211, 238, 0.7) 110deg, rgba(34, 211, 238, 0) 180deg, rgba(34, 211, 238, 0) 360deg);
+  background: conic-gradient(
+    from 0deg,
+    rgba(34, 211, 238, 0) 0deg,
+    rgba(207, 250, 254, 0.9) 50deg,
+    rgba(34, 211, 238, 0.7) 110deg,
+    rgba(34, 211, 238, 0) 180deg,
+    rgba(34, 211, 238, 0) 360deg
+  );
   animation: plaza-active-ring-spin 6s linear infinite;
 }
 

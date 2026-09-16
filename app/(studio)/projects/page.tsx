@@ -66,10 +66,14 @@ export default function ProjectsPage() {
         ) : (
           <div className="pt-3">
             {/* 模板精选:参考站当前为空列表,保留区块与空态 */}
-            <h2 className="text-foreground text-[18px] font-medium tracking-[-0.02em]">{t('Template picks')}</h2>
+            <h2 className="text-foreground text-[18px] font-medium tracking-[-0.02em]">
+              {t('Template picks')}
+            </h2>
             <div className="mt-6 flex flex-col items-center justify-center rounded-[16px] border border-dashed border-[#dce5f6] py-16 text-center dark:border-white/10">
               <p className="text-foreground text-[15px] font-medium">{t('No matching skills')}</p>
-              <p className="text-muted-foreground mt-1 text-[12px]">{t('Try other keywords or categories')}</p>
+              <p className="text-muted-foreground mt-1 text-[12px]">
+                {t('Try other keywords or categories')}
+              </p>
             </div>
           </div>
         )}

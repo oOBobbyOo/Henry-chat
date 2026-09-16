@@ -3,7 +3,18 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { BarChart3, Blocks, Bot, CircleHelp, LayoutDashboard, Plug, ScanLine, Users, Wallet, Webhook } from 'lucide-react'
+import {
+  BarChart3,
+  Blocks,
+  Bot,
+  CircleHelp,
+  LayoutDashboard,
+  Plug,
+  ScanLine,
+  Users,
+  Wallet,
+  Webhook,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { BrandLogo } from '@/components/brand-logo'
@@ -16,7 +27,8 @@ export function ConsoleSidebar() {
   useHealthQuery()
 
   // 控制台统一位于 /token-hub 前缀下,navItems href 均携带完整前缀,直接基于 pathname 匹配
-  const isActive = (href: string) => pathname === href || (href !== '/token-hub/dashboard' && pathname.startsWith(`${href}/`))
+  const isActive = (href: string) =>
+    pathname === href || (href !== '/token-hub/dashboard' && pathname.startsWith(`${href}/`))
 
   const navItems = [
     { href: '/token-hub/dashboard', label: t('Dashboard Overview'), icon: LayoutDashboard },
@@ -46,7 +58,9 @@ export function ConsoleSidebar() {
         aria-label="工作区导航"
         className="scrollbar-hidden mt-10 min-h-0 flex-1 overflow-y-auto overscroll-contain pb-4 pr-1 pl-2"
       >
-        <p className="px-3 pb-2 text-[10px] font-bold tracking-[0.14em] text-(--tc-muted) uppercase">{t('Dashboard Workspace')}</p>
+        <p className="px-3 pb-2 text-[10px] font-bold tracking-[0.14em] text-(--tc-muted) uppercase">
+          {t('Dashboard Workspace')}
+        </p>
         <div className="space-y-1">
           {navItems.map(({ href, label, icon: Icon }) => {
             const active = isActive(href)
@@ -56,7 +70,9 @@ export function ConsoleSidebar() {
                 href={href}
                 aria-current={active ? 'page' : undefined}
                 className={`group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none ${
-                  active ? 'bg-(--tc-blue-soft) text-(--tc-blue-bright)' : 'text-(--tc-body) hover:bg-(--tc-blue-soft) hover:text-(--tc-blue-bright)'
+                  active
+                    ? 'bg-(--tc-blue-soft) text-(--tc-blue-bright)'
+                    : 'text-(--tc-body) hover:bg-(--tc-blue-soft) hover:text-(--tc-blue-bright)'
                 }`}
               >
                 <Icon

@@ -16,8 +16,8 @@ import { Label } from '@/components/ui/label'
 import { cn } from '@/lib/utils'
 import { AuthService } from '@/services/auth'
 
-import { LoginOrSignup } from './LoginOrSignup'
-import { SocialLoginButtons } from './SocialLoginButtons'
+import { LoginOrSignup } from './login-or-signup'
+import { SocialLoginButtons } from './social-login-buttons'
 
 // 统一 Input 样式类（边框/阴影/无外环/聚焦反馈）
 const inputClasses = cn(
@@ -117,7 +117,11 @@ export function PhoneLoginForm() {
                   field.handleChange(val)
                 }}
                 aria-invalid={!!field.state.meta.errors.length}
-                aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                aria-describedby={
+                  field.state.meta.isTouched && field.state.meta.errors.length
+                    ? `${field.name}-error`
+                    : undefined
+                }
                 className={inputClasses}
               />
               <FieldError errors={field.state.meta.errors} />
@@ -152,16 +156,24 @@ export function PhoneLoginForm() {
                     field.handleChange(val)
                   }}
                   aria-invalid={!!field.state.meta.errors.length}
-                  aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                  aria-describedby={
+                    field.state.meta.isTouched && field.state.meta.errors.length
+                      ? `${field.name}-error`
+                      : undefined
+                  }
                   className={cn(inputClasses, 'flex-1')}
                 />
                 <button
                   type="button"
                   onClick={handleSendCode}
                   disabled={countdown > 0 || isSending}
-                  className="min-w-[100px] shrink-0 cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-3 text-center text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:border-violet-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-gray-300 disabled:hover:bg-white sm:w-[150px] dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-violet-400 dark:hover:bg-gray-750 dark:disabled:hover:border-gray-600 dark:disabled:hover:bg-gray-800"
+                  className="dark:hover:bg-gray-750 min-w-[100px] shrink-0 cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-3 text-center text-sm font-medium text-gray-900 shadow-sm transition-all duration-300 hover:border-violet-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-gray-300 disabled:hover:bg-white sm:w-[150px] dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:border-violet-400 dark:disabled:hover:border-gray-600 dark:disabled:hover:bg-gray-800"
                 >
-                  {isSending ? t('Sending...') : countdown > 0 ? t('{{countdown}}s', { countdown }) : t('Get code')}
+                  {isSending
+                    ? t('Sending...')
+                    : countdown > 0
+                      ? t('{{countdown}}s', { countdown })
+                      : t('Get code')}
                 </button>
               </div>
               <FieldError errors={field.state.meta.errors} />

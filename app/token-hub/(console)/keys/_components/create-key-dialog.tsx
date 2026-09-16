@@ -7,7 +7,14 @@ import { useT } from 'next-i18next/client'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { useCreateKeyMutation } from '@/services/token-hub'
 
 /** 创建成功后的一次性明文展示步骤 */
@@ -88,8 +95,12 @@ export function CreateKeyDialog() {
         {step === 'form' ? (
           <>
             <DialogHeader className="mb-4 space-y-1 text-left">
-              <DialogTitle className="text-base font-semibold text-(--tc-strong)">{t('Keys Create Title')}</DialogTitle>
-              <DialogDescription className="text-sm text-(--tc-muted)">{t('Keys Create Desc')}</DialogDescription>
+              <DialogTitle className="text-base font-semibold text-(--tc-strong)">
+                {t('Keys Create Title')}
+              </DialogTitle>
+              <DialogDescription className="text-sm text-(--tc-muted)">
+                {t('Keys Create Desc')}
+              </DialogDescription>
             </DialogHeader>
 
             <div className="space-y-4">
@@ -113,7 +124,8 @@ export function CreateKeyDialog() {
                   htmlFor="ip-whitelist"
                   className="text-sm text-(--tc-body)"
                 >
-                  {t('Keys Create IP')} <span className="text-xs text-(--tc-muted)">（{t('Keys Create Optional')}）</span>
+                  {t('Keys Create IP')}{' '}
+                  <span className="text-xs text-(--tc-muted)">（{t('Keys Create Optional')}）</span>
                 </label>
                 <textarea
                   id="ip-whitelist"
@@ -152,19 +164,29 @@ export function CreateKeyDialog() {
         ) : (
           <div className="space-y-4">
             <DialogHeader className="space-y-1 text-left">
-              <DialogTitle className="text-base font-semibold text-(--tc-strong)">{t('Keys Created Title')}</DialogTitle>
-              <DialogDescription className="text-sm text-(--tc-muted)">{t('Keys Created Desc')}</DialogDescription>
+              <DialogTitle className="text-base font-semibold text-(--tc-strong)">
+                {t('Keys Created Title')}
+              </DialogTitle>
+              <DialogDescription className="text-sm text-(--tc-muted)">
+                {t('Keys Created Desc')}
+              </DialogDescription>
             </DialogHeader>
 
             <div className="flex items-center gap-2 rounded-xl border border-(--tc-border) bg-(--tc-surface-raised) p-3">
-              <code className="min-w-0 flex-1 break-all text-xs text-(--tc-strong)">{createdKey?.key}</code>
+              <code className="min-w-0 flex-1 break-all text-xs text-(--tc-strong)">
+                {createdKey?.key}
+              </code>
               <button
                 type="button"
                 onClick={handleCopy}
                 title={t('Keys Copy Full')}
                 className="inline-flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-lg text-(--tc-muted) transition hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none"
               >
-                {copied ? <Check className="h-4 w-4 text-emerald-500" /> : <Copy className="h-4 w-4" />}
+                {copied ? (
+                  <Check className="h-4 w-4 text-emerald-500" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
               </button>
             </div>
 

@@ -66,12 +66,16 @@ export function ReportMetricsGrid({ summary }: { summary: TokenHub.CostReportSum
         >
           <div className="p-4 sm:p-5">
             <div className="flex items-start justify-between gap-3">
-              <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-(--tc-strong)">{label}</p>
+              <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-(--tc-strong)">
+                {label}
+              </p>
               <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${tone}`}>
                 <Icon className="h-4 w-4" />
               </span>
             </div>
-            <p className="mt-3 truncate text-[20px] leading-none font-semibold tracking-tight text-(--tc-strong) tabular-nums">{value}</p>
+            <p className="mt-3 truncate text-[20px] leading-none font-semibold tracking-tight text-(--tc-strong) tabular-nums">
+              {value}
+            </p>
             <p className="mt-2.5 truncate text-[11px] font-medium text-(--tc-muted)">{hint}</p>
           </div>
         </div>

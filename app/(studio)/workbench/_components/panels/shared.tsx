@@ -13,15 +13,31 @@ import { cn } from '@/lib/utils'
  */
 
 /** 能力面板卡片容器(圆角 16px 白卡);icon = 标题前图标(与参考站卡片标题图标规范一致) */
-export function PanelCard({ title, icon, right, children }: { title: string; icon?: React.ReactNode; right?: React.ReactNode; children: React.ReactNode }) {
+export function PanelCard({
+  title,
+  icon,
+  right,
+  children,
+}: {
+  title: string
+  icon?: React.ReactNode
+  right?: React.ReactNode
+  children: React.ReactNode
+}) {
   return (
     <div className="rounded-[16px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(56,103,255,0.02),transparent)] p-1.5 dark:border-white/8">
       <div className="mb-1.5 flex min-w-0 items-start justify-between gap-2">
         <p className="inline-flex min-w-0 items-center gap-1.5 text-[14px] font-medium text-[#091423] dark:text-[#eef4ff]">
-          {icon ? <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">{icon}</span> : null}
+          {icon ? (
+            <span className="shrink-0 text-[#3867ff] dark:text-[#8fa5ff]">{icon}</span>
+          ) : null}
           <span>{title}</span>
         </p>
-        {right ? <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{right}</span> : null}
+        {right ? (
+          <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">
+            {right}
+          </span>
+        ) : null}
       </div>
       {children}
     </div>
@@ -29,7 +45,11 @@ export function PanelCard({ title, icon, right, children }: { title: string; ico
 }
 
 /** 卡片标题图标(统一规格:lucide h-3.5 w-3.5 / stroke 1.75,颜色由 PanelCard 内包裹层控制) */
-export function PanelIcon({ icon }: { icon: React.ComponentType<{ className?: string; strokeWidth?: number }> }) {
+export function PanelIcon({
+  icon,
+}: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>
+}) {
   const Icon = icon
   return (
     <Icon
@@ -41,11 +61,19 @@ export function PanelIcon({ icon }: { icon: React.ComponentType<{ className?: st
 
 /** 字段标签行 */
 export function FieldLabel({ children }: { children: React.ReactNode }) {
-  return <div className="mb-1.5 flex items-center justify-between gap-2 text-[12px] text-[#091423] dark:text-[#eef4ff]">{children}</div>
+  return (
+    <div className="mb-1.5 flex items-center justify-between gap-2 text-[12px] text-[#091423] dark:text-[#eef4ff]">
+      {children}
+    </div>
+  )
 }
 
 /** 字段子标题图标(与图片生成参数面板规格一致:lucide h-3.5 + 品牌蓝) */
-export function FieldLabelIcon({ icon }: { icon: React.ComponentType<{ className?: string; strokeWidth?: number }> }) {
+export function FieldLabelIcon({
+  icon,
+}: {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>
+}) {
   const Icon = icon
   return (
     <Icon
@@ -61,7 +89,17 @@ export function FieldGrid({ children }: { children: React.ReactNode }) {
 }
 
 /** 分段单选按钮(生成方式 / 音色 / 开启关闭等);wrap=true 时按内容宽度排布并允许换行(选项多且标签长时用) */
-export function Seg({ options, value, onChange, wrap = false }: { options: Array<{ value: string; label: string }>; value: string; onChange: (value: string) => void; wrap?: boolean }) {
+export function Seg({
+  options,
+  value,
+  onChange,
+  wrap = false,
+}: {
+  options: Array<{ value: string; label: string }>
+  value: string
+  onChange: (value: string) => void
+  wrap?: boolean
+}) {
   return (
     <div
       className={cn(
@@ -73,8 +111,12 @@ export function Seg({ options, value, onChange, wrap = false }: { options: Array
         <button
           className={cn(
             'inline-flex min-h-7 items-center justify-center rounded-[9px] text-[12px] whitespace-nowrap transition-colors',
-            wrap ? 'grow basis-[calc(25%-0.25rem)] px-1.5 md:min-w-0 md:basis-0 md:flex-1' : 'min-w-0 flex-1',
-            value === opt.value ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white' : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
+            wrap
+              ? 'grow basis-[calc(25%-0.25rem)] px-1.5 md:min-w-0 md:basis-0 md:flex-1'
+              : 'min-w-0 flex-1',
+            value === opt.value
+              ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white'
+              : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
           )}
           key={opt.value}
           onClick={() => onChange(opt.value)}
@@ -88,7 +130,15 @@ export function Seg({ options, value, onChange, wrap = false }: { options: Array
 }
 
 /** 多选 chips(编辑工具 / 对齐模式等) */
-export function Chips({ options, selected, onToggle }: { options: Array<{ value: string; label: string }>; selected: string[]; onToggle: (value: string) => void }) {
+export function Chips({
+  options,
+  selected,
+  onToggle,
+}: {
+  options: Array<{ value: string; label: string }>
+  selected: string[]
+  onToggle: (value: string) => void
+}) {
   return (
     <div className="flex flex-wrap gap-1.5">
       {options.map((opt) => {
@@ -114,7 +164,15 @@ export function Chips({ options, selected, onToggle }: { options: Array<{ value:
 }
 
 /** 下拉(与 controls 内 MiniDropdown 相同交互) */
-export function Drop({ options, value, onChange }: { options: Array<{ value: string; label: string }>; value: string; onChange: (value: string) => void }) {
+export function Drop({
+  options,
+  value,
+  onChange,
+}: {
+  options: Array<{ value: string; label: string }>
+  value: string
+  onChange: (value: string) => void
+}) {
   const [open, setOpen] = useState(false)
   return (
     <div className="relative">
@@ -127,7 +185,10 @@ export function Drop({ options, value, onChange }: { options: Array<{ value: str
       >
         <span className="min-w-0 flex-1 truncate text-left">{value}</span>
         <ChevronDown
-          className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform dark:text-[#8a9bc0]', open && 'rotate-180')}
+          className={cn(
+            'h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform dark:text-[#8a9bc0]',
+            open && 'rotate-180',
+          )}
           strokeWidth={1.75}
         />
       </button>
@@ -190,7 +251,9 @@ export function SliderField({
           {icon}
           {label}
         </span>
-        <span className="shrink-0 text-[11px] font-medium text-[#3867ff] dark:text-[#8fa5ff]">{value}</span>
+        <span className="shrink-0 text-[11px] font-medium text-[#3867ff] dark:text-[#8fa5ff]">
+          {value}
+        </span>
       </FieldLabel>
       <input
         className="h-2 w-full cursor-pointer appearance-none rounded-full bg-[rgba(56,103,255,0.15)] accent-[#3867ff] dark:bg-[rgba(143,165,255,0.15)]"
@@ -206,7 +269,17 @@ export function SliderField({
 }
 
 /** 上传区(亮色浅灰蓝底 / 暗色深底,与 controls 内 insetPanelCls 一致) */
-export function UploadZone({ icon, title, hintLines, multiple }: { icon: React.ReactNode; title: string; hintLines?: string[]; multiple?: boolean }) {
+export function UploadZone({
+  icon,
+  title,
+  hintLines,
+  multiple,
+}: {
+  icon: React.ReactNode
+  title: string
+  hintLines?: string[]
+  multiple?: boolean
+}) {
   const { t } = useT('workbench')
   return (
     <div className="mt-1.5 rounded-[14px] border border-[rgba(12,24,36,0.08)] bg-[linear-gradient(180deg,rgba(237,241,255,0.9),rgba(226,233,250,0.85))] px-3 py-3 dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(7,11,22,0.96),rgba(5,8,16,0.98))]">

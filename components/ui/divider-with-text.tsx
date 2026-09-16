@@ -16,7 +16,9 @@ export function DividerWithText({ children, className, ...props }: DividerWithTe
       </div>
 
       {/* 文字遮罩层 */}
-      <span className="bg-card text-muted-foreground relative z-10 px-3 text-xs uppercase">{children}</span>
+      <span className="bg-card text-muted-foreground relative z-10 px-3 text-xs uppercase">
+        {children}
+      </span>
     </div>
   )
 }

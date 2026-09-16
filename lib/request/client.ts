@@ -1,4 +1,11 @@
-import type { ErrorInterceptor, RequestBody, RequestConfig, RequestInterceptor, RequestParams, ResponseInterceptor } from '@/types/request'
+import type {
+  ErrorInterceptor,
+  RequestBody,
+  RequestConfig,
+  RequestInterceptor,
+  RequestParams,
+  ResponseInterceptor,
+} from '@/types/request'
 
 import { RequestError } from './error'
 
@@ -43,7 +50,10 @@ export class ClientRequest {
    * @param onFulfilled 成功回调，接收 Response 对象
    * @param onRejected 失败回调，接收 RequestError 对象
    */
-  public useResponseInterceptor(onFulfilled: ResponseInterceptor, onRejected?: ErrorInterceptor): void {
+  public useResponseInterceptor(
+    onFulfilled: ResponseInterceptor,
+    onRejected?: ErrorInterceptor,
+  ): void {
     this.responseInterceptors.push({ onFulfilled, onRejected })
   }
 
@@ -189,7 +199,16 @@ export class ClientRequest {
 
     // 4. 构造 Fetch Init 对象
     // 剔除自定义字段，只保留 Fetch 标准支持的字段
-    const { url: _url, baseURL: _baseURL, params: _params, timeout: _timeout, stream: _stream, signal: _signal, headers, ...restInit } = config
+    const {
+      url: _url,
+      baseURL: _baseURL,
+      params: _params,
+      timeout: _timeout,
+      stream: _stream,
+      signal: _signal,
+      headers,
+      ...restInit
+    } = config
 
     const fetchInit: RequestInit = {
       ...restInit,
@@ -216,11 +235,21 @@ export class ClientRequest {
   /**
    * 智能序列化请求体
    */
-  private serializeBody(body: RequestBody, headers?: Record<string, string>): BodyInit | null | undefined {
+  private serializeBody(
+    body: RequestBody,
+    headers?: Record<string, string>,
+  ): BodyInit | null | undefined {
     if (body === undefined || body === null) return body
 
     // 原生类型直接返回，Fetch 会自动处理
-    if (body instanceof FormData || body instanceof Blob || body instanceof URLSearchParams || body instanceof ArrayBuffer || body instanceof ReadableStream || typeof body === 'string') {
+    if (
+      body instanceof FormData ||
+      body instanceof Blob ||
+      body instanceof URLSearchParams ||
+      body instanceof ArrayBuffer ||
+      body instanceof ReadableStream ||
+      typeof body === 'string'
+    ) {
       return body
     }
 
@@ -286,7 +315,11 @@ export class ClientRequest {
   /**
    * 标准化错误对象
    */
-  private normalizeError(err: any, config: RequestConfig, defaultMsg: string = 'Unknown Error'): RequestError {
+  private normalizeError(
+    err: any,
+    config: RequestConfig,
+    defaultMsg: string = 'Unknown Error',
+  ): RequestError {
     if (err instanceof RequestError) {
       return err
     }

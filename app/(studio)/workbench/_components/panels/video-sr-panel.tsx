@@ -5,7 +5,17 @@ import { useState } from 'react'
 import { ImageUp, Maximize, Settings2, Boxes, Film, FileArchive, Activity } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Drop, FieldGrid, FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, SliderField, UploadGlyph, UploadZone } from './shared'
+import {
+  Drop,
+  FieldGrid,
+  FieldLabel,
+  FieldLabelIcon,
+  PanelCard,
+  PanelIcon,
+  SliderField,
+  UploadGlyph,
+  UploadZone,
+} from './shared'
 
 /**
  * 视频超分面板 —— 参考站结构:添加源视频 + 超分配置(超分模型 / 放大倍率 / 目标帧率)+ 高级参数(压缩 / 噪点滑块)
@@ -48,11 +58,16 @@ export function VideoSrPanel({ configs }: { configs: Workbench.ConfigResponse['d
             </FieldLabel>
             <Drop
               onChange={() => {}}
-              options={configs.videoUpscale.models.map((m) => ({ value: m.displayName, label: m.displayName }))}
+              options={configs.videoUpscale.models.map((m) => ({
+                value: m.displayName,
+                label: m.displayName,
+              }))}
               value={configs.videoUpscale.models[0]?.displayName ?? ''}
             />
           </div>
-          <p className="mt-0.5 -mb-1 text-[10px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Upscale model hint')}</p>
+          <p className="mt-0.5 -mb-1 text-[10px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">
+            {t('Upscale model hint')}
+          </p>
           <FieldGrid>
             <div>
               <FieldLabel>

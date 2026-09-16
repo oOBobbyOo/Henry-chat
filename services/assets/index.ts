@@ -8,7 +8,10 @@ import { request } from '@/lib/request'
  */
 export const AssetsService = {
   /** 资产库聚合:选项字典 + facets + 云空间 + 资产列表 */
-  getLibrary: () => request.get<Assets.LibraryResponse>('/api/assets/library', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getLibrary: () =>
+    request.get<Assets.LibraryResponse>('/api/assets/library', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
 }
 
 export const ASSETS_QUERY_KEYS = {

@@ -15,7 +15,7 @@ import { PasswordInput } from '@/components/ui/password-input'
 import { cn } from '@/lib/utils'
 import { AuthService } from '@/services/auth'
 
-import { LoginOrSignup } from '../_components/LoginOrSignup'
+import { LoginOrSignup } from './login-or-signup'
 
 // 统一 Input 样式类（边框/阴影/无外环/聚焦反馈）
 const inputClasses = cn(
@@ -86,7 +86,11 @@ export function SignupForm() {
                   placeholder={t('Enter your username')}
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
-                  aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                  aria-describedby={
+                    field.state.meta.isTouched && field.state.meta.errors.length
+                      ? `${field.name}-error`
+                      : undefined
+                  }
                   className={inputClasses}
                 />
                 <FieldError errors={field.state.meta.errors} />
@@ -115,7 +119,11 @@ export function SignupForm() {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                   aria-invalid={!!field.state.meta.errors.length}
-                  aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                  aria-describedby={
+                    field.state.meta.isTouched && field.state.meta.errors.length
+                      ? `${field.name}-error`
+                      : undefined
+                  }
                   className={inputClasses}
                 />
                 <FieldError errors={field.state.meta.errors} />
@@ -143,7 +151,11 @@ export function SignupForm() {
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
                 aria-invalid={!!field.state.meta.errors.length}
-                aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                aria-describedby={
+                  field.state.meta.isTouched && field.state.meta.errors.length
+                    ? `${field.name}-error`
+                    : undefined
+                }
                 className={inputClasses}
               />
 
@@ -161,7 +173,9 @@ export function SignupForm() {
             onChange: signupSchema.shape.confirmPassword,
             // 失去焦点时比对两次密码
             onBlur: ({ value, fieldApi }) => {
-              return value !== fieldApi.form.getFieldValue('password') ? { message: '两次输入的密码不一致' } : undefined
+              return value !== fieldApi.form.getFieldValue('password')
+                ? { message: '两次输入的密码不一致' }
+                : undefined
             },
           }}
           children={(field) => (
@@ -177,7 +191,11 @@ export function SignupForm() {
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
                 aria-invalid={!!field.state.meta.errors.length}
-                aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                aria-describedby={
+                  field.state.meta.isTouched && field.state.meta.errors.length
+                    ? `${field.name}-error`
+                    : undefined
+                }
                 className={inputClasses}
               />
               <FieldError errors={field.state.meta.errors} />

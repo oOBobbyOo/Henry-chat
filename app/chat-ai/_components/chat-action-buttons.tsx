@@ -84,7 +84,9 @@ export function ChatActionButtons({
             size="icon"
             className={cn(
               'flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
-              copied ? 'bg-green-50 text-green-600' : 'text-gray-400 hover:bg-blue-50 hover:text-blue-600',
+              copied
+                ? 'bg-green-50 text-green-600'
+                : 'text-gray-400 hover:bg-blue-50 hover:text-blue-600',
             )}
             onClick={handleCopy}
           >
@@ -122,7 +124,9 @@ export function ChatActionButtons({
               size="icon"
               className={cn(
                 'flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
-                liked ? 'bg-green-50 text-blue-600' : 'text-gray-400 hover:bg-blue-50 hover:text-blue-600',
+                liked
+                  ? 'bg-green-50 text-blue-600'
+                  : 'text-gray-400 hover:bg-blue-50 hover:text-blue-600',
               )}
               onClick={onLike}
             >
@@ -143,7 +147,9 @@ export function ChatActionButtons({
               size="icon"
               className={cn(
                 'flex cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
-                disliked ? 'bg-green-50 text-red-600' : 'text-gray-400 hover:bg-blue-50 hover:text-blue-600',
+                disliked
+                  ? 'bg-green-50 text-red-600'
+                  : 'text-gray-400 hover:bg-blue-50 hover:text-blue-600',
               )}
               onClick={onDislike}
             >
@@ -182,7 +188,9 @@ export function ChatActionButtons({
               size="icon"
               className={cn(
                 'flex items-center gap-1 rounded-md px-2 py-1 text-xs transition-all duration-200',
-                disabled ? 'cursor-not-allowed text-gray-300' : 'cursor-pointer text-gray-400 hover:bg-blue-50 hover:text-blue-600',
+                disabled
+                  ? 'cursor-not-allowed text-gray-300'
+                  : 'cursor-pointer text-gray-400 hover:bg-blue-50 hover:text-blue-600',
               )}
               disabled={disabled}
               onClick={handleEdit}

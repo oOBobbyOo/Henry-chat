@@ -2,7 +2,17 @@
 
 import { useState } from 'react'
 
-import { BookOpen, Music, SlidersHorizontal, Music2, Shapes, Sparkles, Activity, Waves, FileArchive } from 'lucide-react'
+import {
+  BookOpen,
+  Music,
+  SlidersHorizontal,
+  Music2,
+  Shapes,
+  Sparkles,
+  Activity,
+  Waves,
+  FileArchive,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { Drop, FieldGrid, FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, Seg } from './shared'
@@ -38,7 +48,9 @@ export function MusicPanel({ configs }: { configs: Workbench.ConfigResponse['dat
               ]}
               value={lyricMode}
             />
-            <p className="mt-1.5 text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{lyricMode === 'new' ? t('Write full lyrics hint') : t('Continue / edit hint')}</p>
+            <p className="mt-1.5 text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">
+              {lyricMode === 'new' ? t('Write full lyrics hint') : t('Continue / edit hint')}
+            </p>
           </div>
           <button
             className="inline-flex h-9 w-full items-center justify-center gap-2 rounded-[12px] border border-[rgba(56,103,255,0.3)] bg-[rgba(56,103,255,0.08)] text-[13px] font-medium text-[#3867ff] transition-colors hover:bg-[rgba(56,103,255,0.14)] dark:border-[rgba(143,165,255,0.3)] dark:text-[#8fa5ff] dark:hover:bg-[rgba(143,165,255,0.14)]"
@@ -69,7 +81,10 @@ export function MusicPanel({ configs }: { configs: Workbench.ConfigResponse['dat
             </FieldLabel>
             <Drop
               onChange={() => {}}
-              options={configs.music.models.map((m) => ({ value: m.displayName, label: m.displayName }))}
+              options={configs.music.models.map((m) => ({
+                value: m.displayName,
+                label: m.displayName,
+              }))}
               value={configs.music.models[0]?.displayName ?? ''}
             />
           </div>

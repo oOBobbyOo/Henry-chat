@@ -1,7 +1,19 @@
 declare namespace Ranking {
   export type Period = 'today' | 'week' | 'month' | 'year' | 'all'
 
-  export type CategoryId = 'all' | 'programming' | 'roleplay' | 'marketing' | 'translation' | 'science' | 'finance' | 'health' | 'legal' | 'education' | 'productivity' | 'multimodal'
+  export type CategoryId =
+    | 'all'
+    | 'programming'
+    | 'roleplay'
+    | 'marketing'
+    | 'translation'
+    | 'science'
+    | 'finance'
+    | 'health'
+    | 'legal'
+    | 'education'
+    | 'productivity'
+    | 'multimodal'
 
   export type ModelRanking = {
     rank: number

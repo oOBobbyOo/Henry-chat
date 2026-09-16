@@ -4,7 +4,13 @@ import { LayoutGrid, Search, SlidersHorizontal, TableProperties, TimerReset } fr
 import { useT } from 'next-i18next/client'
 
 import { getProviderIcon } from '@/components/token-hub/family-icon'
-import { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectTrigger, ConsoleSelectValue } from '@/components/token-hub/select'
+import {
+  ConsoleSelect,
+  ConsoleSelectContent,
+  ConsoleSelectItem,
+  ConsoleSelectTrigger,
+  ConsoleSelectValue,
+} from '@/components/token-hub/select'
 
 import type { PlazaCurrency } from './model-card'
 
@@ -124,9 +130,13 @@ export function PlazaToolbar({
                   value={v.name}
                 >
                   <span className="flex items-center gap-1.5">
-                    <span className="grid h-4 w-4 place-items-center">{getProviderIcon(v.name, 12)}</span>
+                    <span className="grid h-4 w-4 place-items-center">
+                      {getProviderIcon(v.name, 12)}
+                    </span>
                     {v.name}
-                    <span className="ml-auto pl-2 text-xs text-(--tc-muted) tabular-nums">{v.count}</span>
+                    <span className="ml-auto pl-2 text-xs text-(--tc-muted) tabular-nums">
+                      {v.count}
+                    </span>
                   </span>
                 </ConsoleSelectItem>
               ))}
@@ -153,7 +163,8 @@ export function PlazaToolbar({
             aria-live="polite"
             className="mr-auto text-xs whitespace-nowrap text-(--tc-muted) lg:mr-1"
           >
-            {t('Plaza Showing')} <span className="font-semibold text-(--tc-strong)">{shown}</span> / {total} {t('Plaza Models')}
+            {t('Plaza Showing')} <span className="font-semibold text-(--tc-strong)">{shown}</span> /{' '}
+            {total} {t('Plaza Models')}
           </p>
 
           {/* 排序 */}
@@ -186,7 +197,9 @@ export function PlazaToolbar({
               aria-pressed={currency === 'CNY'}
               onClick={() => onCurrencyChange('CNY')}
               className={`inline-flex h-7 cursor-pointer items-center justify-center rounded-md px-3 text-xs font-semibold leading-none whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none ${
-                currency === 'CNY' ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)'
+                currency === 'CNY'
+                  ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]'
+                  : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)'
               }`}
             >
               ¥ {t('Plaza CNY')}
@@ -196,7 +209,9 @@ export function PlazaToolbar({
               aria-pressed={currency === 'USD'}
               onClick={() => onCurrencyChange('USD')}
               className={`inline-flex h-7 cursor-pointer items-center justify-center rounded-md px-3 text-xs font-semibold leading-none whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none ${
-                currency === 'USD' ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)'
+                currency === 'USD'
+                  ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]'
+                  : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)'
               }`}
             >
               $ {t('Plaza USD')}
@@ -215,7 +230,9 @@ export function PlazaToolbar({
               onClick={() => onViewChange('list')}
               title={t('Plaza List View')}
               className={`grid h-7 w-8 cursor-pointer place-items-center rounded-md leading-none transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none ${
-                view === 'list' ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)'
+                view === 'list'
+                  ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]'
+                  : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)'
               }`}
             >
               <TableProperties className="h-3.5 w-3.5" />
@@ -226,7 +243,9 @@ export function PlazaToolbar({
               onClick={() => onViewChange('card')}
               title={t('Plaza Card View')}
               className={`grid h-7 w-8 cursor-pointer place-items-center rounded-md leading-none transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none ${
-                view === 'card' ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)'
+                view === 'card'
+                  ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]'
+                  : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)'
               }`}
             >
               <LayoutGrid className="h-3.5 w-3.5" />
@@ -266,7 +285,17 @@ export function PlazaToolbar({
 }
 
 /** 供应商 chip —— 选中态高亮,未选中灰底 */
-function VendorChip({ name, count, active, onClick }: { name: string; count: number; active: boolean; onClick: () => void }) {
+function VendorChip({
+  name,
+  count,
+  active,
+  onClick,
+}: {
+  name: string
+  count: number
+  active: boolean
+  onClick: () => void
+}) {
   return (
     <button
       type="button"

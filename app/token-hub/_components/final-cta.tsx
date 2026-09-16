@@ -18,8 +18,12 @@ export async function FinalCta() {
         className="pointer-events-none absolute -top-24 right-[10%] h-64 w-64 rounded-full bg-[#5f7cff]/25 blur-3xl"
       />
       <div className="relative mx-auto max-w-330 px-5 py-20 text-center sm:px-8 sm:py-24">
-        <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#a8b8ff]">{t('Cta Heading')}</p>
-        <h2 className="mx-auto mt-4 max-w-2xl text-[28px] font-semibold leading-tight tracking-tight text-white sm:text-[36px]">{t('Cta Title')}</h2>
+        <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#a8b8ff]">
+          {t('Cta Heading')}
+        </p>
+        <h2 className="mx-auto mt-4 max-w-2xl text-[28px] font-semibold leading-tight tracking-tight text-white sm:text-[36px]">
+          {t('Cta Title')}
+        </h2>
         <div className="mt-8 flex justify-center">
           <Link
             href="/api/logto/sign-in"

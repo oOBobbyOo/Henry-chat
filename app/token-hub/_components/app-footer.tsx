@@ -51,7 +51,9 @@ export async function AppFooter() {
           {/* 品牌区 */}
           <div className="col-span-2">
             <BrandLogo />
-            <p className="mt-5 max-w-65 text-sm leading-relaxed text-[#8a9bc0]">{t('Footer Description')}</p>
+            <p className="mt-5 max-w-65 text-sm leading-relaxed text-[#8a9bc0]">
+              {t('Footer Description')}
+            </p>
           </div>
 
           {/* 链接分组 */}

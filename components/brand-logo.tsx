@@ -38,8 +38,12 @@ export function BrandLogo({ href = '/' }: { href?: string }) {
           </svg>
         </span>
         <span className="leading-none hidden lg:block">
-          <span className="block text-[15px] font-semibold tracking-[-0.04em] text-[#1c2c4d]">Token Hub</span>
-          <span className="mt-1 block text-[9px] font-bold tracking-[0.18em] text-[#b1bfd0] uppercase">AI Gateway</span>
+          <span className="block text-[15px] font-semibold tracking-[-0.04em] text-[#1c2c4d]">
+            Token Hub
+          </span>
+          <span className="mt-1 block text-[9px] font-bold tracking-[0.18em] text-[#b1bfd0] uppercase">
+            AI Gateway
+          </span>
         </span>
       </span>
     </Link>

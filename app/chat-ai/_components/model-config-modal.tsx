@@ -3,11 +3,19 @@
 import { RotateCcw, Settings2, X } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogDescription,
+} from '@/components/ui/dialog'
 import { cn } from '@/lib/utils'
 
 import { DEFAULT_MODEL_CONFIG } from '../constants'
-import { ConfigFields } from './ConfigFields'
+import { ConfigFields } from './config-fields'
 
 interface ModelConfigModalProps {
   /** 模型配置 */
@@ -124,7 +132,12 @@ export function ModelConfigModal({
               variant="ghost"
               size="sm"
               onClick={toggleCompare}
-              className={cn('rounded-lg transition-all', isCompareMode ? 'text-red-500 hover:bg-red-50 hover:text-red-600' : 'text-gray-500 hover:bg-blue-50 hover:text-blue-600')}
+              className={cn(
+                'rounded-lg transition-all',
+                isCompareMode
+                  ? 'text-red-500 hover:bg-red-50 hover:text-red-600'
+                  : 'text-gray-500 hover:bg-blue-50 hover:text-blue-600',
+              )}
             >
               {isCompareMode ? (
                 <>
@@ -140,7 +153,9 @@ export function ModelConfigModal({
             </Button>
           </div>
           <DialogTrigger asChild>
-            <Button className="rounded-lg bg-blue-500 px-8 text-white shadow-lg shadow-blue-100 transition-all hover:bg-blue-600 active:scale-95">确定</Button>
+            <Button className="rounded-lg bg-blue-500 px-8 text-white shadow-lg shadow-blue-100 transition-all hover:bg-blue-600 active:scale-95">
+              确定
+            </Button>
           </DialogTrigger>
         </DialogFooter>
       </DialogContent>

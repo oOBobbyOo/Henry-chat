@@ -7,10 +7,10 @@ import { useStickToBottom } from 'use-stick-to-bottom'
 
 import { cn } from '@/lib/utils'
 
-import { ChatMessageBubble } from './ChatMessageBubble'
-import { ModelConfigModal } from './ModelConfigModal'
-import { QuickQuestions } from './QuickQuestions'
-import { UserDropdownMenu } from './UserDropdownMenu'
+import { ChatMessageBubble } from './chat-message-bubble'
+import { ModelConfigModal } from './model-config-modal'
+import { QuickQuestions } from './quick-questions'
+import { UserDropdownMenu } from './user-dropdown-menu'
 
 interface ChatPanelProps {
   /** 模型配置信息 */
@@ -100,7 +100,12 @@ export function ChatAIPanels({
   }
 
   return (
-    <div className={cn('flex min-w-0 flex-1 flex-col bg-linear-to-br from-gray-50 to-blue-50/30', showBorder ? 'rounded-xl border border-gray-100' : '')}>
+    <div
+      className={cn(
+        'flex min-w-0 flex-1 flex-col bg-linear-to-br from-gray-50 to-blue-50/30',
+        showBorder ? 'rounded-xl border border-gray-100' : '',
+      )}
+    >
       {/* --- 模型标题栏 --- */}
       <header className="sticky top-0 z-10 hidden items-center justify-between border-b border-gray-100 bg-white px-4 py-2 shadow-sm lg:flex">
         <ModelConfigModal
@@ -156,7 +161,10 @@ export function ChatAIPanels({
               onKeyDown={handleKeyDown}
               placeholder={status === 'streaming' ? 'AI 正在回复中...' : '请输入提示词...'}
               disabled={status === 'streaming'}
-              className={cn('min-h-[60px] w-full resize-none px-4 py-3 pb-14 text-sm text-gray-800 outline-none', status === 'streaming' && 'cursor-not-allowed opacity-60')}
+              className={cn(
+                'min-h-[60px] w-full resize-none px-4 py-3 pb-14 text-sm text-gray-800 outline-none',
+                status === 'streaming' && 'cursor-not-allowed opacity-60',
+              )}
             />
             <div className="absolute right-3 bottom-3 left-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -165,7 +173,9 @@ export function ChatAIPanels({
                   onClick={toggleWebSearch}
                   className={cn(
                     'flex items-center gap-1.5 rounded-lg border px-2 py-1 text-xs transition-all duration-200',
-                    enableWebSearch ? 'border-blue-200 bg-blue-50 text-blue-600' : 'border-gray-200 bg-white text-gray-500 hover:border-blue-200 hover:text-blue-600',
+                    enableWebSearch
+                      ? 'border-blue-200 bg-blue-50 text-blue-600'
+                      : 'border-gray-200 bg-white text-gray-500 hover:border-blue-200 hover:text-blue-600',
                   )}
                   disabled={status === 'streaming'}
                 >
@@ -177,7 +187,9 @@ export function ChatAIPanels({
                   onClick={toggleDeepThinking}
                   className={cn(
                     'flex items-center gap-1.5 rounded-lg border px-2 py-1 text-xs transition-all duration-200',
-                    enableDeepThinking ? 'border-purple-200 bg-purple-50 text-purple-600' : 'border-gray-200 bg-white text-gray-500 hover:border-purple-200 hover:text-purple-600',
+                    enableDeepThinking
+                      ? 'border-purple-200 bg-purple-50 text-purple-600'
+                      : 'border-gray-200 bg-white text-gray-500 hover:border-purple-200 hover:text-purple-600',
                   )}
                   disabled={status === 'streaming'}
                 >
@@ -200,7 +212,11 @@ export function ChatAIPanels({
                 aria-label={status === 'streaming' ? '停止生成' : '发送'}
                 title={status === 'streaming' ? '停止生成' : '发送'}
               >
-                {status === 'streaming' ? <Square className="h-4 w-4 fill-current" /> : <Send className="h-4 w-4" />}
+                {status === 'streaming' ? (
+                  <Square className="h-4 w-4 fill-current" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
               </button>
             </div>
           </div>

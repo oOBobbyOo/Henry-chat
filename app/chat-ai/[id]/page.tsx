@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 
 import { useParams, useRouter } from 'next/navigation'
 
-import { ChatInterface } from '../_components/ChatInterface'
+import { ChatInterface } from '../_components/chat-interface'
 import { useChat } from '../hooks/useChat'
 
 /**
@@ -18,7 +18,8 @@ export default function ChatRoomPage() {
   const isNewSession = /^\d{13,}$/.test(chatId)
   const hasInitializedRef = useRef(false)
 
-  const { messages, status, conversationId, sendMessage, stopGenerating, loadConversation } = useChat()
+  const { messages, status, conversationId, sendMessage, stopGenerating, loadConversation } =
+    useChat()
 
   // 加载会话历史
   useEffect(() => {

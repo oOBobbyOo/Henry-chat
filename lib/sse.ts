@@ -65,7 +65,8 @@ export function parseOpenAIStreamLine(line: string): OpenAIStreamChunk | null {
     }
 
     // 提取 reasoning_content (不同字段名：reasoning_content / reasoning / thoughts)
-    const reasoning = choice.delta?.reasoning_content ?? choice.delta?.reasoning ?? choice.delta?.thoughts ?? null
+    const reasoning =
+      choice.delta?.reasoning_content ?? choice.delta?.reasoning ?? choice.delta?.thoughts ?? null
 
     // 提取 content（接口：delta；补全接口：text）
     const content = choice.delta?.content ?? choice.text ?? null
@@ -171,7 +172,10 @@ export async function processLine(line: string, state: StreamState, callbacks: S
  * @param response - Fetch API 的 Response 对象
  * @param streamCallbacks - 流式响应回调配置
  */
-export async function parseStream(response: Response, streamCallbacks: StreamCallbacks): Promise<void> {
+export async function parseStream(
+  response: Response,
+  streamCallbacks: StreamCallbacks,
+): Promise<void> {
   if (!response.body) {
     throw new Error('Response body is null')
   }

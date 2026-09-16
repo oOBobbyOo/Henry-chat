@@ -3,7 +3,13 @@
 import { CalendarRange, TimerReset } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectTrigger, ConsoleSelectValue } from '@/components/token-hub/select'
+import {
+  ConsoleSelect,
+  ConsoleSelectContent,
+  ConsoleSelectItem,
+  ConsoleSelectTrigger,
+  ConsoleSelectValue,
+} from '@/components/token-hub/select'
 
 import { FILTER_ALL, RANGE_CONFIG, type UsageFilters, type UsageRange } from '../page'
 
@@ -48,7 +54,10 @@ export function UsageFilterBar({
   ]
 
   /** 粒度文案(与时间范围联动:24h 按小时,其余按天) */
-  const granularityLabel = RANGE_CONFIG[range].granularity === 'hour' ? t('Usage Granularity Hour') : t('Usage Granularity Day')
+  const granularityLabel =
+    RANGE_CONFIG[range].granularity === 'hour'
+      ? t('Usage Granularity Hour')
+      : t('Usage Granularity Day')
 
   /** 通用筛选下拉项 */
   const renderItems = (values: string[], allLabel: string) => (
@@ -84,7 +93,9 @@ export function UsageFilterBar({
               aria-pressed={range === key}
               onClick={() => onRangeChange(key)}
               className={`inline-flex h-7 cursor-pointer items-center justify-center rounded-md px-3 text-xs font-semibold leading-none whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none ${
-                range === key ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-muted) hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)'
+                range === key
+                  ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]'
+                  : 'text-(--tc-muted) hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)'
               }`}
             >
               {label}
@@ -109,7 +120,9 @@ export function UsageFilterBar({
           >
             <ConsoleSelectValue />
           </ConsoleSelectTrigger>
-          <ConsoleSelectContent>{renderItems([t('Usage Dept Tech')], t('Usage Filter Dept All'))}</ConsoleSelectContent>
+          <ConsoleSelectContent>
+            {renderItems([t('Usage Dept Tech')], t('Usage Filter Dept All'))}
+          </ConsoleSelectContent>
         </ConsoleSelect>
 
         {/* 用户 */}
@@ -123,7 +136,9 @@ export function UsageFilterBar({
           >
             <ConsoleSelectValue />
           </ConsoleSelectTrigger>
-          <ConsoleSelectContent>{renderItems([t('Usage User Henry')], t('Usage Filter User All'))}</ConsoleSelectContent>
+          <ConsoleSelectContent>
+            {renderItems([t('Usage User Henry')], t('Usage Filter User All'))}
+          </ConsoleSelectContent>
         </ConsoleSelect>
 
         {/* 模型 */}
@@ -137,7 +152,9 @@ export function UsageFilterBar({
           >
             <ConsoleSelectValue />
           </ConsoleSelectTrigger>
-          <ConsoleSelectContent>{renderItems(modelOptions, t('Usage Filter Model All'))}</ConsoleSelectContent>
+          <ConsoleSelectContent>
+            {renderItems(modelOptions, t('Usage Filter Model All'))}
+          </ConsoleSelectContent>
         </ConsoleSelect>
 
         {/* 供应商 */}
@@ -151,7 +168,9 @@ export function UsageFilterBar({
           >
             <ConsoleSelectValue />
           </ConsoleSelectTrigger>
-          <ConsoleSelectContent>{renderItems(providerOptions, t('Usage Filter Provider All'))}</ConsoleSelectContent>
+          <ConsoleSelectContent>
+            {renderItems(providerOptions, t('Usage Filter Provider All'))}
+          </ConsoleSelectContent>
         </ConsoleSelect>
 
         {/* 客户端 */}
@@ -165,7 +184,9 @@ export function UsageFilterBar({
           >
             <ConsoleSelectValue />
           </ConsoleSelectTrigger>
-          <ConsoleSelectContent>{renderItems(clientOptions, t('Usage Filter Client All'))}</ConsoleSelectContent>
+          <ConsoleSelectContent>
+            {renderItems(clientOptions, t('Usage Filter Client All'))}
+          </ConsoleSelectContent>
         </ConsoleSelect>
 
         {/* 清空筛选 */}

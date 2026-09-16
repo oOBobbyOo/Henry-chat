@@ -55,7 +55,9 @@ export function AssetPickerDialog({
     return assets
       .filter((item) => item.assetType === 'image')
       .filter((item) => !favoritesOnly || item.favorite)
-      .filter((item) => !kw || `${item.name} ${item.modelName} ${item.format}`.toLowerCase().includes(kw))
+      .filter(
+        (item) => !kw || `${item.name} ${item.modelName} ${item.format}`.toLowerCase().includes(kw),
+      )
   }, [assets, favoritesOnly, keyword])
 
   const selected = list.find((item) => item.id === selectedId) ?? null
@@ -79,9 +81,15 @@ export function AssetPickerDialog({
         {/* 头部:eyebrow + 标题 + 说明 + 关闭 */}
         <div className="flex items-start justify-between gap-4 border-b border-[rgba(12,24,36,0.06)] px-5 py-4 dark:border-white/8">
           <div className="min-w-0 flex-1">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-[#8296b4] dark:text-[#7b8aa8]">{t('My assets')}</p>
-            <DialogTitle className="mt-1 text-lg font-semibold tracking-[-0.01em] text-[#091423] dark:text-[#eef4ff]">{t('Choose from asset library')}</DialogTitle>
-            <p className="mt-2 text-[12px] leading-6 text-[#4a6080] dark:text-[#8fa5c4]">{t('Asset picker hint')}</p>
+            <p className="text-[11px] uppercase tracking-[0.22em] text-[#8296b4] dark:text-[#7b8aa8]">
+              {t('My assets')}
+            </p>
+            <DialogTitle className="mt-1 text-lg font-semibold tracking-[-0.01em] text-[#091423] dark:text-[#eef4ff]">
+              {t('Choose from asset library')}
+            </DialogTitle>
+            <p className="mt-2 text-[12px] leading-6 text-[#4a6080] dark:text-[#8fa5c4]">
+              {t('Asset picker hint')}
+            </p>
           </div>
           <button
             type="button"
@@ -133,7 +141,9 @@ export function AssetPickerDialog({
             {t('My favorites')}
           </button>
           <div className="ml-auto flex items-center gap-3">
-            <span className="text-[11px] text-[#4a6080] dark:text-[#8fa5c4]">{t('Selected count', { count: selected ? 1 : 0 })}</span>
+            <span className="text-[11px] text-[#4a6080] dark:text-[#8fa5c4]">
+              {t('Selected count', { count: selected ? 1 : 0 })}
+            </span>
             {selected && (
               <button
                 type="button"
@@ -155,7 +165,9 @@ export function AssetPickerDialog({
                 className="h-6 w-6 text-[#8a9bc0]"
                 strokeWidth={1.5}
               />
-              <p className="mt-3 text-[12.5px] text-[#4a6080] dark:text-[#8fa5c4]">{t('No matching assets')}</p>
+              <p className="mt-3 text-[12.5px] text-[#4a6080] dark:text-[#8fa5c4]">
+                {t('No matching assets')}
+              </p>
             </div>
           ) : (
             list.map((item, index) => {
@@ -199,7 +211,9 @@ export function AssetPickerDialog({
                     onClick={() => setSelectedId(isSelected ? null : item.id)}
                     className="min-w-0 flex-1 cursor-pointer text-left"
                   >
-                    <p className="truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">{item.name}</p>
+                    <p className="truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                      {item.name}
+                    </p>
                     <div className="mt-1.5">
                       <span
                         className={cn(
@@ -228,7 +242,9 @@ export function AssetPickerDialog({
 
         {/* 页脚:说明 + 取消 + 使用所选图片 */}
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-[rgba(12,24,36,0.06)] px-5 py-4 dark:border-white/8">
-          <p className="text-[12px] leading-6 text-[#4a6080] dark:text-[#8fa5c4]">{t('Asset picker footer hint')}</p>
+          <p className="text-[12px] leading-6 text-[#4a6080] dark:text-[#8fa5c4]">
+            {t('Asset picker footer hint')}
+          </p>
           <div className="ml-auto flex items-center gap-2.5">
             <button
               type="button"

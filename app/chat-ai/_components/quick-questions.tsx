@@ -15,7 +15,10 @@ export function QuickQuestions({ onClickQuestion }: QuickQuestionsProps) {
           onClick={() => {
             onClickQuestion(question)
           }}
-          className={cn('cursor-pointer rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-600', 'transition-colors hover:border-blue-200 hover:bg-gray-50')}
+          className={cn(
+            'cursor-pointer rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs text-gray-600',
+            'transition-colors hover:border-blue-200 hover:bg-gray-50',
+          )}
         >
           {question.text}
         </button>

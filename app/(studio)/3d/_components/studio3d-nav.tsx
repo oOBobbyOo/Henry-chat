@@ -68,7 +68,9 @@ export function Studio3dNav({ capabilities, activeId, onSelect }: Studio3dNavPro
               type="button"
             >
               <CapabilityIcon id={item.id} />
-              <span className="text-[12px] leading-none font-semibold tracking-wide">{t(item.nameKey)}</span>
+              <span className="text-[12px] leading-none font-semibold tracking-wide">
+                {t(item.nameKey)}
+              </span>
             </button>
           )
         })}
@@ -80,7 +82,9 @@ export function Studio3dNav({ capabilities, activeId, onSelect }: Studio3dNavPro
           type="button"
         >
           <CableIcon />
-          <span className="text-[12px] leading-none font-semibold tracking-wide">{t('DCC Bridge')}</span>
+          <span className="text-[12px] leading-none font-semibold tracking-wide">
+            {t('DCC Bridge')}
+          </span>
         </button>
       </div>
     </aside>

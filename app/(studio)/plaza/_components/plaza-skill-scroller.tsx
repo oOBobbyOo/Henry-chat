@@ -55,7 +55,9 @@ export function PlazaSkillScroller() {
             </div>
             <div className="px-3 py-2 text-left">
               <p className="truncate text-[13px] font-medium">{skill.displayName}</p>
-              <p className="mt-0.5 truncate text-[11.5px] text-muted-foreground">{skill.description}</p>
+              <p className="mt-0.5 truncate text-[11.5px] text-muted-foreground">
+                {skill.description}
+              </p>
             </div>
             <ChevronRight className="absolute right-2 bottom-2 h-4 w-4 opacity-0 transition group-hover:opacity-60" />
           </article>

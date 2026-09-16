@@ -27,8 +27,10 @@ export const plazaMock: Plaza.MockData = {
       title: '西游记女儿国海报',
       tags: ['image_creation', 'official_picks', '社区种子', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/145e4c57-b2cd-4544-80cc-b6a38b7ed71c-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-2451b52959dd8e6ae8240a2c449a9564',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/554f9ea1-ac96-4b99-9894-49c6927d5ab8-fal-ai-gpt-image-2.png?sign=1789034400-0-0-4aa0d5c3852caf18f0f9220109587533',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/145e4c57-b2cd-4544-80cc-b6a38b7ed71c-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-2451b52959dd8e6ae8240a2c449a9564',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/554f9ea1-ac96-4b99-9894-49c6927d5ab8-fal-ai-gpt-image-2.png?sign=1789034400-0-0-4aa0d5c3852caf18f0f9220109587533',
       displayName: '西游记女儿国温泉海报',
       width: 1536,
       height: 2048,
@@ -40,8 +42,10 @@ export const plazaMock: Plaza.MockData = {
       title: '日式教室长发快照',
       tags: ['image_creation', 'official_picks', '社区种子', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/6f3ef3f6-8340-4b45-8454-d5f09b1d91b5-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-803b2c37d06a0034d8f0b647ec7ef60b',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/b8585f3d-6d7d-4d0b-aec1-018bac4c56e6-fal-ai-gpt-image-2.png?sign=1789034400-0-0-a9bff74f494fea825385f740c4bde635',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/6f3ef3f6-8340-4b45-8454-d5f09b1d91b5-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-803b2c37d06a0034d8f0b647ec7ef60b',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/b8585f3d-6d7d-4d0b-aec1-018bac4c56e6-fal-ai-gpt-image-2.png?sign=1789034400-0-0-a9bff74f494fea825385f740c4bde635',
       displayName: '日本高中教室长发女生日常',
       width: 2160,
       height: 3840,
@@ -68,8 +72,10 @@ export const plazaMock: Plaza.MockData = {
       title: 'Vertical Wuxia Heroine Portrait',
       tags: ['image_creation', 'official_picks', '社区种子', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/dc485967-057e-48fd-be71-60144917c955-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-a93d899c1ab536760fffaf14a953dad4',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/1d99b7cc-0533-470a-8e5c-b5e27a6662dc-fal-ai-gpt-image-2.png?sign=1789034400-0-0-7549fa1ceccc707301a5bbd00b77623d',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/dc485967-057e-48fd-be71-60144917c955-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-a93d899c1ab536760fffaf14a953dad4',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/1d99b7cc-0533-470a-8e5c-b5e27a6662dc-fal-ai-gpt-image-2.png?sign=1789034400-0-0-7549fa1ceccc707301a5bbd00b77623d',
       displayName: '月夜雨中冷艳武侠女侠',
       width: 1152,
       height: 2048,
@@ -81,8 +87,10 @@ export const plazaMock: Plaza.MockData = {
       title: 'Old Money Hamptons Editorial, Tall Blonde Woman',
       tags: ['image_creation', 'official_picks', 'Community Seed', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/6e651c85-f358-423e-9213-0177ffd4a7af-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-291a7836fd08ace1be998642920aae8a',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/7ebc4c57-61c6-4af8-a9db-b65b525c5ba8-fal-ai-gpt-image-2.png?sign=1789034400-0-0-129b659e03fd9d64736d5fee929e08f1',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/6e651c85-f358-423e-9213-0177ffd4a7af-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-291a7836fd08ace1be998642920aae8a',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/7ebc4c57-61c6-4af8-a9db-b65b525c5ba8-fal-ai-gpt-image-2.png?sign=1789034400-0-0-129b659e03fd9d64736d5fee929e08f1',
       displayName: '汉普顿老钱风时尚摄影',
       width: 1536,
       height: 1024,
@@ -94,8 +102,10 @@ export const plazaMock: Plaza.MockData = {
       title: '幼儿蜡笔涂鸦风格人像',
       tags: ['image_creation', 'official_picks', '社区种子', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/0874a1d4-87d2-4159-9c59-27e78a9a21e7-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-2c8ee1006523e4c38c2ec7f0252f8563',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/a571dc47-86c9-4ba4-b7d6-276a663d764e-fal-ai-gpt-image-2.png?sign=1789034400-0-0-76602bf1c348ddb3beb87034f918c398',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/0874a1d4-87d2-4159-9c59-27e78a9a21e7-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-2c8ee1006523e4c38c2ec7f0252f8563',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/a571dc47-86c9-4ba4-b7d6-276a663d764e-fal-ai-gpt-image-2.png?sign=1789034400-0-0-76602bf1c348ddb3beb87034f918c398',
       displayName: '儿童涂鸦风格简笔画',
       width: 2048,
       height: 2048,
@@ -122,8 +132,10 @@ export const plazaMock: Plaza.MockData = {
       title: '城市回眸街头人像',
       tags: ['image_creation', 'official_picks', '社区种子', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/c2075b8e-f381-4bed-b03f-8c651da075e0-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-801815653a6962124fa76ab13eb83f7b',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/5c3b06a1-90a2-4421-bf3f-e2549a1ff746-fal-ai-gpt-image-2.png?sign=1789034400-0-0-73c15ed3fd578805573d9bdc00971d91',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/c2075b8e-f381-4bed-b03f-8c651da075e0-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-801815653a6962124fa76ab13eb83f7b',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/5c3b06a1-90a2-4421-bf3f-e2549a1ff746-fal-ai-gpt-image-2.png?sign=1789034400-0-0-73c15ed3fd578805573d9bdc00971d91',
       displayName: '街头休闲风少女回眸肖像',
       width: 1024,
       height: 1536,
@@ -135,8 +147,10 @@ export const plazaMock: Plaza.MockData = {
       title: '城市美食插画地图',
       tags: ['image_creation', 'official_picks', '社区种子', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/fb700f0c-67f5-4965-8163-4bc078120efb-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-241905d024a0a00d84d4988a674eeffb',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/96cf275c-ebe2-47c2-b888-b9fb2b6a4d9f-fal-ai-gpt-image-2.png?sign=1789034400-0-0-214e75fc1cfcd88ce5c60101f2d7c25b',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/fb700f0c-67f5-4965-8163-4bc078120efb-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-241905d024a0a00d84d4988a674eeffb',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/96cf275c-ebe2-47c2-b888-b9fb2b6a4d9f-fal-ai-gpt-image-2.png?sign=1789034400-0-0-214e75fc1cfcd88ce5c60101f2d7c25b',
       displayName: '成都吃货暴走手绘地图',
       width: 3264,
       height: 2448,
@@ -148,8 +162,10 @@ export const plazaMock: Plaza.MockData = {
       title: 'A Stunning 18-year-old Chinese Girl',
       tags: ['image_creation', 'official_picks', 'Community Seed', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/db40154a-5cd4-4a7b-987d-52199d99fde9-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-539570cacf7f60a4880a0a737c66ad90',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/c8a6d932-fb19-424d-b5d6-11435dc76fc5-fal-ai-gpt-image-2.png?sign=1789034400-0-0-1b30e3fc33cc6615a74d2e2fe1ef621a',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/db40154a-5cd4-4a7b-987d-52199d99fde9-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-539570cacf7f60a4880a0a737c66ad90',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/c8a6d932-fb19-424d-b5d6-11435dc76fc5-fal-ai-gpt-image-2.png?sign=1789034400-0-0-1b30e3fc33cc6615a74d2e2fe1ef621a',
       displayName: '卧室少女镜面自拍写实摄影',
       width: 2160,
       height: 3840,
@@ -161,8 +177,10 @@ export const plazaMock: Plaza.MockData = {
       title: 'Luxury Sportswear Campaign Poster',
       tags: ['image_creation', 'official_picks', 'Community Seed', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/e37d2aa4-b22a-403e-9167-910b918ce6c0-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-691b71461e5d1db90163bd32879af9db',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/d77b3d7d-f9d8-4f6a-8f8e-274bbaec0127-fal-ai-gpt-image-2.png?sign=1789034400-0-0-4534b32d5c563358623cfafda84c66e0',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/e37d2aa4-b22a-403e-9167-910b918ce6c0-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-691b71461e5d1db90163bd32879af9db',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/d77b3d7d-f9d8-4f6a-8f8e-274bbaec0127-fal-ai-gpt-image-2.png?sign=1789034400-0-0-4534b32d5c563358623cfafda84c66e0',
       displayName: '高端运动品牌时尚海报',
       width: 2160,
       height: 3840,
@@ -204,8 +222,10 @@ export const plazaMock: Plaza.MockData = {
       title: '아마추어 아이폰 발표회 현장 사진',
       tags: ['image_creation', 'official_picks', '커뮤니티 시드', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/2717bb95-4d82-4324-86bf-9a82e2cd6265-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-66edf5dba4194dff2b30842f64fd8e82',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/cfeb9ffb-4d80-422e-b51d-2698b2171549-fal-ai-gpt-image-2.png?sign=1789034400-0-0-3d2e254b4f5b70dd25c5b0fd874fe297',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/2717bb95-4d82-4324-86bf-9a82e2cd6265-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-66edf5dba4194dff2b30842f64fd8e82',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/cfeb9ffb-4d80-422e-b51d-2698b2171549-fal-ai-gpt-image-2.png?sign=1789034400-0-0-3d2e254b4f5b70dd25c5b0fd874fe297',
       displayName: '苹果发布会现场库克演讲实拍',
       width: 1536,
       height: 1024,
@@ -217,8 +237,10 @@ export const plazaMock: Plaza.MockData = {
       title: 'Vibrant Tropical Commercial Poster for a Citrus',
       tags: ['image_creation', 'official_picks', 'Community Seed', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/633fd5bd-54ce-49ff-91fa-a72a115130ac-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-594b8f3438fbfc8a16dbaa22356f30b9',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/8e3f9567-f4fc-4666-b81f-4a27548265e6-fal-ai-gpt-image-2.png?sign=1789034400-0-0-64656ff673ee1c80b96582273e8d433d',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/633fd5bd-54ce-49ff-91fa-a72a115130ac-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-594b8f3438fbfc8a16dbaa22356f30b9',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/8e3f9567-f4fc-4666-b81f-4a27548265e6-fal-ai-gpt-image-2.png?sign=1789034400-0-0-64656ff673ee1c80b96582273e8d433d',
       displayName: '柑橘汽水夏季商业海报',
       width: 3840,
       height: 1280,
@@ -245,8 +267,10 @@ export const plazaMock: Plaza.MockData = {
       title: 'ストップモーションアニメーション用プロンプト',
       tags: ['short_drama', '人物ドラマ', 'concept_art', 'official_picks'],
       assetType: 'video',
-      thumbnailUrl: 'https://assetscdn.syna.art/prod/seed/generated/fal/2026/05/12/3792e728-f7bc-469a-8ffc-f5ea3753db83-fal-ai-veo3.1-fast.jpg?sign=1789034400-0-0-b57ab704208ff6dcce6b8d916378f108',
-      mediaUrl: 'https://assetscdn.syna.art/prod/seed/generated/fal/2026/05/12/d84954fd-f5eb-4b43-b406-5e96e3a238d7-fal-ai-veo3.1-fast.mp4?sign=1789034400-0-0-83c643982e13c5e7c164ab3d518edfe2',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/prod/seed/generated/fal/2026/05/12/3792e728-f7bc-469a-8ffc-f5ea3753db83-fal-ai-veo3.1-fast.jpg?sign=1789034400-0-0-b57ab704208ff6dcce6b8d916378f108',
+      mediaUrl:
+        'https://assetscdn.syna.art/prod/seed/generated/fal/2026/05/12/d84954fd-f5eb-4b43-b406-5e96e3a238d7-fal-ai-veo3.1-fast.mp4?sign=1789034400-0-0-83c643982e13c5e7c164ab3d518edfe2',
       displayName: '手工定格动画风格视频',
       width: 1024,
       height: 1024,
@@ -258,8 +282,10 @@ export const plazaMock: Plaza.MockData = {
       title: '비디오 콘텐츠 기반 유튜브 썸네일 생성',
       tags: ['image_creation', 'official_picks', '커뮤니티 시드', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/75c96d55-1d5e-47db-9ff7-634d9e042b19-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-048e5c73b1c6bdb7d041d367c9181fb2',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/b55ca18a-69f8-4d3b-8b85-1a0da553781b-fal-ai-gpt-image-2.png?sign=1789034400-0-0-1035c29d4ad2080a12074412014f47a4',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/75c96d55-1d5e-47db-9ff7-634d9e042b19-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-048e5c73b1c6bdb7d041d367c9181fb2',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/b55ca18a-69f8-4d3b-8b85-1a0da553781b-fal-ai-gpt-image-2.png?sign=1789034400-0-0-1035c29d4ad2080a12074412014f47a4',
       displayName: 'YouTube视频封面图生成',
       width: 2048,
       height: 2048,
@@ -271,8 +297,10 @@ export const plazaMock: Plaza.MockData = {
       title: 'A Centered Black-and-white Vintage Engraved Port',
       tags: ['image_creation', 'official_picks', 'Community Seed', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/be3268e3-94a3-40bd-b388-6c40056e5f08-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-8e2286e680bddb88a0cf075281d17a4a',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/843dc2ab-5d73-4349-894d-089322ce71a1-fal-ai-gpt-image-2.png?sign=1789034400-0-0-12a7add4e16704b462987dd1639bea7d',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/be3268e3-94a3-40bd-b388-6c40056e5f08-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-8e2286e680bddb88a0cf075281d17a4a',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/843dc2ab-5d73-4349-894d-089322ce71a1-fal-ai-gpt-image-2.png?sign=1789034400-0-0-12a7add4e16704b462987dd1639bea7d',
       displayName: '复古版画风格连帽衫男子肖像',
       width: 1024,
       height: 1536,
@@ -314,8 +342,10 @@ export const plazaMock: Plaza.MockData = {
       title: 'Lu Bu Boss Design Sheet',
       tags: ['image_creation', 'official_picks', '社区种子', 'gpt_image_2'],
       assetType: 'image',
-      thumbnailUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/781c5eeb-6438-4e53-8c82-5f728ed70fd8-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-f372a93f93b3eb3afed106a391761886',
-      mediaUrl: 'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/a0ff6cc5-b360-4bf9-82a0-99c47d627f09-fal-ai-gpt-image-2.png?sign=1789034400-0-0-58b3f2d90f8a58f8d6092cbe0364d2eb',
+      thumbnailUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/781c5eeb-6438-4e53-8c82-5f728ed70fd8-fal-ai-gpt-image-2.jpg?sign=1789034400-0-0-f372a93f93b3eb3afed106a391761886',
+      mediaUrl:
+        'https://assetscdn.syna.art/release/seed/generated/fal/2026/05/12/a0ff6cc5-b360-4bf9-82a0-99c47d627f09-fal-ai-gpt-image-2.png?sign=1789034400-0-0-58b3f2d90f8a58f8d6092cbe0364d2eb',
       displayName: '吕布暗黑进化双形态设定',
       width: 2048,
       height: 2048,
@@ -344,7 +374,8 @@ export const plazaMock: Plaza.MockData = {
       slug: 'scene-concept-art-m',
       displayName: '场景设定图设计',
       description: '输入场景描述，生成电影写实风格的场景设定图（全景 + 细节四宫格）。',
-      coverUrl: 'https://assetscdn.syna.art/prod/skill-covers/scene-concept-art-m-v2.png?sign=1789034400-0-0-c8d6a35eccfdeef8ef453cb4b41a6b2b',
+      coverUrl:
+        'https://assetscdn.syna.art/prod/skill-covers/scene-concept-art-m-v2.png?sign=1789034400-0-0-c8d6a35eccfdeef8ef453cb4b41a6b2b',
       featured: false,
     },
     {
@@ -352,7 +383,8 @@ export const plazaMock: Plaza.MockData = {
       slug: 'travel-film-master',
       displayName: '旅拍电影导演',
       description: '把旅行地点、人物参考和文案，做成电影感旅拍短片',
-      coverUrl: 'https://assetscdn.syna.art/prod/skill-covers/travel-film-master-v2.png?sign=1789034400-0-0-b1a93f9e56335538d22728397bf576f1',
+      coverUrl:
+        'https://assetscdn.syna.art/prod/skill-covers/travel-film-master-v2.png?sign=1789034400-0-0-b1a93f9e56335538d22728397bf576f1',
       featured: false,
     },
     {
@@ -360,7 +392,8 @@ export const plazaMock: Plaza.MockData = {
       slug: 'concept-micro-short-script',
       displayName: '概念短片剧本创作',
       description: '反常识设定，3分钟直击人心',
-      coverUrl: 'https://assetscdn.syna.art/prod/skill-covers/concept-micro-short-script-v2.png?sign=1789034400-0-0-3e220d85c8c8ec22cefc06f78252c361',
+      coverUrl:
+        'https://assetscdn.syna.art/prod/skill-covers/concept-micro-short-script-v2.png?sign=1789034400-0-0-3e220d85c8c8ec22cefc06f78252c361',
       featured: false,
     },
     {
@@ -368,7 +401,8 @@ export const plazaMock: Plaza.MockData = {
       slug: 'article-illustration-gen',
       displayName: '文章配图设计',
       description: '输入文章标题，自动产出封面首图与文中插画配图方案。',
-      coverUrl: 'https://assetscdn.syna.art/prod/skill-covers/article-illustration-gen-v2.png?sign=1789034400-0-0-64f8adaeea15b0b334f68a87d60ac11d',
+      coverUrl:
+        'https://assetscdn.syna.art/prod/skill-covers/article-illustration-gen-v2.png?sign=1789034400-0-0-64f8adaeea15b0b334f68a87d60ac11d',
       featured: false,
     },
     {
@@ -376,7 +410,8 @@ export const plazaMock: Plaza.MockData = {
       slug: 'digital-human-broadcast',
       displayName: '数字人口播导演',
       description: '选人设写台词，配好对口型',
-      coverUrl: 'https://assetscdn.syna.art/prod/skill-covers/digital-human-broadcast-v2.png?sign=1789034400-0-0-93f51ead1699d5cd9ad7842e41535ca5',
+      coverUrl:
+        'https://assetscdn.syna.art/prod/skill-covers/digital-human-broadcast-v2.png?sign=1789034400-0-0-93f51ead1699d5cd9ad7842e41535ca5',
       featured: false,
     },
     {
@@ -384,7 +419,8 @@ export const plazaMock: Plaza.MockData = {
       slug: 'cinematic-storyboard',
       displayName: '电影分镜设计',
       description: '输入剧本，自动生成电影级分镜或转场设计方案。',
-      coverUrl: 'https://assetscdn.syna.art/prod/skill-covers/cinematic-storyboard-v2.png?sign=1789034400-0-0-a70bac6f8bae5c3a3c6cae275481611a',
+      coverUrl:
+        'https://assetscdn.syna.art/prod/skill-covers/cinematic-storyboard-v2.png?sign=1789034400-0-0-a70bac6f8bae5c3a3c6cae275481611a',
       featured: false,
     },
     {
@@ -392,7 +428,8 @@ export const plazaMock: Plaza.MockData = {
       slug: 'soviet-brutalism',
       displayName: '苏式粗野主义美学',
       description: '深构苏联粗粝美学，一键生成纪念碑式视觉大片',
-      coverUrl: 'https://assetscdn.syna.art/prod/skill-covers/soviet-brutalism-v2.png?sign=1789034400-0-0-2495c8f57d7fe863eb64af4b779adb9d',
+      coverUrl:
+        'https://assetscdn.syna.art/prod/skill-covers/soviet-brutalism-v2.png?sign=1789034400-0-0-2495c8f57d7fe863eb64af4b779adb9d',
       featured: false,
     },
     {
@@ -400,7 +437,8 @@ export const plazaMock: Plaza.MockData = {
       slug: 'xhs-viral-cover-gen',
       displayName: '小红书爆款封面设计',
       description: '输入笔记主题，自动产出高点击率小红书封面与标题。',
-      coverUrl: 'https://assetscdn.syna.art/prod/skill-covers/xhs-viral-cover-gen-v2.png?sign=1789034400-0-0-38045965c48124059e4630b91e5a03e4',
+      coverUrl:
+        'https://assetscdn.syna.art/prod/skill-covers/xhs-viral-cover-gen-v2.png?sign=1789034400-0-0-38045965c48124059e4630b91e5a03e4',
       featured: false,
     },
   ],

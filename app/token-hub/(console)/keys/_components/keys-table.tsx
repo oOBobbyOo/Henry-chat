@@ -29,7 +29,15 @@ export function KeysTable({ keys }: { keys: TokenHub.ApiKey[] }) {
         <table className="w-full min-w-max text-sm">
           <thead className="border-y border-(--tc-border) bg-(--tc-blue-soft)">
             <tr>
-              {[t('Keys Col Name'), t('Keys Col Prefix'), t('Keys Col IP'), t('Keys Col Status'), t('Keys Col Created'), t('Keys Col LastUsed'), t('Keys Col Actions')].map((h, i) => (
+              {[
+                t('Keys Col Name'),
+                t('Keys Col Prefix'),
+                t('Keys Col IP'),
+                t('Keys Col Status'),
+                t('Keys Col Created'),
+                t('Keys Col LastUsed'),
+                t('Keys Col Actions'),
+              ].map((h, i) => (
                 <th
                   key={h}
                   className={cn(
@@ -75,7 +83,9 @@ function KeyRow({ item }: { item: TokenHub.ApiKey }) {
 
   return (
     <tr className="border-b border-(--tc-border)/80 transition-colors hover:bg-(--tc-blue-soft)">
-      <td className="px-4 py-3.5 text-left align-middle text-[13px] font-medium whitespace-nowrap text-(--tc-strong)">{item.name}</td>
+      <td className="px-4 py-3.5 text-left align-middle text-[13px] font-medium whitespace-nowrap text-(--tc-strong)">
+        {item.name}
+      </td>
       <td className="px-4 py-3.5 align-middle text-[13px] whitespace-nowrap text-(--tc-body)">
         <span className="inline-flex items-center gap-1.5">
           <code className="text-xs text-(--tc-muted)">{item.key_prefix}…</code>
@@ -86,25 +96,37 @@ function KeyRow({ item }: { item: TokenHub.ApiKey }) {
             title={t('Keys Copy Full')}
             className="inline-flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-xl text-(--tc-muted) transition-all duration-200 hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none"
           >
-            {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
+            {copied ? (
+              <Check className="h-3.5 w-3.5 text-emerald-500" />
+            ) : (
+              <Copy className="h-3.5 w-3.5" />
+            )}
           </button>
         </span>
       </td>
       <td className="px-4 py-3.5 align-middle text-[13px] whitespace-nowrap text-(--tc-body)">
-        <span className="text-xs text-(--tc-muted)">{item.ip_whitelist ? item.ip_whitelist.split(',').join(', ') : t('Keys IP Unlimited')}</span>
+        <span className="text-xs text-(--tc-muted)">
+          {item.ip_whitelist ? item.ip_whitelist.split(',').join(', ') : t('Keys IP Unlimited')}
+        </span>
       </td>
       <td className="px-4 py-3.5 align-middle text-[13px] whitespace-nowrap text-(--tc-body)">
         <span
           className={cn(
             'inline-flex items-center rounded-md px-2 py-0.5 text-xs font-semibold tracking-[0.01em]',
-            item.status === 'active' ? 'bg-emerald-50 text-emerald-600' : 'bg-(--tc-surface-raised) text-(--tc-muted)',
+            item.status === 'active'
+              ? 'bg-emerald-50 text-emerald-600'
+              : 'bg-(--tc-surface-raised) text-(--tc-muted)',
           )}
         >
           {item.status === 'active' ? t('Keys Status Active') : t('Keys Status Disabled')}
         </span>
       </td>
-      <td className="px-4 py-3.5 align-middle text-[13px] whitespace-nowrap text-(--tc-body) tabular-nums">{formatDateTime(item.created_at)}</td>
-      <td className="px-4 py-3.5 align-middle text-[13px] whitespace-nowrap text-(--tc-body) tabular-nums">{formatDateTime(item.last_used_at)}</td>
+      <td className="px-4 py-3.5 align-middle text-[13px] whitespace-nowrap text-(--tc-body) tabular-nums">
+        {formatDateTime(item.created_at)}
+      </td>
+      <td className="px-4 py-3.5 align-middle text-[13px] whitespace-nowrap text-(--tc-body) tabular-nums">
+        {formatDateTime(item.last_used_at)}
+      </td>
       <td className="px-4 py-3.5 align-middle text-[13px] whitespace-nowrap text-(--tc-body)">
         <div className="flex items-center justify-end gap-2">
           <button

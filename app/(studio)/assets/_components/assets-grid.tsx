@@ -2,7 +2,19 @@
 
 import { useMemo } from 'react'
 
-import { Download, FolderInput, ImageIcon, Music, RefreshCw, Search, Tags, Trash2, Video, Box, X } from 'lucide-react'
+import {
+  Download,
+  FolderInput,
+  ImageIcon,
+  Music,
+  RefreshCw,
+  Search,
+  Tags,
+  Trash2,
+  Video,
+  Box,
+  X,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { cn } from '@/lib/utils'
@@ -48,7 +60,17 @@ interface AssetsGridProps {
   hasActiveFilters: boolean
 }
 
-export function AssetsGrid({ items, density, selectedIds, onToggleSelect, onExitMultiSelect, onBatchAction, onRefresh, onClearFilters, hasActiveFilters }: AssetsGridProps) {
+export function AssetsGrid({
+  items,
+  density,
+  selectedIds,
+  onToggleSelect,
+  onExitMultiSelect,
+  onBatchAction,
+  onRefresh,
+  onClearFilters,
+  hasActiveFilters,
+}: AssetsGridProps) {
   const { t } = useT('assets')
 
   const multiSelect = selectedIds.length > 0
@@ -88,8 +110,12 @@ export function AssetsGrid({ items, density, selectedIds, onToggleSelect, onExit
         </div>
         {hasActiveFilters ? (
           <>
-            <h3 className="mt-4 text-[15px] font-semibold tracking-[-0.005em] text-[#091423] dark:text-[#eef4ff]">{t('No assets found')}</h3>
-            <p className="mx-auto mt-1.5 max-w-[380px] text-[12.5px] leading-relaxed text-[#4a6080] dark:text-[#8fa5c4]">{t('No assets hint')}</p>
+            <h3 className="mt-4 text-[15px] font-semibold tracking-[-0.005em] text-[#091423] dark:text-[#eef4ff]">
+              {t('No assets found')}
+            </h3>
+            <p className="mx-auto mt-1.5 max-w-[380px] text-[12.5px] leading-relaxed text-[#4a6080] dark:text-[#8fa5c4]">
+              {t('No assets hint')}
+            </p>
             <button
               type="button"
               onClick={onClearFilters}
@@ -105,8 +131,12 @@ export function AssetsGrid({ items, density, selectedIds, onToggleSelect, onExit
           </>
         ) : (
           <>
-            <h3 className="mt-4 text-[15px] font-semibold tracking-[-0.005em] text-[#091423] dark:text-[#eef4ff]">{t('Empty library title')}</h3>
-            <p className="mx-auto mt-1.5 max-w-[380px] text-[12.5px] leading-relaxed text-[#4a6080] dark:text-[#8fa5c4]">{t('Empty library hint')}</p>
+            <h3 className="mt-4 text-[15px] font-semibold tracking-[-0.005em] text-[#091423] dark:text-[#eef4ff]">
+              {t('Empty library title')}
+            </h3>
+            <p className="mx-auto mt-1.5 max-w-[380px] text-[12.5px] leading-relaxed text-[#4a6080] dark:text-[#8fa5c4]">
+              {t('Empty library hint')}
+            </p>
             <button
               type="button"
               onClick={onRefresh}
@@ -235,10 +265,17 @@ export function AssetsGrid({ items, density, selectedIds, onToggleSelect, onExit
                 onClick={() => onToggleSelect(item.id)}
                 className={cn(
                   'group block w-full cursor-pointer overflow-hidden rounded-[14px] border bg-white text-left transition duration-200 hover:-translate-y-[2px] hover:shadow-[0_10px_28px_-14px_rgba(15,23,42,0.22)] dark:bg-[linear-gradient(180deg,rgba(20,22,32,0.7),rgba(12,14,22,0.85))]',
-                  selected ? 'border-[rgba(93,175,206,0.65)] shadow-[0_0_0_2px_rgba(93,175,206,0.35)]' : 'border-[rgba(12,24,36,0.08)] dark:border-white/8',
+                  selected
+                    ? 'border-[rgba(93,175,206,0.65)] shadow-[0_0_0_2px_rgba(93,175,206,0.35)]'
+                    : 'border-[rgba(12,24,36,0.08)] dark:border-white/8',
                 )}
               >
-                <div className={cn('relative w-full overflow-hidden', density === 'comfortable' ? 'aspect-[4/3]' : 'aspect-[16/10]')}>
+                <div
+                  className={cn(
+                    'relative w-full overflow-hidden',
+                    density === 'comfortable' ? 'aspect-[4/3]' : 'aspect-[16/10]',
+                  )}
+                >
                   <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(135deg,rgba(56,152,188,0.22),rgba(56,103,255,0.16))] dark:bg-[linear-gradient(135deg,rgba(56,152,188,0.18),rgba(112,119,224,0.14))]">
                     <TypeIcon
                       aria-hidden
@@ -246,8 +283,12 @@ export function AssetsGrid({ items, density, selectedIds, onToggleSelect, onExit
                       strokeWidth={1.5}
                     />
                   </div>
-                  <span className="absolute left-2.5 top-2.5 rounded-full bg-[rgba(9,20,35,0.62)] px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">{typeLabel[item.assetType]}</span>
-                  <span className="absolute right-2.5 top-2.5 rounded-full bg-[rgba(9,20,35,0.5)] px-2 py-0.5 text-[10px] font-medium tabular-nums text-white backdrop-blur-sm">{item.format}</span>
+                  <span className="absolute left-2.5 top-2.5 rounded-full bg-[rgba(9,20,35,0.62)] px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">
+                    {typeLabel[item.assetType]}
+                  </span>
+                  <span className="absolute right-2.5 top-2.5 rounded-full bg-[rgba(9,20,35,0.5)] px-2 py-0.5 text-[10px] font-medium tabular-nums text-white backdrop-blur-sm">
+                    {item.format}
+                  </span>
                   {selected && (
                     <span
                       className="absolute inset-0 border-2 border-[rgba(93,175,206,0.9)]"
@@ -256,7 +297,9 @@ export function AssetsGrid({ items, density, selectedIds, onToggleSelect, onExit
                   )}
                 </div>
                 <div className="border-t border-[rgba(12,24,36,0.08)] px-3 py-2.5 dark:border-white/8">
-                  <p className="truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">{item.name}</p>
+                  <p className="truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                    {item.name}
+                  </p>
                   <p className="mt-0.5 truncate text-[11.5px] text-[#4a6080] dark:text-[#8fa5c4]">
                     {item.modelName} · {item.dimensions}
                   </p>
@@ -271,7 +314,17 @@ export function AssetsGrid({ items, density, selectedIds, onToggleSelect, onExit
 }
 
 /** 批量操作胶囊按钮 */
-function BatchButton({ onClick, icon, label, tone = 'default' }: { onClick: () => void; icon: React.ReactNode; label: string; tone?: 'default' | 'danger' }) {
+function BatchButton({
+  onClick,
+  icon,
+  label,
+  tone = 'default',
+}: {
+  onClick: () => void
+  icon: React.ReactNode
+  label: string
+  tone?: 'default' | 'danger'
+}) {
   return (
     <button
       type="button"

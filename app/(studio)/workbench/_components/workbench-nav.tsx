@@ -2,7 +2,19 @@
 
 import type { LucideIcon } from 'lucide-react'
 
-import { AudioWaveform, BookAudio, Eraser, Image, ImageUp, Mic, Music, Orbit, Scissors, Speech, Video } from 'lucide-react'
+import {
+  AudioWaveform,
+  BookAudio,
+  Eraser,
+  Image,
+  ImageUp,
+  Mic,
+  Music,
+  Orbit,
+  Scissors,
+  Speech,
+  Video,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { cn } from '@/lib/utils'
@@ -76,7 +88,9 @@ export function WorkbenchNav({ capabilities, activeId, onSelect }: WorkbenchNavP
                     <button
                       className={cn(
                         'group relative w-full cursor-pointer overflow-hidden rounded-[14px] text-left transition-colors',
-                        active ? 'bg-[rgba(56,103,255,0.08)] dark:bg-white/6' : 'hover:bg-[rgba(12,24,36,0.03)] dark:hover:bg-white/4',
+                        active
+                          ? 'bg-[rgba(56,103,255,0.08)] dark:bg-white/6'
+                          : 'hover:bg-[rgba(12,24,36,0.03)] dark:hover:bg-white/4',
                       )}
                       key={item.id}
                       onClick={() => onSelect(item.id)}
@@ -97,7 +111,9 @@ export function WorkbenchNav({ capabilities, activeId, onSelect }: WorkbenchNavP
                           <div
                             className={cn(
                               'truncate text-[13.5px] tracking-[0.01em] transition-colors',
-                              active ? 'font-semibold text-[#091423] dark:text-[#eef4ff]' : 'font-medium text-[#2e4268] dark:text-[#b6c4dc]',
+                              active
+                                ? 'font-semibold text-[#091423] dark:text-[#eef4ff]'
+                                : 'font-medium text-[#2e4268] dark:text-[#b6c4dc]',
                             )}
                           >
                             {t(item.nameKey)}
@@ -105,7 +121,9 @@ export function WorkbenchNav({ capabilities, activeId, onSelect }: WorkbenchNavP
                         </div>
                         {item.badge ? (
                           <span className="pointer-events-none inline-flex h-[22px] min-w-[38px] shrink-0 items-center justify-center rounded-full border border-[rgba(56,103,255,0.3)] bg-[rgba(56,103,255,0.1)] px-2 text-[10px] font-semibold text-[#3867ff] dark:border-[rgba(143,165,255,0.3)] dark:bg-[rgba(143,165,255,0.12)] dark:text-[#8fa5ff]">
-                            <span className="whitespace-nowrap">{item.badge === 'new' ? t('New') : t('Hot')}</span>
+                            <span className="whitespace-nowrap">
+                              {item.badge === 'new' ? t('New') : t('Hot')}
+                            </span>
                           </span>
                         ) : null}
                       </div>

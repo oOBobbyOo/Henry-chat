@@ -24,7 +24,9 @@ export function UsageTrendCard() {
       <div className="flex flex-col gap-3 border-b border-(--tc-border) px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Dashboard Trend Title')}</h2>
+            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+              {t('Dashboard Trend Title')}
+            </h2>
           </div>
           <p className="mt-1.5 text-xs text-(--tc-muted)">{t('Dashboard Trend Subtitle')}</p>
         </div>

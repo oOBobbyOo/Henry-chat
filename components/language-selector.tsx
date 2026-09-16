@@ -4,7 +4,12 @@ import { Check, ChevronDown, Globe } from 'lucide-react'
 import { useChangeLanguage, useT } from 'next-i18next/client'
 
 import { Button } from '@/components/ui/button'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { INTERFACE_LANGUAGE_OPTIONS } from '@/i18n/languages'
 import { cn } from '@/lib/utils'
 
@@ -16,7 +21,8 @@ export function LanguageSelector() {
   // 专用 hook 切换语言（自动更新 Cookie + 刷新页面）
   const changeLanguage = useChangeLanguage()
   // 当前语言的显示文案
-  const currentLabel = INTERFACE_LANGUAGE_OPTIONS.find((lang) => lang.code === currentLanguage)?.label ?? ''
+  const currentLabel =
+    INTERFACE_LANGUAGE_OPTIONS.find((lang) => lang.code === currentLanguage)?.label ?? ''
 
   return (
     <DropdownMenu>
@@ -42,7 +48,9 @@ export function LanguageSelector() {
             className="rounded-md text-sm text-[#1c2c4d] data-highlighted:bg-[#eef3ff] data-highlighted:text-[#294fd4]"
           >
             <span className="whitespace-nowrap">{lang.label}</span>
-            <span className="ms-auto whitespace-nowrap text-xs text-[#8a9bc0]">{lang.code === 'zh' ? 'Chinese' : 'English'}</span>
+            <span className="ms-auto whitespace-nowrap text-xs text-[#8a9bc0]">
+              {lang.code === 'zh' ? 'Chinese' : 'English'}
+            </span>
             <Check
               size={14}
               className={cn('ms-2 text-[#294fd4]', currentLanguage !== lang.code && 'hidden')}

@@ -8,11 +8,20 @@ import { request } from '@/lib/request'
  */
 export const WorkbenchService = {
   /** 能力导航 + 模型 + 参数字典 */
-  getConfig: () => request.get<Workbench.ConfigResponse>('/api/workbench/config', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getConfig: () =>
+    request.get<Workbench.ConfigResponse>('/api/workbench/config', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
   /** 创作历史 */
-  getHistory: () => request.get<Workbench.HistoryResponse>('/api/workbench/history', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getHistory: () =>
+    request.get<Workbench.HistoryResponse>('/api/workbench/history', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
   /** 空态社群灵感卡 */
-  getCommunity: () => request.get<Workbench.CommunityResponse>('/api/workbench/community', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getCommunity: () =>
+    request.get<Workbench.CommunityResponse>('/api/workbench/community', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
 }
 
 export const WORKBENCH_QUERY_KEYS = {

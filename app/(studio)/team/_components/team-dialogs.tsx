@@ -52,8 +52,12 @@ function DialogShell({
       >
         <div className="flex items-start justify-between gap-4 px-6 pt-6">
           <div>
-            <h2 className="text-[20px] font-semibold tracking-[-0.02em] text-[#091423] dark:text-[#eef4ff]">{title}</h2>
-            <p className="mt-1.5 text-[12.5px] leading-5 text-[#4a6080] dark:text-[#8fa5c4]">{desc}</p>
+            <h2 className="text-[20px] font-semibold tracking-[-0.02em] text-[#091423] dark:text-[#eef4ff]">
+              {title}
+            </h2>
+            <p className="mt-1.5 text-[12.5px] leading-5 text-[#4a6080] dark:text-[#8fa5c4]">
+              {desc}
+            </p>
           </div>
           <button
             type="button"
@@ -69,14 +73,24 @@ function DialogShell({
           </button>
         </div>
         {children}
-        {footer ? <div className="flex items-center justify-end gap-2 border-t border-[rgba(12,24,36,0.08)] px-6 py-3 dark:border-white/8">{footer}</div> : null}
+        {footer ? (
+          <div className="flex items-center justify-end gap-2 border-t border-[rgba(12,24,36,0.08)] px-6 py-3 dark:border-white/8">
+            {footer}
+          </div>
+        ) : null}
       </DialogContent>
     </Dialog>
   )
 }
 
 /** 创建工作区弹窗(名称必填 + 描述选填) */
-export function CreateWorkspaceDialog({ onCreate, onClose }: { onCreate: (name: string, description: string) => void; onClose: () => void }) {
+export function CreateWorkspaceDialog({
+  onCreate,
+  onClose,
+}: {
+  onCreate: (name: string, description: string) => void
+  onClose: () => void
+}) {
   const { t } = useT('team')
 
   return (
@@ -89,7 +103,15 @@ export function CreateWorkspaceDialog({ onCreate, onClose }: { onCreate: (name: 
 }
 
 /** 内层(持有输入状态,避免外层重渲染丢焦点) */
-function CreateWorkspaceDialogInner({ onCreate, onClose, t }: { onCreate: (name: string, description: string) => void; onClose: () => void; t: (key: string) => string }) {
+function CreateWorkspaceDialogInner({
+  onCreate,
+  onClose,
+  t,
+}: {
+  onCreate: (name: string, description: string) => void
+  onClose: () => void
+  t: (key: string) => string
+}) {
   const [name, setName] = React.useState('')
   const [description, setDescription] = React.useState('')
 
@@ -149,7 +171,13 @@ function CreateWorkspaceDialogInner({ onCreate, onClose, t }: { onCreate: (name:
 }
 
 /** 邀请成员弹窗(只读链接 + 复制 + 7 天有效提示) */
-export function InviteDialog({ inviteToken, onClose }: { inviteToken: string; onClose: () => void }) {
+export function InviteDialog({
+  inviteToken,
+  onClose,
+}: {
+  inviteToken: string
+  onClose: () => void
+}) {
   const { t } = useT('team')
   const [copied, setCopied] = React.useState(false)
   const link = `https://example.com/workspace-invite?token=${inviteToken}`
@@ -197,7 +225,9 @@ export function InviteDialog({ inviteToken, onClose }: { inviteToken: string; on
     >
       <div className="space-y-4 px-6 py-5">
         <div>
-          <label className="text-[10.5px] font-medium tracking-[0.12em] text-[#4e6585] uppercase dark:text-[#7a8db0]">{t('Invite link')}</label>
+          <label className="text-[10.5px] font-medium tracking-[0.12em] text-[#4e6585] uppercase dark:text-[#7a8db0]">
+            {t('Invite link')}
+          </label>
           <div className="mt-1.5 flex items-stretch gap-2">
             <input
               readOnly
@@ -228,8 +258,12 @@ export function InviteDialog({ inviteToken, onClose }: { inviteToken: string; on
               <span className="h-1.5 w-1.5 rounded-full bg-[#3d8fb0] dark:bg-[#5dafce]" />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="text-[13px] font-semibold text-[#091423] dark:text-[#eef4ff]">{t('Link valid note')}</p>
-              <p className="mt-0.5 text-[11.5px] text-[#4e6585] dark:text-[#7a8db0]">{t('Link valid desc')}</p>
+              <p className="text-[13px] font-semibold text-[#091423] dark:text-[#eef4ff]">
+                {t('Link valid note')}
+              </p>
+              <p className="mt-0.5 text-[11.5px] text-[#4e6585] dark:text-[#7a8db0]">
+                {t('Link valid desc')}
+              </p>
             </div>
           </div>
         </div>
@@ -239,7 +273,13 @@ export function InviteDialog({ inviteToken, onClose }: { inviteToken: string; on
 }
 
 /** 设置弹窗(基本信息 / 所有权 / 危险操作 三 nav) */
-export function SettingsDialog({ workspace, onClose }: { workspace: Team.Workspace; onClose: () => void }) {
+export function SettingsDialog({
+  workspace,
+  onClose,
+}: {
+  workspace: Team.Workspace
+  onClose: () => void
+}) {
   const { t } = useT('team')
   const [tab, setTab] = React.useState<'basic' | 'ownership' | 'danger'>('basic')
   const [name, setName] = React.useState(workspace.name)
@@ -326,7 +366,9 @@ export function SettingsDialog({ workspace, onClose }: { workspace: Team.Workspa
               {t('Owner')}: {workspace.ownerName}
             </p>
           ) : null}
-          {tab === 'danger' ? <p className="text-[12.5px] text-[#c0392b] dark:text-[#e07a6a]">{workspace.name}</p> : null}
+          {tab === 'danger' ? (
+            <p className="text-[12.5px] text-[#c0392b] dark:text-[#e07a6a]">{workspace.name}</p>
+          ) : null}
         </div>
       </div>
     </DialogShell>

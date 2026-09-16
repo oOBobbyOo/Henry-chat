@@ -6,7 +6,12 @@ import { useQueryClient } from '@tanstack/react-query'
 import { RefreshCw, UserRound } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { TOKEN_HUB_QUERY_KEYS, useReportBreakdownQuery, useReportSummaryQuery, useReportTrendQuery } from '@/services/token-hub'
+import {
+  TOKEN_HUB_QUERY_KEYS,
+  useReportBreakdownQuery,
+  useReportSummaryQuery,
+  useReportTrendQuery,
+} from '@/services/token-hub'
 
 import type { DateRangeValue } from '../_components/date-range-picker'
 
@@ -55,8 +60,12 @@ export default function ReportsPage() {
         {/* 标题区 */}
         <header className="flex flex-col gap-4 border-b border-(--tc-border)/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">{t('Reports Title')}</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">{t('Reports Subtitle')}</p>
+            <h1 className="text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">
+              {t('Reports Title')}
+            </h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">
+              {t('Reports Subtitle')}
+            </p>
           </div>
           <div className="flex shrink-0 items-center gap-2.5">
             <DateRangePicker
@@ -78,18 +87,24 @@ export default function ReportsPage() {
 
         {/* 分析视角 */}
         <section className="flex flex-wrap items-center gap-3">
-          <p className="text-xs font-bold tracking-[0.14em] text-(--tc-muted) uppercase">{t('Reports Perspective')}</p>
+          <p className="text-xs font-bold tracking-[0.14em] text-(--tc-muted) uppercase">
+            {t('Reports Perspective')}
+          </p>
           <span className="inline-flex items-center gap-2 rounded-xl border border-(--tc-primary)/25 bg-(--tc-blue-soft) px-3.5 py-2 text-[13px] font-semibold text-(--tc-blue-bright)">
             <UserRound className="h-4 w-4" />
             {t('Reports Perspective Personal')}
-            <span className="hidden text-xs font-medium text-(--tc-body) sm:inline">· {t('Reports Perspective Personal Desc')}</span>
+            <span className="hidden text-xs font-medium text-(--tc-body) sm:inline">
+              · {t('Reports Perspective Personal Desc')}
+            </span>
           </span>
         </section>
 
         {/* 成本总览 */}
         <section className="space-y-5">
           <div className="flex items-baseline gap-2">
-            <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Reports Overview Title')}</h2>
+            <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+              {t('Reports Overview Title')}
+            </h2>
             <span className="text-xs text-(--tc-muted)">{t('Reports Overview Period')}</span>
           </div>
 

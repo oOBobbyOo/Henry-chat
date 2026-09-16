@@ -19,7 +19,7 @@ import { useT } from 'next-i18next/client'
 import { AppLogo } from '@/components/app-logo'
 
 /**
- * 左侧悬浮导航栏(App Rail)
+ * 左侧悬浮导航栏(Studio Rail)
  * 品牌 logo 区 + 图标/文字导航项(激活态浅蓝高亮,部分项带角标) + 底部社交图标。
  */
 
@@ -52,7 +52,7 @@ const RAIL_SOCIAL_ITEMS = [
   { labelKey: 'Telegram', href: '#', Icon: Send },
 ] as const
 
-/** 移动端底部导航项(参考 syna.art:6 项均分横排,含帐号;社交图标在移动端隐藏) */
+/** 移动端底部导航项(社交图标在移动端隐藏) */
 const RAIL_MOBILE_ITEMS = [
   ...RAIL_NAV_ITEMS.map((item) => ({
     href: item.href,
@@ -68,12 +68,12 @@ function isRailItemActive(pathname: string, href: string) {
   return pathname === href || (href !== '/' && pathname.startsWith(`${href}/`))
 }
 
-export function AppRailDesktop() {
+export function StudioRailDesktop() {
   const { t } = useT('common')
   const pathname = usePathname()
 
   return (
-    <aside className="fixed top-3 bottom-3 left-3 z-30 hidden w-[110px] flex-col rounded-[26px] border border-[rgba(12,24,36,0.05)] bg-white/90 px-2.5 py-3 shadow-[0_18px_34px_rgba(2,6,23,0.06)] backdrop-blur-xl xl:flex dark:border-white/6 dark:bg-[linear-gradient(180deg,rgba(15,22,36,0.92),rgba(9,14,25,0.9))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_38px_rgba(2,6,23,0.3)]">
+    <aside className="fixed top-3 bottom-3 left-3 z-30 hidden w-[110px] flex-col rounded-[26px] border border-[rgba(12,24,36,0.05)] bg-white/90 px-2.5 py-3 shadow-[0_18px_34px_rgba(2,6,23,0.06)] backdrop-blur-xl xl:flex dark:border-white/6 dark:bg-[linear-gradient(180deg,rgba(15,22,36,0.94),rgba(9,14,25,0.92))] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_18px_38px_rgba(2,6,23,0.3)]">
       <div className="flex min-h-0 flex-1 flex-col items-center gap-3.5">
         {/* 品牌区 */}
         <Link
@@ -185,7 +185,7 @@ export function AppRailDesktop() {
  * 移动端底部导航栏(< xl 显示)
  * 浮岛式圆角面板,6 个导航项均分横排(上图下文),角标置于图标上方,社交图标不展示。
  */
-function AppRailMobile() {
+function StudioRailMobile() {
   const { t } = useT('common')
   const pathname = usePathname()
 
@@ -233,7 +233,9 @@ function AppRailMobile() {
                   strokeWidth={1.75}
                 />
               </span>
-              <span className="block w-full min-w-0 truncate text-center text-[10px] leading-[1.2] font-medium">{t(item.titleKey)}</span>
+              <span className="block w-full min-w-0 truncate text-center text-[10px] leading-[1.2] font-medium">
+                {t(item.titleKey)}
+              </span>
             </Link>
           )
         })}
@@ -243,11 +245,11 @@ function AppRailMobile() {
 }
 
 /** 桌面侧栏 + 移动底部栏组合导出 */
-export function AppRail() {
+export function StudioRail() {
   return (
     <>
-      <AppRailDesktop />
-      <AppRailMobile />
+      <StudioRailDesktop />
+      <StudioRailMobile />
     </>
   )
 }

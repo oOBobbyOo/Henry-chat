@@ -18,8 +18,10 @@ const GRANULARITY_TABS: { key: ReportGranularity; labelKey: string }[] = [
 /** x 轴标签格式 */
 function formatAxisLabel(granularity: ReportGranularity, date: string): string {
   const d = new Date(date)
-  if (granularity === 'day' || granularity === 'week') return `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-  if (granularity === 'month') return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+  if (granularity === 'day' || granularity === 'week')
+    return `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+  if (granularity === 'month')
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
   return String(d.getFullYear())
 }
 
@@ -75,7 +77,8 @@ export function CostTrendCard({
         color: '#8a9bc0',
         fontSize: 10,
         interval: granularity === 'day' ? 2 : 0,
-        formatter: (v: string, index: number) => (granularity === 'day' ? (index % 3 === 0 ? v : '') : v),
+        formatter: (v: string, index: number) =>
+          granularity === 'day' ? (index % 3 === 0 ? v : '') : v,
       },
     },
     yAxis: {
@@ -120,7 +123,9 @@ export function CostTrendCard({
       <div className="flex flex-col gap-3 border-b border-(--tc-border) px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Reports Trend Title')}</h2>
+            <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+              {t('Reports Trend Title')}
+            </h2>
           </div>
           <p className="mt-1.5 text-xs text-(--tc-muted)">
             {t('Reports Trend Subtitle')} · {t('Reports Trend Unit')}
@@ -141,7 +146,9 @@ export function CostTrendCard({
               onClick={() => onGranularityChange(key)}
               className={cn(
                 'inline-flex h-7 cursor-pointer items-center justify-center rounded-md px-3.5 text-xs font-semibold leading-none whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none',
-                granularity === key ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)',
+                granularity === key
+                  ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]'
+                  : 'text-(--tc-muted) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)',
               )}
             >
               {t(labelKey)}

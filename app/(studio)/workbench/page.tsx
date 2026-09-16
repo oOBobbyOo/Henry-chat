@@ -4,7 +4,11 @@ import { useState } from 'react'
 
 import { useT } from 'next-i18next/client'
 
-import { useWorkbenchCommunityQuery, useWorkbenchConfigQuery, useWorkbenchHistoryQuery } from '@/services/workbench'
+import {
+  useWorkbenchCommunityQuery,
+  useWorkbenchConfigQuery,
+  useWorkbenchHistoryQuery,
+} from '@/services/workbench'
 
 import { WorkbenchControls } from './_components/workbench-controls'
 import { WorkbenchHistory } from './_components/workbench-history'
@@ -42,7 +46,9 @@ export default function WorkbenchPage() {
         />
         <WorkbenchControls
           activeCapability={activeCapability}
-          activeNameKey={t(capabilities.find((c) => c.id === activeCapability)?.nameKey ?? 'Image generation')}
+          activeNameKey={t(
+            capabilities.find((c) => c.id === activeCapability)?.nameKey ?? 'Image generation',
+          )}
           aspectRatios={aspectRatios}
           configs={configData?.data}
           formats={formats}

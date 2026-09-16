@@ -20,8 +20,12 @@ export async function Governance() {
     >
       <div className="mx-auto max-w-330 px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#294fd4]">{t('Governance Heading')}</p>
-          <h2 className="mt-4 text-[30px] font-semibold leading-tight tracking-tight text-[#0f1c3a] sm:text-[36px]">{t('Governance Title')}</h2>
+          <p className="text-sm font-bold uppercase tracking-[0.18em] text-[#294fd4]">
+            {t('Governance Heading')}
+          </p>
+          <h2 className="mt-4 text-[30px] font-semibold leading-tight tracking-tight text-[#0f1c3a] sm:text-[36px]">
+            {t('Governance Title')}
+          </h2>
           <p className="mt-4 text-[15px] leading-8 text-[#5b6b8c]">{t('Governance Desc')}</p>
         </div>
 

@@ -117,7 +117,14 @@ declare namespace Team {
     /** 14 日任务统计 */
     tasks: { total: number; completed: number; failed: number; pendingReview: number }
     /** 资产统计(KPI + 资产 tab 六联) */
-    assets: { total: number; produced: number; shared: number; favorited: number; tagged: number; tagCount: number }
+    assets: {
+      total: number
+      produced: number
+      shared: number
+      favorited: number
+      tagged: number
+      tagCount: number
+    }
     /** 任务通过率(%) */
     passRate: number
     /** 失败率(%) */
@@ -149,7 +156,10 @@ declare namespace Team {
       /** 空态引导特性卡 */
       features: Feature[]
       /** 创建工作区模板(页面据此本地构造 Workspace) */
-      template: Omit<Workspace, 'id' | 'name' | 'description' | 'createdAt' | 'members' | 'invites' | 'audit'>
+      template: Omit<
+        Workspace,
+        'id' | 'name' | 'description' | 'createdAt' | 'members' | 'invites' | 'audit'
+      >
     }
   }
 }

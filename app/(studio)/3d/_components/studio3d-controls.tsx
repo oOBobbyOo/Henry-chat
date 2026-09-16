@@ -47,14 +47,24 @@ function ParamLabel({ hint, label }: { hint?: string; label: string }) {
 }
 
 /** 开关(role=switch,激活蓝 #2563eb,与参考站逐字对齐) */
-function ToggleSwitch({ checked, label, onChange }: { checked: boolean; label: string; onChange: (v: boolean) => void }) {
+function ToggleSwitch({
+  checked,
+  label,
+  onChange,
+}: {
+  checked: boolean
+  label: string
+  onChange: (v: boolean) => void
+}) {
   return (
     <button
       aria-checked={checked}
       aria-label={checked ? label : undefined}
       className={cn(
         'relative inline-flex h-[18px] w-8 shrink-0 items-center rounded-full border transition focus-visible:ring-2 focus-visible:ring-[rgba(48,140,176,0.24)] focus-visible:outline-none',
-        checked ? 'border-[#2563eb] bg-[#2563eb] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]' : 'border-[rgba(12,24,36,0.1)] bg-white dark:border-white/10 dark:bg-white/6',
+        checked
+          ? 'border-[#2563eb] bg-[#2563eb] shadow-[inset_0_1px_0_rgba(255,255,255,0.12)]'
+          : 'border-[rgba(12,24,36,0.1)] bg-white dark:border-white/10 dark:bg-white/6',
       )}
       onClick={() => onChange(!checked)}
       role="switch"
@@ -87,7 +97,10 @@ function ChoiceGroup({
   return (
     <div
       aria-label={ariaLabel}
-      className={cn('grid gap-1 rounded-[10px] border border-[rgba(12,24,36,0.1)] bg-[rgba(245,249,255,0.95)] p-1 dark:border-white/10 dark:bg-white/5', columns === 3 ? 'grid-cols-3' : 'grid-cols-2')}
+      className={cn(
+        'grid gap-1 rounded-[10px] border border-[rgba(12,24,36,0.1)] bg-[rgba(245,249,255,0.95)] p-1 dark:border-white/10 dark:bg-white/5',
+        columns === 3 ? 'grid-cols-3' : 'grid-cols-2',
+      )}
       role="radiogroup"
     >
       {options.map((opt) => {
@@ -115,7 +128,17 @@ function ChoiceGroup({
 }
 
 /** 带说明的开关行(标签左 + 开关右,参数面板最小行高 min-h-10) */
-function ToggleRow({ checked, hint, label, onChange }: { checked: boolean; hint?: string; label: string; onChange: (v: boolean) => void }) {
+function ToggleRow({
+  checked,
+  hint,
+  label,
+  onChange,
+}: {
+  checked: boolean
+  hint?: string
+  label: string
+  onChange: (v: boolean) => void
+}) {
   return (
     <div className="flex min-h-10 items-center justify-between gap-2.5 rounded-[10px] border border-[rgba(12,24,36,0.1)] bg-[rgba(245,249,255,0.95)] px-2.5 py-1 transition hover:border-[rgba(12,24,36,0.14)] dark:border-white/10 dark:bg-white/5">
       <div className="min-w-0">
@@ -133,7 +156,12 @@ function ToggleRow({ checked, hint, label, onChange }: { checked: boolean; hint?
   )
 }
 
-export function Studio3dControls({ models, textureQualities, geometryQualities, topologies }: Studio3dControlsProps) {
+export function Studio3dControls({
+  models,
+  textureQualities,
+  geometryQualities,
+  topologies,
+}: Studio3dControlsProps) {
   const { t } = useT('studio3d')
 
   // 表单状态(默认值对齐参考站:Tripo3D 3.1 / 文生 3D / 纹理开+2K / PBR 开 / 标准几何 / 面数上限 / 三角面)
@@ -151,7 +179,8 @@ export function Studio3dControls({ models, textureQualities, geometryQualities, 
   const [advancedOpen, setAdvancedOpen] = useState(false)
   const [geometrySeed, setGeometrySeed] = useState('')
   const [textureSeed, setTextureSeed] = useState('')
-  const [textureAlignment, setTextureAlignment] = useState<Studio3d.TextureAlignment>('original_image')
+  const [textureAlignment, setTextureAlignment] =
+    useState<Studio3d.TextureAlignment>('original_image')
   const [orientation, setOrientation] = useState<Studio3d.ModelOrientation>('default')
   const [realScale, setRealScale] = useState(false)
   const [artStyle, setArtStyle] = useState(false)
@@ -181,7 +210,9 @@ export function Studio3dControls({ models, textureQualities, geometryQualities, 
           <div className="rounded-[5px] border border-[rgba(12,24,36,0.08)] bg-[rgba(245,249,255,0.95)] dark:border-white/8 dark:bg-white/4">
             {/* 模型选择(下拉) */}
             <div className="px-2.5 pt-2 pb-1.5">
-              <p className="mb-1 text-[12px] font-medium text-[#4e6585] dark:text-[#8a9bc0]">{t('Model selection')}</p>
+              <p className="mb-1 text-[12px] font-medium text-[#4e6585] dark:text-[#8a9bc0]">
+                {t('Model selection')}
+              </p>
               <div className="relative">
                 <button
                   aria-expanded={modelOpen}
@@ -211,7 +242,10 @@ export function Studio3dControls({ models, textureQualities, geometryQualities, 
                     </span>
                   </span>
                   <ChevronRight
-                    className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform duration-150', modelOpen && 'rotate-90')}
+                    className={cn(
+                      'h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform duration-150',
+                      modelOpen && 'rotate-90',
+                    )}
                     strokeWidth={1.75}
                   />
                 </button>
@@ -232,7 +266,9 @@ export function Studio3dControls({ models, textureQualities, geometryQualities, 
                           <button
                             className={cn(
                               'flex w-full cursor-pointer items-center gap-2 rounded-[9px] px-3 py-2.5 text-left text-[13px] transition',
-                              selected ? 'bg-[rgba(56,103,255,0.08)] text-[#3867ff] dark:text-[#8fa5ff]' : 'text-[#2e4268] hover:bg-[rgba(12,24,36,0.04)] dark:text-[#b6c4dc] dark:hover:bg-white/6',
+                              selected
+                                ? 'bg-[rgba(56,103,255,0.08)] text-[#3867ff] dark:text-[#8fa5ff]'
+                                : 'text-[#2e4268] hover:bg-[rgba(12,24,36,0.04)] dark:text-[#b6c4dc] dark:hover:bg-white/6',
                             )}
                             onClick={() => {
                               setModelId(m.id)
@@ -274,7 +310,9 @@ export function Studio3dControls({ models, textureQualities, geometryQualities, 
                     <button
                       className={cn(
                         'flex-1 rounded-[8px] py-1.5 text-[12px] font-medium transition',
-                        inputMode === mode.key ? 'bg-[#2563eb] text-white shadow-sm' : 'text-[#4e6585] dark:text-[#8a9bc0]',
+                        inputMode === mode.key
+                          ? 'bg-[#2563eb] text-white shadow-sm'
+                          : 'text-[#4e6585] dark:text-[#8a9bc0]',
                       )}
                       key={mode.key}
                       onClick={() => setInputMode(mode.key)}
@@ -316,8 +354,12 @@ export function Studio3dControls({ models, textureQualities, geometryQualities, 
                       className="h-4 w-4 text-[#8a9bc0] transition group-hover:text-[#091423] dark:group-hover:text-[#eef4ff]"
                       strokeWidth={1.75}
                     />
-                    <span className="text-[12px] leading-4 text-[#2e4268] dark:text-[#b6c4dc]">{t('Drag image here or click to select')}</span>
-                    <span className="text-[10px] leading-3 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('PNG JPG WebP')}</span>
+                    <span className="text-[12px] leading-4 text-[#2e4268] dark:text-[#b6c4dc]">
+                      {t('Drag image here or click to select')}
+                    </span>
+                    <span className="text-[10px] leading-3 text-[#8a9bc0] dark:text-[#6b7f9d]">
+                      {t('PNG JPG WebP')}
+                    </span>
                     <input
                       accept="image/png,image/jpeg,image/webp"
                       className="sr-only"
@@ -459,7 +501,9 @@ export function Studio3dControls({ models, textureQualities, geometryQualities, 
                       <button
                         className={cn(
                           'flex-1 rounded-[8px] py-1.5 text-[12px] font-medium transition',
-                          topology === tp.value ? 'bg-[#2563eb] text-white shadow-sm' : 'text-[#4e6585] dark:text-[#8a9bc0]',
+                          topology === tp.value
+                            ? 'bg-[#2563eb] text-white shadow-sm'
+                            : 'text-[#4e6585] dark:text-[#8a9bc0]',
                         )}
                         key={tp.value}
                         onClick={() => setTopology(tp.value)}
@@ -478,9 +522,14 @@ export function Studio3dControls({ models, textureQualities, geometryQualities, 
                     onClick={() => setAdvancedOpen((prev) => !prev)}
                     type="button"
                   >
-                    <span className="min-w-0 flex-1 text-[12px] font-medium text-[#2e4268] dark:text-[#b6c4dc]">{t('Advanced parameters')}</span>
+                    <span className="min-w-0 flex-1 text-[12px] font-medium text-[#2e4268] dark:text-[#b6c4dc]">
+                      {t('Advanced parameters')}
+                    </span>
                     <ChevronDown
-                      className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform duration-200', advancedOpen && 'rotate-180')}
+                      className={cn(
+                        'h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform duration-200',
+                        advancedOpen && 'rotate-180',
+                      )}
                       strokeWidth={2}
                     />
                   </button>
@@ -615,9 +664,15 @@ export function Studio3dControls({ models, textureQualities, geometryQualities, 
               strokeWidth={1.75}
             />
             {t('Generate model')}
-            <span className="ml-1.5 rounded-full bg-[#dce5f3] px-2 py-0.5 text-[12px] text-[#091423] dark:bg-white/14 dark:text-[#eef4ff]">{model?.credits ?? 0}</span>
+            <span className="ml-1.5 rounded-full bg-[#dce5f3] px-2 py-0.5 text-[12px] text-[#091423] dark:bg-white/14 dark:text-[#eef4ff]">
+              {model?.credits ?? 0}
+            </span>
           </button>
-          {submittedEmpty ? <p className="mt-1.5 text-center text-[11px] text-rose-600 dark:text-rose-300">{t('Prompt is required')}</p> : null}
+          {submittedEmpty ? (
+            <p className="mt-1.5 text-center text-[11px] text-rose-600 dark:text-rose-300">
+              {t('Prompt is required')}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

@@ -21,8 +21,12 @@ export function Studio3dViewport() {
           />
         </div>
         <div>
-          <p className="text-[14px] font-medium text-[#2e4268] dark:text-[#b6c4dc]">{t('Preview placeholder title')}</p>
-          <p className="mt-1 text-[12px] text-[#4e6585] dark:text-[#6b7f9d]">{t('Preview placeholder hint')}</p>
+          <p className="text-[14px] font-medium text-[#2e4268] dark:text-[#b6c4dc]">
+            {t('Preview placeholder title')}
+          </p>
+          <p className="mt-1 text-[12px] text-[#4e6585] dark:text-[#6b7f9d]">
+            {t('Preview placeholder hint')}
+          </p>
         </div>
       </div>
     </div>

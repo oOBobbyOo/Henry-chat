@@ -10,13 +10,22 @@ import type { UsageFilters } from '../page'
 const SERIES_COLORS = ['#294fd4', '#22c55e', '#f59e0b', '#8b5cf6', '#0ea5e9', '#ef4444']
 
 /** 趋势指标类型 */
-export type TrendMetric = 'cost' | 'model' | 'provider' | 'rpm' | 'ttft' | 'output-latency' | 'cache-hit' | 'error-rate'
+export type TrendMetric =
+  | 'cost'
+  | 'model'
+  | 'provider'
+  | 'rpm'
+  | 'ttft'
+  | 'output-latency'
+  | 'cache-hit'
+  | 'error-rate'
 
 /** 数值格式化(轴标签) */
 function formatAxisValue(metric: TrendMetric, v: number): string {
   if (metric === 'cost') return v >= 1 ? `¥${v.toFixed(2)}` : `¥${v.toFixed(3)}`
   if (metric === 'cache-hit' || metric === 'error-rate') return `${v.toFixed(0)}%`
-  if (metric === 'ttft' || metric === 'output-latency') return v >= 1000 ? `${(v / 1000).toFixed(1)}s` : `${v.toFixed(0)}ms`
+  if (metric === 'ttft' || metric === 'output-latency')
+    return v >= 1000 ? `${(v / 1000).toFixed(1)}s` : `${v.toFixed(0)}ms`
   if (metric === 'model' || metric === 'provider') {
     if (v >= 1_000_000) return `${(v / 1_000_000).toFixed(1)}M`
     if (v >= 1_000) return `${(v / 1_000).toFixed(0)}K`
@@ -57,13 +66,18 @@ export function CostTrendChart({
     () =>
       trend.items.map((i) => {
         const d = new Date(i.date)
-        return isHour ? `${String(d.getHours()).padStart(2, '0')}:00` : `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+        return isHour
+          ? `${String(d.getHours()).padStart(2, '0')}:00`
+          : `${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
       }),
     [trend.items, isHour],
   )
 
   // 模型 → 供应商 / 客户端 映射(用于供应商聚合与筛选)
-  const providerOf = useMemo(() => new Map(modelStats.map((m) => [m.model, m.provider])), [modelStats])
+  const providerOf = useMemo(
+    () => new Map(modelStats.map((m) => [m.model, m.provider])),
+    [modelStats],
+  )
   const clientOf = useMemo(() => new Map(modelStats.map((m) => [m.model, m.client])), [modelStats])
 
   // 应用筛选后保留的模型
@@ -79,7 +93,10 @@ export function CostTrendChart({
   )
 
   // 供应商列表(按筛选后模型的 provider 去重)
-  const providers = useMemo(() => Array.from(new Set(activeModels.map((m) => providerOf.get(m) ?? m))), [activeModels, providerOf])
+  const providers = useMemo(
+    () => Array.from(new Set(activeModels.map((m) => providerOf.get(m) ?? m))),
+    [activeModels, providerOf],
+  )
 
   const option = useMemo(() => {
     // —— 单序列指标 ——
@@ -125,7 +142,9 @@ export function CostTrendChart({
         lineStyle: { width: 2 },
         itemStyle: { color: SERIES_COLORS[idx % SERIES_COLORS.length] },
         emphasis: { focus: 'series' },
-        data: modelTrend.items.map((item) => item.models.find((m) => m.model === model)?.tokens ?? 0),
+        data: modelTrend.items.map(
+          (item) => item.models.find((m) => m.model === model)?.tokens ?? 0,
+        ),
       }))
     } else if (metric === 'provider') {
       series = providers.map((provider, idx) => {
@@ -140,7 +159,12 @@ export function CostTrendChart({
           lineStyle: { width: 2 },
           itemStyle: { color: SERIES_COLORS[idx % SERIES_COLORS.length] },
           emphasis: { focus: 'series' },
-          data: modelTrend.items.map((item) => models.reduce((sum, model) => sum + (item.models.find((m) => m.model === model)?.tokens ?? 0), 0)),
+          data: modelTrend.items.map((item) =>
+            models.reduce(
+              (sum, model) => sum + (item.models.find((m) => m.model === model)?.tokens ?? 0),
+              0,
+            ),
+          ),
         }
       })
     } else {
@@ -170,8 +194,12 @@ export function CostTrendChart({
         borderWidth: 1,
         padding: [10, 14],
         textStyle: { color: '#0f1c3a', fontSize: 12 },
-        axisPointer: { type: 'line' as const, lineStyle: { color: '#c9d6ef', type: 'dashed' as const } },
-        valueFormatter: (v: unknown) => (typeof v === 'number' ? formatTooltipValue(metric, v) : String(v)),
+        axisPointer: {
+          type: 'line' as const,
+          lineStyle: { color: '#c9d6ef', type: 'dashed' as const },
+        },
+        valueFormatter: (v: unknown) =>
+          typeof v === 'number' ? formatTooltipValue(metric, v) : String(v),
       },
       legend: showLegend
         ? {

@@ -2,10 +2,35 @@
 
 import { useState } from 'react'
 
-import { SlidersHorizontal, Settings2, Mic, Speech, FileArchive, Activity, Waves, Languages, MessageSquare, Code, Braces, Wrench, AudioWaveform, Volume2, Music2 } from 'lucide-react'
+import {
+  SlidersHorizontal,
+  Settings2,
+  Mic,
+  Speech,
+  FileArchive,
+  Activity,
+  Waves,
+  Languages,
+  MessageSquare,
+  Code,
+  Braces,
+  Wrench,
+  AudioWaveform,
+  Volume2,
+  Music2,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { Drop, FieldGrid, FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, Seg, SliderField } from './shared'
+import {
+  Drop,
+  FieldGrid,
+  FieldLabel,
+  FieldLabelIcon,
+  PanelCard,
+  PanelIcon,
+  Seg,
+  SliderField,
+} from './shared'
 
 /**
  * 配音生成面板 —— 参考站结构:参数面板(语音模型 / 音色 / 输出格式 / 采样率 / Opus 码率 / 目标语言 / 语速 / 音量 / 音调)+ 高级参数(表达指令 / SSML / Markdown 过滤 / 文本热修复)
@@ -42,7 +67,10 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
             </FieldLabel>
             <Drop
               onChange={() => {}}
-              options={configs.voice.models.map((m) => ({ value: m.displayName, label: m.displayName }))}
+              options={configs.voice.models.map((m) => ({
+                value: m.displayName,
+                label: m.displayName,
+              }))}
               value={configs.voice.models[0]?.displayName ?? ''}
             />
           </div>
@@ -108,12 +136,17 @@ export function VoicePanel({ configs }: { configs: Workbench.ConfigResponse['dat
               </FieldLabel>
               <Drop
                 onChange={setLanguage}
-                options={configs.voice.languages.map((l) => ({ value: l, label: t(`Language.${l}`) }))}
+                options={configs.voice.languages.map((l) => ({
+                  value: l,
+                  label: t(`Language.${l}`),
+                }))}
                 value={t(`Language.${language}`)}
               />
             </div>
           </FieldGrid>
-          <p className="mt-0.5 -mb-1 text-[10px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Opus bitrate hint')}</p>
+          <p className="mt-0.5 -mb-1 text-[10px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">
+            {t('Opus bitrate hint')}
+          </p>
           <SliderField
             icon={<FieldLabelIcon icon={AudioWaveform} />}
             label={t('Speech rate')}

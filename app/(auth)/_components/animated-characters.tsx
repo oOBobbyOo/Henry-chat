@@ -10,7 +10,13 @@ interface PupilProps {
   forceLookY?: number
 }
 
-export const Pupil = ({ size = 12, maxDistance = 5, pupilColor = 'black', forceLookX, forceLookY }: PupilProps) => {
+export const Pupil = ({
+  size = 12,
+  maxDistance = 5,
+  pupilColor = 'black',
+  forceLookX,
+  forceLookY,
+}: PupilProps) => {
   const [mouseX, setMouseX] = useState<number>(0)
   const [mouseY, setMouseY] = useState<number>(0)
   const pupilRef = useRef<HTMLDivElement>(null)
@@ -79,7 +85,16 @@ interface EyeBallProps {
   forceLookY?: number
 }
 
-export const EyeBall = ({ size = 48, pupilSize = 16, maxDistance = 10, eyeColor = 'white', pupilColor = 'black', isBlinking = false, forceLookX, forceLookY }: EyeBallProps) => {
+export const EyeBall = ({
+  size = 48,
+  pupilSize = 16,
+  maxDistance = 10,
+  eyeColor = 'white',
+  pupilColor = 'black',
+  isBlinking = false,
+  forceLookX,
+  forceLookY,
+}: EyeBallProps) => {
   const [mouseX, setMouseX] = useState<number>(0)
   const [mouseY, setMouseY] = useState<number>(0)
   const eyeRef = useRef<HTMLDivElement>(null)
@@ -155,7 +170,11 @@ interface AnimatedCharactersProps {
   passwordLength?: number
 }
 
-export function AnimatedCharacters({ isTyping = false, showPassword = false, passwordLength = 0 }: AnimatedCharactersProps) {
+export function AnimatedCharacters({
+  isTyping = false,
+  showPassword = false,
+  passwordLength = 0,
+}: AnimatedCharactersProps) {
   const [mouseX, setMouseX] = useState<number>(0)
   const [mouseY, setMouseY] = useState<number>(0)
   const [isPurpleBlinking, setIsPurpleBlinking] = useState(false)
@@ -294,7 +313,11 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
           borderRadius: '10px 10px 0 0',
           zIndex: 1,
           transform:
-            passwordLength > 0 && showPassword ? `skewX(0deg)` : isTyping || isHidingPassword ? `skewX(${(purplePos.bodySkew || 0) - 12}deg) translateX(40px)` : `skewX(${purplePos.bodySkew || 0}deg)`,
+            passwordLength > 0 && showPassword
+              ? `skewX(0deg)`
+              : isTyping || isHidingPassword
+                ? `skewX(${(purplePos.bodySkew || 0) - 12}deg) translateX(40px)`
+                : `skewX(${purplePos.bodySkew || 0}deg)`,
           transformOrigin: 'bottom center',
         }}
       >
@@ -302,8 +325,18 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
         <div
           className="absolute flex gap-8 transition-all duration-700 ease-in-out"
           style={{
-            left: passwordLength > 0 && showPassword ? `${20}px` : isLookingAtEachOther ? `${55}px` : `${45 + purplePos.faceX}px`,
-            top: passwordLength > 0 && showPassword ? `${35}px` : isLookingAtEachOther ? `${65}px` : `${40 + purplePos.faceY}px`,
+            left:
+              passwordLength > 0 && showPassword
+                ? `${20}px`
+                : isLookingAtEachOther
+                  ? `${55}px`
+                  : `${45 + purplePos.faceX}px`,
+            top:
+              passwordLength > 0 && showPassword
+                ? `${35}px`
+                : isLookingAtEachOther
+                  ? `${65}px`
+                  : `${40 + purplePos.faceY}px`,
           }}
         >
           <EyeBall
@@ -313,8 +346,24 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
             eyeColor="white"
             pupilColor="#2D2D2D"
             isBlinking={isPurpleBlinking}
-            forceLookX={passwordLength > 0 && showPassword ? (isPurplePeeking ? 4 : -4) : isLookingAtEachOther ? 3 : undefined}
-            forceLookY={passwordLength > 0 && showPassword ? (isPurplePeeking ? 5 : -4) : isLookingAtEachOther ? 4 : undefined}
+            forceLookX={
+              passwordLength > 0 && showPassword
+                ? isPurplePeeking
+                  ? 4
+                  : -4
+                : isLookingAtEachOther
+                  ? 3
+                  : undefined
+            }
+            forceLookY={
+              passwordLength > 0 && showPassword
+                ? isPurplePeeking
+                  ? 5
+                  : -4
+                : isLookingAtEachOther
+                  ? 4
+                  : undefined
+            }
           />
           <EyeBall
             size={18}
@@ -323,8 +372,24 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
             eyeColor="white"
             pupilColor="#2D2D2D"
             isBlinking={isPurpleBlinking}
-            forceLookX={passwordLength > 0 && showPassword ? (isPurplePeeking ? 4 : -4) : isLookingAtEachOther ? 3 : undefined}
-            forceLookY={passwordLength > 0 && showPassword ? (isPurplePeeking ? 5 : -4) : isLookingAtEachOther ? 4 : undefined}
+            forceLookX={
+              passwordLength > 0 && showPassword
+                ? isPurplePeeking
+                  ? 4
+                  : -4
+                : isLookingAtEachOther
+                  ? 3
+                  : undefined
+            }
+            forceLookY={
+              passwordLength > 0 && showPassword
+                ? isPurplePeeking
+                  ? 5
+                  : -4
+                : isLookingAtEachOther
+                  ? 4
+                  : undefined
+            }
           />
         </div>
       </div>
@@ -355,8 +420,18 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
         <div
           className="absolute flex gap-6 transition-all duration-700 ease-in-out"
           style={{
-            left: passwordLength > 0 && showPassword ? `${10}px` : isLookingAtEachOther ? `${32}px` : `${26 + blackPos.faceX}px`,
-            top: passwordLength > 0 && showPassword ? `${28}px` : isLookingAtEachOther ? `${12}px` : `${32 + blackPos.faceY}px`,
+            left:
+              passwordLength > 0 && showPassword
+                ? `${10}px`
+                : isLookingAtEachOther
+                  ? `${32}px`
+                  : `${26 + blackPos.faceX}px`,
+            top:
+              passwordLength > 0 && showPassword
+                ? `${28}px`
+                : isLookingAtEachOther
+                  ? `${12}px`
+                  : `${32 + blackPos.faceY}px`,
           }}
         >
           <EyeBall
@@ -366,8 +441,12 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
             eyeColor="white"
             pupilColor="#2D2D2D"
             isBlinking={isBlackBlinking}
-            forceLookX={passwordLength > 0 && showPassword ? -4 : isLookingAtEachOther ? 0 : undefined}
-            forceLookY={passwordLength > 0 && showPassword ? -4 : isLookingAtEachOther ? -4 : undefined}
+            forceLookX={
+              passwordLength > 0 && showPassword ? -4 : isLookingAtEachOther ? 0 : undefined
+            }
+            forceLookY={
+              passwordLength > 0 && showPassword ? -4 : isLookingAtEachOther ? -4 : undefined
+            }
           />
           <EyeBall
             size={16}
@@ -376,8 +455,12 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
             eyeColor="white"
             pupilColor="#2D2D2D"
             isBlinking={isBlackBlinking}
-            forceLookX={passwordLength > 0 && showPassword ? -4 : isLookingAtEachOther ? 0 : undefined}
-            forceLookY={passwordLength > 0 && showPassword ? -4 : isLookingAtEachOther ? -4 : undefined}
+            forceLookX={
+              passwordLength > 0 && showPassword ? -4 : isLookingAtEachOther ? 0 : undefined
+            }
+            forceLookY={
+              passwordLength > 0 && showPassword ? -4 : isLookingAtEachOther ? -4 : undefined
+            }
           />
         </div>
       </div>
@@ -393,7 +476,10 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
           zIndex: 3,
           backgroundColor: '#FF9B6B',
           borderRadius: '120px 120px 0 0',
-          transform: passwordLength > 0 && showPassword ? `skewX(0deg)` : `skewX(${orangePos.bodySkew || 0}deg)`,
+          transform:
+            passwordLength > 0 && showPassword
+              ? `skewX(0deg)`
+              : `skewX(${orangePos.bodySkew || 0}deg)`,
           transformOrigin: 'bottom center',
         }}
       >
@@ -401,8 +487,10 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
         <div
           className="absolute flex gap-8 transition-all duration-200 ease-out"
           style={{
-            left: passwordLength > 0 && showPassword ? `${50}px` : `${82 + (orangePos.faceX || 0)}px`,
-            top: passwordLength > 0 && showPassword ? `${85}px` : `${90 + (orangePos.faceY || 0)}px`,
+            left:
+              passwordLength > 0 && showPassword ? `${50}px` : `${82 + (orangePos.faceX || 0)}px`,
+            top:
+              passwordLength > 0 && showPassword ? `${85}px` : `${90 + (orangePos.faceY || 0)}px`,
           }}
         >
           <Pupil
@@ -433,7 +521,10 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
           backgroundColor: '#E8D754',
           borderRadius: '70px 70px 0 0',
           zIndex: 4,
-          transform: passwordLength > 0 && showPassword ? `skewX(0deg)` : `skewX(${yellowPos.bodySkew || 0}deg)`,
+          transform:
+            passwordLength > 0 && showPassword
+              ? `skewX(0deg)`
+              : `skewX(${yellowPos.bodySkew || 0}deg)`,
           transformOrigin: 'bottom center',
         }}
       >
@@ -441,8 +532,10 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
         <div
           className="absolute flex gap-6 transition-all duration-200 ease-out"
           style={{
-            left: passwordLength > 0 && showPassword ? `${20}px` : `${52 + (yellowPos.faceX || 0)}px`,
-            top: passwordLength > 0 && showPassword ? `${35}px` : `${40 + (yellowPos.faceY || 0)}px`,
+            left:
+              passwordLength > 0 && showPassword ? `${20}px` : `${52 + (yellowPos.faceX || 0)}px`,
+            top:
+              passwordLength > 0 && showPassword ? `${35}px` : `${40 + (yellowPos.faceY || 0)}px`,
           }}
         >
           <Pupil
@@ -464,8 +557,10 @@ export function AnimatedCharacters({ isTyping = false, showPassword = false, pas
         <div
           className="absolute h-[4px] w-20 rounded-full bg-[#2D2D2D] transition-all duration-200 ease-out"
           style={{
-            left: passwordLength > 0 && showPassword ? `${10}px` : `${40 + (yellowPos.faceX || 0)}px`,
-            top: passwordLength > 0 && showPassword ? `${88}px` : `${88 + (yellowPos.faceY || 0)}px`,
+            left:
+              passwordLength > 0 && showPassword ? `${10}px` : `${40 + (yellowPos.faceX || 0)}px`,
+            top:
+              passwordLength > 0 && showPassword ? `${88}px` : `${88 + (yellowPos.faceY || 0)}px`,
           }}
         />
       </div>

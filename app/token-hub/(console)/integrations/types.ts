@@ -84,7 +84,10 @@ export const INTEGRATION_APPS: IntegrationApp[] = [
 ]
 
 /** 按协议筛选模型(模型只来自模型广场,按当前应用协议自动筛选) */
-export function filterModelsByProtocol(models: TokenHub.CatalogModel[], protocol: ProtocolFilter): TokenHub.CatalogModel[] {
+export function filterModelsByProtocol(
+  models: TokenHub.CatalogModel[],
+  protocol: ProtocolFilter,
+): TokenHub.CatalogModel[] {
   return models.filter((m) => {
     const protos = m.supported_protocols ?? []
     switch (protocol) {

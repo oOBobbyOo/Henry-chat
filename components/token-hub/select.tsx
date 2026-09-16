@@ -61,14 +61,20 @@ function ConsoleSelectTrigger({
   )
 }
 
-function ConsoleSelectContent({ className, children, position = 'popper', ...props }: React.ComponentProps<typeof SelectPrimitive.Content>) {
+function ConsoleSelectContent({
+  className,
+  children,
+  position = 'popper',
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Content>) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
         data-slot="console-select-content"
         className={cn(
           'bg-popover text-popover-foreground relative z-50 max-h-[min(var(--radix-select-content-available-height),320px)] min-w-36 overflow-y-auto rounded-xl border border-(--tc-border) bg-(--tc-surface) p-1 shadow-[0_10px_40px_rgb(16_38_79/0.14)] data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
-          position === 'popper' && 'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
+          position === 'popper' &&
+            'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
           className,
         )}
         position={position}
@@ -77,7 +83,10 @@ function ConsoleSelectContent({ className, children, position = 'popper', ...pro
         <ConsoleSelectScrollUpButton />
         <SelectPrimitive.Viewport
           data-position={position}
-          className={cn('p-1', position === 'popper' && 'w-full min-w-(--radix-select-trigger-width)')}
+          className={cn(
+            'p-1',
+            position === 'popper' && 'w-full min-w-(--radix-select-trigger-width)',
+          )}
         >
           {children}
         </SelectPrimitive.Viewport>
@@ -87,7 +96,11 @@ function ConsoleSelectContent({ className, children, position = 'popper', ...pro
   )
 }
 
-function ConsoleSelectItem({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) {
+function ConsoleSelectItem({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Item>) {
   return (
     <SelectPrimitive.Item
       data-slot="console-select-item"
@@ -109,7 +122,10 @@ function ConsoleSelectItem({ className, children, ...props }: React.ComponentPro
   )
 }
 
-function ConsoleSelectScrollUpButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
+function ConsoleSelectScrollUpButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
   return (
     <SelectPrimitive.ScrollUpButton
       className={cn('flex cursor-default items-center justify-center py-1', className)}
@@ -120,7 +136,10 @@ function ConsoleSelectScrollUpButton({ className, ...props }: React.ComponentPro
   )
 }
 
-function ConsoleSelectScrollDownButton({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
+function ConsoleSelectScrollDownButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
   return (
     <SelectPrimitive.ScrollDownButton
       className={cn('flex cursor-default items-center justify-center py-1', className)}
@@ -131,4 +150,12 @@ function ConsoleSelectScrollDownButton({ className, ...props }: React.ComponentP
   )
 }
 
-export { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectScrollDownButton, ConsoleSelectScrollUpButton, ConsoleSelectTrigger, ConsoleSelectValue }
+export {
+  ConsoleSelect,
+  ConsoleSelectContent,
+  ConsoleSelectItem,
+  ConsoleSelectScrollDownButton,
+  ConsoleSelectScrollUpButton,
+  ConsoleSelectTrigger,
+  ConsoleSelectValue,
+}

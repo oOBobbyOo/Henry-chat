@@ -18,7 +18,9 @@ export function ProjectsRecentSection() {
   return (
     <section className="pt-1">
       <div className="flex items-center justify-between gap-4">
-        <h2 className="text-[18px] font-medium tracking-[-0.02em] text-foreground">{t('Recent projects')}</h2>
+        <h2 className="text-[18px] font-medium tracking-[-0.02em] text-foreground">
+          {t('Recent projects')}
+        </h2>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2 xl:grid-cols-6">
         {isLoading ? (
@@ -41,7 +43,9 @@ export function ProjectsRecentSection() {
                   <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[#dce5f6] bg-white text-foreground dark:border-white/15 dark:bg-[#0f1c3a]">
                     <Plus className="h-6 w-6" />
                   </div>
-                  <p className="mt-2 text-[15px] font-medium tracking-[-0.02em] text-foreground">{t('Sign in to start creating')}</p>
+                  <p className="mt-2 text-[15px] font-medium tracking-[-0.02em] text-foreground">
+                    {t('Sign in to start creating')}
+                  </p>
                 </div>
               </div>
             </button>
@@ -70,7 +74,9 @@ export function ProjectsRecentSection() {
                   )}
                 </div>
               </button>
-              <p className="mt-2 truncate text-[13px] font-medium text-foreground">{project.name}</p>
+              <p className="mt-2 truncate text-[13px] font-medium text-foreground">
+                {project.name}
+              </p>
             </div>
           ))
         )}

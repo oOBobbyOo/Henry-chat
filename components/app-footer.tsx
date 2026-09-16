@@ -21,10 +21,18 @@ const SOCIAL_LINKS = [
   { label: 'Telegram', href: '#', Icon: Send },
 ]
 
-function FooterLinkColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
+function FooterLinkColumn({
+  title,
+  links,
+}: {
+  title: string
+  links: { label: string; href: string }[]
+}) {
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-[12px] font-semibold tracking-[0.12em] text-[#718096] uppercase dark:text-white/50">{title}</p>
+      <p className="text-[12px] font-semibold tracking-[0.12em] text-[#718096] uppercase dark:text-white/50">
+        {title}
+      </p>
       <ul className="space-y-2.5">
         {links.map((link) => (
           <li key={link.label}>
@@ -49,9 +57,14 @@ export function AppFooter() {
           {/* Brand */}
           <div className="max-w-sm">
             <div className="flex items-center gap-2">
-              <h2 className="text-[17px] font-semibold tracking-tight text-gray-700 dark:text-[#eef4ff]">Henry AI Chat</h2>
+              <h2 className="text-[17px] font-semibold tracking-tight text-gray-700 dark:text-[#eef4ff]">
+                Henry AI Chat
+              </h2>
             </div>
-            <p className="mt-2.5 text-[13px] leading-relaxed text-[#91a0b5]">一个集多模型对话、模型排行榜与 Token 管理于一体的 AI 工作台，帮助你高效完成从探索到生产落地的全过程。</p>
+            <p className="mt-2.5 text-[13px] leading-relaxed text-[#91a0b5]">
+              一个集多模型对话、模型排行榜与 Token 管理于一体的 AI
+              工作台，帮助你高效完成从探索到生产落地的全过程。
+            </p>
             <div className="mt-5 flex items-center gap-2.5">
               {SOCIAL_LINKS.map(({ label, href, Icon }) => (
                 <Link

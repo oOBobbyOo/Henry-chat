@@ -5,10 +5,10 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useRankings, VALID_PERIODS } from '@/services/ranking'
 
-import { MarketShareSection } from './_components/MarketShareSection'
-import { ModelsSection } from './_components/ModelsSection'
-import { PulseSection } from './_components/PulseSection'
-import { RankingsHero } from './_components/RankingsHero'
+import { MarketShareSection } from './_components/market-share-section'
+import { ModelsSection } from './_components/models-section'
+import { PulseSection } from './_components/pulse-section'
+import { RankingsHero } from './_components/rankings-hero'
 
 export default function RankingsPage() {
   const router = useRouter()
@@ -30,7 +30,9 @@ export default function RankingsPage() {
   if (error)
     return (
       <>
-        <RankingsError message={error instanceof Error ? error.message : 'Unable to load rankings data'} />
+        <RankingsError
+          message={error instanceof Error ? error.message : 'Unable to load rankings data'}
+        />
       </>
     )
 

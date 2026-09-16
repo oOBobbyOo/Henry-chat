@@ -8,9 +8,15 @@ import { request } from '@/lib/request'
  */
 export const Studio3dService = {
   /** 能力导航 + 模型 + 参数字典 */
-  getConfig: () => request.get<Studio3d.ConfigResponse>('/api/studio3d/config', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getConfig: () =>
+    request.get<Studio3d.ConfigResponse>('/api/studio3d/config', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
   /** 资产列表(我的资产 + 公共资源) */
-  getAssets: () => request.get<Studio3d.AssetsResponse>('/api/studio3d/assets', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getAssets: () =>
+    request.get<Studio3d.AssetsResponse>('/api/studio3d/assets', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
 }
 
 export const STUDIO_3D_QUERY_KEYS = {

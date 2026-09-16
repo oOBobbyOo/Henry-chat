@@ -41,7 +41,9 @@ export function CostSignalsCard({ summary }: { summary: TokenHub.CostReportSumma
       <div>
         <div className="flex items-center gap-2">
           <BellRing className="h-4 w-4 text-(--tc-primary-text)" />
-          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Reports Signals Title')}</h2>
+          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+            {t('Reports Signals Title')}
+          </h2>
         </div>
         <p className="mt-1.5 text-xs text-(--tc-muted)">{t('Reports Signals Subtitle')}</p>
       </div>
@@ -52,8 +54,14 @@ export function CostSignalsCard({ summary }: { summary: TokenHub.CostReportSumma
             key={label}
             className="rounded-xl border border-(--tc-border)/80 bg-(--tc-surface-raised)/70 p-3.5"
           >
-            <p className="text-[11px] font-bold tracking-[0.06em] text-(--tc-muted) uppercase">{label}</p>
-            <p className={`mt-2 truncate text-[17px] leading-none font-semibold tracking-[-0.02em] tabular-nums ${muted ? 'text-(--tc-muted)' : 'text-(--tc-strong)'}`}>{value}</p>
+            <p className="text-[11px] font-bold tracking-[0.06em] text-(--tc-muted) uppercase">
+              {label}
+            </p>
+            <p
+              className={`mt-2 truncate text-[17px] leading-none font-semibold tracking-[-0.02em] tabular-nums ${muted ? 'text-(--tc-muted)' : 'text-(--tc-strong)'}`}
+            >
+              {value}
+            </p>
             <p className="mt-2 text-[11px] leading-4 text-(--tc-muted)">{hint}</p>
           </div>
         ))}

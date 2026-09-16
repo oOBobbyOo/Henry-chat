@@ -44,10 +44,18 @@ export default function PlazaPage() {
   // 筛选 + 排序后的模型列表
   const filtered = useMemo(() => {
     let list = data.items.filter((m) => {
-      if (query && !m.alias.toLowerCase().includes(query.toLowerCase()) && !m.display_name.toLowerCase().includes(query.toLowerCase())) {
+      if (
+        query &&
+        !m.alias.toLowerCase().includes(query.toLowerCase()) &&
+        !m.display_name.toLowerCase().includes(query.toLowerCase())
+      ) {
         return false
       }
-      if (capability !== 'all' && !m.input_modalities.includes(capability) && !m.output_modalities.includes(capability)) {
+      if (
+        capability !== 'all' &&
+        !m.input_modalities.includes(capability) &&
+        !m.output_modalities.includes(capability)
+      ) {
         return false
       }
       if (vendor !== 'all' && !m.mappings.some((p) => p.provider_name === vendor)) {
@@ -56,7 +64,12 @@ export default function PlazaPage() {
       return true
     })
 
-    const priceOf = (m: TokenHub.CatalogModel) => Math.min(...m.mappings.filter((x) => x.status === 'active').map((x) => x.input_price_cny * x.discount_rate))
+    const priceOf = (m: TokenHub.CatalogModel) =>
+      Math.min(
+        ...m.mappings
+          .filter((x) => x.status === 'active')
+          .map((x) => x.input_price_cny * x.discount_rate),
+      )
 
     switch (sort) {
       case 'price-asc':
@@ -86,8 +99,12 @@ export default function PlazaPage() {
         {/* 标题区 */}
         <header className="flex flex-col gap-4 border-b border-(--tc-border)/80 pb-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
-            <h1 className="text-[24px] font-semibold tracking-[-0.045em] text-(--tc-strong) sm:text-[26px]">{t('Plaza Title')}</h1>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-(--tc-body)">{t('Plaza Subtitle')}</p>
+            <h1 className="text-[24px] font-semibold tracking-[-0.045em] text-(--tc-strong) sm:text-[26px]">
+              {t('Plaza Title')}
+            </h1>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-(--tc-body)">
+              {t('Plaza Subtitle')}
+            </p>
           </div>
           <div className="flex shrink-0 flex-wrap items-center gap-2">
             <Link

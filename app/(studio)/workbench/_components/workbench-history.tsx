@@ -2,7 +2,19 @@
 
 import { useMemo, useState } from 'react'
 
-import { ArrowDown, History, Image, LayoutGrid, ListVideo, Music, RefreshCw, Rows3, Search, Volume2, Mic } from 'lucide-react'
+import {
+  ArrowDown,
+  History,
+  Image,
+  LayoutGrid,
+  ListVideo,
+  Music,
+  RefreshCw,
+  Rows3,
+  Search,
+  Volume2,
+  Mic,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { cn } from '@/lib/utils'
@@ -88,7 +100,9 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
           <div className="flex items-end justify-between gap-3 pb-3">
             <div className="min-w-0">
               <div className="flex items-baseline gap-2.5">
-                <h2 className="text-[18px] leading-none font-semibold whitespace-nowrap text-[#091423] dark:text-[#eef4ff]">{t('Creation history')}</h2>
+                <h2 className="text-[18px] leading-none font-semibold whitespace-nowrap text-[#091423] dark:text-[#eef4ff]">
+                  {t('Creation history')}
+                </h2>
               </div>
             </div>
             <button
@@ -186,7 +200,9 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
                     <button
                       className={cn(
                         'relative pb-2.5 text-[13px] font-medium whitespace-nowrap transition-colors',
-                        active ? 'text-[#091423] dark:text-[#eef4ff]' : 'text-[#8a9bc0] hover:text-[#2e4268] dark:hover:text-[#b6c4dc]',
+                        active
+                          ? 'text-[#091423] dark:text-[#eef4ff]'
+                          : 'text-[#8a9bc0] hover:text-[#2e4268] dark:hover:text-[#b6c4dc]',
                       )}
                       key={tab.key}
                       onClick={() => setModality(tab.key as Workbench.AssetModality | 'all')}
@@ -194,12 +210,20 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
                     >
                       <span className="inline-flex items-center gap-1.5">
                         <TabIcon
-                          className={cn('h-3.5 w-3.5', active ? 'text-[#3867ff] dark:text-[#8fa5ff]' : 'text-[#8a9bc0]')}
+                          className={cn(
+                            'h-3.5 w-3.5',
+                            active ? 'text-[#3867ff] dark:text-[#8fa5ff]' : 'text-[#8a9bc0]',
+                          )}
                           strokeWidth={1.75}
                         />
                         <span>{t(tab.labelKey)}</span>
                       </span>
-                      <span className={cn('absolute right-0 -bottom-px left-0 h-[2px] rounded-full bg-gradient-to-r from-[#3898bc] to-[#3867ff]', active ? 'opacity-100' : 'opacity-0')} />
+                      <span
+                        className={cn(
+                          'absolute right-0 -bottom-px left-0 h-[2px] rounded-full bg-gradient-to-r from-[#3898bc] to-[#3867ff]',
+                          active ? 'opacity-100' : 'opacity-0',
+                        )}
+                      />
                     </button>
                   )
                 })}
@@ -216,7 +240,9 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
               <div className="mx-3 my-3 rounded-[22px] border border-dashed border-[rgba(12,24,36,0.14)] p-5 dark:border-white/20">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="text-[16px] font-semibold text-[#091423] dark:text-[#eef4ff]">{t('No creation records for this filter')}</p>
+                    <p className="text-[16px] font-semibold text-[#091423] dark:text-[#eef4ff]">
+                      {t('No creation records for this filter')}
+                    </p>
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
                     <button
@@ -246,7 +272,9 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
                           {t(item.modality === 'image' ? 'Image' : 'Video')}
                         </div>
                         {item.featured ? (
-                          <div className="absolute top-3 right-3 rounded-full border border-white/24 bg-black/35 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">{t('Featured')}</div>
+                          <div className="absolute top-3 right-3 rounded-full border border-white/24 bg-black/35 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">
+                            {t('Featured')}
+                          </div>
                         ) : null}
                         {item.durationSeconds ? (
                           <div className="absolute right-3 bottom-3 rounded-full border border-white/24 bg-black/35 px-2 py-0.5 text-[10px] font-medium text-white backdrop-blur-sm">
@@ -257,7 +285,9 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
                       <div className="border-t border-[rgba(12,24,36,0.08)] px-3 py-3 dark:border-white/8">
                         <div className="flex items-center gap-3">
                           <div className="min-w-0 flex-1 text-left">
-                            <p className="truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">{item.title}</p>
+                            <p className="truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                              {item.title}
+                            </p>
                           </div>
                           <button
                             className="inline-flex shrink-0 cursor-pointer items-center rounded-full border border-[rgba(12,24,36,0.1)] px-2.5 py-1 text-[11px] text-[#2e4268] transition-colors hover:border-[rgba(56,103,255,0.35)] hover:text-[#3867ff] dark:border-white/10 dark:text-[#b6c4dc] dark:hover:text-[#8fa5ff]"
@@ -273,7 +303,12 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
               </div>
             ) : (
               /* 有记录:按视图模式渲染(棋盘视图 = 2 列紧凑网格) */
-              <div className={cn('grid gap-3 p-3', view === 'cards' ? 'grid-cols-1' : 'grid-cols-2 xl:grid-cols-3')}>
+              <div
+                className={cn(
+                  'grid gap-3 p-3',
+                  view === 'cards' ? 'grid-cols-1' : 'grid-cols-2 xl:grid-cols-3',
+                )}
+              >
                 {filtered.map((item) => (
                   <article
                     className="overflow-hidden rounded-[18px] border border-[rgba(12,24,36,0.08)] dark:border-white/8"
@@ -283,8 +318,12 @@ export function WorkbenchHistory({ history, communityCases }: WorkbenchHistoryPr
                       <CaseCover />
                     </div>
                     <div className="border-t border-[rgba(12,24,36,0.08)] px-3 py-3 dark:border-white/8">
-                      <p className="truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">{item.title}</p>
-                      <p className="mt-0.5 truncate text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{item.modelName}</p>
+                      <p className="truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                        {item.title}
+                      </p>
+                      <p className="mt-0.5 truncate text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">
+                        {item.modelName}
+                      </p>
                     </div>
                   </article>
                 ))}

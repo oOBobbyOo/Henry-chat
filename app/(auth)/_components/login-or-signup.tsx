@@ -17,9 +17,30 @@ interface Model {
 }
 
 export const models: Model[] = [
-  { type: 'phone', path: '/login?model=phone', lang: 'Phone Login', label: '手机登录', shortLabel: '手机', icon: Phone },
-  { type: 'email', path: '/login?model=email', lang: 'Email Login', label: '邮箱登录', shortLabel: '邮箱', icon: Mail },
-  { type: 'signup', path: '/signup', lang: 'Create Account', label: '创建账户', shortLabel: '注册', icon: CircleUser },
+  {
+    type: 'phone',
+    path: '/login?model=phone',
+    lang: 'Phone Login',
+    label: '手机登录',
+    shortLabel: '手机',
+    icon: Phone,
+  },
+  {
+    type: 'email',
+    path: '/login?model=email',
+    lang: 'Email Login',
+    label: '邮箱登录',
+    shortLabel: '邮箱',
+    icon: Mail,
+  },
+  {
+    type: 'signup',
+    path: '/signup',
+    lang: 'Create Account',
+    label: '创建账户',
+    shortLabel: '注册',
+    icon: CircleUser,
+  },
 ]
 
 interface LoginOrSignupProps {

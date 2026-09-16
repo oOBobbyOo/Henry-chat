@@ -9,14 +9,24 @@ import { cn } from '@/lib/utils'
  * 余额明细卡 —— 每笔余额增加与扣费记录(分页表格)
  * 列: 明细 / 时间 / 变动后余额 / 变动金额;底部: 共 N 笔 + 分页
  */
-export function BalanceDetailsCard({ transactions, page, onPageChange }: { transactions: TokenHub.BalanceTransactionsResponse; page: number; onPageChange: (page: number) => void }) {
+export function BalanceDetailsCard({
+  transactions,
+  page,
+  onPageChange,
+}: {
+  transactions: TokenHub.BalanceTransactionsResponse
+  page: number
+  onPageChange: (page: number) => void
+}) {
   const { t } = useT('token-hub')
 
   const total = transactions.total
   const totalPages = Math.max(1, Math.ceil(total / transactions.page_size))
 
   /** 分页窗口(当前页 ±1) */
-  const pageWindow = Array.from({ length: totalPages }, (_, i) => i + 1).filter((p) => p === 1 || p === totalPages || Math.abs(p - page) <= 1)
+  const pageWindow = Array.from({ length: totalPages }, (_, i) => i + 1).filter(
+    (p) => p === 1 || p === totalPages || Math.abs(p - page) <= 1,
+  )
 
   const formatDateTime = (iso: string) => {
     const d = new Date(iso)
@@ -28,12 +38,16 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
       {/* 标题 */}
       <div className="flex flex-col gap-3 border-b border-(--tc-border) px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div>
-          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Profile Balance Details')}</h2>
+          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+            {t('Profile Balance Details')}
+          </h2>
           <p className="mt-1 text-xs text-(--tc-muted)">{t('Profile Balance Details Desc')}</p>
         </div>
         <div className="flex shrink-0 items-center gap-2">
           <span className="text-xs whitespace-nowrap text-(--tc-muted)">
-            {t('Profile Total')} <span className="font-semibold text-(--tc-strong) tabular-nums">{total}</span> {t('Profile Total Unit')}
+            {t('Profile Total')}{' '}
+            <span className="font-semibold text-(--tc-strong) tabular-nums">{total}</span>{' '}
+            {t('Profile Total Unit')}
           </span>
           <button
             type="button"
@@ -88,9 +102,18 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
                     {tx.title}
                   </span>
                 </td>
-                <td className="px-5 py-3.5 text-[12px] whitespace-nowrap text-(--tc-muted) tabular-nums">{formatDateTime(tx.created_at)}</td>
-                <td className="px-5 py-3.5 text-right text-[12px] whitespace-nowrap text-(--tc-strong) tabular-nums">¥{tx.balance_after.toFixed(2)}</td>
-                <td className={cn('px-5 py-3.5 text-right text-[12px] font-semibold whitespace-nowrap tabular-nums', tx.amount_delta > 0 ? 'text-emerald-600' : 'text-(--tc-strong)')}>
+                <td className="px-5 py-3.5 text-[12px] whitespace-nowrap text-(--tc-muted) tabular-nums">
+                  {formatDateTime(tx.created_at)}
+                </td>
+                <td className="px-5 py-3.5 text-right text-[12px] whitespace-nowrap text-(--tc-strong) tabular-nums">
+                  ¥{tx.balance_after.toFixed(2)}
+                </td>
+                <td
+                  className={cn(
+                    'px-5 py-3.5 text-right text-[12px] font-semibold whitespace-nowrap tabular-nums',
+                    tx.amount_delta > 0 ? 'text-emerald-600' : 'text-(--tc-strong)',
+                  )}
+                >
                   {tx.amount_delta > 0 ? '+' : '-'}¥{Math.abs(tx.amount_delta).toFixed(4)}
                 </td>
               </tr>
@@ -102,7 +125,8 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
       {/* 分页 */}
       <div className="flex flex-col gap-3 border-t border-(--tc-border) bg-(--tc-surface-raised)/50 px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <p className="text-xs text-(--tc-muted)">
-          {t('Profile Pagination Info')} {total} {t('Profile Pagination Unit')}，{t('Profile Pagination Page')} {page} / {totalPages} {t('Profile Pagination Page Unit')}
+          {t('Profile Pagination Info')} {total} {t('Profile Pagination Unit')}，
+          {t('Profile Pagination Page')} {page} / {totalPages} {t('Profile Pagination Page Unit')}
         </p>
         <div className="flex items-center gap-1">
           <button
@@ -130,7 +154,9 @@ export function BalanceDetailsCard({ transactions, page, onPageChange }: { trans
                   aria-current={p === page ? 'page' : undefined}
                   className={cn(
                     'inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg text-xs font-semibold tabular-nums transition',
-                    p === page ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-body) hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)',
+                    p === page
+                      ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]'
+                      : 'text-(--tc-body) hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)',
                   )}
                 >
                   {p}

@@ -7,7 +7,13 @@ import { useT } from 'next-i18next/client'
 import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 
 /** MCP 网关地址(MCP Server 接入端点) */
 const MCP_GATEWAY_BASE_URL = process.env.NEXT_PUBLIC_MCP_GATEWAY_URL ?? ''
@@ -15,7 +21,13 @@ const MCP_GATEWAY_BASE_URL = process.env.NEXT_PUBLIC_MCP_GATEWAY_URL ?? ''
 /**
  * 生成 MCP 接入配置弹窗 —— 展示该服务的 MCP Server 配置 JSON + 复制
  */
-export function McpConfigDialog({ service, onClose }: { service: TokenHub.McpService; onClose: () => void }) {
+export function McpConfigDialog({
+  service,
+  onClose,
+}: {
+  service: TokenHub.McpService
+  onClose: () => void
+}) {
   const { t } = useT('token-hub')
   const [copied, setCopied] = useState(false)
 
@@ -60,7 +72,9 @@ export function McpConfigDialog({ service, onClose }: { service: TokenHub.McpSer
               {service.name} · {t('Mcp Config Title')}
             </DialogTitle>
           </div>
-          <DialogDescription className="text-sm text-(--tc-muted)">{t('Mcp Config Desc')}</DialogDescription>
+          <DialogDescription className="text-sm text-(--tc-muted)">
+            {t('Mcp Config Desc')}
+          </DialogDescription>
         </DialogHeader>
 
         <div className="relative min-w-0 overflow-hidden rounded-xl border border-(--tc-border) bg-(--tc-code-bg) p-4">
@@ -73,7 +87,9 @@ export function McpConfigDialog({ service, onClose }: { service: TokenHub.McpSer
           >
             {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
           </button>
-          <pre className="scrollbar-slim-dark overflow-x-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">{configText}</pre>
+          <pre className="scrollbar-slim-dark overflow-x-auto font-mono text-xs leading-5 whitespace-pre text-[#cdd8f0]">
+            {configText}
+          </pre>
         </div>
 
         <div className="mt-5 flex justify-end gap-2">

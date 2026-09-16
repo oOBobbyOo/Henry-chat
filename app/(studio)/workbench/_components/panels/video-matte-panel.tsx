@@ -5,7 +5,15 @@ import { useState } from 'react'
 import { ImageUp, Scissors, Frame, Volume2 } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, Seg, UploadGlyph, UploadZone } from './shared'
+import {
+  FieldLabel,
+  FieldLabelIcon,
+  PanelCard,
+  PanelIcon,
+  Seg,
+  UploadGlyph,
+  UploadZone,
+} from './shared'
 
 /**
  * 视频去背景面板 —— 参考站结构:添加源视频 + 去背景配置(输出背景 / 保留原音)
@@ -46,7 +54,10 @@ export function VideoMattePanel({ configs }: { configs: Workbench.ConfigResponse
             </FieldLabel>
             <Seg
               onChange={setBgOutput}
-              options={configs.videoRemoveBg.outputs.map((o) => ({ value: o, label: t(`Bg output.${o}`) }))}
+              options={configs.videoRemoveBg.outputs.map((o) => ({
+                value: o,
+                label: t(`Bg output.${o}`),
+              }))}
               value={bgOutput}
             />
           </div>
@@ -65,7 +76,9 @@ export function VideoMattePanel({ configs }: { configs: Workbench.ConfigResponse
               ]}
               value={keepAudio}
             />
-            <p className="mt-1.5 text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Keep original audio hint')}</p>
+            <p className="mt-1.5 text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">
+              {t('Keep original audio hint')}
+            </p>
           </div>
         </div>
       </PanelCard>

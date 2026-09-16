@@ -40,7 +40,9 @@ export function PlazaFeedSection() {
       if (activeTag && !post.tags.includes(activeTag)) return false
       if (keyword) {
         const kw = keyword.toLowerCase()
-        const hit = post.title.toLowerCase().includes(kw) || post.tags.some((tg) => tg.toLowerCase().includes(kw))
+        const hit =
+          post.title.toLowerCase().includes(kw) ||
+          post.tags.some((tg) => tg.toLowerCase().includes(kw))
         if (!hit) return false
       }
       return true
@@ -124,13 +126,19 @@ export function PlazaFeedSection() {
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <div className="rounded-[15px] border border-dashed px-6 py-16 text-center text-sm text-muted-foreground">{t('No works match the current filters')}</div>
+        <div className="rounded-[15px] border border-dashed px-6 py-16 text-center text-sm text-muted-foreground">
+          {t('No works match the current filters')}
+        </div>
       ) : (
         <div className="mt-2 flex items-start gap-4 [column-fill:_balance]">
           <PlazaMasonry posts={filtered} />
         </div>
       )}
-      {!isLoading && filtered.length > 0 && <p className="py-6 text-center text-[12px] text-muted-foreground">{t('You have seen all works')}</p>}
+      {!isLoading && filtered.length > 0 && (
+        <p className="py-6 text-center text-[12px] text-muted-foreground">
+          {t('You have seen all works')}
+        </p>
+      )}
     </section>
   )
 }
@@ -173,7 +181,9 @@ function PlazaMasonry(props: { posts: Plaza.Post[] }) {
               {/* 底部渐变 + hover 信息 */}
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80 opacity-90" />
               <div className="plaza-card-hover-reveal absolute inset-x-0 bottom-0 z-10 p-3">
-                <p className="truncate text-left text-[12.5px] font-medium text-white">{post.title}</p>
+                <p className="truncate text-left text-[12.5px] font-medium text-white">
+                  {post.title}
+                </p>
                 <div className="mt-2 flex items-center justify-between">
                   <span className="inline-flex h-7 items-center rounded-full bg-white/12 px-3 text-[11.5px] font-medium text-white backdrop-blur-sm transition group-hover:bg-white/22">
                     {t('Remix')}

@@ -3,7 +3,16 @@
 import { useState } from 'react'
 import type { DateRange } from 'react-day-picker'
 
-import { ArrowRight, CalendarDays, Check, ChevronDown, ChevronLeft, ChevronRight, RotateCcw, X } from 'lucide-react'
+import {
+  ArrowRight,
+  CalendarDays,
+  Check,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  X,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 import { zhCN } from 'react-day-picker/locale'
 
@@ -58,10 +67,20 @@ export function createPresetRange(preset: DateRangePresetKey): DateRangeValue {
   // 当月:从月初到今天
   if (preset === 'cm') {
     const start = end.startOf('month')
-    return { days: end.diff(start, 'day') + 1, start: start.format('YYYY-MM-DD'), end: end.format('YYYY-MM-DD'), preset }
+    return {
+      days: end.diff(start, 'day') + 1,
+      start: start.format('YYYY-MM-DD'),
+      end: end.format('YYYY-MM-DD'),
+      preset,
+    }
   }
   const days = PRESET_DAYS[preset]
-  return { days, start: end.subtract(days - 1, 'day').format('YYYY-MM-DD'), end: end.format('YYYY-MM-DD'), preset }
+  return {
+    days,
+    start: end.subtract(days - 1, 'day').format('YYYY-MM-DD'),
+    end: end.format('YYYY-MM-DD'),
+    preset,
+  }
 }
 
 /** 根据起止日期匹配快速选择 key(结束日期必须是今天才算命中) */
@@ -146,7 +165,8 @@ export function DateRangePicker({
 
   // 草稿是否已选定完整区间
   const draftComplete = Boolean(draft?.from && draft?.to)
-  const draftDays = draft?.from && draft?.to ? dayjs(draft.to).diff(dayjs(draft.from), 'day') + 1 : 0
+  const draftDays =
+    draft?.from && draft?.to ? dayjs(draft.to).diff(dayjs(draft.from), 'day') + 1 : 0
   const draftTooLong = draftDays > maxDays
 
   // 触发按钮文案:展示日期区间(与参考站一致的全角波浪号分隔)
@@ -171,7 +191,12 @@ export function DateRangePicker({
           >
             <CalendarDays className="h-[15px] w-[15px] shrink-0 text-(--tc-primary)" />
             <span className="tabular-nums text-[12px]">{triggerLabel}</span>
-            <ChevronDown className={cn('h-[15px] w-[15px] shrink-0 text-(--tc-muted) transition-transform', open && 'rotate-180')} />
+            <ChevronDown
+              className={cn(
+                'h-[15px] w-[15px] shrink-0 text-(--tc-muted) transition-transform',
+                open && 'rotate-180',
+              )}
+            />
           </Button>
         </PopoverTrigger>
 
@@ -204,7 +229,9 @@ export function DateRangePicker({
                 onClick={() => setTab('quick')}
                 className={cn(
                   'min-h-8 cursor-pointer rounded-md px-2.5 text-[11px] font-semibold transition-colors',
-                  tab === 'quick' ? 'bg-(--tc-surface) text-(--tc-primary-text) shadow-[0_1px_4px_rgb(15_38_79/0.08)]' : 'text-(--tc-muted) hover:text-(--tc-body)',
+                  tab === 'quick'
+                    ? 'bg-(--tc-surface) text-(--tc-primary-text) shadow-[0_1px_4px_rgb(15_38_79/0.08)]'
+                    : 'text-(--tc-muted) hover:text-(--tc-body)',
                 )}
               >
                 {t('Range Quick Title')}
@@ -216,7 +243,9 @@ export function DateRangePicker({
                 onClick={() => setTab('custom')}
                 className={cn(
                   'min-h-8 cursor-pointer rounded-md px-2.5 text-[11px] font-semibold transition-colors',
-                  tab === 'custom' ? 'bg-(--tc-surface) text-(--tc-primary-text) shadow-[0_1px_4px_rgb(15_38_79/0.08)]' : 'text-(--tc-muted) hover:text-(--tc-body)',
+                  tab === 'custom'
+                    ? 'bg-(--tc-surface) text-(--tc-primary-text) shadow-[0_1px_4px_rgb(15_38_79/0.08)]'
+                    : 'text-(--tc-muted) hover:text-(--tc-body)',
                 )}
               >
                 {t('Range Custom')}
@@ -238,11 +267,14 @@ export function DateRangePicker({
                       onClick={() => handlePresetClick(key)}
                       className={cn(
                         'flex min-h-8 justify-between gap-1 rounded-md border px-1.5 text-[10px] font-semibold text-(--tc-body) shadow-none hover:border-(--tc-primary)/40 hover:bg-(--tc-surface-raised) hover:text-(--tc-body)',
-                        active && 'border-(--tc-primary)/25 bg-(--tc-blue-soft) text-(--tc-primary-text) hover:border-(--tc-primary)/25 hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)',
+                        active &&
+                          'border-(--tc-primary)/25 bg-(--tc-blue-soft) text-(--tc-primary-text) hover:border-(--tc-primary)/25 hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)',
                       )}
                     >
                       <span className="truncate">{t(PRESET_LABEL_KEYS[key])}</span>
-                      {active && <Check className="h-[15px] w-[15px] shrink-0 text-(--tc-primary)" />}
+                      {active && (
+                        <Check className="h-[15px] w-[15px] shrink-0 text-(--tc-primary)" />
+                      )}
                     </Button>
                   )
                 })}
@@ -255,7 +287,13 @@ export function DateRangePicker({
                 {/* 窗口天数 / 超限提示 */}
                 <div className="rounded-lg border border-(--tc-border)/80 bg-(--tc-surface-raised)/60 p-1">
                   <div className="flex h-4 items-center justify-end px-1 text-[10px] font-semibold text-(--tc-primary-text)">
-                    {draftTooLong ? <span className="text-(--tc-danger)">{t('Range Max Hint', { count: maxDays })}</span> : draftComplete && t('Range Days', { count: draftDays })}
+                    {draftTooLong ? (
+                      <span className="text-(--tc-danger)">
+                        {t('Range Max Hint', { count: maxDays })}
+                      </span>
+                    ) : (
+                      draftComplete && t('Range Days', { count: draftDays })
+                    )}
                   </div>
                 </div>
 
@@ -264,21 +302,33 @@ export function DateRangePicker({
                   <div
                     className={cn(
                       'min-w-0 rounded-md border px-1.5 py-1 text-left',
-                      draft?.from ? 'border-(--tc-primary)/40 bg-(--tc-surface) shadow-[0_1px_3px_rgb(15_38_79/0.06)]' : 'border-transparent',
+                      draft?.from
+                        ? 'border-(--tc-primary)/40 bg-(--tc-surface) shadow-[0_1px_3px_rgb(15_38_79/0.06)]'
+                        : 'border-transparent',
                     )}
                   >
-                    <span className="block text-[9px] font-semibold leading-3 text-(--tc-muted)">{t('Range Start Date')}</span>
-                    <span className="mt-0.5 block truncate text-[10px] font-bold leading-3.5 tabular-nums text-(--tc-strong)">{draft?.from ? formatDate(draft.from) : '--'}</span>
+                    <span className="block text-[9px] font-semibold leading-3 text-(--tc-muted)">
+                      {t('Range Start Date')}
+                    </span>
+                    <span className="mt-0.5 block truncate text-[10px] font-bold leading-3.5 tabular-nums text-(--tc-strong)">
+                      {draft?.from ? formatDate(draft.from) : '--'}
+                    </span>
                   </div>
                   <ArrowRight className="h-[13px] w-[13px] shrink-0 text-(--tc-muted)" />
                   <div
                     className={cn(
                       'min-w-0 rounded-md border px-1.5 py-1 text-left',
-                      draft?.to ? 'border-(--tc-primary)/40 bg-(--tc-surface) shadow-[0_1px_3px_rgb(15_38_79/0.06)]' : 'border-transparent',
+                      draft?.to
+                        ? 'border-(--tc-primary)/40 bg-(--tc-surface) shadow-[0_1px_3px_rgb(15_38_79/0.06)]'
+                        : 'border-transparent',
                     )}
                   >
-                    <span className="block text-[9px] font-semibold leading-3 text-(--tc-muted)">{t('Range End Date')}</span>
-                    <span className="mt-0.5 block truncate text-[10px] font-bold leading-3.5 tabular-nums text-(--tc-strong)">{draft?.to ? formatDate(draft.to) : '--'}</span>
+                    <span className="block text-[9px] font-semibold leading-3 text-(--tc-muted)">
+                      {t('Range End Date')}
+                    </span>
+                    <span className="mt-0.5 block truncate text-[10px] font-bold leading-3.5 tabular-nums text-(--tc-strong)">
+                      {draft?.to ? formatDate(draft.to) : '--'}
+                    </span>
                   </div>
                 </div>
 
@@ -312,7 +362,11 @@ export function DateRangePicker({
                     }}
                     components={{
                       // 标题并入自定义导航行(左侧「< 年月 >」+ 右侧「今天」),仅保留屏幕阅读器可读的标题
-                      MonthCaption: ({ calendarMonth }) => <span className="sr-only">{dayjs(calendarMonth.date).format('YYYY年MM月')}</span>,
+                      MonthCaption: ({ calendarMonth }) => (
+                        <span className="sr-only">
+                          {dayjs(calendarMonth.date).format('YYYY年MM月')}
+                        </span>
+                      ),
                       // Nav 由 rdp 渲染在 months 层(与 month 并列),需保持默认的绝对定位浮在日历上方;
                       // month 顶部 pt-(--cell-size) 为导航行留位
                       Nav: ({ onPreviousClick, onNextClick, previousMonth, nextMonth }) => (
@@ -329,7 +383,9 @@ export function DateRangePicker({
                             >
                               <ChevronLeft className="h-4 w-4" />
                             </Button>
-                            <span className="min-w-[88px] text-center text-[11px] font-bold tabular-nums text-(--tc-strong)">{month ? dayjs(month).format('YYYY年MM月') : ''}</span>
+                            <span className="min-w-[88px] text-center text-[11px] font-bold tabular-nums text-(--tc-strong)">
+                              {month ? dayjs(month).format('YYYY年MM月') : ''}
+                            </span>
                             <Button
                               type="button"
                               variant="ghost"
@@ -358,11 +414,18 @@ export function DateRangePicker({
                         <CalendarDayButton
                           {...rest}
                           modifiers={modifiers}
-                          style={modifiers?.range_middle ? { color: 'var(--tc-primary-text)' } : undefined}
+                          style={
+                            modifiers?.range_middle
+                              ? { color: 'var(--tc-primary-text)' }
+                              : undefined
+                          }
                           className={cn(
                             className,
-                            modifiers?.selected && 'rounded-md shadow-[0_3px_8px_rgb(49_88_232/0.24)]',
-                            !modifiers?.selected && !modifiers?.disabled && 'hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)',
+                            modifiers?.selected &&
+                              'rounded-md shadow-[0_3px_8px_rgb(49_88_232/0.24)]',
+                            !modifiers?.selected &&
+                              !modifiers?.disabled &&
+                              'hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text)',
                           )}
                         />
                       ),

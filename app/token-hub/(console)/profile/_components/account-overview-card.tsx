@@ -9,10 +9,20 @@ import { formatTokens } from '@/lib/format'
  * 账户概览卡 —— 当前账号的实时摘要
  * 账户余额 / Token 配额 / 近 30 天用量 / API Keys(行式,对齐生产)
  */
-export function AccountOverviewCard({ balance, summary, activeKeyCount }: { balance?: TokenHub.BalanceResponse; summary: TokenHub.Summary; activeKeyCount: number }) {
+export function AccountOverviewCard({
+  balance,
+  summary,
+  activeKeyCount,
+}: {
+  balance?: TokenHub.BalanceResponse
+  summary: TokenHub.Summary
+  activeKeyCount: number
+}) {
   const { t } = useT('token-hub')
 
-  const amount = balance?.account_balance.amount_cny ? Number(balance.account_balance.amount_cny).toFixed(2) : '—'
+  const amount = balance?.account_balance.amount_cny
+    ? Number(balance.account_balance.amount_cny).toFixed(2)
+    : '—'
   const unlimited = balance?.quota?.unlimited ?? balance?.unlimited ?? true
 
   const rows = [
@@ -26,7 +36,9 @@ export function AccountOverviewCard({ balance, summary, activeKeyCount }: { bala
     {
       label: t('Profile Quota'),
       hint: t('Profile Quota Hint'),
-      value: unlimited ? t('Profile Quota Unlimited') : formatTokens(balance?.quota?.remaining_tokens ?? 0),
+      value: unlimited
+        ? t('Profile Quota Unlimited')
+        : formatTokens(balance?.quota?.remaining_tokens ?? 0),
       icon: InfinityIcon,
       tone: 'bg-emerald-50 text-emerald-600',
     },
@@ -49,7 +61,9 @@ export function AccountOverviewCard({ balance, summary, activeKeyCount }: { bala
   return (
     <div className="overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
       <div className="px-5 pt-5 sm:px-6">
-        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Profile Overview')}</h2>
+        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+          {t('Profile Overview')}
+        </h2>
         <p className="mt-1 text-xs text-(--tc-muted)">{t('Profile Overview Desc')}</p>
       </div>
 
@@ -66,7 +80,9 @@ export function AccountOverviewCard({ balance, summary, activeKeyCount }: { bala
               <p className="truncate text-[13px] font-semibold text-(--tc-strong)">{label}</p>
               <p className="mt-0.5 truncate text-[11px] text-(--tc-muted)">{hint}</p>
             </div>
-            <p className="shrink-0 text-[15px] font-semibold text-(--tc-strong) tabular-nums">{value}</p>
+            <p className="shrink-0 text-[15px] font-semibold text-(--tc-strong) tabular-nums">
+              {value}
+            </p>
           </div>
         ))}
       </div>

@@ -29,7 +29,12 @@ function formatBytes(bytes: number): string {
   return `${bytes} B`
 }
 
-export function AssetsFilterSidebar({ facets, activeFacetIds, onToggleFacet, storage }: AssetsFilterSidebarProps) {
+export function AssetsFilterSidebar({
+  facets,
+  activeFacetIds,
+  onToggleFacet,
+  storage,
+}: AssetsFilterSidebarProps) {
   const { t } = useT('assets')
 
   const percent = Math.min(100, Math.round((storage.usedBytes / storage.totalBytes) * 100))
@@ -56,7 +61,9 @@ export function AssetsFilterSidebar({ facets, activeFacetIds, onToggleFacet, sto
                   strokeWidth={1.75}
                 />
               </div>
-              <h3 className="text-[12px] font-semibold tracking-[-0.005em] text-[#091423] dark:text-[#eef4ff]">{t('Quick filters')}</h3>
+              <h3 className="text-[12px] font-semibold tracking-[-0.005em] text-[#091423] dark:text-[#eef4ff]">
+                {t('Quick filters')}
+              </h3>
             </div>
           </div>
 
@@ -64,7 +71,9 @@ export function AssetsFilterSidebar({ facets, activeFacetIds, onToggleFacet, sto
             {facets.map((group) => (
               <section key={group.id}>
                 <div className="mb-1.5 flex items-center justify-between gap-2 px-1">
-                  <p className="text-[12px] font-semibold uppercase tracking-[0.10em] text-[#4e6585] dark:text-[#8fa5c4]">{t(group.labelKey)}</p>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.10em] text-[#4e6585] dark:text-[#8fa5c4]">
+                    {t(group.labelKey)}
+                  </p>
                 </div>
                 <div className="space-y-0.5">
                   {group.items.length === 0 ? (
@@ -88,7 +97,16 @@ export function AssetsFilterSidebar({ facets, activeFacetIds, onToggleFacet, sto
                           )}
                         >
                           <span className="min-w-0 truncate">{t(item.labelKey)}</span>
-                          <span className={cn('shrink-0 text-[11.5px] tabular-nums', active ? 'text-[#3d8fb0] dark:text-[#7fc4dc]' : 'text-[#4e6585] dark:text-[#8fa5c4]')}>{item.count}</span>
+                          <span
+                            className={cn(
+                              'shrink-0 text-[11.5px] tabular-nums',
+                              active
+                                ? 'text-[#3d8fb0] dark:text-[#7fc4dc]'
+                                : 'text-[#4e6585] dark:text-[#8fa5c4]',
+                            )}
+                          >
+                            {item.count}
+                          </span>
                         </button>
                       )
                     })
@@ -122,20 +140,26 @@ export function AssetsFilterSidebar({ facets, activeFacetIds, onToggleFacet, sto
                 strokeWidth={1.75}
               />
             </span>
-            <span className="truncate text-[12px] font-semibold text-[#091423] dark:text-[#eef4ff]">{t('Cloud storage')}</span>
+            <span className="truncate text-[12px] font-semibold text-[#091423] dark:text-[#eef4ff]">
+              {t('Cloud storage')}
+            </span>
           </div>
           <span className="inline-flex h-5 shrink-0 items-center rounded-full border border-[rgba(12,24,36,0.08)] bg-[rgba(93,175,206,0.07)] px-1.5 text-[12px] font-medium tabular-nums text-[#091423] dark:border-white/8 dark:text-[#eef4ff]">
             {percent}%
           </span>
         </div>
-        <div className="relative mt-2 truncate text-[12.5px] font-semibold tabular-nums text-[#091423] dark:text-[#eef4ff]">{usedLabel}</div>
+        <div className="relative mt-2 truncate text-[12.5px] font-semibold tabular-nums text-[#091423] dark:text-[#eef4ff]">
+          {usedLabel}
+        </div>
         <div className="relative mt-2 h-1 overflow-hidden rounded-full bg-[rgba(245,249,255,0.95)] dark:bg-white/10">
           <div
             className="h-full rounded-full bg-[linear-gradient(90deg,rgba(93,175,206,0.78),rgba(52,211,153,0.76))]"
             style={{ width: `${Math.max(percent, 2)}%` }}
           />
         </div>
-        <div className="relative mt-1.5 truncate text-[12px] text-[#4e6585] dark:text-[#8fa5c4]">{t('Storage used hint', { percent, remaining })}</div>
+        <div className="relative mt-1.5 truncate text-[12px] text-[#4e6585] dark:text-[#8fa5c4]">
+          {t('Storage used hint', { percent, remaining })}
+        </div>
       </div>
     </div>
   )

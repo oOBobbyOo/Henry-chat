@@ -26,7 +26,10 @@ export function VideoLipSyncPanel({ configs }: { configs: Workbench.ConfigRespon
       >
         <Seg
           onChange={setLipsyncModel}
-          options={configs.lipsync.models.map((m) => ({ value: m, label: t(`Lipsync model.${m}`) }))}
+          options={configs.lipsync.models.map((m) => ({
+            value: m,
+            label: t(`Lipsync model.${m}`),
+          }))}
           value={lipsyncModel}
         />
       </PanelCard>
@@ -62,11 +65,18 @@ export function VideoLipSyncPanel({ configs }: { configs: Workbench.ConfigRespon
         title={t('Alignment mode')}
       >
         <Chips
-          onToggle={(v) => setAlignModes((prev) => (prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v]))}
-          options={configs.lipsync.alignModes.map((m) => ({ value: m, label: t(`Align mode.${m}`) }))}
+          onToggle={(v) =>
+            setAlignModes((prev) => (prev.includes(v) ? prev.filter((x) => x !== v) : [...prev, v]))
+          }
+          options={configs.lipsync.alignModes.map((m) => ({
+            value: m,
+            label: t(`Align mode.${m}`),
+          }))}
           selected={alignModes}
         />
-        <p className="mt-2 text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Alignment mode hint')}</p>
+        <p className="mt-2 text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">
+          {t('Alignment mode hint')}
+        </p>
       </PanelCard>
     </>
   )

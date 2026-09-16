@@ -14,7 +14,12 @@ export async function GET(request: Request) {
   const client = searchParams.get('client')
 
   const { items } = tokenHubMock.modelStats(days)
-  const filtered = items.filter((item) => (!model || item.model === model) && (!provider || item.provider === provider) && (!client || item.client === client))
+  const filtered = items.filter(
+    (item) =>
+      (!model || item.model === model) &&
+      (!provider || item.provider === provider) &&
+      (!client || item.client === client),
+  )
 
   return NextResponse.json({ days, items: filtered })
 }

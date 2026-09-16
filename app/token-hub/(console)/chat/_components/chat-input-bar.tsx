@@ -3,7 +3,13 @@
 import { Globe, Maximize2, Paperclip, SendHorizonal, Trash2, Zap } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectTrigger, ConsoleSelectValue } from '@/components/token-hub/select'
+import {
+  ConsoleSelect,
+  ConsoleSelectContent,
+  ConsoleSelectItem,
+  ConsoleSelectTrigger,
+  ConsoleSelectValue,
+} from '@/components/token-hub/select'
 
 /**
  * Agent Chat 输入栏 —— 模型选择 + 附件 + 联网搜索(固定开启)+ MCP + 思考 + 清除 + 发送
@@ -90,7 +96,9 @@ export function ChatInputBar({
           <span className="inline-flex h-8 items-center gap-1.5 rounded-lg bg-emerald-50 px-2.5 text-[11px] font-semibold text-emerald-600">
             <Globe className="h-3.5 w-3.5" />
             {t('Chat Web Search')}
-            <span className="rounded bg-emerald-100 px-1 py-0.5 text-[9px] font-bold">{t('Chat Always On')}</span>
+            <span className="rounded bg-emerald-100 px-1 py-0.5 text-[9px] font-bold">
+              {t('Chat Always On')}
+            </span>
           </span>
 
           {/* MCP 计数 */}
@@ -106,7 +114,9 @@ export function ChatInputBar({
             aria-pressed={thinking}
             title={t('Chat Thinking')}
             className={`inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg px-2.5 text-[11px] font-semibold transition ${
-              thinking ? 'bg-(--tc-blue-soft) text-(--tc-blue-bright)' : 'text-(--tc-muted) hover:bg-(--tc-blue-soft)'
+              thinking
+                ? 'bg-(--tc-blue-soft) text-(--tc-blue-bright)'
+                : 'text-(--tc-muted) hover:bg-(--tc-blue-soft)'
             }`}
           >
             {t('Chat Thinking')}: {t('Chat Thinking Auto')}

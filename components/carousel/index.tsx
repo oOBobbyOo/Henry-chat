@@ -46,7 +46,13 @@ type CarouselProps = {
   showDots?: boolean
 }
 
-export function Carousel({ items, className, autoPlayMs = 6000, showArrows = true, showDots = true }: CarouselProps) {
+export function Carousel({
+  items,
+  className,
+  autoPlayMs = 6000,
+  showArrows = true,
+  showDots = true,
+}: CarouselProps) {
   const [activeIndex, setActiveIndex] = React.useState(0)
   const [isPaused, setIsPaused] = React.useState(false)
   const count = items.length
@@ -190,9 +196,20 @@ export type PromoSlideData = {
   accentClassName?: string
 }
 
-const DEFAULT_PROMO_BACKGROUND = 'linear-gradient(135deg, #1a1030 0%, #2d1b4e 35%, #0f2847 70%, #0a1628 100%)'
+const DEFAULT_PROMO_BACKGROUND =
+  'linear-gradient(135deg, #1a1030 0%, #2d1b4e 35%, #0f2847 70%, #0a1628 100%)'
 
-function PromoSlideBackground({ imageSrc, imageAlt, background, priority }: { imageSrc?: string; imageAlt?: string; background?: string; priority?: boolean }) {
+function PromoSlideBackground({
+  imageSrc,
+  imageAlt,
+  background,
+  priority,
+}: {
+  imageSrc?: string
+  imageAlt?: string
+  background?: string
+  priority?: boolean
+}) {
   if (imageSrc) {
     return (
       <Image
@@ -217,12 +234,18 @@ function PromoSlideBackground({ imageSrc, imageAlt, background, priority }: { im
 function PromoSlideOverlays({ data, showGrid }: { data: PromoSlideData; showGrid?: boolean }) {
   return (
     <>
-      <div className={cn('pointer-events-none absolute inset-0 bg-linear-to-br opacity-65', data.accentClassName)} />
+      <div
+        className={cn(
+          'pointer-events-none absolute inset-0 bg-linear-to-br opacity-65',
+          data.accentClassName,
+        )}
+      />
       {showGrid ? (
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.55]"
           style={{
-            backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
+            backgroundImage:
+              'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
             backgroundSize: '32px 32px',
             WebkitMaskImage: 'radial-gradient(80% 100% at 70% 50%, black, transparent 80%)',
             maskImage: 'radial-gradient(80% 100% at 70% 50%, black, transparent 80%)',
@@ -267,8 +290,14 @@ export function PromoSlide({ data, variant = 'active', priority }: PromoSlidePro
             <span />
           )}
           <div>
-            {secondaryTag ? <div className="text-[10px] font-semibold tracking-[0.16em] text-gray-500 uppercase dark:text-white/55">{secondaryTag.label}</div> : null}
-            <div className="mt-2 line-clamp-2 text-[20px] leading-[1.05] font-bold tracking-tight text-gray-900 dark:text-white dark:drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)]">{data.title}</div>
+            {secondaryTag ? (
+              <div className="text-[10px] font-semibold tracking-[0.16em] text-gray-500 uppercase dark:text-white/55">
+                {secondaryTag.label}
+              </div>
+            ) : null}
+            <div className="mt-2 line-clamp-2 text-[20px] leading-[1.05] font-bold tracking-tight text-gray-900 dark:text-white dark:drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)]">
+              {data.title}
+            </div>
           </div>
         </div>
       </div>
@@ -326,22 +355,40 @@ export function PromoSlide({ data, variant = 'active', priority }: PromoSlidePro
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-500 opacity-60 dark:bg-cyan-300" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-cyan-600 shadow-[0_0_10px_rgba(34,211,238,0.6)] dark:bg-cyan-300" />
               </span>
-              <span className="text-[9.5px] font-semibold tracking-[0.16em] text-gray-500 uppercase dark:text-white/45">活动剩余</span>
-              <span className="text-[12.5px] font-semibold text-gray-900 tabular-nums dark:text-white/95">{data.countdown}</span>
+              <span className="text-[9.5px] font-semibold tracking-[0.16em] text-gray-500 uppercase dark:text-white/45">
+                活动剩余
+              </span>
+              <span className="text-[12.5px] font-semibold text-gray-900 tabular-nums dark:text-white/95">
+                {data.countdown}
+              </span>
             </div>
           ) : null}
         </div>
 
         <div className="flex flex-1 flex-col justify-center py-2">
           {data.subtitle ? (
-            <p className="text-[clamp(22px,3vw,36px)] leading-[0.98] font-black tracking-tighter text-gray-900 dark:text-white dark:drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">{data.subtitle}</p>
+            <p className="text-[clamp(22px,3vw,36px)] leading-[0.98] font-black tracking-tighter text-gray-900 dark:text-white dark:drop-shadow-[0_2px_24px_rgba(0,0,0,0.5)]">
+              {data.subtitle}
+            </p>
           ) : null}
-          <h2 className="mt-2 max-w-[560px] text-[17px] leading-[1.18] font-semibold tracking-tight text-gray-800 dark:text-white/94">{data.title}</h2>
-          {data.description ? <p className="mt-2 line-clamp-2 max-w-[560px] text-[12.5px] leading-[1.6] text-gray-600 dark:text-white/65">{data.description}</p> : null}
+          <h2 className="mt-2 max-w-[560px] text-[17px] leading-[1.18] font-semibold tracking-tight text-gray-800 dark:text-white/94">
+            {data.title}
+          </h2>
+          {data.description ? (
+            <p className="mt-2 line-clamp-2 max-w-[560px] text-[12.5px] leading-[1.6] text-gray-600 dark:text-white/65">
+              {data.description}
+            </p>
+          ) : null}
         </div>
 
         <div className="flex items-end justify-between gap-3">
-          {data.footer ? <span className="line-clamp-1 text-[10.5px] text-gray-500 dark:text-white/55">{data.footer}</span> : <span />}
+          {data.footer ? (
+            <span className="line-clamp-1 text-[10.5px] text-gray-500 dark:text-white/55">
+              {data.footer}
+            </span>
+          ) : (
+            <span />
+          )}
           {data.cta ? (
             <Link
               href={data.cta.href}
@@ -360,7 +407,13 @@ export function PromoSlide({ data, variant = 'active', priority }: PromoSlidePro
   )
 }
 
-export function PromoCarousel({ slides, className }: { slides: PromoSlideData[]; className?: string }) {
+export function PromoCarousel({
+  slides,
+  className,
+}: {
+  slides: PromoSlideData[]
+  className?: string
+}) {
   const items: CarouselItem[] = slides.map((slide, index) => ({
     id: slide.id,
     content: (

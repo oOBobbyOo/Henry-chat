@@ -2,11 +2,28 @@
 
 import { useState } from 'react'
 
-import { AudioLines, Check, Copy, FileText, Image, Sparkles, Type, Video, type LucideIcon } from 'lucide-react'
+import {
+  AudioLines,
+  Check,
+  Copy,
+  FileText,
+  Image,
+  Sparkles,
+  Type,
+  Video,
+  type LucideIcon,
+} from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
 import { getFamilyIcon, getProviderIcon } from '@/components/token-hub/family-icon'
-import { ConsoleTable, ConsoleTableBody, ConsoleTableCell, ConsoleTableHead, ConsoleTableHeader, ConsoleTableRow } from '@/components/token-hub/table'
+import {
+  ConsoleTable,
+  ConsoleTableBody,
+  ConsoleTableCell,
+  ConsoleTableHead,
+  ConsoleTableHeader,
+  ConsoleTableRow,
+} from '@/components/token-hub/table'
 import { cn } from '@/lib/utils'
 import { useModelMetricsQuery } from '@/services/token-hub'
 
@@ -49,7 +66,13 @@ function formatPrice(v: number): string {
  * 模型广场表格视图 —— 模型 / 上下文 / 延迟 / 吞吐 / 价格 / 能力 / 供应商 / 操作
  * 与生产参考表头一致(生产另有「档位」价格子列,本地 mock 数据未含,以输入/输出/缓存读三行替代)
  */
-export function PlazaTable({ models, currency }: { models: TokenHub.CatalogModel[]; currency: PlazaCurrency }) {
+export function PlazaTable({
+  models,
+  currency,
+}: {
+  models: TokenHub.CatalogModel[]
+  currency: PlazaCurrency
+}) {
   const { t } = useT('token-hub')
 
   return (
@@ -100,7 +123,9 @@ function PlazaRow({ model, currency }: { model: TokenHub.CatalogModel; currency:
   const metric = data.items.find((m) => m.alias === model.alias)
 
   // 最低价格映射(按折扣后 CNY 单价取最小,与卡片视图一致)
-  const best = model.mappings.filter((m) => m.status === 'active').sort((a, b) => a.input_price_cny * a.discount_rate - b.input_price_cny * b.discount_rate)[0]
+  const best = model.mappings
+    .filter((m) => m.status === 'active')
+    .sort((a, b) => a.input_price_cny * a.discount_rate - b.input_price_cny * b.discount_rate)[0]
   // 近 3 天内上架 → 新上架
   const isNew = Date.now() - Date.parse(model.created_at) < 3 * 24 * 3600 * 1000
   // 去重供应商
@@ -132,18 +157,26 @@ function PlazaRow({ model, currency }: { model: TokenHub.CatalogModel; currency:
 
   const latency = metric && metric.p50_ttft_ms ? `${(metric.p50_ttft_ms / 1000).toFixed(2)}s` : '—'
   const tps = metric?.p50_tps ? `${metric.p50_tps.toFixed(0)} tps` : '—'
-  const nonStreamTps = metric?.p50_non_stream_tps ? `约 ${metric.p50_non_stream_tps.toFixed(0)} tps` : '—'
+  const nonStreamTps = metric?.p50_non_stream_tps
+    ? `约 ${metric.p50_non_stream_tps.toFixed(0)} tps`
+    : '—'
 
   return (
     <ConsoleTableRow>
       {/* 模型: 家族图标 + 名称 + 别名 + 徽章 */}
       <ConsoleTableCell className="text-left">
         <div className="flex items-center gap-3">
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-(--tc-border)/80 bg-(--tc-blue-soft)/65">{getFamilyIcon(model.family, 20)}</span>
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-(--tc-border)/80 bg-(--tc-blue-soft)/65">
+            {getFamilyIcon(model.family, 20)}
+          </span>
           <div className="min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="max-w-48 truncate text-[13px] font-semibold text-(--tc-strong)">{model.display_name}</span>
-              <span className="inline-flex shrink-0 items-center rounded-md bg-emerald-50 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-600">{t('Plaza Callable')}</span>
+              <span className="max-w-48 truncate text-[13px] font-semibold text-(--tc-strong)">
+                {model.display_name}
+              </span>
+              <span className="inline-flex shrink-0 items-center rounded-md bg-emerald-50 px-1.5 py-0.5 text-[10px] font-semibold text-emerald-600">
+                {t('Plaza Callable')}
+              </span>
               {isNew && (
                 <span className="inline-flex shrink-0 items-center gap-0.5 rounded-md border border-amber-500/55 bg-amber-50 px-1 py-0.5 text-[10px] font-bold text-amber-600">
                   <Sparkles className="h-2.5 w-2.5" />
@@ -156,9 +189,13 @@ function PlazaRow({ model, currency }: { model: TokenHub.CatalogModel; currency:
         </div>
       </ConsoleTableCell>
       {/* 上下文 */}
-      <ConsoleTableCell className="text-[13px] text-(--tc-strong) tabular-nums">{formatContext(model.context_window)}</ConsoleTableCell>
+      <ConsoleTableCell className="text-[13px] text-(--tc-strong) tabular-nums">
+        {formatContext(model.context_window)}
+      </ConsoleTableCell>
       {/* 延迟 */}
-      <ConsoleTableCell className="text-[13px] text-(--tc-body) tabular-nums">{latency}</ConsoleTableCell>
+      <ConsoleTableCell className="text-[13px] text-(--tc-body) tabular-nums">
+        {latency}
+      </ConsoleTableCell>
       {/* 吞吐 */}
       <ConsoleTableCell className="text-[13px] text-(--tc-body) tabular-nums">
         <p className="text-[13px] text-(--tc-strong) tabular-nums">{tps}</p>
@@ -187,14 +224,20 @@ function PlazaRow({ model, currency }: { model: TokenHub.CatalogModel; currency:
       {/* 能力: 输入 + 输出模态 */}
       <ConsoleTableCell>
         <div className="flex items-center gap-1">
-          {[...model.input_modalities, ...model.output_modalities.filter((m) => !model.input_modalities.includes(m))].map((mod) => {
+          {[
+            ...model.input_modalities,
+            ...model.output_modalities.filter((m) => !model.input_modalities.includes(m)),
+          ].map((mod) => {
             const Icon = MODALITY_ICON[mod]
             if (!Icon) return null
             return (
               <span
                 key={mod}
                 title={mod}
-                className={cn('grid h-7 w-7 shrink-0 place-items-center rounded-lg', MODALITY_TONE[mod] ?? 'bg-(--tc-blue-soft) text-(--tc-primary-text)')}
+                className={cn(
+                  'grid h-7 w-7 shrink-0 place-items-center rounded-lg',
+                  MODALITY_TONE[mod] ?? 'bg-(--tc-blue-soft) text-(--tc-primary-text)',
+                )}
               >
                 <Icon
                   className="h-3.5 w-3.5"
@@ -218,7 +261,11 @@ function PlazaRow({ model, currency }: { model: TokenHub.CatalogModel; currency:
               {getProviderIcon(p, 15)}
             </span>
           ))}
-          {model.mappings.length > providers.length && <span className="text-[11px] font-semibold text-(--tc-muted)">+{model.mappings.length - providers.length}</span>}
+          {model.mappings.length > providers.length && (
+            <span className="text-[11px] font-semibold text-(--tc-muted)">
+              +{model.mappings.length - providers.length}
+            </span>
+          )}
         </div>
       </ConsoleTableCell>
       {/* 操作: 复制模型 ID */}
@@ -231,7 +278,11 @@ function PlazaRow({ model, currency }: { model: TokenHub.CatalogModel; currency:
             title={t('Plaza Copy Id')}
             className="grid h-8 w-8 cursor-pointer place-items-center rounded-xl text-(--tc-muted) transition-all duration-200 hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none"
           >
-            {copied ? <Check className="h-3.5 w-3.5 text-emerald-500" /> : <Copy className="h-3.5 w-3.5" />}
+            {copied ? (
+              <Check className="h-3.5 w-3.5 text-emerald-500" />
+            ) : (
+              <Copy className="h-3.5 w-3.5" />
+            )}
           </button>
         </div>
       </ConsoleTableCell>
@@ -240,7 +291,15 @@ function PlazaRow({ model, currency }: { model: TokenHub.CatalogModel; currency:
 }
 
 /** 价格行 —— 划线原价 + 绿色折后价(每百万 Token) */
-function PriceLine({ label, price, currency }: { label: string; price: { original: number; discounted: number } | null; currency: PlazaCurrency }) {
+function PriceLine({
+  label,
+  price,
+  currency,
+}: {
+  label: string
+  price: { original: number; discounted: number } | null
+  currency: PlazaCurrency
+}) {
   const symbol = currency === 'CNY' ? '¥' : '$'
   return (
     <span className="inline-flex items-baseline gap-1.5 text-[11px] text-(--tc-body)">

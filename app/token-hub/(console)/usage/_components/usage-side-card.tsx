@@ -9,7 +9,15 @@ import { formatShare } from '@/lib/format'
  * 请求健康摘要卡 —— 活跃模型 / 成功率 / 平均吞吐 / 缓存命中
  * 按当前筛选条件实时汇总
  */
-export function UsageSideCard({ summary, modelTrend, days }: { summary: TokenHub.Summary; modelTrend: TokenHub.ModelTrendResponse; days: number }) {
+export function UsageSideCard({
+  summary,
+  modelTrend,
+  days,
+}: {
+  summary: TokenHub.Summary
+  modelTrend: TokenHub.ModelTrendResponse
+  days: number
+}) {
   const { t } = useT('token-hub')
 
   // 活跃模型数(最近窗口有流量的模型)
@@ -46,7 +54,9 @@ export function UsageSideCard({ summary, modelTrend, days }: { summary: TokenHub
   return (
     <div className="flex h-full flex-col rounded-[15px] border border-(--tc-border) bg-(--tc-surface) p-5 shadow-[0_1px_2px_rgb(15_38_79/0.04)] sm:p-6">
       <div>
-        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Usage Health Title')}</h2>
+        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+          {t('Usage Health Title')}
+        </h2>
         <p className="mt-1.5 text-xs text-(--tc-muted)">{t('Usage Health Subtitle')}</p>
       </div>
 
@@ -59,7 +69,9 @@ export function UsageSideCard({ summary, modelTrend, days }: { summary: TokenHub
             <span className={`grid h-8 w-8 place-items-center rounded-lg ${tone}`}>
               <Icon className="h-4 w-4" />
             </span>
-            <p className="mt-3 truncate text-[20px] leading-none font-semibold tracking-[-0.02em] text-(--tc-strong) tabular-nums">{value}</p>
+            <p className="mt-3 truncate text-[20px] leading-none font-semibold tracking-[-0.02em] text-(--tc-strong) tabular-nums">
+              {value}
+            </p>
             <p className="mt-2 truncate text-[11px] font-medium text-(--tc-muted)">{label}</p>
           </div>
         ))}

@@ -24,7 +24,16 @@ const MCP_SERVICES: TokenHub.McpService[] = [
     price_type: 'free',
     price: 0,
     price_unit: '次',
-    tools: ['get_stock', 'get_stocks', 'get_klines', 'search_stocks', 'inspect_stock', 'get_futures', 'get_crypto', 'get_news'],
+    tools: [
+      'get_stock',
+      'get_stocks',
+      'get_klines',
+      'search_stocks',
+      'inspect_stock',
+      'get_futures',
+      'get_crypto',
+      'get_news',
+    ],
     credential_type: 'none',
     status: 'disabled',
     pinned: false,
@@ -37,7 +46,16 @@ const MCP_SERVICES: TokenHub.McpService[] = [
     price_type: 'free',
     price: 0,
     price_unit: '次',
-    tools: ['officecli', 'officecli_list_sheets', 'officecli_read_sheet', 'officecli_read_cell', 'officecli_write_cell', 'officecli_render', 'officecli_convert', 'officecli_merge'],
+    tools: [
+      'officecli',
+      'officecli_list_sheets',
+      'officecli_read_sheet',
+      'officecli_read_cell',
+      'officecli_write_cell',
+      'officecli_render',
+      'officecli_convert',
+      'officecli_merge',
+    ],
     credential_type: 'none',
     status: 'active',
     pinned: true,
@@ -76,7 +94,13 @@ const MCP_SERVICES: TokenHub.McpService[] = [
     price_type: 'free',
     price: 0,
     price_unit: '次',
-    tools: ['get_me', 'search_repositories', 'get_file_contents', 'list_issues', 'create_pull_request'],
+    tools: [
+      'get_me',
+      'search_repositories',
+      'get_file_contents',
+      'list_issues',
+      'create_pull_request',
+    ],
     credential_type: 'user',
     status: 'disabled',
     pinned: false,
@@ -215,7 +239,17 @@ const MCP_SERVICES: TokenHub.McpService[] = [
     price_type: 'free',
     price: 0,
     price_unit: '次',
-    tools: ['base64_convert', 'url_convert', 'uuid_generate', 'hash_text', 'timestamp_convert', 'crontab_parse', 'regex_test', 'json_parse', 'json_stringify'],
+    tools: [
+      'base64_convert',
+      'url_convert',
+      'uuid_generate',
+      'hash_text',
+      'timestamp_convert',
+      'crontab_parse',
+      'regex_test',
+      'json_parse',
+      'json_stringify',
+    ],
     credential_type: 'none',
     status: 'disabled',
     pinned: false,
@@ -224,7 +258,8 @@ const MCP_SERVICES: TokenHub.McpService[] = [
   {
     id: 'context7',
     name: 'Context7 文档查询',
-    description: '查询主流库与框架的最新官方文档和代码示例，减少幻觉 API；由 Upstash Context7 提供。',
+    description:
+      '查询主流库与框架的最新官方文档和代码示例，减少幻觉 API；由 Upstash Context7 提供。',
     price_type: 'free',
     price: 0,
     price_unit: '次',
@@ -306,7 +341,13 @@ const MCP_SERVICES: TokenHub.McpService[] = [
     price_type: 'free',
     price: 0,
     price_unit: '次',
-    tools: ['search_documentation', 'read_documentation', 'recommend', 'read_sections', 'search_table'],
+    tools: [
+      'search_documentation',
+      'read_documentation',
+      'recommend',
+      'read_sections',
+      'search_table',
+    ],
     credential_type: 'none',
     status: 'disabled',
     pinned: false,
@@ -315,7 +356,12 @@ const MCP_SERVICES: TokenHub.McpService[] = [
 ]
 
 /** 市场列表(可筛选) */
-function buildMcpMarket(filters?: { price?: string; credential?: string; status?: string; q?: string }): TokenHub.McpMarketResponse {
+function buildMcpMarket(filters?: {
+  price?: string
+  credential?: string
+  status?: string
+  q?: string
+}): TokenHub.McpMarketResponse {
   let items = MCP_SERVICES
   if (filters?.q && filters.q.trim()) {
     const kw = filters.q.trim().toLowerCase()
@@ -335,7 +381,9 @@ function buildMcpMarket(filters?: { price?: string; credential?: string; status?
     items = items.filter((s) => s.credential_type === filters.credential)
   }
   if (filters?.status && filters.status !== 'all') {
-    items = items.filter((s) => (filters.status === 'active' ? s.status === 'active' || s.pinned : s.status === 'disabled'))
+    items = items.filter((s) =>
+      filters.status === 'active' ? s.status === 'active' || s.pinned : s.status === 'disabled',
+    )
   }
   return { items }
 }

@@ -41,7 +41,10 @@ export default function IntegrationsPage() {
   const configRef = useRef<HTMLDivElement>(null)
 
   // 按当前应用协议筛选模型
-  const matchedModels = useMemo(() => filterModelsByProtocol(modelsData.items, app.protocol), [modelsData.items, app.protocol])
+  const matchedModels = useMemo(
+    () => filterModelsByProtocol(modelsData.items, app.protocol),
+    [modelsData.items, app.protocol],
+  )
 
   // 默认选中第一个匹配模型(应用切换时)
   const selectedModel = matchedModels.find((m) => m.alias === modelAlias) ?? matchedModels[0]
@@ -56,7 +59,9 @@ export default function IntegrationsPage() {
   /** 生成完整配置: 展开第二步区块并平滑滚动到该区块 */
   const generateConfig = () => {
     setConfigVisible(true)
-    requestAnimationFrame(() => configRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }))
+    requestAnimationFrame(() =>
+      configRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+    )
   }
 
   /** 连通性检查: 复用健康检查查询 */
@@ -76,8 +81,12 @@ export default function IntegrationsPage() {
         {/* 标题区 */}
         <header className="flex flex-col gap-4 border-b border-(--tc-border)/80 pb-6 xl:flex-row xl:items-end xl:justify-between">
           <div>
-            <h1 className="text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">{t('Integ Title')}</h1>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">{t('Integ Subtitle')}</p>
+            <h1 className="text-[28px] font-semibold tracking-tighter text-(--tc-strong) sm:text-[32px]">
+              {t('Integ Title')}
+            </h1>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-(--tc-body)">
+              {t('Integ Subtitle')}
+            </p>
           </div>
           <div className="flex shrink-0 flex-wrap items-center gap-2.5">
             <a
@@ -103,9 +112,13 @@ export default function IntegrationsPage() {
           {/* 步骤头 */}
           <div className="flex items-center justify-between gap-4 border-b border-(--tc-border) px-5 py-4 sm:px-6">
             <div className="flex items-center gap-4">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-(--tc-blue-soft) text-[15px] font-bold text-(--tc-blue-bright)">01</span>
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-(--tc-blue-soft) text-[15px] font-bold text-(--tc-blue-bright)">
+                01
+              </span>
               <div>
-                <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Integ Step Title')}</h2>
+                <h2 className="text-[16px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+                  {t('Integ Step Title')}
+                </h2>
                 <p className="mt-1 text-xs leading-5 text-(--tc-muted)">{t('Integ Step Desc')}</p>
               </div>
             </div>
@@ -118,7 +131,9 @@ export default function IntegrationsPage() {
           <div className="space-y-6 px-5 py-5 sm:px-6 sm:pb-6">
             {/* 选择应用或 SDK —— 3 列网格 */}
             <div>
-              <h3 className="text-[13px] font-bold tracking-[0.06em] text-(--tc-strong)">{t('Integ Choose App')}</h3>
+              <h3 className="text-[13px] font-bold tracking-[0.06em] text-(--tc-strong)">
+                {t('Integ Choose App')}
+              </h3>
               <div className="mt-3 grid gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
                 {INTEGRATION_APPS.map((item) => (
                   <button
@@ -138,13 +153,21 @@ export default function IntegrationsPage() {
                   >
                     <span className="flex items-center justify-between gap-2">
                       <span className="flex min-w-0 items-center gap-2">
-                        <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-(--tc-border)/80 bg-(--tc-blue-soft)/65 text-(--tc-strong)">{getAppIcon(item.id, 16)}</span>
-                        <span className="truncate text-[13px] font-semibold text-(--tc-strong)">{item.name}</span>
+                        <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg border border-(--tc-border)/80 bg-(--tc-blue-soft)/65 text-(--tc-strong)">
+                          {getAppIcon(item.id, 16)}
+                        </span>
+                        <span className="truncate text-[13px] font-semibold text-(--tc-strong)">
+                          {item.name}
+                        </span>
                       </span>
-                      {app.id === item.id && <Check className="h-3.5 w-3.5 shrink-0 text-(--tc-blue-bright)" />}
+                      {app.id === item.id && (
+                        <Check className="h-3.5 w-3.5 shrink-0 text-(--tc-blue-bright)" />
+                      )}
                     </span>
                     <span className="text-[11px] leading-4 text-(--tc-muted)">{item.desc}</span>
-                    <span className="mt-0.5 inline-flex w-fit rounded-md bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-semibold text-(--tc-blue-bright)">{item.protocolLabel}</span>
+                    <span className="mt-0.5 inline-flex w-fit rounded-md bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-semibold text-(--tc-blue-bright)">
+                      {item.protocolLabel}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -155,7 +178,9 @@ export default function IntegrationsPage() {
               {/* 选择模型 */}
               <div className="rounded-2xl border border-(--tc-border)/70 bg-(--tc-surface-raised)/55 p-3.5 sm:p-4">
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-[13px] font-bold tracking-[0.06em] text-(--tc-strong)">{t('Integ Choose Model')}</h3>
+                  <h3 className="text-[13px] font-bold tracking-[0.06em] text-(--tc-strong)">
+                    {t('Integ Choose Model')}
+                  </h3>
                   <span className="shrink-0 text-xs text-(--tc-muted)">
                     {matchedModels.length} {t('Integ Matching Models')}
                   </span>
@@ -175,15 +200,25 @@ export default function IntegrationsPage() {
                       )}
                     >
                       <span className="flex min-w-0 items-center gap-2.5">
-                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-(--tc-border)/80 bg-(--tc-blue-soft)/65">{getFamilyIcon(model.family, 18)}</span>
+                        <span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-(--tc-border)/80 bg-(--tc-blue-soft)/65">
+                          {getFamilyIcon(model.family, 18)}
+                        </span>
                         <span className="min-w-0">
-                          <span className="block truncate text-[13px] font-semibold text-(--tc-strong)">{model.display_name}</span>
-                          <code className="block truncate font-mono text-[11px] text-(--tc-muted)">{model.alias}</code>
+                          <span className="block truncate text-[13px] font-semibold text-(--tc-strong)">
+                            {model.display_name}
+                          </span>
+                          <code className="block truncate font-mono text-[11px] text-(--tc-muted)">
+                            {model.alias}
+                          </code>
                         </span>
                       </span>
                       <span className="flex shrink-0 items-center gap-2">
-                        <span className="hidden rounded-md bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-semibold text-(--tc-blue-bright) md:inline">{app.protocolLabel}</span>
-                        {effectiveModelAlias === model.alias && <Check className="h-4 w-4 shrink-0 text-(--tc-blue-bright)" />}
+                        <span className="hidden rounded-md bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-semibold text-(--tc-blue-bright) md:inline">
+                          {app.protocolLabel}
+                        </span>
+                        {effectiveModelAlias === model.alias && (
+                          <Check className="h-4 w-4 shrink-0 text-(--tc-blue-bright)" />
+                        )}
                       </span>
                     </button>
                   ))}
@@ -192,7 +227,9 @@ export default function IntegrationsPage() {
 
               {/* 选择我的 API Key */}
               <div className="rounded-2xl border border-(--tc-border)/70 bg-(--tc-surface-raised)/55 p-3.5 sm:p-4">
-                <h3 className="text-[13px] font-bold tracking-[0.06em] text-(--tc-strong)">{t('Integ Choose Key')}</h3>
+                <h3 className="text-[13px] font-bold tracking-[0.06em] text-(--tc-strong)">
+                  {t('Integ Choose Key')}
+                </h3>
                 <div className="mt-3 flex flex-col gap-2">
                   {activeKeys.length === 0 ? (
                     <p className="rounded-xl border border-dashed border-(--tc-border) px-4 py-6 text-center text-xs text-(--tc-muted)">
@@ -220,13 +257,19 @@ export default function IntegrationsPage() {
                       >
                         <span className="min-w-0">
                           <span className="block truncate text-[13px] font-semibold text-(--tc-strong)">
-                            {key.name} · <code className="font-mono text-[12px]">{key.key_prefix}…</code>
+                            {key.name} ·{' '}
+                            <code className="font-mono text-[12px]">{key.key_prefix}…</code>
                           </span>
                           <span className="mt-0.5 block truncate font-mono text-[11px] text-(--tc-muted)">
-                            {key.key_prefix}… · {t('Integ Key Last Used')}: {key.last_used_at ? new Date(key.last_used_at).toLocaleDateString() : '—'}
+                            {key.key_prefix}… · {t('Integ Key Last Used')}:{' '}
+                            {key.last_used_at
+                              ? new Date(key.last_used_at).toLocaleDateString()
+                              : '—'}
                           </span>
                         </span>
-                        {selectedKey?.id === key.id && <Check className="h-4 w-4 shrink-0 text-(--tc-blue-bright)" />}
+                        {selectedKey?.id === key.id && (
+                          <Check className="h-4 w-4 shrink-0 text-(--tc-blue-bright)" />
+                        )}
                       </button>
                     ))
                   )}
@@ -255,9 +298,13 @@ export default function IntegrationsPage() {
               <div>
                 <p className="flex items-center gap-1.5 text-[13px] font-semibold text-(--tc-strong)">
                   {t('Integ Health Title')}
-                  <span className="rounded-md bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-semibold text-(--tc-blue-bright)">{t('Integ Health Optional')}</span>
+                  <span className="rounded-md bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-semibold text-(--tc-blue-bright)">
+                    {t('Integ Health Optional')}
+                  </span>
                 </p>
-                <p className="mt-1 text-[11px] leading-4 text-(--tc-muted)">{t('Integ Health Desc')}</p>
+                <p className="mt-1 text-[11px] leading-4 text-(--tc-muted)">
+                  {t('Integ Health Desc')}
+                </p>
               </div>
             </div>
             <div className="flex shrink-0 items-center gap-2.5">
@@ -279,7 +326,11 @@ export default function IntegrationsPage() {
                 disabled={health === 'checking'}
                 className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-xl border border-(--tc-border) bg-(--tc-surface) px-3.5 text-xs font-semibold text-(--tc-body) transition hover:border-(--tc-primary-hover)/40 hover:bg-(--tc-blue-soft) hover:text-(--tc-primary-text) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-60"
               >
-                {health === 'checking' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <ShieldCheck className="h-3.5 w-3.5" />}
+                {health === 'checking' ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <ShieldCheck className="h-3.5 w-3.5" />
+                )}
                 {t('Integ Health Check')}
               </button>
             </div>

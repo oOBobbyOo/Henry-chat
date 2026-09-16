@@ -8,7 +8,13 @@ interface AnimatedFieldProps {
   className?: string
 }
 
-function AnimatedField({ children, index = 0, animateName = 'animate-fade-slide-up', delayMs = 100, className }: AnimatedFieldProps) {
+function AnimatedField({
+  children,
+  index = 0,
+  animateName = 'animate-fade-slide-up',
+  delayMs = 100,
+  className,
+}: AnimatedFieldProps) {
   return (
     <div
       className={cn(animateName, className)}

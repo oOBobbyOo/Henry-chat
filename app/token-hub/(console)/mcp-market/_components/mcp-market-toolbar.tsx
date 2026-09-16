@@ -5,7 +5,13 @@ import { useEffect, useRef, useState } from 'react'
 import { Search, SlidersHorizontal, X } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { ConsoleSelect, ConsoleSelectContent, ConsoleSelectItem, ConsoleSelectTrigger, ConsoleSelectValue } from '@/components/token-hub/select'
+import {
+  ConsoleSelect,
+  ConsoleSelectContent,
+  ConsoleSelectItem,
+  ConsoleSelectTrigger,
+  ConsoleSelectValue,
+} from '@/components/token-hub/select'
 
 import { FILTER_ALL, type McpFilters } from '../page'
 
@@ -15,7 +21,15 @@ const SEARCH_DEBOUNCE_MS = 300
 /**
  * MCP 市场筛选栏 —— 搜索 / 价格 / 凭据 / 状态 + 服务数量
  */
-export function McpMarketToolbar({ filters, onFilterChange, shown }: { filters: McpFilters; onFilterChange: (key: keyof McpFilters, value: string) => void; shown: number }) {
+export function McpMarketToolbar({
+  filters,
+  onFilterChange,
+  shown,
+}: {
+  filters: McpFilters
+  onFilterChange: (key: keyof McpFilters, value: string) => void
+  shown: number
+}) {
   const { t } = useT('token-hub')
 
   // —— 搜索(本地受控 + 防抖上报, 避免每次键入都触发查询) ——
@@ -50,7 +64,8 @@ export function McpMarketToolbar({ filters, onFilterChange, shown }: { filters: 
           {t('Mcp Filter Label')}
         </span>
         <p className="text-xs whitespace-nowrap text-(--tc-muted) sm:hidden">
-          {t('Mcp Services Label')} <span className="font-semibold text-(--tc-strong)">{shown}</span> {t('Mcp Services Unit')}
+          {t('Mcp Services Label')}{' '}
+          <span className="font-semibold text-(--tc-strong)">{shown}</span> {t('Mcp Services Unit')}
         </p>
       </div>
 
@@ -86,7 +101,9 @@ export function McpMarketToolbar({ filters, onFilterChange, shown }: { filters: 
             <ConsoleSelectValue />
           </ConsoleSelectTrigger>
           <ConsoleSelectContent>
-            <ConsoleSelectItem value={FILTER_ALL}>{t('Mcp Filter Credential All')}</ConsoleSelectItem>
+            <ConsoleSelectItem value={FILTER_ALL}>
+              {t('Mcp Filter Credential All')}
+            </ConsoleSelectItem>
             <ConsoleSelectItem value="platform">{t('Mcp Credential Platform')}</ConsoleSelectItem>
             <ConsoleSelectItem value="user">{t('Mcp Credential User')}</ConsoleSelectItem>
             <ConsoleSelectItem value="none">{t('Mcp Credential None')}</ConsoleSelectItem>
@@ -142,7 +159,8 @@ export function McpMarketToolbar({ filters, onFilterChange, shown }: { filters: 
         aria-live="polite"
         className="ml-auto hidden text-xs whitespace-nowrap text-(--tc-muted) sm:block"
       >
-        {t('Mcp Services Label')} <span className="font-semibold text-(--tc-strong)">{shown}</span> {t('Mcp Services Unit')}
+        {t('Mcp Services Label')} <span className="font-semibold text-(--tc-strong)">{shown}</span>{' '}
+        {t('Mcp Services Unit')}
       </p>
     </section>
   )

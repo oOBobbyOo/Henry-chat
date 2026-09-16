@@ -4,7 +4,7 @@ import { useT } from 'next-i18next/client'
 
 import { formatShare, formatTokens } from '@/lib/format'
 
-import { VendorLink } from './EntityLinks'
+import { VendorLink } from './entity-links'
 
 /** Stable colour palette for vendors, used in both the share chart and the
  * legend dots. Falls back to a neutral palette for unknown vendors so that
@@ -28,7 +28,21 @@ const VENDOR_COLOURS: Record<string, string> = {
   Others: '#94a3b8',
 }
 
-const FALLBACK_PALETTE = ['#0ea5e9', '#22c55e', '#a855f7', '#f97316', '#14b8a6', '#eab308', '#ec4899', '#84cc16', '#6366f1', '#10b981', '#f43f5e', '#0891b2', '#94a3b8']
+const FALLBACK_PALETTE = [
+  '#0ea5e9',
+  '#22c55e',
+  '#a855f7',
+  '#f97316',
+  '#14b8a6',
+  '#eab308',
+  '#ec4899',
+  '#84cc16',
+  '#6366f1',
+  '#10b981',
+  '#f43f5e',
+  '#0891b2',
+  '#94a3b8',
+]
 
 function buildVendorColourMap(names: string[]): Record<string, string> {
   const result: Record<string, string> = {}
@@ -60,17 +74,24 @@ export function MarketShareSection(props: MarketShareSectionProps) {
   const left = visible.slice(0, half)
   const right = visible.slice(half)
 
-  const colourMap = useMemo(() => buildVendorColourMap(props.history.vendors.map((v) => v.name)), [props.history])
+  const colourMap = useMemo(
+    () => buildVendorColourMap(props.history.vendors.map((v) => v.name)),
+    [props.history],
+  )
 
   return (
     <section className="bg-card overflow-hidden rounded-lg border">
       <div className="border-t">
         <header className="px-5 pt-4 pb-2">
           <h3 className="text-foreground text-sm font-semibold">{t('By model author')}</h3>
-          <p className="text-muted-foreground/80 mt-0.5 text-xs">{t('Vendors ranked by aggregated token volume')}</p>
+          <p className="text-muted-foreground/80 mt-0.5 text-xs">
+            {t('Vendors ranked by aggregated token volume')}
+          </p>
         </header>
         {visible.length === 0 ? (
-          <div className="text-muted-foreground/80 px-5 py-8 text-center text-sm">{t('No vendor data available')}</div>
+          <div className="text-muted-foreground/80 px-5 py-8 text-center text-sm">
+            {t('No vendor data available')}
+          </div>
         ) : (
           <div className="grid grid-cols-1 gap-x-8 px-5 pt-1 pb-4 md:grid-cols-2">
             <VendorList
@@ -98,7 +119,9 @@ function VendorList(props: { rows: Ranking.VendorRanking[]; colourMap: Record<st
           key={vendor.vendor}
           className="flex items-center gap-3 py-2.5"
         >
-          <span className="text-muted-foreground/80 w-6 shrink-0 text-right font-mono text-xs tabular-nums">{vendor.rank}.</span>
+          <span className="text-muted-foreground/80 w-6 shrink-0 text-right font-mono text-xs tabular-nums">
+            {vendor.rank}.
+          </span>
           <span
             aria-hidden
             className="size-2.5 shrink-0 rounded-full"
@@ -113,8 +136,12 @@ function VendorList(props: { rows: Ranking.VendorRanking[]; colourMap: Record<st
             {vendor.vendor}
           </VendorLink>
           <div className="shrink-0 text-right">
-            <div className="text-foreground font-mono text-sm font-semibold tabular-nums">{formatTokens(vendor.total_tokens)}</div>
-            <div className="text-muted-foreground/80 font-mono text-[11px] tabular-nums">{formatShare(vendor.share)}</div>
+            <div className="text-foreground font-mono text-sm font-semibold tabular-nums">
+              {formatTokens(vendor.total_tokens)}
+            </div>
+            <div className="text-muted-foreground/80 font-mono text-[11px] tabular-nums">
+              {formatShare(vendor.share)}
+            </div>
           </div>
         </li>
       ))}

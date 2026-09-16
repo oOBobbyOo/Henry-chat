@@ -4,8 +4,8 @@ import { Suspense } from 'react'
 
 import { getT } from 'next-i18next/server'
 
-import { EmailLoginForm } from '../_components/EmailLoginForm'
-import { PhoneLoginForm } from '../_components/PhoneLoginForm'
+import { EmailLoginForm } from '../_components/email-login-form'
+import { PhoneLoginForm } from '../_components/phone-login-form'
 
 interface LoginPageProps {
   searchParams: Promise<{ model?: string }>
@@ -22,8 +22,12 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
     <>
       {/* Header */}
       <div className="mb-10 text-center">
-        <h1 className="mb-2 text-3xl leading-tight font-bold tracking-tight text-gray-900 sm:text-3xl md:mb-2.5 md:text-4xl lg:text-5xl dark:text-white">{t('Welcome back!')}</h1>
-        <p className="text-base leading-relaxed font-medium text-gray-600 md:text-base dark:text-gray-400">{t('Log in to your account')}</p>
+        <h1 className="mb-2 text-3xl leading-tight font-bold tracking-tight text-gray-900 sm:text-3xl md:mb-2.5 md:text-4xl lg:text-5xl dark:text-white">
+          {t('Welcome back!')}
+        </h1>
+        <p className="text-base leading-relaxed font-medium text-gray-600 md:text-base dark:text-gray-400">
+          {t('Log in to your account')}
+        </p>
       </div>
 
       {/* Login Form */}

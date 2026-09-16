@@ -4,7 +4,13 @@ import { useState } from 'react'
 
 import { Check, ChevronRight, LayoutDashboard, Plus } from 'lucide-react'
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 /** 工作区选项(下拉列表项) */
 export interface WorkspaceOption {
@@ -45,7 +51,13 @@ interface WorkspaceChipProps {
  * 工作区 chip(SiteHeader 右侧胶囊)
  * 点击弹出工作区切换下拉:工作区列表(当前项打勾)+ 创建工作区入口。
  */
-export function WorkspaceChip({ name, role, workspaces = DEFAULT_WORKSPACES, onSelect, onCreate }: WorkspaceChipProps) {
+export function WorkspaceChip({
+  name,
+  role,
+  workspaces = DEFAULT_WORKSPACES,
+  onSelect,
+  onCreate,
+}: WorkspaceChipProps) {
   const [currentId, setCurrentId] = useState(workspaces[0]?.id ?? '')
 
   const current = workspaces.find((ws) => ws.id === currentId) ?? workspaces[0]

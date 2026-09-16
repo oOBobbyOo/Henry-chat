@@ -51,7 +51,10 @@ function parseValue(raw: string | undefined | null): string | number | boolean {
  * getLobeIcon("OpenAI.Color", 20)
  * getLobeIcon("Claude.Avatar.type={'platform'}", 32)
  */
-export function getLobeIcon(iconName: string | undefined | null, size: number = 20): React.ReactNode {
+export function getLobeIcon(
+  iconName: string | undefined | null,
+  size: number = 20,
+): React.ReactNode {
   if (!iconName || typeof iconName !== 'string') {
     return (
       <div
@@ -78,7 +81,9 @@ export function getLobeIcon(iconName: string | undefined | null, size: number = 
   // Parse component path and chained properties
   const segments = trimmedName.split('.')
   const baseKey = segments[0]
-  const BaseIcon = (LobeIcons as Record<string, unknown>)[baseKey] as Record<string, unknown> | undefined
+  const BaseIcon = (LobeIcons as Record<string, unknown>)[baseKey] as
+    | Record<string, unknown>
+    | undefined
 
   let IconComponent: React.ComponentType<Record<string, unknown>> | undefined
   let propStartIndex: number
@@ -87,12 +92,17 @@ export function getLobeIcon(iconName: string | undefined | null, size: number = 
     IconComponent = BaseIcon[segments[1]] as React.ComponentType<Record<string, unknown>>
     propStartIndex = 2
   } else {
-    IconComponent = (LobeIcons as Record<string, unknown>)[baseKey] as React.ComponentType<Record<string, unknown>> | undefined
+    IconComponent = (LobeIcons as Record<string, unknown>)[baseKey] as
+      | React.ComponentType<Record<string, unknown>>
+      | undefined
     propStartIndex = segments.length > 1 && /^[A-Z]/.test(segments[1]) ? 2 : 1
   }
 
   // Fallback if icon not found
-  if (!IconComponent || (typeof IconComponent !== 'function' && typeof IconComponent !== 'object')) {
+  if (
+    !IconComponent ||
+    (typeof IconComponent !== 'function' && typeof IconComponent !== 'object')
+  ) {
     const firstLetter = trimmedName.charAt(0).toUpperCase()
     return (
       <div

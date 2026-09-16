@@ -74,7 +74,10 @@ export function MetricCard({
   tone?: 'primary' | 'green' | 'amber' | 'violet' | 'sky'
 }) {
   const toneMap = {
-    primary: { icon: 'bg-(--tc-blue-soft) text-(--tc-blue-bright)', spark: 'text-(--tc-blue-bright)' },
+    primary: {
+      icon: 'bg-(--tc-blue-soft) text-(--tc-blue-bright)',
+      spark: 'text-(--tc-blue-bright)',
+    },
     green: { icon: 'bg-emerald-50 text-emerald-600', spark: 'text-emerald-500' },
     amber: { icon: 'bg-amber-50 text-amber-600', spark: 'text-amber-500' },
     violet: { icon: 'bg-violet-50 text-violet-600', spark: 'text-violet-500' },
@@ -85,7 +88,9 @@ export function MetricCard({
     <div className="group overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)] transition-shadow duration-200 hover:shadow-[0_4px_16px_rgb(28_55_105/0.06)]">
       <div className="p-3.5 sm:p-4">
         <div className="flex items-start justify-between gap-3">
-          <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-(--tc-strong)">{label}</p>
+          <p className="min-w-0 truncate pt-1 text-[13px] font-semibold tracking-[-0.012em] text-(--tc-strong)">
+            {label}
+          </p>
           <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-full ${toneMap.icon}`}>
             <Icon className="h-4 w-4" />
           </span>
@@ -95,7 +100,9 @@ export function MetricCard({
           <div className="min-w-0">
             <div className="flex items-baseline gap-1">
               {display ? (
-                <span className="truncate text-[24px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong) tabular-nums">{display}</span>
+                <span className="truncate text-[24px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong) tabular-nums">
+                  {display}
+                </span>
               ) : (
                 <>
                   <span className="text-[24px] leading-none font-semibold tracking-[-0.03em] text-(--tc-strong)">

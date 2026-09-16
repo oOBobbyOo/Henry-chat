@@ -19,7 +19,15 @@ const BY_TABS: { key: BreakdownBy; labelKey: string; icon: typeof Layers }[] = [
  * 个人成本构成卡 —— 按模型 / 供应商 / API Key / 客户端排名列表
  * 每行: 名次 + 名称 + 占比进度条 + 成本 + 占比 + 请求次数
  */
-export function CostBreakdownCard({ by, onByChange, items }: { by: BreakdownBy; onByChange: (v: BreakdownBy) => void; items: TokenHub.CostBreakdownItem[] }) {
+export function CostBreakdownCard({
+  by,
+  onByChange,
+  items,
+}: {
+  by: BreakdownBy
+  onByChange: (v: BreakdownBy) => void
+  items: TokenHub.CostBreakdownItem[]
+}) {
   const { t } = useT('token-hub')
 
   // 占比进度条基准(第一名宽度)
@@ -30,7 +38,9 @@ export function CostBreakdownCard({ by, onByChange, items }: { by: BreakdownBy; 
       {/* 标题 + 视角切换 */}
       <div className="flex flex-col gap-4 border-b border-(--tc-border) px-5 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div>
-          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Reports Breakdown Title')}</h2>
+          <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+            {t('Reports Breakdown Title')}
+          </h2>
           <p className="mt-1.5 text-xs text-(--tc-muted)">{t('Reports Breakdown Subtitle')}</p>
         </div>
 
@@ -43,7 +53,9 @@ export function CostBreakdownCard({ by, onByChange, items }: { by: BreakdownBy; 
               onClick={() => onByChange(key)}
               className={cn(
                 'inline-flex h-8 shrink-0 cursor-pointer items-center gap-1.5 rounded-md px-3 text-xs font-semibold whitespace-nowrap transition-colors focus-visible:ring-4 focus-visible:ring-(--tc-primary-hover)/15 focus-visible:outline-none',
-                by === key ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]' : 'text-(--tc-body) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)',
+                by === key
+                  ? 'bg-(--tc-primary) text-white shadow-[0_2px_6px_rgb(49_88_232/0.22)]'
+                  : 'text-(--tc-body) hover:bg-(--tc-surface) hover:text-(--tc-primary-text)',
               )}
             >
               <Icon className="h-3.5 w-3.5" />
@@ -64,7 +76,9 @@ export function CostBreakdownCard({ by, onByChange, items }: { by: BreakdownBy; 
             <span
               className={cn(
                 'grid h-7 w-7 shrink-0 place-items-center rounded-lg text-xs font-bold tabular-nums',
-                idx === 0 ? 'bg-(--tc-blue-soft) text-(--tc-blue-bright)' : 'bg-(--tc-blue-soft) text-(--tc-muted)',
+                idx === 0
+                  ? 'bg-(--tc-blue-soft) text-(--tc-blue-bright)'
+                  : 'bg-(--tc-blue-soft) text-(--tc-muted)',
               )}
             >
               {idx + 1}
@@ -88,8 +102,12 @@ export function CostBreakdownCard({ by, onByChange, items }: { by: BreakdownBy; 
 
             {/* 成本 + 占比 */}
             <div className="shrink-0 text-right">
-              <p className="text-[14px] font-semibold text-(--tc-strong) tabular-nums">¥{item.cost.toFixed(1)}</p>
-              <p className="mt-0.5 text-[11px] font-medium text-(--tc-muted) tabular-nums">{(item.share * 100).toFixed(1)}%</p>
+              <p className="text-[14px] font-semibold text-(--tc-strong) tabular-nums">
+                ¥{item.cost.toFixed(1)}
+              </p>
+              <p className="mt-0.5 text-[11px] font-medium text-(--tc-muted) tabular-nums">
+                {(item.share * 100).toFixed(1)}%
+              </p>
             </div>
           </div>
         ))}

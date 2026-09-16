@@ -3,7 +3,13 @@
 import { HelpCircle } from 'lucide-react'
 
 import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
@@ -245,7 +251,9 @@ export function ConfigFields({ config, updateConfig }: ConfigFieldsProps) {
         />
         <Textarea
           value={systemPrompt}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => updateConfig('systemPrompt', e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            updateConfig('systemPrompt', e.target.value)
+          }
           placeholder="输入系统提示词..."
           className="min-h-[100px] text-sm resize-none"
         />

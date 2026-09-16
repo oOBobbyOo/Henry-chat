@@ -29,7 +29,9 @@ export function PlazaHero() {
           {t('Turn one idea into a set of works')}
         </span>
       </h1>
-      <p className="mx-auto mt-2.5 max-w-[620px] text-[15px] leading-[1.85] text-muted-foreground">{t('Hero subtitle')}</p>
+      <p className="mx-auto mt-2.5 max-w-[620px] text-[15px] leading-[1.85] text-muted-foreground">
+        {t('Hero subtitle')}
+      </p>
 
       {/* 创作输入框 */}
       <div className="mx-auto mt-5 max-w-[880px] text-left">
@@ -102,9 +104,15 @@ export function PlazaSkillsSection() {
       <div className="flex flex-col gap-5 lg:flex-row lg:items-stretch">
         <div className="flex shrink-0 flex-col justify-between gap-5">
           <div>
-            <p className="text-[10.5px] font-semibold tracking-[0.24em] text-[#60a5fa] uppercase dark:text-[#7dd3fc]">{t('Agent Skills')}</p>
-            <h2 className="mt-2 text-[22px] leading-[1.25] font-semibold tracking-[-0.02em]">{t('What do you want to create today?')}</h2>
-            <p className="mt-2 text-[12.5px] leading-[1.7] text-muted-foreground">{t('Pick a skill to start; the Agent will carry it through the whole creation.')}</p>
+            <p className="text-[10.5px] font-semibold tracking-[0.24em] text-[#60a5fa] uppercase dark:text-[#7dd3fc]">
+              {t('Agent Skills')}
+            </p>
+            <h2 className="mt-2 text-[22px] leading-[1.25] font-semibold tracking-[-0.02em]">
+              {t('What do you want to create today?')}
+            </h2>
+            <p className="mt-2 text-[12.5px] leading-[1.7] text-muted-foreground">
+              {t('Pick a skill to start; the Agent will carry it through the whole creation.')}
+            </p>
           </div>
           <button
             type="button"

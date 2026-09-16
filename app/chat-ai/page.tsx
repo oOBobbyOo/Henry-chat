@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 
 import { toast } from 'sonner'
 
-import { ChatInterface } from './_components/ChatInterface'
+import { ChatInterface } from './_components/chat-interface'
 
 export default function ChatAiPage() {
   const router = useRouter()

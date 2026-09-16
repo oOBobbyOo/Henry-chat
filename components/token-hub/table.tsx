@@ -59,7 +59,10 @@ function ConsoleTableRow({ className, ...props }: React.ComponentProps<'tr'>) {
   return (
     <tr
       data-slot="console-table-row"
-      className={cn('border-b border-[#dce5f6]/80 transition-colors hover:bg-[#eef3ff] data-[state=selected]:bg-[#eef3ff]', className)}
+      className={cn(
+        'border-b border-[#dce5f6]/80 transition-colors hover:bg-[#eef3ff] data-[state=selected]:bg-[#eef3ff]',
+        className,
+      )}
       {...props}
     />
   )
@@ -69,7 +72,10 @@ function ConsoleTableHead({ className, ...props }: React.ComponentProps<'th'>) {
   return (
     <th
       data-slot="console-table-head"
-      className={cn('h-10 px-4 text-left align-middle text-[11px] font-semibold tracking-[0.07em] whitespace-nowrap text-[#8a9bc0] uppercase [&:has([role=checkbox])]:pr-0', className)}
+      className={cn(
+        'h-10 px-4 text-left align-middle text-[11px] font-semibold tracking-[0.07em] whitespace-nowrap text-[#8a9bc0] uppercase [&:has([role=checkbox])]:pr-0',
+        className,
+      )}
       {...props}
     />
   )
@@ -79,7 +85,10 @@ function ConsoleTableCell({ className, ...props }: React.ComponentProps<'td'>) {
   return (
     <td
       data-slot="console-table-cell"
-      className={cn('px-4 py-3.5 align-middle text-[13px] whitespace-nowrap [&:has([role=checkbox])]:pr-0', className)}
+      className={cn(
+        'px-4 py-3.5 align-middle text-[13px] whitespace-nowrap [&:has([role=checkbox])]:pr-0',
+        className,
+      )}
       {...props}
     />
   )
@@ -95,4 +104,13 @@ function ConsoleTableCaption({ className, ...props }: React.ComponentProps<'capt
   )
 }
 
-export { ConsoleTable, ConsoleTableHeader, ConsoleTableBody, ConsoleTableFooter, ConsoleTableHead, ConsoleTableRow, ConsoleTableCell, ConsoleTableCaption }
+export {
+  ConsoleTable,
+  ConsoleTableHeader,
+  ConsoleTableBody,
+  ConsoleTableFooter,
+  ConsoleTableHead,
+  ConsoleTableRow,
+  ConsoleTableCell,
+  ConsoleTableCaption,
+}

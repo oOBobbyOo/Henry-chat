@@ -15,7 +15,16 @@ import { FieldLabel, FieldLabelIcon, Seg } from './shared'
  */
 
 /** 局部重绘:画笔预设色板 */
-export const BRUSH_COLORS = ['#0f172a', '#ffffff', '#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#8b5cf6']
+export const BRUSH_COLORS = [
+  '#0f172a',
+  '#ffffff',
+  '#ef4444',
+  '#f97316',
+  '#eab308',
+  '#22c55e',
+  '#3b82f6',
+  '#8b5cf6',
+]
 
 /**
  * 裁剪比例预设(对齐参考站 original / free / 常见宽高比)
@@ -80,7 +89,11 @@ type FormProps = {
 /** 工具说明行(参考站每个编辑工具自带的一句说明) */
 function ToolHint({ tool }: { tool: string }) {
   const { t } = useT('workbench')
-  return <p className="text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">{t(`Edit tool hint.${tool}`)}</p>
+  return (
+    <p className="text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">
+      {t(`Edit tool hint.${tool}`)}
+    </p>
+  )
 }
 
 /** 无需参数的工具(牛皮癣擦除 / 去背景):一行说明,点击开始编辑即自动处理 */
@@ -88,7 +101,9 @@ function NoParamHint() {
   const { t } = useT('workbench')
   return (
     <div className="rounded-[12px] border border-dashed border-[rgba(56,103,255,0.28)] bg-[rgba(56,103,255,0.06)] px-3 py-2.5 dark:border-[rgba(143,165,255,0.26)] dark:bg-[rgba(143,165,255,0.08)]">
-      <p className="text-[12px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">{t('No params hint')}</p>
+      <p className="text-[12px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">
+        {t('No params hint')}
+      </p>
     </div>
   )
 }
@@ -118,7 +133,9 @@ export function InpaintForm({ params, onChange }: FormProps) {
               type="range"
               value={params.brushSize}
             />
-            <span className="shrink-0 text-[11px] font-medium text-[#3867ff] dark:text-[#8fa5ff]">{params.brushSize}px</span>
+            <span className="shrink-0 text-[11px] font-medium text-[#3867ff] dark:text-[#8fa5ff]">
+              {params.brushSize}px
+            </span>
           </div>
         </div>
         <div>
@@ -139,7 +156,9 @@ export function InpaintForm({ params, onChange }: FormProps) {
               type="range"
               value={params.brushStrength}
             />
-            <span className="shrink-0 text-[11px] font-medium text-[#3867ff] dark:text-[#8fa5ff]">{params.brushStrength}%</span>
+            <span className="shrink-0 text-[11px] font-medium text-[#3867ff] dark:text-[#8fa5ff]">
+              {params.brushStrength}%
+            </span>
           </div>
         </div>
       </div>
@@ -156,7 +175,9 @@ export function InpaintForm({ params, onChange }: FormProps) {
               aria-label={c}
               className={cn(
                 'h-6 w-6 rounded-full border border-[rgba(12,24,36,0.1)] transition-transform dark:border-white/14',
-                params.brushColor === c ? 'scale-110 ring-2 ring-[#3867ff] ring-offset-1 ring-offset-white dark:ring-[#8fa5ff] dark:ring-offset-[#0d1220]' : 'hover:scale-105',
+                params.brushColor === c
+                  ? 'scale-110 ring-2 ring-[#3867ff] ring-offset-1 ring-offset-white dark:ring-[#8fa5ff] dark:ring-offset-[#0d1220]'
+                  : 'hover:scale-105',
               )}
               key={c}
               onClick={() => onChange({ brushColor: c })}
@@ -201,12 +222,17 @@ export function CropForm({ params, onChange }: FormProps) {
         </FieldLabel>
         <Seg
           onChange={(value) => onChange({ cropRatio: value })}
-          options={CROP_RATIOS.map((r) => ({ value: r.value, label: r.i18nKey ? t(r.i18nKey) : r.value }))}
+          options={CROP_RATIOS.map((r) => ({
+            value: r.value,
+            label: r.i18nKey ? t(r.i18nKey) : r.value,
+          }))}
           wrap
           value={params.cropRatio}
         />
       </div>
-      <p className="text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">{t('Crop frame hint')}</p>
+      <p className="text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">
+        {t('Crop frame hint')}
+      </p>
     </div>
   )
 }
@@ -234,7 +260,9 @@ export function SuperResolutionForm({ params, onChange }: FormProps) {
           value={params.upscaleRatio}
         />
       </div>
-      <p className="text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">{t('Upscale model hint')}</p>
+      <p className="text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">
+        {t('Upscale model hint')}
+      </p>
     </div>
   )
 }
@@ -268,7 +296,9 @@ export function ExtractSubjectForm({ params, onChange }: FormProps) {
           options={SUBJECT_TYPES.map((s) => ({ value: s.value, label: t(s.label) }))}
           value={params.subjectType}
         />
-        <p className="mt-1.5 text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">{t(active.hint)}</p>
+        <p className="mt-1.5 text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">
+          {t(active.hint)}
+        </p>
       </div>
     </div>
   )
@@ -363,6 +393,10 @@ export function ImageEditToolForm({ tool, params, onChange }: { tool: string | n
     case 'remove-bg':
       return <RemoveBackgroundForm />
     default:
-      return <p className="mt-3 text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">{t('Edit tool hint.fallback')}</p>
+      return (
+        <p className="mt-3 text-[11px] leading-4 text-[#5b6b8c] dark:text-[#8a9bc0]">
+          {t('Edit tool hint.fallback')}
+        </p>
+      )
   }
 }

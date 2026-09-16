@@ -157,7 +157,9 @@ export function ChatHistoryList({
                 onClick={() => editingId !== session.id && onSessionClick(session.id)}
                 className={cn(
                   'group relative cursor-pointer rounded-lg p-2 transition-colors',
-                  activeSessionId === session.id ? 'border border-blue-200 bg-blue-50' : 'border border-transparent hover:bg-gray-50',
+                  activeSessionId === session.id
+                    ? 'border border-blue-200 bg-blue-50'
+                    : 'border border-transparent hover:bg-gray-50',
                 )}
               >
                 {/* 会话信息 */}
@@ -188,10 +190,21 @@ export function ChatHistoryList({
                     </div>
                   ) : (
                     <>
-                      <h4 className={cn('truncate text-xs font-medium', activeSessionId === session.id ? 'text-blue-600' : 'text-gray-700')}>{session.title}</h4>
+                      <h4
+                        className={cn(
+                          'truncate text-xs font-medium',
+                          activeSessionId === session.id ? 'text-blue-600' : 'text-gray-700',
+                        )}
+                      >
+                        {session.title}
+                      </h4>
                       <div className="mt-1 flex items-center justify-between">
-                        <span className="text-[10px] text-gray-400">{formatTime(session.lastMessageAt)}</span>
-                        <span className="text-[10px] text-gray-400">{session.messageCount} 条消息</span>
+                        <span className="text-[10px] text-gray-400">
+                          {formatTime(session.lastMessageAt)}
+                        </span>
+                        <span className="text-[10px] text-gray-400">
+                          {session.messageCount} 条消息
+                        </span>
                       </div>
                     </>
                   )}
@@ -237,7 +250,9 @@ export function ChatHistoryList({
               </div>
             )}
 
-            {!hasMore && sessions.length > 0 && <div className="py-4 text-center text-[10px] text-gray-300">已显示全部会话</div>}
+            {!hasMore && sessions.length > 0 && (
+              <div className="py-4 text-center text-[10px] text-gray-300">已显示全部会话</div>
+            )}
           </div>
         )}
       </div>

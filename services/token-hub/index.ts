@@ -1,4 +1,10 @@
-import { queryOptions, useMutation, useQuery, useQueryClient, useSuspenseQuery } from '@tanstack/react-query'
+import {
+  queryOptions,
+  useMutation,
+  useQuery,
+  useQueryClient,
+  useSuspenseQuery,
+} from '@tanstack/react-query'
 
 import { request } from '@/lib/request'
 
@@ -8,11 +14,13 @@ const LOCAL_BASE_URL = process.env.NEXT_PUBLIC_HOST_URL
 /** Token Hub 控制台 —— 业务服务层(对接本地 `/api/token-hub/*`,契约对齐生产网关) */
 export const TokenHubService = {
   /** 网关健康检查 */
-  getHealth: () => request.get<TokenHub.HealthResponse>('/api/token-hub/healthz', { baseURL: LOCAL_BASE_URL }),
+  getHealth: () =>
+    request.get<TokenHub.HealthResponse>('/api/token-hub/healthz', { baseURL: LOCAL_BASE_URL }),
   /** 当前登录用户信息 */
   getProfile: () => request.get<TokenHub.Profile>('/api/token-hub/me', { baseURL: LOCAL_BASE_URL }),
   /** 账户余额与配额 */
-  getBalance: () => request.get<TokenHub.BalanceResponse>('/api/token-hub/me/balance', { baseURL: LOCAL_BASE_URL }),
+  getBalance: () =>
+    request.get<TokenHub.BalanceResponse>('/api/token-hub/me/balance', { baseURL: LOCAL_BASE_URL }),
   /** 用量汇总统计 */
   getSummary: (days = 1) =>
     request.get<TokenHub.Summary>('/api/token-hub/usage/summary', {
@@ -79,7 +87,10 @@ export const TokenHubService = {
       params: { page, page_size: pageSize },
     }),
   /** 模型目录(模型广场) */
-  getModels: () => request.get<TokenHub.CatalogResponse>('/api/token-hub/catalog/models', { baseURL: LOCAL_BASE_URL }),
+  getModels: () =>
+    request.get<TokenHub.CatalogResponse>('/api/token-hub/catalog/models', {
+      baseURL: LOCAL_BASE_URL,
+    }),
   /** 模型近 30 分钟性能指标 */
   getModelMetrics: (minutes = 30) =>
     request.get<TokenHub.CatalogMetricsResponse>('/api/token-hub/catalog/models/metrics', {
@@ -87,7 +98,11 @@ export const TokenHubService = {
       params: { minutes },
     }),
   /** 个人 API Key 列表 */
-  getKeys: () => request.get<TokenHub.ApiKeysResponse>('/api/token-hub/keys', { baseURL: LOCAL_BASE_URL, params: { mine: true } }),
+  getKeys: () =>
+    request.get<TokenHub.ApiKeysResponse>('/api/token-hub/keys', {
+      baseURL: LOCAL_BASE_URL,
+      params: { mine: true },
+    }),
   /** 创建 API Key */
   createKey: (body: TokenHub.CreateApiKeyBody) =>
     request.post<TokenHub.CreateApiKeyResponse>('/api/token-hub/keys', {
@@ -95,7 +110,10 @@ export const TokenHubService = {
       body,
     }),
   /** 服务账号列表 */
-  getServiceAccounts: () => request.get<TokenHub.ServiceAccountsResponse>('/api/token-hub/keys/service-accounts', { baseURL: LOCAL_BASE_URL }),
+  getServiceAccounts: () =>
+    request.get<TokenHub.ServiceAccountsResponse>('/api/token-hub/keys/service-accounts', {
+      baseURL: LOCAL_BASE_URL,
+    }),
 }
 
 /** 稳定查询键 */
@@ -147,9 +165,18 @@ export function createModelTrendQueryOptions(granularity: 'hour' | 'day' = 'hour
 }
 
 /** 模型表现明细查询配置(默认最近 7 天) */
-export function createModelStatsQueryOptions(days = 7, filters?: { model?: string; provider?: string; client?: string }) {
+export function createModelStatsQueryOptions(
+  days = 7,
+  filters?: { model?: string; provider?: string; client?: string },
+) {
   return queryOptions({
-    queryKey: [...TOKEN_HUB_QUERY_KEYS.modelStats, days, filters?.model ?? '', filters?.provider ?? '', filters?.client ?? ''],
+    queryKey: [
+      ...TOKEN_HUB_QUERY_KEYS.modelStats,
+      days,
+      filters?.model ?? '',
+      filters?.provider ?? '',
+      filters?.client ?? '',
+    ],
     queryFn: () => TokenHubService.getModelStats(days, filters),
     staleTime: 60_000,
   })
@@ -165,7 +192,10 @@ export function createReportSummaryQueryOptions(days = 30) {
 }
 
 /** 成本走势查询配置(默认按月) */
-export function createReportTrendQueryOptions(granularity: 'day' | 'week' | 'month' | 'year' = 'month', days = 365) {
+export function createReportTrendQueryOptions(
+  granularity: 'day' | 'week' | 'month' | 'year' = 'month',
+  days = 365,
+) {
   return queryOptions({
     queryKey: [...TOKEN_HUB_QUERY_KEYS.reportTrend, granularity, days],
     queryFn: () => TokenHubService.getReportTrend(granularity, days),
@@ -183,9 +213,20 @@ export function createReportBreakdownQueryOptions(by: TokenHub.CostBreakdownBy =
 }
 
 /** MCP 市场查询配置 */
-export function createMcpMarketQueryOptions(filters?: { price?: string; credential?: string; status?: string; q?: string }) {
+export function createMcpMarketQueryOptions(filters?: {
+  price?: string
+  credential?: string
+  status?: string
+  q?: string
+}) {
   return queryOptions({
-    queryKey: [...TOKEN_HUB_QUERY_KEYS.mcpMarket, filters?.price ?? 'all', filters?.credential ?? 'all', filters?.status ?? 'all', filters?.q ?? ''],
+    queryKey: [
+      ...TOKEN_HUB_QUERY_KEYS.mcpMarket,
+      filters?.price ?? 'all',
+      filters?.credential ?? 'all',
+      filters?.status ?? 'all',
+      filters?.q ?? '',
+    ],
     queryFn: () => TokenHubService.getMcpMarket(filters),
     staleTime: 60_000,
   })
@@ -243,7 +284,10 @@ export function useModelTrendQuery(granularity: 'hour' | 'day' = 'hour', days = 
 }
 
 /** 模型表现明细(hook) */
-export function useModelStatsQuery(days = 7, filters?: { model?: string; provider?: string; client?: string }) {
+export function useModelStatsQuery(
+  days = 7,
+  filters?: { model?: string; provider?: string; client?: string },
+) {
   return useSuspenseQuery(createModelStatsQueryOptions(days, filters))
 }
 
@@ -253,7 +297,10 @@ export function useReportSummaryQuery(days = 30) {
 }
 
 /** 成本走势(hook) */
-export function useReportTrendQuery(granularity: 'day' | 'week' | 'month' | 'year' = 'month', days = 365) {
+export function useReportTrendQuery(
+  granularity: 'day' | 'week' | 'month' | 'year' = 'month',
+  days = 365,
+) {
   return useSuspenseQuery(createReportTrendQueryOptions(granularity, days))
 }
 
@@ -263,7 +310,11 @@ export function useReportBreakdownQuery(by: TokenHub.CostBreakdownBy = 'model') 
 }
 
 /** MCP 市场(hook) */
-export function useMcpMarketQuery(filters?: { price?: string; credential?: string; status?: string }) {
+export function useMcpMarketQuery(filters?: {
+  price?: string
+  credential?: string
+  status?: string
+}) {
   return useSuspenseQuery(createMcpMarketQueryOptions(filters))
 }
 
@@ -281,7 +332,8 @@ export function useBalanceTransactionsQuery(page = 1, pageSize = 10) {
 export function useSetMcpEnabledMutation() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: ({ serviceId, enabled }: { serviceId: string; enabled: boolean }) => TokenHubService.setMcpEnabled(serviceId, enabled),
+    mutationFn: ({ serviceId, enabled }: { serviceId: string; enabled: boolean }) =>
+      TokenHubService.setMcpEnabled(serviceId, enabled),
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: TOKEN_HUB_QUERY_KEYS.mcpMarket })
     },

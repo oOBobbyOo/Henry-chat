@@ -134,12 +134,22 @@ function PartnerLogoItem({ logo }: { logo: PartnerLogo }) {
       <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-gray-200/70 bg-white dark:border-white/8 dark:bg-white/4">
         <BrandMark icon={logo.icon} />
       </span>
-      <span className="whitespace-nowrap text-[13px] font-medium tracking-tight text-gray-500 dark:text-[#c8d0dc]">{logo.name}</span>
+      <span className="whitespace-nowrap text-[13px] font-medium tracking-tight text-gray-500 dark:text-[#c8d0dc]">
+        {logo.name}
+      </span>
     </div>
   )
 }
 
-function MarqueeRow({ logos, reverse = false, duration = 36 }: { logos: PartnerLogo[]; reverse?: boolean; duration?: number }) {
+function MarqueeRow({
+  logos,
+  reverse = false,
+  duration = 36,
+}: {
+  logos: PartnerLogo[]
+  reverse?: boolean
+  duration?: number
+}) {
   const doubled = useMemo(() => [...logos, ...logos], [logos])
 
   return (
@@ -207,7 +217,9 @@ function StatItem({ value, label, active }: { value: string; label: string; acti
   const display = useCountUp(value, active)
   return (
     <div className="rounded-2xl border border-gray-200/70 bg-transparent px-3 py-3.5 text-center saturate-145 backdrop-blur-xl dark:border-white/8 dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]">
-      <dt className="text-[22px] font-semibold tabular-nums text-gray-800 dark:text-[#eef4ff]">{display}</dt>
+      <dt className="text-[22px] font-semibold tabular-nums text-gray-800 dark:text-[#eef4ff]">
+        {display}
+      </dt>
       <dd className="mt-0.5 text-[11px] text-[#91a0b5]">{label}</dd>
     </div>
   )
@@ -239,8 +251,12 @@ export function PartnersShowcase() {
           <span className="inline-flex h-6 items-center rounded-full border border-gray-200 px-2.5 text-[11px] tracking-[0.14em] text-[#718096] uppercase dark:border-white/8 dark:text-white/50">
             生态伙伴
           </span>
-          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-gray-700 sm:text-[26px] dark:text-[#eef4ff]">与顶尖伙伴携手共创</h2>
-          <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-[#91a0b5]">深入产业，为 500+ 企业创造卓越价值，让 AI 能力真正落地千行百业。</p>
+          <h2 className="mt-3 text-2xl font-semibold tracking-tight text-gray-700 sm:text-[26px] dark:text-[#eef4ff]">
+            与顶尖伙伴携手共创
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-[#91a0b5]">
+            深入产业，为 500+ 企业创造卓越价值，让 AI 能力真正落地千行百业。
+          </p>
         </div>
 
         {/* Stats */}
@@ -272,7 +288,9 @@ export function PartnersShowcase() {
           />
         </div>
 
-        <p className="mt-6 text-center text-[11px] tracking-wide text-[#91a0b5]/60">—— 以上仅为部分合作伙伴展示，排名不分先后 ——</p>
+        <p className="mt-6 text-center text-[11px] tracking-wide text-[#91a0b5]/60">
+          —— 以上仅为部分合作伙伴展示，排名不分先后 ——
+        </p>
       </div>
     </section>
   )

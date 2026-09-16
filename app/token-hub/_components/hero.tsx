@@ -1,6 +1,17 @@
 import Link from 'next/link'
 
-import { ArrowRight, Boxes, Braces, Check, ChevronRight, GitMerge, LayoutGrid, Route, Sparkles, Terminal } from 'lucide-react'
+import {
+  ArrowRight,
+  Boxes,
+  Braces,
+  Check,
+  ChevronRight,
+  GitMerge,
+  LayoutGrid,
+  Route,
+  Sparkles,
+  Terminal,
+} from 'lucide-react'
 import { getT } from 'next-i18next/server'
 
 /** Hero 主视觉 —— 左侧文案 + 右侧「路由控制面」示意卡片 */
@@ -44,7 +55,9 @@ export async function Hero() {
             {t('Hero Title Line 2')}
           </h1>
 
-          <p className="mt-6 max-w-xl text-[15px] leading-8 text-[#5b6b8c] sm:text-[17px]">{t('Hero Subtitle')}</p>
+          <p className="mt-6 max-w-xl text-[15px] leading-8 text-[#5b6b8c] sm:text-[17px]">
+            {t('Hero Subtitle')}
+          </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
@@ -103,14 +116,18 @@ export async function Hero() {
                 <span className="h-2 w-2 rounded-full bg-[#5ce1b2] shadow-[0_0_0_4px_rgb(92_225_178/0.13)]" />
                 {t('Console Title')}
               </div>
-              <span className="rounded-full bg-white/9 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-white/70">{t('Console Badge')}</span>
+              <span className="rounded-full bg-white/9 px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-white/70">
+                {t('Console Badge')}
+              </span>
             </div>
 
             {/* 三列：客户端 → 路由策略 */}
             <div className="mt-4 grid gap-3 sm:grid-cols-[0.88fr_42px_1.12fr] sm:items-stretch">
               <div className="rounded-2xl border border-white/[0.07] bg-[#173461]/90 p-4 shadow-[inset_0_1px_0_rgb(255_255_255/0.06),0_12px_28px_rgb(0_9_34/0.22)]">
                 <div className="flex items-center justify-between">
-                  <p className="text-[10px] font-bold tracking-[0.16em] text-[#a8b8ff]">{t('Console Column Clients')}</p>
+                  <p className="text-[10px] font-bold tracking-[0.16em] text-[#a8b8ff]">
+                    {t('Console Column Clients')}
+                  </p>
                   <Boxes
                     className="h-4 w-4 text-[#829fff]"
                     aria-hidden="true"
@@ -149,7 +166,9 @@ export async function Hero() {
 
               <div className="rounded-2xl border border-white/[0.07] bg-[#173461]/90 p-4 shadow-[inset_0_1px_0_rgb(255_255_255/0.06),0_12px_28px_rgb(0_9_34/0.22)]">
                 <div className="flex items-center justify-between">
-                  <p className="text-[10px] font-bold tracking-[0.16em] text-[#a8b8ff]">{t('Console Column Routes')}</p>
+                  <p className="text-[10px] font-bold tracking-[0.16em] text-[#a8b8ff]">
+                    {t('Console Column Routes')}
+                  </p>
                   <Route
                     className="h-4 w-4 text-[#829fff]"
                     aria-hidden="true"
@@ -163,7 +182,9 @@ export async function Hero() {
                       className="flex items-center justify-between rounded-xl bg-white/5.5 px-2.5 py-2.5"
                     >
                       <span className="flex items-center gap-2 text-[11px] font-semibold text-white/90">
-                        <span className="grid h-5 w-5 place-items-center rounded-md bg-[#5f7cff]/20 text-[10px] font-bold text-[#a8b8ff]">{route.index}</span>
+                        <span className="grid h-5 w-5 place-items-center rounded-md bg-[#5f7cff]/20 text-[10px] font-bold text-[#a8b8ff]">
+                          {route.index}
+                        </span>
                         {route.label}
                       </span>
                       <span className="text-[10px] text-white/55">{route.meta}</span>
@@ -184,7 +205,9 @@ export async function Hero() {
               </span>
               <span className="flex items-center gap-2">
                 <span className="text-[10px] text-white/50">{t('Console Obs Meta')}</span>
-                <span className="text-xs font-semibold text-[#a8b8ff]">{t('Console Column Obs')}</span>
+                <span className="text-xs font-semibold text-[#a8b8ff]">
+                  {t('Console Column Obs')}
+                </span>
               </span>
             </div>
           </div>

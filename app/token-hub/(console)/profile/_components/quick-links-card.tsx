@@ -7,9 +7,27 @@ import { useT } from 'next-i18next/client'
 
 /** 常用入口(对齐生产: API Keys / 用量分析 / 应用接入) */
 const LINKS = [
-  { href: '/token-hub/keys', labelKey: 'Profile Quick Keys', descKey: 'Profile Quick Keys Desc', icon: KeyRound, tone: 'bg-(--tc-blue-soft) text-(--tc-blue-bright)' },
-  { href: '/token-hub/usage', labelKey: 'Profile Quick Usage', descKey: 'Profile Quick Usage Desc', icon: BarChart3, tone: 'bg-emerald-50 text-emerald-600' },
-  { href: '/token-hub/integrations', labelKey: 'Profile Quick Integrations', descKey: 'Profile Quick Integrations Desc', icon: Plug, tone: 'bg-amber-50 text-amber-600' },
+  {
+    href: '/token-hub/keys',
+    labelKey: 'Profile Quick Keys',
+    descKey: 'Profile Quick Keys Desc',
+    icon: KeyRound,
+    tone: 'bg-(--tc-blue-soft) text-(--tc-blue-bright)',
+  },
+  {
+    href: '/token-hub/usage',
+    labelKey: 'Profile Quick Usage',
+    descKey: 'Profile Quick Usage Desc',
+    icon: BarChart3,
+    tone: 'bg-emerald-50 text-emerald-600',
+  },
+  {
+    href: '/token-hub/integrations',
+    labelKey: 'Profile Quick Integrations',
+    descKey: 'Profile Quick Integrations Desc',
+    icon: Plug,
+    tone: 'bg-amber-50 text-amber-600',
+  },
 ]
 
 /**
@@ -21,7 +39,9 @@ export function QuickLinksCard() {
   return (
     <div className="overflow-hidden rounded-[15px] border border-(--tc-border) bg-(--tc-surface) shadow-[0_1px_2px_rgb(15_38_79/0.04)]">
       <div className="px-5 pt-5 sm:px-6">
-        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Profile Quick Links')}</h2>
+        <h2 className="text-[15px] font-semibold tracking-[-0.01em] text-(--tc-strong)">
+          {t('Profile Quick Links')}
+        </h2>
         <p className="mt-1 text-xs text-(--tc-muted)">{t('Profile Quick Links Desc')}</p>
       </div>
 
@@ -36,8 +56,12 @@ export function QuickLinksCard() {
               <Icon className="h-4 w-4" />
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block truncate text-[13px] font-semibold text-(--tc-strong)">{t(labelKey)}</span>
-              <span className="mt-0.5 block truncate text-[11px] text-(--tc-muted)">{t(descKey)}</span>
+              <span className="block truncate text-[13px] font-semibold text-(--tc-strong)">
+                {t(labelKey)}
+              </span>
+              <span className="mt-0.5 block truncate text-[11px] text-(--tc-muted)">
+                {t(descKey)}
+              </span>
             </span>
             <ArrowRight className="h-4 w-4 shrink-0 text-(--tc-muted) transition-transform group-hover:translate-x-0.5 group-hover:text-(--tc-blue-bright)" />
           </Link>

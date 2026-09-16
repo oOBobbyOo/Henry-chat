@@ -41,7 +41,10 @@ export default function ChatPage() {
   const inputRef = useRef<HTMLTextAreaElement>(null)
 
   // 模型选项(模型广场的展示名)
-  const modelOptions = useMemo(() => modelsData.items.map((m) => m.display_name), [modelsData.items])
+  const modelOptions = useMemo(
+    () => modelsData.items.map((m) => m.display_name),
+    [modelsData.items],
+  )
   const [model, setModel] = useState<string>(modelOptions[0] ?? 'Gemini 3.7 Flash')
 
   /** 按时间分组会话(本周 / 更早) */
@@ -116,8 +119,12 @@ export default function ChatPage() {
                 <Bot className="h-4 w-4" />
               </span>
               <div className="min-w-0 leading-tight">
-                <p className="truncate text-[14px] font-semibold text-(--tc-strong)">{t('Chat Title')}</p>
-                <p className="mt-0.5 truncate text-[11px] text-(--tc-muted)">{t('Chat Subtitle')}</p>
+                <p className="truncate text-[14px] font-semibold text-(--tc-strong)">
+                  {t('Chat Title')}
+                </p>
+                <p className="mt-0.5 truncate text-[11px] text-(--tc-muted)">
+                  {t('Chat Subtitle')}
+                </p>
               </div>
             </div>
             <button
@@ -137,18 +144,28 @@ export default function ChatPage() {
             >
               <Plus className="h-4 w-4" />
               {t('Chat New Conversation')}
-              <kbd className="ml-1 hidden rounded-md bg-white/20 px-1.5 py-0.5 text-[10px] font-medium sm:block">⌘ K</kbd>
+              <kbd className="ml-1 hidden rounded-md bg-white/20 px-1.5 py-0.5 text-[10px] font-medium sm:block">
+                ⌘ K
+              </kbd>
             </button>
           </div>
 
           {/* 最近对话 */}
           <div className="scrollbar-hidden min-h-0 flex-1 overflow-y-auto px-3 pb-4">
             <div className="flex items-center justify-between px-1 pt-1 pb-2">
-              <p className="text-[11px] font-bold tracking-[0.08em] text-(--tc-muted) uppercase">{t('Chat Recent')}</p>
-              <span className="rounded-full bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-bold text-(--tc-muted) tabular-nums">{conversationsData.items.length}</span>
+              <p className="text-[11px] font-bold tracking-[0.08em] text-(--tc-muted) uppercase">
+                {t('Chat Recent')}
+              </p>
+              <span className="rounded-full bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-bold text-(--tc-muted) tabular-nums">
+                {conversationsData.items.length}
+              </span>
             </div>
 
-            {conversationsData.items.length === 0 && <p className="px-1 py-6 text-center text-xs text-(--tc-muted)">{t('Chat No Conversations')}</p>}
+            {conversationsData.items.length === 0 && (
+              <p className="px-1 py-6 text-center text-xs text-(--tc-muted)">
+                {t('Chat No Conversations')}
+              </p>
+            )}
 
             {groups.map((group) => (
               <div
@@ -157,7 +174,9 @@ export default function ChatPage() {
               >
                 <div className="flex items-center justify-between px-1 pb-1">
                   <p className="text-[11px] font-semibold text-(--tc-body)">{group.label}</p>
-                  <span className="text-[10px] font-semibold text-(--tc-muted) tabular-nums">{group.count}</span>
+                  <span className="text-[10px] font-semibold text-(--tc-muted) tabular-nums">
+                    {group.count}
+                  </span>
                 </div>
                 <div className="space-y-0.5">
                   {group.items.map((conv) => {
@@ -179,9 +198,13 @@ export default function ChatPage() {
                             {conv.model.charAt(0)}
                           </span>
                           <span className="min-w-0 flex-1">
-                            <span className="block truncate text-[13px] font-semibold text-(--tc-strong)">{conv.title}</span>
+                            <span className="block truncate text-[13px] font-semibold text-(--tc-strong)">
+                              {conv.title}
+                            </span>
                             <span className="mt-0.5 block">
-                              <span className="inline-block max-w-full truncate rounded bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-semibold text-(--tc-blue-bright)">{conv.model}</span>
+                              <span className="inline-block max-w-full truncate rounded bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-semibold text-(--tc-blue-bright)">
+                                {conv.model}
+                              </span>
                             </span>
                           </span>
                         </span>
@@ -202,7 +225,9 @@ export default function ChatPage() {
               <p className="truncate text-[14px] font-semibold text-(--tc-strong)">
                 {t('Chat Token Hub Agent')}
                 <span className="mx-1.5 text-[#c9d6ef]">/</span>
-                <span className="font-medium text-(--tc-body)">{active ? active.title : t('Chat New Workspace')}</span>
+                <span className="font-medium text-(--tc-body)">
+                  {active ? active.title : t('Chat New Workspace')}
+                </span>
               </p>
               <p className="mt-0.5 truncate text-[11px] text-(--tc-muted)">{model}</p>
             </div>

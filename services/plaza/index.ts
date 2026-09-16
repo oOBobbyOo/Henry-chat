@@ -8,11 +8,20 @@ import { request } from '@/lib/request'
  */
 export const PlazaService = {
   /** 社区作品列表(瀑布流) */
-  getPosts: () => request.get<Plaza.PostsResponse>('/api/plaza/posts', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getPosts: () =>
+    request.get<Plaza.PostsResponse>('/api/plaza/posts', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
   /** Agent 技能列表(横滑卡片) */
-  getSkills: () => request.get<Plaza.SkillsResponse>('/api/plaza/skills', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getSkills: () =>
+    request.get<Plaza.SkillsResponse>('/api/plaza/skills', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
   /** 热门标签(分类筛选条) */
-  getTags: () => request.get<Plaza.TagsResponse>('/api/plaza/tags', { baseURL: process.env.NEXT_PUBLIC_HOST_URL }),
+  getTags: () =>
+    request.get<Plaza.TagsResponse>('/api/plaza/tags', {
+      baseURL: process.env.NEXT_PUBLIC_HOST_URL,
+    }),
 }
 
 export const PLAZA_QUERY_KEYS = {

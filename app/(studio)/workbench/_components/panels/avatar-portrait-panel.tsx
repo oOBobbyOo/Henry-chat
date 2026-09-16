@@ -3,7 +3,15 @@
 import { ImagePlus, UserRound, AudioLines, SlidersHorizontal, Maximize, Zap } from 'lucide-react'
 import { useT } from 'next-i18next/client'
 
-import { FieldLabel, FieldLabelIcon, PanelCard, PanelIcon, Seg, UploadGlyph, UploadZone } from './shared'
+import {
+  FieldLabel,
+  FieldLabelIcon,
+  PanelCard,
+  PanelIcon,
+  Seg,
+  UploadGlyph,
+  UploadZone,
+} from './shared'
 
 /**
  * 数字人像面板 —— 参考站结构:① 人像参考图(肖像要求)+ ② 驱动音频(规格约束)+ 生成参数(分辨率 / 加速模式)
@@ -59,7 +67,10 @@ export function AvatarPortraitPanel({ configs }: { configs: Workbench.ConfigResp
             </FieldLabel>
             <Seg
               onChange={() => {}}
-              options={configs.digitalHuman.resolutions.map((r) => ({ value: r, label: t(`DH resolution.${r}`) }))}
+              options={configs.digitalHuman.resolutions.map((r) => ({
+                value: r,
+                label: t(`DH resolution.${r}`),
+              }))}
               value={configs.digitalHuman.resolutions[0] ?? ''}
             />
           </div>

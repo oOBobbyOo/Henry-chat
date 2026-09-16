@@ -4,7 +4,7 @@ import { useT } from 'next-i18next/client'
 import { getLobeIcon } from '@/lib/libe-icon'
 import { cn } from '@/lib/utils'
 
-import { ModelLink, VendorLink } from './EntityLinks'
+import { ModelLink, VendorLink } from './entity-links'
 
 type PulseSectionProps = {
   movers: Ranking.Mover[]
@@ -59,7 +59,12 @@ export function PulseSection(props: PulseSectionProps) {
   )
 }
 
-function PulseCard(props: { title: string; description: string; icon: React.ReactNode; children: React.ReactNode }) {
+function PulseCard(props: {
+  title: string
+  description: string
+  icon: React.ReactNode
+  children: React.ReactNode
+}) {
   return (
     <div className="bg-card overflow-hidden rounded-lg border">
       <header className="border-b px-4 py-3">
@@ -90,16 +95,23 @@ function MoverRow(props: { row: Ranking.Mover; intent: 'up' | 'down' }) {
           {props.row.model_name}
         </ModelLink>
         <p className="text-muted-foreground/80 truncate text-[11px]">
-          #{props.row.current_rank} · <VendorLink vendor={props.row.vendor}>{props.row.vendor.toLowerCase()}</VendorLink>
+          #{props.row.current_rank} ·{' '}
+          <VendorLink vendor={props.row.vendor}>{props.row.vendor.toLowerCase()}</VendorLink>
         </p>
       </div>
       <span
         className={cn(
           'inline-flex shrink-0 items-center gap-0.5 font-mono text-xs font-semibold tabular-nums',
-          props.intent === 'up' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400',
+          props.intent === 'up'
+            ? 'text-emerald-600 dark:text-emerald-400'
+            : 'text-rose-600 dark:text-rose-400',
         )}
       >
-        {props.intent === 'up' ? <ArrowUpRight className="size-3" /> : <ArrowDownRight className="size-3" />}
+        {props.intent === 'up' ? (
+          <ArrowUpRight className="size-3" />
+        ) : (
+          <ArrowDownRight className="size-3" />
+        )}
         {Math.abs(props.row.rank_delta)}
       </span>
     </li>

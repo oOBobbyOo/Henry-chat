@@ -42,7 +42,9 @@ export function MotionSyncPanel() {
           icon={<UploadGlyph />}
           title={t('Video')}
         />
-        <p className="mt-2 text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">{t('Reference time hint')}</p>
+        <p className="mt-2 text-[11px] leading-4 text-[#8a9bc0] dark:text-[#6b7f9d]">
+          {t('Reference time hint')}
+        </p>
       </PanelCard>
 
       {/* 提示词(可选) */}

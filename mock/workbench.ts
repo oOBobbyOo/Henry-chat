@@ -84,7 +84,8 @@ const imageModels: Workbench.ModelOption[] = [
     id: 'nano-banana-2-lite',
     provider: 'NanoBanana',
     displayName: 'Nano Banana 2 Lite',
-    description: 'Nano Banana 2 的轻量版本,支持多参考图和相机控制;仅支持 512、1K 尺寸,不支持联网增强。',
+    description:
+      'Nano Banana 2 的轻量版本,支持多参考图和相机控制;仅支持 512、1K 尺寸,不支持联网增强。',
     badge: 'new',
     recommended: false,
     credits: 4,
@@ -369,7 +370,8 @@ export const workbenchMock: {
         id: 'wan-3.0',
         provider: 'Qwen',
         displayName: 'Wan 3.0',
-        description: '支持文生、首帧/首尾帧与全能参考;全能参考支持图片、视频、音频、文件和公网链接。',
+        description:
+          '支持文生、首帧/首尾帧与全能参考;全能参考支持图片、视频、音频、文件和公网链接。',
         badge: 'new',
         recommended: true,
         credits: 40,
@@ -378,7 +380,8 @@ export const workbenchMock: {
         id: 'wan-3.0-prime',
         provider: 'Qwen',
         displayName: 'Wan 3.0 Prime',
-        description: 'Wan 3.0 Prime 支持文生、首帧/首尾帧与全能参考;参考素材支持图片、视频、音频、文件和公网链接。',
+        description:
+          'Wan 3.0 Prime 支持文生、首帧/首尾帧与全能参考;参考素材支持图片、视频、音频、文件和公网链接。',
         badge: 'new',
         recommended: true,
         credits: 55,
@@ -387,7 +390,8 @@ export const workbenchMock: {
         id: 'happyhorse-1.1',
         provider: 'HappyHorse',
         displayName: 'HappyHorse 1.1',
-        description: '三模式视频生成,支持文生、首帧图生与参考图驱动,适合直接升级 HappyHorse 主力出片模型。',
+        description:
+          '三模式视频生成,支持文生、首帧图生与参考图驱动,适合直接升级 HappyHorse 主力出片模型。',
         badge: 'new',
         recommended: true,
         credits: 30,
@@ -405,7 +409,8 @@ export const workbenchMock: {
         id: 'minimax-h3',
         provider: 'Minimax',
         displayName: 'MiniMax H3',
-        description: '会员旗舰视频生成,支持文生 / 图生 / 首尾帧与全能参考(图片 / 视频 / 音频),768P / 2K 直出。',
+        description:
+          '会员旗舰视频生成,支持文生 / 图生 / 首尾帧与全能参考(图片 / 视频 / 音频),768P / 2K 直出。',
         badge: 'new',
         recommended: true,
         credits: 60,
@@ -414,7 +419,8 @@ export const workbenchMock: {
         id: 'seedance-2.5',
         provider: 'ByteDance',
         displayName: 'Seedance 2.5',
-        description: '覆盖文生、图生、首尾帧、全能参考(图 / 视频 / 音频)与视频编辑;最多 30 图 / 10 视频 / 10 音频,生成时长 4–30 秒。',
+        description:
+          '覆盖文生、图生、首尾帧、全能参考(图 / 视频 / 音频)与视频编辑;最多 30 图 / 10 视频 / 10 音频,生成时长 4–30 秒。',
         badge: 'new',
         recommended: true,
         credits: 65,
@@ -450,7 +456,8 @@ export const workbenchMock: {
         id: 'veo-3.1',
         provider: 'Gemini',
         displayName: 'Veo 3.1',
-        description: '高规格视频生成,覆盖文生 / 图生 / 首尾帧 / 视频延长等模式,适合预演级镜头创作。',
+        description:
+          '高规格视频生成,覆盖文生 / 图生 / 首尾帧 / 视频延长等模式,适合预演级镜头创作。',
         badge: null,
         recommended: false,
         credits: 90,
@@ -562,7 +569,15 @@ export const workbenchMock: {
   libraryAssets,
   /** 图片编辑工具 */
   imageEdit: {
-    tools: ['inpaint', 'crop', 'super-resolution', 'scratch-removal', 'extract-subject', 'extract-lineart', 'remove-bg'],
+    tools: [
+      'inpaint',
+      'crop',
+      'super-resolution',
+      'scratch-removal',
+      'extract-subject',
+      'extract-lineart',
+      'remove-bg',
+    ],
   },
   /** 视频超分配置 */
   videoUpscale: {

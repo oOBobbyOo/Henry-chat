@@ -1,7 +1,7 @@
 import { LanguageSwitcher } from '@/components/language-switcher'
 import { ThemeModeToggle } from '@/components/theme/theme-mode-toggle'
 
-import { AnimatedCharacters } from './_components/AnimatedCharacters'
+import { AnimatedCharacters } from './_components/animated-characters'
 
 export default function AuthLayout({
   children,

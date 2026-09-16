@@ -44,7 +44,8 @@ export const CHAT_CONVERSATIONS: TokenHub.ChatConversation[] = [
         role: 'assistant',
         content:
           '好的，我们从目标、约束与行动三个角度拆解：\n\n**目标**\n- 统一协议接入多家供应商，降低切换成本\n- 按成本/质量动态路由，保留故障回退能力\n\n**约束**\n- 各家协议(OpenAI / Anthropic / Gemini)与限流策略不同\n- 计费口径与用量归因需要统一\n\n**下一步行动**\n1. 确定网关层协议规范(如统一转 OpenAI 兼容)\n2. 建立供应商健康检查与自动回退策略\n3. 接入用量与成本聚合报表\n\n需要我针对其中某一步展开方案草稿吗？',
-        reasoning_content: '用户希望梳理多供应商接入问题。先识别三个维度:目标、约束、行动,再给出可执行的步骤。',
+        reasoning_content:
+          '用户希望梳理多供应商接入问题。先识别三个维度:目标、约束、行动,再给出可执行的步骤。',
         created_at: dayjs().subtract(1, 'day').hour(10).minute(13).toISOString(),
       },
     ],

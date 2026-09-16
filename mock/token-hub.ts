@@ -10,7 +10,8 @@ const MOCK_PROFILE: TokenHub.Profile = {
   user_id: 'c6605e22d81c45b5bcaa427e0cfb7b93',
   name: 'Henry',
   email: 'henry@example.com',
-  avatar_url: 'https://static-legacy.dingtalk.com/media/lQDPDhtH9CMuMRtkZLDr0tZA3ovMMwJGj-RBwOAA_100_100.jpg',
+  avatar_url:
+    'https://static-legacy.dingtalk.com/media/lQDPDhtH9CMuMRtkZLDr0tZA3ovMMwJGj-RBwOAA_100_100.jpg',
   mobile: '86134xxxxxxx',
   mobile_country_code: '86',
   mobile_e164: '+86134xxxxxxx',
@@ -114,7 +115,10 @@ function buildTrend(granularity: 'hour' | 'day' = 'hour', days = 1): TokenHub.Tr
 }
 
 /** 按模型统计(生产实测最近一小时三条模型的用量) */
-function buildModelTrend(granularity: 'hour' | 'day' = 'hour', days = 1): TokenHub.ModelTrendResponse {
+function buildModelTrend(
+  granularity: 'hour' | 'day' = 'hour',
+  days = 1,
+): TokenHub.ModelTrendResponse {
   const step = granularity === 'hour' ? 3600 : 86400
   const count = granularity === 'hour' ? 24 * days : days
   const now = dayjs().startOf(granularity)
@@ -213,7 +217,10 @@ function buildCostSummary(_days = 30): TokenHub.CostReportSummary {
 }
 
 /** 成本走势 —— 按粒度生成;当月成本 17.3 落在最近窗口(对齐生产 09-01 ～ 09-03 形态) */
-function buildCostTrend(granularity: 'day' | 'week' | 'month' | 'year' = 'month', _days = 30): TokenHub.CostReportTrendResponse {
+function buildCostTrend(
+  granularity: 'day' | 'week' | 'month' | 'year' = 'month',
+  _days = 30,
+): TokenHub.CostReportTrendResponse {
   const now = dayjs()
   let items: TokenHub.CostReportTrendPoint[] = []
 
@@ -259,7 +266,9 @@ function buildCostTrend(granularity: 'day' | 'week' | 'month' | 'year' = 'month'
 }
 
 /** 成本构成 —— 模型 / 供应商 / API Key / 客户端 四个视角(对齐生产实测占比) */
-function buildCostBreakdown(by: TokenHub.CostBreakdownBy = 'model'): TokenHub.CostBreakdownResponse {
+function buildCostBreakdown(
+  by: TokenHub.CostBreakdownBy = 'model',
+): TokenHub.CostBreakdownResponse {
   const data: Record<TokenHub.CostBreakdownBy, TokenHub.CostBreakdownItem[]> = {
     model: [
       { name: 'DeepSeek V4 Flash', cost: 16.5, share: 0.953, requests: 478 },
@@ -308,7 +317,10 @@ const BALANCE_PAGE_SIZE = 10
  * 余额明细 —— 分页生成模拟扣费流水(对齐生产: 1410 笔 / 141 页)
  * 起点余额 572.11,每笔 -0.03 ~ -0.14 元递减
  */
-function buildBalanceTransactions(page = 1, pageSize = BALANCE_PAGE_SIZE): TokenHub.BalanceTransactionsResponse {
+function buildBalanceTransactions(
+  page = 1,
+  pageSize = BALANCE_PAGE_SIZE,
+): TokenHub.BalanceTransactionsResponse {
   const total = BALANCE_TOTAL
   const safePage = Math.min(Math.max(page, 1), Math.ceil(total / pageSize))
   const start = (safePage - 1) * pageSize

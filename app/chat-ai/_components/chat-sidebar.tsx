@@ -6,7 +6,7 @@ import { PanelLeftClose, PanelLeftOpen, X } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-import { ChatHistoryList } from './ChatHistoryList'
+import { ChatHistoryList } from './chat-history-list'
 
 interface ChatSidebarProps {
   /** 当前模型配置 */
@@ -73,7 +73,10 @@ export function ChatSidebar({
     <>
       {/* --- 移动端遮罩层 --- */}
       <div
-        className={cn('fixed inset-0 z-60 bg-black/30 backdrop-blur-sm transition-opacity duration-300 lg:hidden', isMobileOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0')}
+        className={cn(
+          'fixed inset-0 z-60 bg-black/30 backdrop-blur-sm transition-opacity duration-300 lg:hidden',
+          isMobileOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
+        )}
         onClick={onMobileClose}
       >
         <aside
@@ -106,7 +109,11 @@ export function ChatSidebar({
                 className="hidden rounded-lg p-1.5 text-gray-500 transition-all hover:bg-blue-50 hover:text-blue-600 lg:flex"
                 title={isSidebarCollapsed ? '展开侧边栏' : '折叠侧边栏'}
               >
-                {isSidebarCollapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
+                {isSidebarCollapsed ? (
+                  <PanelLeftOpen className="h-4 w-4" />
+                ) : (
+                  <PanelLeftClose className="h-4 w-4" />
+                )}
               </button>
 
               {/* 移动端关闭按钮 */}
@@ -117,7 +124,12 @@ export function ChatSidebar({
           </div>
 
           {/* --- 侧边栏内容 --- */}
-          <div className={cn('flex min-h-0 flex-1 flex-col transition-opacity duration-200', isSidebarCollapsed ? 'lg:pointer-events-none lg:opacity-0' : 'opacity-100')}>
+          <div
+            className={cn(
+              'flex min-h-0 flex-1 flex-col transition-opacity duration-200',
+              isSidebarCollapsed ? 'lg:pointer-events-none lg:opacity-0' : 'opacity-100',
+            )}
+          >
             {/* 历史记录（下方） */}
             <div className="min-h-0 flex-1">
               <ChatHistoryList

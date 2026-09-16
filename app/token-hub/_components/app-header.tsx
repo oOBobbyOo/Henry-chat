@@ -25,14 +25,18 @@ async function AnnouncementBar() {
           {t('Newly Listed')}
         </span>
         <span className="shrink-0 text-[#afbddb]">·</span>
-        <span className="min-w-0 max-w-28 truncate font-semibold text-[#1c2c4d] sm:max-w-none">Qwen3.8-27B</span>
+        <span className="min-w-0 max-w-28 truncate font-semibold text-[#1c2c4d] sm:max-w-none">
+          Qwen3.8-27B
+        </span>
         <span className="hidden shrink-0 items-center gap-1.5 rounded-md bg-white/70 px-2 py-1 text-[11px] font-medium text-[#8a9bc0] sm:inline-flex">
           <span className="text-[#b1bfd0]">{t('Context')}</span>
           <strong className="font-semibold text-[#8a9bc0]">991K</strong>
         </span>
         <span className="hidden min-w-0 shrink items-center gap-1.5 rounded-md bg-white/70 px-2 py-1 text-[11px] font-medium text-[#8a9bc0] md:inline-flex">
           <span className="shrink-0 text-[#b1bfd0]">{t('Input')}</span>
-          <strong className="truncate font-semibold text-[#8a9bc0]">{t('Text · Image · Video')}</strong>
+          <strong className="truncate font-semibold text-[#8a9bc0]">
+            {t('Text · Image · Video')}
+          </strong>
         </span>
         <Link
           href="/plaza"

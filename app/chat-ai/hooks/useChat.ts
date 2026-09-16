@@ -29,7 +29,11 @@ export interface UseChatResult {
   /** 会话 ID（发送首条消息后获得） */
   conversationId: string | null
   /** 发送消息 */
-  sendMessage: (content: string, config: Chat.ModelConfig, options?: { onSuccess?: () => void; onError?: (err: unknown) => void }) => Promise<void>
+  sendMessage: (
+    content: string,
+    config: Chat.ModelConfig,
+    options?: { onSuccess?: () => void; onError?: (err: unknown) => void },
+  ) => Promise<void>
   /** 停止生成 */
   stopGenerating: () => void
   /** 清空消息 */
@@ -97,7 +101,9 @@ export function useChat() {
       const params = {
         model: 'deepseek-v4-flash',
         messages: [
-          ...(config.systemPrompt ? [{ role: 'system' as const, content: config.systemPrompt.trim() }] : []),
+          ...(config.systemPrompt
+            ? [{ role: 'system' as const, content: config.systemPrompt.trim() }]
+            : []),
           ...messages.map((m) => ({ role: m.role, content: m.content })),
           { role: 'user' as const, content: content.trim() },
         ],
@@ -142,7 +148,11 @@ export function useChat() {
     }
 
     setStatus('idle')
-    setMessages((prev) => prev.map((m) => (m.isStreaming ? { ...m, isStreaming: false, content: m.content || '已终止' } : m)))
+    setMessages((prev) =>
+      prev.map((m) =>
+        m.isStreaming ? { ...m, isStreaming: false, content: m.content || '已终止' } : m,
+      ),
+    )
   }, [])
 
   /** 清空消息 */

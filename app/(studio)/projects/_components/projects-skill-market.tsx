@@ -37,10 +37,13 @@ export function ProjectsSkillMarket() {
   const filtered = useMemo(() => {
     return skills.filter((skill) => {
       if (category === 'featured' && !skill.featured) return false
-      if (category !== 'all' && category !== 'featured' && skill.marketCategory !== category) return false
+      if (category !== 'all' && category !== 'featured' && skill.marketCategory !== category)
+        return false
       if (keyword) {
         const kw = keyword.toLowerCase()
-        const hit = skill.displayName.toLowerCase().includes(kw) || skill.description.toLowerCase().includes(kw)
+        const hit =
+          skill.displayName.toLowerCase().includes(kw) ||
+          skill.description.toLowerCase().includes(kw)
         if (!hit) return false
       }
       return true
@@ -49,8 +52,12 @@ export function ProjectsSkillMarket() {
 
   return (
     <section className="pt-3">
-      <h2 className="text-[18px] font-medium tracking-[-0.02em] text-foreground">{t('Skill market')}</h2>
-      <p className="mt-2 max-w-[720px] text-[13px] leading-6 text-muted-foreground">{t('Pick vertical skills to let the Agent work in your industry workflow')}</p>
+      <h2 className="text-[18px] font-medium tracking-[-0.02em] text-foreground">
+        {t('Skill market')}
+      </h2>
+      <p className="mt-2 max-w-[720px] text-[13px] leading-6 text-muted-foreground">
+        {t('Pick vertical skills to let the Agent work in your industry workflow')}
+      </p>
 
       {/* 分类横滑条 + 搜索框 */}
       <div className="mt-5 flex flex-col gap-3 xl:flex-row xl:items-center">
@@ -68,7 +75,14 @@ export function ProjectsSkillMarket() {
                       ? 'shrink-0 rounded-full border px-3 py-1.5 text-[12px] font-medium text-[#3867ff]'
                       : 'shrink-0 rounded-full border px-3 py-1.5 text-[12px] font-medium text-[#5b6b8c] hover:text-foreground'
                   }
-                  style={active ? { borderColor: 'rgba(56,103,255,0.35)', backgroundColor: 'rgba(56,103,255,0.08)' } : undefined}
+                  style={
+                    active
+                      ? {
+                          borderColor: 'rgba(56,103,255,0.35)',
+                          backgroundColor: 'rgba(56,103,255,0.08)',
+                        }
+                      : undefined
+                  }
                 >
                   {t(item.labelKey)}
                 </button>
@@ -104,7 +118,9 @@ export function ProjectsSkillMarket() {
       ) : filtered.length === 0 ? (
         <div className="mt-6 flex flex-col items-center justify-center rounded-[16px] border border-dashed py-16 text-center">
           <p className="text-[15px] font-medium text-foreground">{t('No matching skills')}</p>
-          <p className="mt-1 text-[12px] text-muted-foreground">{t('Try other keywords or categories')}</p>
+          <p className="mt-1 text-[12px] text-muted-foreground">
+            {t('Try other keywords or categories')}
+          </p>
         </div>
       ) : (
         <div className="mt-6 grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -121,11 +137,17 @@ export function ProjectsSkillMarket() {
                   loading="lazy"
                   className="h-full w-full object-cover"
                 />
-                {skill.featured && <span className="absolute left-2.5 top-2.5 rounded-full bg-[#b45309] px-2 py-0.5 text-[10px] font-semibold text-white">★</span>}
+                {skill.featured && (
+                  <span className="absolute left-2.5 top-2.5 rounded-full bg-[#b45309] px-2 py-0.5 text-[10px] font-semibold text-white">
+                    ★
+                  </span>
+                )}
               </div>
               <div className="flex min-w-0 flex-1 flex-col px-3.5 pb-3.5 pt-3">
                 <div className="flex items-center gap-2">
-                  <p className="min-w-0 flex-1 truncate text-[14px] font-semibold tracking-[-0.01em] text-foreground">{skill.displayName}</p>
+                  <p className="min-w-0 flex-1 truncate text-[14px] font-semibold tracking-[-0.01em] text-foreground">
+                    {skill.displayName}
+                  </p>
                   <button
                     type="button"
                     className="shrink-0 rounded-full bg-gradient-to-br from-[#3898bc] to-[#3867ff] px-3 py-1 text-[11px] font-semibold text-white transition hover:-translate-y-[1px]"
@@ -133,7 +155,9 @@ export function ProjectsSkillMarket() {
                     {t('Use')}
                   </button>
                 </div>
-                <p className="mt-1 line-clamp-2 text-[12px] leading-[1.6] text-[#5b6b8c] dark:text-zinc-400">{skill.description}</p>
+                <p className="mt-1 line-clamp-2 text-[12px] leading-[1.6] text-[#5b6b8c] dark:text-zinc-400">
+                  {skill.description}
+                </p>
               </div>
             </article>
           ))}

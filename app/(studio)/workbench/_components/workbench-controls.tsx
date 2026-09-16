@@ -122,7 +122,10 @@ function MiniDropdown({
       >
         <span className="min-w-0 flex-1 truncate text-left font-medium">{value}</span>
         <ChevronDown
-          className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform dark:text-[#8a9bc0]', open && 'rotate-180')}
+          className={cn(
+            'h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform dark:text-[#8a9bc0]',
+            open && 'rotate-180',
+          )}
           strokeWidth={1.75}
         />
       </button>
@@ -171,7 +174,9 @@ function MiniDropdown({
                   <button
                     className={cn(
                       'flex w-full cursor-pointer items-center gap-1.5 rounded-[9px] px-3 py-2 text-left text-[13px] whitespace-nowrap transition-colors',
-                      selected ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white' : 'text-[#2e4268] hover:bg-[rgba(12,24,36,0.04)] dark:text-[#b6c4dc] dark:hover:bg-white/6',
+                      selected
+                        ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white'
+                        : 'text-[#2e4268] hover:bg-[rgba(12,24,36,0.04)] dark:text-[#b6c4dc] dark:hover:bg-white/6',
                     )}
                     onClick={() => {
                       onChange(opt.value)
@@ -220,13 +225,33 @@ export function WorkbenchControls({
     switch (activeCapability) {
       case 'image-gen':
       case 'video-gen':
-        return { titleKey: 'Prompt', hintKey: 'Supports natural language', placeholderKey: 'Prompt placeholder hint', required: true }
+        return {
+          titleKey: 'Prompt',
+          hintKey: 'Supports natural language',
+          placeholderKey: 'Prompt placeholder hint',
+          required: true,
+        }
       case 'sound-gen':
-        return { titleKey: 'Sound description', hintKey: null, placeholderKey: 'Sound description placeholder', required: true }
+        return {
+          titleKey: 'Sound description',
+          hintKey: null,
+          placeholderKey: 'Sound description placeholder',
+          required: true,
+        }
       case 'music-gen':
-        return { titleKey: 'Song description', hintKey: 'Supports natural language', placeholderKey: 'Song description placeholder', required: true }
+        return {
+          titleKey: 'Song description',
+          hintKey: 'Supports natural language',
+          placeholderKey: 'Song description placeholder',
+          required: true,
+        }
       case 'voice-gen':
-        return { titleKey: 'Voice text', hintKey: 'Voice text hint', placeholderKey: 'Voice text placeholder', required: true }
+        return {
+          titleKey: 'Voice text',
+          hintKey: 'Voice text hint',
+          placeholderKey: 'Voice text placeholder',
+          required: true,
+        }
       default:
         return null
     }
@@ -277,7 +302,10 @@ export function WorkbenchControls({
   const [negativePrompt, setNegativePrompt] = useState('')
   const [randomSeed, setRandomSeed] = useState('')
 
-  const videoModel = useMemo(() => videoConfig?.models.find((m) => m.id === videoModelId) ?? videoConfig?.models[0], [videoModelId, videoConfig])
+  const videoModel = useMemo(
+    () => videoConfig?.models.find((m) => m.id === videoModelId) ?? videoConfig?.models[0],
+    [videoModelId, videoConfig],
+  )
   const model = isVideo ? videoModel : (models.find((m) => m.id === modelId) ?? models[0])
 
   // 宽高像素值 = 比例宽高 × 分辨率基准 / 1024
@@ -349,7 +377,9 @@ export function WorkbenchControls({
                             className="h-4 w-4 shrink-0 text-[#3867ff] dark:text-[#8fa5ff]"
                             provider={model?.provider ?? ''}
                           />
-                          <span className="min-w-0 truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">{model?.displayName}</span>
+                          <span className="min-w-0 truncate text-[13px] font-medium text-[#091423] dark:text-[#eef4ff]">
+                            {model?.displayName}
+                          </span>
                           {model?.badge ? (
                             <span className="inline-flex shrink-0 items-center rounded-[7px] border border-[rgba(56,103,255,0.3)] bg-[rgba(56,103,255,0.1)] px-1.5 text-[10px] font-semibold text-[#3867ff] dark:border-[rgba(143,165,255,0.3)] dark:text-[#8fa5ff]">
                               {model.badge === 'new' ? t('New') : t('Hot')}
@@ -363,7 +393,10 @@ export function WorkbenchControls({
                         </span>
                       </span>
                       <ChevronDown
-                        className={cn('h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform dark:text-[#8a9bc0]', modelOpen && 'rotate-180')}
+                        className={cn(
+                          'h-3.5 w-3.5 shrink-0 text-[#8a9bc0] transition-transform dark:text-[#8a9bc0]',
+                          modelOpen && 'rotate-180',
+                        )}
                         strokeWidth={1.75}
                       />
                     </button>
@@ -382,7 +415,9 @@ export function WorkbenchControls({
                             <button
                               className={cn(
                                 'w-full cursor-pointer rounded-[10px] px-3 py-2 text-left transition-colors',
-                                m.id === (isVideo ? videoModelId : modelId) ? 'bg-[rgba(56,103,255,0.08)]' : 'hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
+                                m.id === (isVideo ? videoModelId : modelId)
+                                  ? 'bg-[rgba(56,103,255,0.08)]'
+                                  : 'hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
                               )}
                               onClick={() => {
                                 if (isVideo) setVideoModelId(m.id)
@@ -396,8 +431,17 @@ export function WorkbenchControls({
                                   className="h-4 w-4 shrink-0 text-[#3867ff] dark:text-[#8fa5ff]"
                                   provider={m.provider}
                                 />
-                                <span className="shrink-0 text-[10px] font-semibold text-[#8a9bc0] dark:text-[#8a9bc0]">{m.provider}</span>
-                                <span className={cn('text-[13px] font-medium', m.id === (isVideo ? videoModelId : modelId) ? 'text-[#3867ff]' : 'text-[#091423] dark:text-[#eef4ff]')}>
+                                <span className="shrink-0 text-[10px] font-semibold text-[#8a9bc0] dark:text-[#8a9bc0]">
+                                  {m.provider}
+                                </span>
+                                <span
+                                  className={cn(
+                                    'text-[13px] font-medium',
+                                    m.id === (isVideo ? videoModelId : modelId)
+                                      ? 'text-[#3867ff]'
+                                      : 'text-[#091423] dark:text-[#eef4ff]',
+                                  )}
+                                >
                                   {m.displayName}
                                 </span>
                                 {m.badge ? (
@@ -406,7 +450,9 @@ export function WorkbenchControls({
                                   </span>
                                 ) : null}
                               </span>
-                              <span className="mt-0.5 line-clamp-2 block text-[11px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{m.description}</span>
+                              <span className="mt-0.5 line-clamp-2 block text-[11px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">
+                                {m.description}
+                              </span>
                             </button>
                           </li>
                         ))}
@@ -429,15 +475,21 @@ export function WorkbenchControls({
                       </span>
                       <span>
                         {t(promptMeta.titleKey)}
-                        {promptMeta.required ? <span className="ml-0.5 text-rose-600 dark:text-rose-300">*</span> : null}
+                        {promptMeta.required ? (
+                          <span className="ml-0.5 text-rose-600 dark:text-rose-300">*</span>
+                        ) : null}
                       </span>
                     </p>
-                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{promptMeta.hintKey ? t(promptMeta.hintKey) : ''}</span>
+                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">
+                      {promptMeta.hintKey ? t(promptMeta.hintKey) : ''}
+                    </span>
                   </div>
                   {/* 配音:Instruction 提示 + 标签 chips */}
                   {activeCapability === 'voice-gen' ? (
                     <div className="mb-1.5 flex flex-wrap items-center gap-1.5">
-                      <span className="text-[11px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Voice instruction hint')}</span>
+                      <span className="text-[11px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">
+                        {t('Voice instruction hint')}
+                      </span>
                       <span className="inline-flex items-center rounded-[7px] border border-[rgba(56,103,255,0.3)] bg-[rgba(56,103,255,0.08)] px-1.5 py-0.5 text-[10px] font-medium text-[#3867ff] dark:border-[rgba(143,165,255,0.3)] dark:text-[#8fa5ff]">
                         {t('Control tags')}
                       </span>
@@ -447,9 +499,16 @@ export function WorkbenchControls({
                     </div>
                   ) : null}
                   {/* 提示词工具条(亮色浅灰蓝底 / 暗色深底) */}
-                  <div className={cn('workbench-prompt-toolbar mt-1.5 rounded-[14px] px-3 py-1.5', insetPanelCls)}>
+                  <div
+                    className={cn(
+                      'workbench-prompt-toolbar mt-1.5 rounded-[14px] px-3 py-1.5',
+                      insetPanelCls,
+                    )}
+                  >
                     <div className="flex items-center gap-2.5">
-                      <p className="min-w-0 flex-1 overflow-hidden text-[11px] text-ellipsis whitespace-nowrap text-[#4a6080] dark:text-[#8a9bc0]">{t('Prompt toolbar')}</p>
+                      <p className="min-w-0 flex-1 overflow-hidden text-[11px] text-ellipsis whitespace-nowrap text-[#4a6080] dark:text-[#8a9bc0]">
+                        {t('Prompt toolbar')}
+                      </p>
                       <div className="flex shrink-0 items-center gap-1">
                         <button
                           className="inline-flex h-7 items-center justify-center gap-1 rounded-full px-2 text-[11px] text-[#4a6080] transition-colors hover:bg-[rgba(12,24,36,0.06)] hover:text-[#3867ff] dark:text-[#b6c4dc] dark:hover:bg-white/8 dark:hover:text-white"
@@ -487,7 +546,11 @@ export function WorkbenchControls({
                       value={prompt}
                     />
                   </div>
-                  {submittedEmpty ? <p className="mt-1.5 text-[11px] leading-5 text-rose-600 dark:text-rose-300">{t('Prompt is required')}</p> : null}
+                  {submittedEmpty ? (
+                    <p className="mt-1.5 text-[11px] leading-5 text-rose-600 dark:text-rose-300">
+                      {t('Prompt is required')}
+                    </p>
+                  ) : null}
                 </div>
               ) : null}
 
@@ -539,7 +602,11 @@ export function WorkbenchControls({
                       <span>{t('Video console')}</span>
                     </p>
                     <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">
-                      {t('Current mode')}: {t(videoConfig.createModes.find((m) => m.value === videoMode)?.labelKey ?? 'Text to video')}
+                      {t('Current mode')}:{' '}
+                      {t(
+                        videoConfig.createModes.find((m) => m.value === videoMode)?.labelKey ??
+                          'Text to video',
+                      )}
                     </span>
                   </div>
                   <div className="grid min-w-0 gap-1.5">
@@ -620,10 +687,14 @@ export function WorkbenchControls({
                           </span>
                           {t('Duration')}
                         </div>
-                        <span className="shrink-0 text-[11px] font-medium text-[#3867ff] dark:text-[#8fa5ff]">{t('{{seconds}} seconds', { seconds: videoDuration })}</span>
+                        <span className="shrink-0 text-[11px] font-medium text-[#3867ff] dark:text-[#8fa5ff]">
+                          {t('{{seconds}} seconds', { seconds: videoDuration })}
+                        </span>
                       </div>
                       <div className="flex h-9 items-center gap-3">
-                        <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Shorter')}</span>
+                        <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">
+                          {t('Shorter')}
+                        </span>
                         <input
                           aria-label={t('Duration')}
                           className="h-2 min-w-0 flex-1 cursor-pointer appearance-none rounded-full bg-[rgba(56,103,255,0.15)] accent-[#3867ff] dark:bg-[rgba(143,165,255,0.15)]"
@@ -634,7 +705,9 @@ export function WorkbenchControls({
                           type="range"
                           value={videoDuration}
                         />
-                        <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Longer')}</span>
+                        <span className="shrink-0 text-[11px] text-[#8a9bc0] dark:text-[#8a9bc0]">
+                          {t('Longer')}
+                        </span>
                       </div>
                     </div>
                     {/* 提示词增强 segment */}
@@ -655,7 +728,9 @@ export function WorkbenchControls({
                           <button
                             className={cn(
                               'inline-flex min-h-7 min-w-0 flex-1 items-center justify-center rounded-[9px] text-[12px] transition-colors',
-                              optimize === opt ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white' : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
+                              optimize === opt
+                                ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white'
+                                : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
                             )}
                             key={opt}
                             onClick={() => setOptimize(opt)}
@@ -733,7 +808,9 @@ export function WorkbenchControls({
                       </span>
                       <span>{t('Parameter panel')}</span>
                     </p>
-                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Fill in model parameters directly')}</span>
+                    <span className="block max-w-[52%] min-w-0 shrink text-right text-[10px] leading-4 text-[#8a9bc0] dark:text-[#8a9bc0]">
+                      {t('Fill in model parameters directly')}
+                    </span>
                   </div>
                   <div className="grid grid-cols-2 gap-x-1.5 gap-y-2.5">
                     {/* 宽高比(参考站同款:比例缩略卡网格下拉) */}
@@ -787,8 +864,13 @@ export function WorkbenchControls({
                       <MiniDropdown
                         label={t('Quality tier')}
                         onChange={setQualityTier}
-                        options={qualityTiers.map((q) => ({ value: q.value, label: t(q.labelKey) }))}
-                        value={t(qualityTiers.find((q) => q.value === qualityTier)?.labelKey ?? 'Standard')}
+                        options={qualityTiers.map((q) => ({
+                          value: q.value,
+                          label: t(q.labelKey),
+                        }))}
+                        value={t(
+                          qualityTiers.find((q) => q.value === qualityTier)?.labelKey ?? 'Standard',
+                        )}
                       />
                     </div>
                     {/* 输出压缩 */}
@@ -805,8 +887,14 @@ export function WorkbenchControls({
                       <MiniDropdown
                         label={t('Output compression')}
                         onChange={setCompression}
-                        options={compressions.map((c) => ({ value: c.value, label: t(c.labelKey) }))}
-                        value={t(compressions.find((c) => c.value === compression)?.labelKey ?? 'High quality')}
+                        options={compressions.map((c) => ({
+                          value: c.value,
+                          label: t(c.labelKey),
+                        }))}
+                        value={t(
+                          compressions.find((c) => c.value === compression)?.labelKey ??
+                            'High quality',
+                        )}
                       />
                     </div>
                     {/* 宽高像素值(静态) */}
@@ -839,7 +927,9 @@ export function WorkbenchControls({
                         label={t('Background')}
                         onChange={setBackground}
                         options={backgrounds.map((b) => ({ value: b.value, label: t(b.labelKey) }))}
-                        value={t(backgrounds.find((b) => b.value === background)?.labelKey ?? 'Auto match')}
+                        value={t(
+                          backgrounds.find((b) => b.value === background)?.labelKey ?? 'Auto match',
+                        )}
                       />
                     </div>
                     {/* 输出格式(跨列) */}
@@ -873,14 +963,18 @@ export function WorkbenchControls({
                           />
                         </span>
                         {t('Prompt optimization')}
-                        <span className="min-w-0 flex-1 truncate text-right text-[11px] font-normal text-[#8a9bc0] dark:text-[#8a9bc0]">{t('Follow original prompt')}</span>
+                        <span className="min-w-0 flex-1 truncate text-right text-[11px] font-normal text-[#8a9bc0] dark:text-[#8a9bc0]">
+                          {t('Follow original prompt')}
+                        </span>
                       </div>
                       <div className="flex h-9 items-center gap-1 rounded-[12px] border border-[rgba(12,24,36,0.1)] bg-[rgba(255,255,255,0.85)] p-1 dark:border-white/10 dark:bg-white/5">
                         {(['on', 'off'] as const).map((opt) => (
                           <button
                             className={cn(
                               'inline-flex min-h-7 min-w-0 flex-1 items-center justify-center rounded-[9px] text-[12px] transition-colors',
-                              optimize === opt ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white' : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
+                              optimize === opt
+                                ? 'bg-[#3867ff] font-medium text-white dark:bg-[#5d7dff] dark:text-white'
+                                : 'text-[#8a9bc0] hover:bg-[rgba(12,24,36,0.04)] dark:hover:bg-white/6',
                             )}
                             key={opt}
                             onClick={() => setOptimize(opt)}
@@ -972,7 +1066,9 @@ export function WorkbenchControls({
                     onChange={(v) => setCount(Number(v))}
                     options={[1, 2, 4].map((n) => ({
                       value: String(n),
-                      label: isVideo ? t('{{count}} item', { count: n }) : t('{{count}} image', { count: n }),
+                      label: isVideo
+                        ? t('{{count}} item', { count: n })
+                        : t('{{count}} image', { count: n }),
                     }))}
                     value={String(count)}
                   />

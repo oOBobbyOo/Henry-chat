@@ -9,9 +9,9 @@ import { Menu, Plus } from 'lucide-react'
 import { createModelConfig, INITIAL_PRIMARY_MODEL } from '../constants'
 import { useChatModels } from '../hooks/useChatModels'
 import { useConversations } from '../hooks/useConversations'
-import { ChatAIPanels } from './ChatAIPanels'
-import { ChatSidebar } from './ChatSidebar'
-import { UserDropdownMenu } from './UserDropdownMenu'
+import { ChatAIPanels } from './chat-ai-panels'
+import { ChatSidebar } from './chat-sidebar'
+import { UserDropdownMenu } from './user-dropdown-menu'
 
 /** 最大允许的对比模型数量（不含主模型） */
 const MAX_COMPARE_MODELS = 1
@@ -36,7 +36,11 @@ interface ChatInterfaceProps {
   /** 删除会话后的回调（用于处理路由跳转等） */
   onAfterDeleteSession?: (deletedId: string) => void
   /** 初始化输入框的处理（例如从 sessionStorage 读取） */
-  onInitInput?: (setValues: React.Dispatch<React.SetStateAction<Record<string, string>>>, primaryConfigId: string, triggerSend: (value?: string) => void) => void
+  onInitInput?: (
+    setValues: React.Dispatch<React.SetStateAction<Record<string, string>>>,
+    primaryConfigId: string,
+    triggerSend: (value?: string) => void,
+  ) => void
 }
 
 export function ChatInterface({
@@ -53,7 +57,16 @@ export function ChatInterface({
 }: ChatInterfaceProps) {
   const router = useRouter()
 
-  const { sessions, addSession, deleteSession, renameSession, hasMore, isLoadingMore, loadMore, refresh } = useConversations()
+  const {
+    sessions,
+    addSession,
+    deleteSession,
+    renameSession,
+    hasMore,
+    isLoadingMore,
+    loadMore,
+    refresh,
+  } = useConversations()
 
   // 获取动态模型列表
   const { models, isLoading: isModelsLoading } = useChatModels()
@@ -179,7 +192,9 @@ export function ChatInterface({
           >
             <Menu className="h-6 w-6" />
           </button>
-          <span className="bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-base font-bold text-transparent">AI</span>
+          <span className="bg-linear-to-r from-blue-600 to-indigo-600 bg-clip-text text-base font-bold text-transparent">
+            AI
+          </span>
         </div>
         <div className="flex items-center gap-3">
           <button

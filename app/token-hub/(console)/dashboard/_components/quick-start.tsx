@@ -38,7 +38,9 @@ export function QuickStart() {
             <ArrowRight className="h-4 w-4" />
           </span>
           <div>
-            <p className="text-sm font-semibold tracking-[-0.01em] text-(--tc-strong)">{t('Dashboard QuickStart Title')}</p>
+            <p className="text-sm font-semibold tracking-[-0.01em] text-(--tc-strong)">
+              {t('Dashboard QuickStart Title')}
+            </p>
             <p className="mt-0.5 text-xs text-(--tc-muted)">{t('Dashboard QuickStart Subtitle')}</p>
           </div>
         </div>
@@ -53,10 +55,14 @@ export function QuickStart() {
           >
             <span className="relative mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-lg border border-(--tc-border) bg-(--tc-surface) text-(--tc-primary-text)">
               <Icon className="h-4 w-4" />
-              <span className="absolute -top-1.5 -left-1.5 grid h-4 w-4 place-items-center rounded-full bg-(--tc-primary) text-[9px] font-bold text-white">{idx + 1}</span>
+              <span className="absolute -top-1.5 -left-1.5 grid h-4 w-4 place-items-center rounded-full bg-(--tc-primary) text-[9px] font-bold text-white">
+                {idx + 1}
+              </span>
             </span>
             <span className="min-w-0">
-              <span className="block truncate text-[13px] font-semibold text-(--tc-strong) transition-colors group-hover:text-(--tc-primary-text)">{title}</span>
+              <span className="block truncate text-[13px] font-semibold text-(--tc-strong) transition-colors group-hover:text-(--tc-primary-text)">
+                {title}
+              </span>
               <span className="mt-0.5 block truncate text-xs text-(--tc-muted)">{desc}</span>
             </span>
           </Link>

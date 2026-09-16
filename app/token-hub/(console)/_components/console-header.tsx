@@ -17,7 +17,9 @@ export function ConsoleHeader() {
   const { data: balance } = useBalanceQuery()
   const { data: profile } = useProfileQuery()
 
-  const amount = balance?.account_balance.amount_cny ? `¥${Number(balance.account_balance.amount_cny).toFixed(2)}` : ''
+  const amount = balance?.account_balance.amount_cny
+    ? `¥${Number(balance.account_balance.amount_cny).toFixed(2)}`
+    : ''
   const avatarText = profile?.name?.charAt(0) ?? 'U'
 
   return (
@@ -42,8 +44,12 @@ export function ConsoleHeader() {
             className="flex items-center gap-2 rounded-xl border border-(--tc-border) bg-(--tc-surface) px-3 py-2 text-[13px] text-(--tc-muted) shadow-[0_1px_1px_rgb(15_38_79/0.02)] transition hover:border-(--tc-primary-hover)/40 hover:text-(--tc-primary-text) focus-visible:ring-2 focus-visible:ring-(--tc-primary-hover)/35 focus-visible:outline-none"
           >
             <Search className="h-3.5 w-3.5" />
-            <span className="hidden min-w-36 text-left sm:block">{t('Dashboard Console Search')}</span>
-            <span className="hidden rounded-md border border-(--tc-border) bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-medium text-(--tc-muted) text-nowrap md:block">⌘ K</span>
+            <span className="hidden min-w-36 text-left sm:block">
+              {t('Dashboard Console Search')}
+            </span>
+            <span className="hidden rounded-md border border-(--tc-border) bg-(--tc-blue-soft) px-1.5 py-0.5 text-[10px] font-medium text-(--tc-muted) text-nowrap md:block">
+              ⌘ K
+            </span>
           </button>
         </div>
 
@@ -70,8 +76,12 @@ export function ConsoleHeader() {
               <CircleDollarSign className="h-3.5 w-3.5" />
             </span>
             <span className="flex items-baseline gap-1.5 leading-none whitespace-nowrap">
-              <span className="text-[11px] font-medium text-(--tc-muted)">{t('Dashboard Balance')}</span>
-              <span className="text-[13px] font-semibold text-(--tc-strong) tabular-nums">{amount}</span>
+              <span className="text-[11px] font-medium text-(--tc-muted)">
+                {t('Dashboard Balance')}
+              </span>
+              <span className="text-[13px] font-semibold text-(--tc-strong) tabular-nums">
+                {amount}
+              </span>
             </span>
           </Link>
 
@@ -91,7 +101,9 @@ export function ConsoleHeader() {
                   alt={profile.name ?? 'User'}
                 />
               )}
-              <AvatarFallback className="bg-(--tc-blue-soft) text-[13px] font-semibold text-(--tc-primary-text)">{avatarText}</AvatarFallback>
+              <AvatarFallback className="bg-(--tc-blue-soft) text-[13px] font-semibold text-(--tc-primary-text)">
+                {avatarText}
+              </AvatarFallback>
             </Avatar>
           </button>
         </div>

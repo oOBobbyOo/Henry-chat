@@ -18,7 +18,7 @@ import { PasswordInput } from '@/components/ui/password-input'
 import { cn } from '@/lib/utils'
 import { AuthService } from '@/services/auth'
 
-import { LoginOrSignup } from './LoginOrSignup'
+import { LoginOrSignup } from './login-or-signup'
 
 // 统一 Input 样式类（边框/阴影/无外环/聚焦反馈）
 const inputClasses = cn(
@@ -89,7 +89,11 @@ export function EmailLoginForm() {
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
                 aria-invalid={!!field.state.meta.errors.length}
-                aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                aria-describedby={
+                  field.state.meta.isTouched && field.state.meta.errors.length
+                    ? `${field.name}-error`
+                    : undefined
+                }
                 className={inputClasses}
               />
               <FieldError errors={field.state.meta.errors} />
@@ -116,7 +120,11 @@ export function EmailLoginForm() {
                 onBlur={field.handleBlur}
                 onChange={(e) => field.handleChange(e.target.value)}
                 aria-invalid={!!field.state.meta.errors.length}
-                aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                aria-describedby={
+                  field.state.meta.isTouched && field.state.meta.errors.length
+                    ? `${field.name}-error`
+                    : undefined
+                }
                 className={inputClasses}
               />
               <FieldError errors={field.state.meta.errors} />

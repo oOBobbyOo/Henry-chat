@@ -6,7 +6,13 @@ import { useT } from 'next-i18next/client'
 /**
  * Agent Chat 空状态 —— 欢迎语 + 方向建议卡(居中,对齐生产 max-w-[800px])
  */
-export function ChatWelcome({ directions, onPickDirection }: { directions: TokenHub.ChatDirection[]; onPickDirection: (title: string) => void }) {
+export function ChatWelcome({
+  directions,
+  onPickDirection,
+}: {
+  directions: TokenHub.ChatDirection[]
+  onPickDirection: (title: string) => void
+}) {
   const { t } = useT('token-hub')
 
   return (
@@ -14,9 +20,13 @@ export function ChatWelcome({ directions, onPickDirection }: { directions: Token
       {/* 欢迎语 */}
       <div className="flex items-center gap-2">
         <Sparkles className="h-5 w-5 text-(--tc-blue-bright)" />
-        <h2 className="text-[22px] font-semibold tracking-[-0.02em] text-(--tc-strong) sm:text-[24px]">{t('Chat Welcome Title')}</h2>
+        <h2 className="text-[22px] font-semibold tracking-[-0.02em] text-(--tc-strong) sm:text-[24px]">
+          {t('Chat Welcome Title')}
+        </h2>
       </div>
-      <p className="mt-2 max-w-md text-center text-sm leading-6 text-(--tc-body)">{t('Chat Welcome Desc')}</p>
+      <p className="mt-2 max-w-md text-center text-sm leading-6 text-(--tc-body)">
+        {t('Chat Welcome Desc')}
+      </p>
 
       {/* 方向建议(生产 max-w-[800px] 居中) */}
       <div className="mx-auto mt-9 w-full max-w-200">

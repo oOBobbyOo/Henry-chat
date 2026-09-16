@@ -45,7 +45,8 @@ const providerConfig = {
         />
       </svg>
     ),
-    theme: 'bg-white text-gray-800 border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-750',
+    theme:
+      'bg-white text-gray-800 border-gray-300 hover:bg-gray-50 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-750',
   },
   facebook: {
     label: 'Facebook',
@@ -59,11 +60,17 @@ const providerConfig = {
         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.791-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
       </svg>
     ),
-    theme: 'bg-[#1877F2] text-white hover:text-white/90 hover:bg-[#166FE5] border-transparent dark:bg-[#1877F2] dark:hover:bg-[#1565C0]',
+    theme:
+      'bg-[#1877F2] text-white hover:text-white/90 hover:bg-[#166FE5] border-transparent dark:bg-[#1877F2] dark:hover:bg-[#1565C0]',
   },
 } as const
 
-export function SocialLoginButton({ provider, onClick, isLoading = false, className }: SocialLoginButtonProps) {
+export function SocialLoginButton({
+  provider,
+  onClick,
+  isLoading = false,
+  className,
+}: SocialLoginButtonProps) {
   const { t } = useT('auth')
 
   const { label, Icon, theme } = providerConfig[provider]
@@ -87,7 +94,13 @@ export function SocialLoginButton({ provider, onClick, isLoading = false, classN
   )
 }
 
-export function SocialLoginButtons({ providers = ['google', 'facebook'], className }: { providers?: SocialProvider[]; className?: string }) {
+export function SocialLoginButtons({
+  providers = ['google', 'facebook'],
+  className,
+}: {
+  providers?: SocialProvider[]
+  className?: string
+}) {
   const [loadingProvider, setLoadingProvider] = useState<SocialProvider | null>(null)
 
   const handleSignIn = async (provider: SocialProvider) => {

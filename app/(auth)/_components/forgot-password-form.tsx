@@ -61,7 +61,9 @@ export function ForgotPasswordForm() {
           <div className="space-y-2">
             <h3 className="text-lg font-semibold">{t('Email Sent')}</h3>
             <p className="text-muted-foreground text-sm">
-              <span className="text-foreground font-medium">{form.getFieldValue('email')}</span> {t('Has been sent a password reset link.')} {t('Please check your inbox (and spam folder).')}
+              <span className="text-foreground font-medium">{form.getFieldValue('email')}</span>{' '}
+              {t('Has been sent a password reset link.')}{' '}
+              {t('Please check your inbox (and spam folder).')}
             </p>
           </div>
           <Link href="/login?model=email">
@@ -105,7 +107,11 @@ export function ForgotPasswordForm() {
                   onBlur={field.handleBlur}
                   onChange={(e) => field.handleChange(e.target.value)}
                   aria-invalid={!!field.state.meta.errors.length}
-                  aria-describedby={field.state.meta.isTouched && field.state.meta.errors.length ? `${field.name}-error` : undefined}
+                  aria-describedby={
+                    field.state.meta.isTouched && field.state.meta.errors.length
+                      ? `${field.name}-error`
+                      : undefined
+                  }
                   className={cn(inputClasses, 'pl-10')}
                 />
                 <Mail className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
